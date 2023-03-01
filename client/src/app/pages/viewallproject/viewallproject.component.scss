@@ -1,0 +1,79 @@
+body{
+    margin: 0;
+    background-color: wheat;
+}
+
+p{
+    margin: 0;
+}
+
+// css navbar
+#navbar{
+    height: 60px;
+    width: 100%;
+    background-color: #FFDEDE;
+}
+
+// css body
+#body{
+    padding: 30px;
+    background-color: darkcyan;
+}
+
+////css title
+#title{
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 29px;
+    font-weight: bolder;
+    padding: 0 10px;
+    background-color: brown;
+}
+
+////css overview
+#overview{
+    height: 150px;
+    width: 570px;
+    font-family: 'Quicksand', sans-serif;
+    margin: 20px 0;
+    border-radius: 10px;
+    background-color: tomato;
+}
+#overview-header{
+    height: 45px;
+    font-size: 20px;
+    font-weight: bolder;
+    padding: 15px 0 0 30px;
+    border-radius: 10px 10px 0 0;
+    background-color: rgb(255, 255, 255);
+    border: 1px solid #FFFCE0;
+}
+#overview-body{
+    display: flex;
+    height: 105px;
+    font-size: 10px;
+    font-weight: bolder;
+    padding: 0 30px;
+    border-radius: 0 0 10px 10px;
+    background-color: #FFFCE0;
+}
+.overview-content{
+    height: fit-content;
+    width: 90px;
+    padding: 10px 0;
+    border-radius: 10px;
+    color: #666666;
+    background-color: darkcyan;
+}
+.amount{
+    font-size: 18px;
+    text-align: center;
+}
+.type{
+    font-size: 16px;
+    text-align: center;
+}
+.horizone{
+    width: 43px;
+    margin: -10px auto;
+    background-color: #666666;
+}
