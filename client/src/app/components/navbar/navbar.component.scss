@@ -1,0 +1,75 @@
+// .spacer{
+//     width: 100px;
+
+// }
+
+// .input{
+//     padding: 13px;
+//     border-radius: 8px;
+//     width: 700px;
+//     border: none;
+//     margin-left: 20px;
+//     background-color: beige;
+
+// }
+
+// .box{
+//     width: 500px;
+
+//     display: flex;
+//     justify-content: space-between;
+//     align-items:center;
+// }
+
+// .icon{
+//     width: 40px;
+
+// }
+
+.logo {
+  background-color: #ffacac;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 2.5rem;
+
+  padding-top: 0.3rem;
+  margin-right: 1rem;
+  margin-left: 1rem;
+
+  p {
+    text-align: center;
+  }
+}
+
+.logoName {
+  margin-right: 8rem;
+}
+
+.input {
+  border-radius: 1.5rem;
+  margin-right: 9rem;
+  background-color: #cfd8dc;
+  color: #000;
+  border: none;
+  outline: none;
+  padding-left: 0.5rem;
+  width: 20rem;
+}
+
+.userName {
+  
+  .image-user {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .img {
+      width: 2.5rem;
+      height: 2.5rem;
+    }
+
+    p{
+        padding-top: 0.5rem;
+    }
+  }
+}
