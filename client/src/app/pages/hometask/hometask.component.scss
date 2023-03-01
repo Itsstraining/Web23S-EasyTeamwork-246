@@ -1,0 +1,187 @@
+.body{
+    background-color: #FFFEF6;
+}
+
+.homeContainer{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    // margin-left: 0rem;
+}
+
+
+/* sidebar */
+.menuDiv{
+    width: 270px;
+    /* border-right: .5px solid black; */
+    background-color: #FFFDEF;
+    margin-left: -.4%;
+}
+
+#btnSpaceTop{
+    width: 269.8px;
+    height: 60px;
+    border: none;
+    border-top: 1px solid #ffef79;
+    border-right: 1px solid #ffef79;
+    background-color: #FFFDEF;
+    // margin-left: -5%;
+}
+
+#btnSpaceBottom{
+    width: 270px;
+    height: 80%;
+    border-right: 1px solid #ffef79;
+    background-color: #FFFDEF;
+    // margin-top: 5%;
+}
+
+.menuBtn{
+    font-size: 20px;
+    border: none;
+    border-width: .5px;
+    background-color: transparent;
+    border-right: 1px solid #ffef79;
+    width: 270px;    
+    height: 70px;
+    // margin-bottom: -10px;
+}
+
+.mat-button-toggle-group{
+    border: none !important;
+    border-radius: 0px !important;
+}
+
+.mat-button-toggle{
+    font-size: 1.5rem;
+    padding-top: 4% !important;
+    padding-left: -2% !important;
+}
+
+.mat-button-toggle-checked{
+    background-color: #FFFEF6 !important;
+    border: 1px solid #ffef79;
+    border-right: none !important;
+}
+
+.mat-button-toggle:hover{
+    // background-color: #fffdf1;
+}
+
+.mat-button-toggle-checked:hover{
+    cursor: pointer;
+    background-color: #FFFEF6 !important;
+}
+
+.toggleGroup{
+    display: flex;
+    flex-direction: column;
+    border: none;
+    border-radius: 0px;
+}
+
+/* Home div */
+.infoDiv{
+    position: absolute;
+    width: 100%;
+    height: 117px;
+    background-color: #FFFEF6;
+    border-top: 1px solid #ffef79;
+    padding-left: .5rem;
+    margin-left: 1px;
+}
+
+.homeDiv{
+    background-color: #FFFEF6;
+}
+
+#funcTitle{
+    font-size: 30px;
+    margin-top: .6rem;
+}
+
+.projInfo{
+    font-size: 17px;
+    margin-top: -.4rem;
+    margin-left: 1rem;
+}
+
+.userDiv{
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    width: 200px;
+    height: 2.3rem;
+    // background-color: blue;
+    margin-left: 89rem;
+    margin-top: -7rem;
+}
+
+.usrIconDiv{
+    width: 190px;
+    height: 48px;
+    display: flex;
+    flex-direction: row;
+    margin-left: -.7rem;
+    // background-color: cyan;
+    margin-top: 5%;
+}
+
+
+.usrIcon{
+    width: 48px;
+    height: 48px;
+    border-radius: 25px;
+    background-color: rgb(255, 205, 205);
+    padding-top: 1rem;
+    padding-left: .7rem;
+}
+
+.usrIcon1{
+    width: 48px;
+    height: 48px;
+    border-radius: 25px;
+    background-color: rgb(250, 145, 145);
+    margin-left: -.7rem;
+    padding-top: 1rem;
+    padding-left: .7rem;
+}
+
+.usrIcon2{
+    width: 48px;
+    height: 48px;
+    border-radius: 25px;
+    background-color: rgb(255, 100, 100);
+    margin-left: -.7rem;
+    padding-top: 1rem;
+    padding-left: .7rem;
+}
+
+#addUsr{
+    position: absolute;
+    /* width: 20px; */
+    /* height: 20px; */
+    font-size: 1.2rem;
+    margin-top: .7rem;
+    margin-left: 1rem;
+    border: none;
+    border-radius: 8px;
+}
+
+.todoDiv{
+    width: 1590px;
+    height: 90%;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    background-color: #FFFCE0;
+    padding: 1rem;
+    margin-top: 8.16rem;
+    margin-left: 1rem;
+    box-shadow: 0px -1px 8px 0px rgba(129, 129, 129, 0.75);
+}
+
+
+.test{
+    background-color: red;
+}
