@@ -5,7 +5,8 @@ const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'hometask', loadChildren: () => import('./pages/hometask/hometask.module').then(m => m.HometaskModule) },
   { path: 'login', loadChildren: () => import('./pages/login/login.module').then(m => m.LoginModule) },
-  { path: 'viewallproject', loadChildren: () => import('./pages/viewallproject/viewallproject.module').then(m => m.ViewallprojectModule) }];
+  { path: 'viewallproject', loadChildren: () => import('./pages/viewallproject/viewallproject.module').then(m => m.ViewallprojectModule) },
+  { path: 'tasks', loadChildren: () => import('./pages/hometask/subPage/tasks/tasks.module').then(m => m.TasksModule) }];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

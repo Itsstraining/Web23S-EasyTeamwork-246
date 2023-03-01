@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
 
 
 
@@ -7,7 +8,10 @@ import { CommonModule } from '@angular/common';
   declarations: [],
   imports: [
     CommonModule,
+    MatButtonToggleModule,
   ],
-  exports:[]
+  exports:[
+    MatButtonToggleModule,
+  ]
 })
 export class MaterialModule { }
