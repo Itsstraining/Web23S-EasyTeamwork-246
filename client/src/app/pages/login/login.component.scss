@@ -1,24 +1,192 @@
-// .container {
-//   // width: 100%;
-//   // height: 100%;
-//   background-color: #bbdefb;
-//   // display: flex;
-//   // margin: 0 0 0 0;
-//   // .interface-login {
-//   //   width: 50%;
-//   //   height: 100%;
-//   //   background-color: green;
-//   // }
-//   // .img{
-//   //   width: 50%;
-//   //   height: 100%;
-//   //   background-color: gray;
-//   // }
-// }
 
-.frame{
+.container{
   width: 100%;
   height: 100%;
-  background-color: aqua;
-  
+  background-color: #BBDEFB;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
+
+.interface-login{
+  width: 25%;
+  height: 80%;
+  background-color: white;
+  margin: auto auto;
+  border-radius: 10px;
+
+  .title{
+    
+    height: 18%;
+    // background-color: aquamarine;
+    width: auto;
+    margin-top: 1.5rem;
+    margin-left: 1.5rem;
+
+    p{
+      width: 100%;
+      font-size: 1.5rem;
+      
+    }
+  }
+
+  .logo {
+    // background-color: green;
+    width: auto;
+    height: 3rem;
+    padding-top: 0.3rem;
+    margin-left: 1.5rem;
+
+    .logo-team{
+      width: 2.8rem;
+      height: 2.8rem;
+      border-radius: 1.4rem;
+      background-color: #ffacac;
+    }
+  
+    h3 {
+      text-align: center;
+      padding-top: 0.5rem;
+    }
+  }
+
+
+  .input-email{
+    // background-color: aqua;
+    width: auto;
+    height: auto;
+    margin-left: 1.5rem;
+    
+
+    .Email{
+      width: auto;
+      height: 3rem;
+      padding-bottom: 0.5rem;
+      input{
+        width: 21rem;
+        height: 3rem;
+        border: none;
+        outline: none;
+        border-bottom: 1.5px solid #00C2EE;
+      }
+    }
+
+    .Password{ 
+      width: auto;
+      height: 3rem;
+      padding-bottom: 0.5rem;
+      input{
+        width: 21rem;
+        height: 3rem;
+        border: none;
+        outline: none;
+        border-bottom: 1.5px solid #00C2EE;
+      }
+    }
+
+  }
+  
+
+  .btn-signIn{
+    // background-color: red;
+    width: auto;
+    height: 6rem;
+    margin-left: 1.5rem;
+
+
+    button{
+      width: 21rem;
+      height: 2.5rem;
+      border-radius: 1rem;
+      background-color: #fff;
+      color: black;
+      margin-top: 1rem;
+      box-shadow: 0.5rem;
+    }
+
+    a{
+      float: right;
+      margin-top: 1rem;
+      padding-right: 1.5rem;
+
+    }
+  }
+  
+
+  .word-Or{
+    // background-color: greenyellow;
+    width: auto;
+    height: 4rem;
+    margin-left: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    #or{
+      color: gray;
+      vertical-align: middle;
+      text-align: center;
+    }
+    #hr{
+      border-bottom: 2px solid gray;
+      width: 1.5rem;
+    }
+    
+
+  }
+
+  .signInWithGoogle{
+    // background-color: grey;
+    width: auto;
+    height: 3rem;
+    margin-left: 1.5rem;
+    
+    
+
+    button{
+      width: 21rem;
+      height: 2.5rem;
+      border-radius: 1rem;
+      background-color: #fff;
+      color: black;
+      box-shadow: 0.5rem;
+      border: none;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      img{
+        width: 10%;
+        height: 10%;
+        margin-top: 10px;
+        object-fit: cover;
+      }
+
+      span{
+        margin-bottom: 10px;
+      }
+    }
+
+
+  }
+
+
+  .option{
+    // background-color: red;
+    width: auto;
+    height: 4rem;
+    margin-left: 1.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    a{
+      color: #00C2EE;
+      padding-bottom: 12px;
+    }
+  }
+
+  
+
+}
+
