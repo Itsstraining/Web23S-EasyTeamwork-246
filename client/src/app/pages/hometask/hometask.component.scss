@@ -66,12 +66,12 @@
 }
 
 .mat-button-toggle:hover{
-    // background-color: #fffdf1;
+    background-color: #fffce1;
 }
 
 .mat-button-toggle-checked:hover{
     cursor: pointer;
-    background-color: #FFFEF6 !important;
+    background-color: #fdfcee !important;
 }
 
 .toggleGroup{
@@ -134,7 +134,7 @@
     height: 48px;
     border-radius: 25px;
     background-color: rgb(255, 205, 205);
-    padding-top: 1rem;
+    padding-top: 1.3rem;
     padding-left: .7rem;
 }
 
@@ -144,7 +144,7 @@
     border-radius: 25px;
     background-color: rgb(250, 145, 145);
     margin-left: -.7rem;
-    padding-top: 1rem;
+    padding-top: 1.3rem;
     padding-left: .7rem;
 }
 
@@ -154,24 +154,24 @@
     border-radius: 25px;
     background-color: rgb(255, 100, 100);
     margin-left: -.7rem;
-    padding-top: 1rem;
+    padding-top: 1.3rem;
     padding-left: .7rem;
 }
 
-#addUsr{
-    position: absolute;
-    /* width: 20px; */
-    /* height: 20px; */
-    font-size: 1.2rem;
-    margin-top: .7rem;
-    margin-left: 1rem;
-    border: none;
-    border-radius: 8px;
+.addUsr{
+    margin-top: 1.3rem;
+    margin-left: .5rem;
 }
 
-.todoDiv{
+.addUsr:hover{
+    cursor: pointer;
+}
+
+.todoMainDiv{
     width: 1590px;
     height: 90%;
+    display: flex;
+    flex-direction: row;
     border-top-left-radius: 15px;
     border-top-right-radius: 15px;
     background-color: #FFFCE0;
@@ -182,6 +182,14 @@
 }
 
 
-.test{
+.todoDiv{
+    background-color: cyan;
+}
+
+.inProgressDiv{
+    background-color: blue;
+}
+
+.completeDiv{
     background-color: red;
 }
