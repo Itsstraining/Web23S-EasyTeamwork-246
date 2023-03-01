@@ -1,0 +1,128 @@
+body{
+    margin: 0;
+    background-color: wheat;
+}
+
+p{
+    margin: 0;
+}
+
+hr{
+    margin: 0;
+    border: none;
+}
+
+// css navbar
+#navbar{
+    height: 60px;
+    width: 100%;
+    background-color: #FFDEDE;
+}
+
+// css body
+#body{
+    padding: 30px;
+}
+
+//// css title
+#title{
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 25px;
+    font-weight: bolder;
+    padding: 0 10px;
+}
+
+//// css overview
+#overview{
+    display: inline-block;
+    height: fit-content;
+    width: 500px;
+    font-family: 'Quicksand', sans-serif;
+    margin: 20px 0;
+    border-radius: 10px;
+}
+#overview-header{
+    height: 30px;
+    font-size: 16px;
+    font-weight: 1000;
+    padding: 20px 0 0 30px;
+    border-radius: 10px 10px 0 0;
+    background-color: rgb(255, 255, 255);
+    border: 1px solid #FFFCE0;
+}
+#overview-body{
+    display: flex;
+    height: 80px;
+    font-size: 10px;
+    font-weight: bolder;
+    padding: 15px 0 0 5px;
+    border-radius: 0 0 10px 10px;
+    background-color: #FFFCE0;
+}
+.overview-content{
+    height: fit-content;
+    width: 90px;
+    padding: 10px 0;
+    border-radius: 10px;
+    margin-left: 5%
+}
+.amount{
+    font-size: 14px;
+    text-align: center;
+    margin-bottom: 5px;
+}
+.type{
+    font-size: 13px;
+    text-align: center;
+    margin-top: 5px;
+}
+.horizone{
+    width: 65px;
+    height: 1px ;
+    margin: 0 auto;
+}
+#total{
+    color: #666666;
+    .horizone{
+        background-color: #666666;
+    }
+}
+#in-progress{
+    color: #44AEB7;
+    .horizone{
+        background-color: #159ACC;
+    }
+}
+#completed{
+    color: #28C700;
+    .horizone{
+        background-color: #28C700;
+    }
+}
+#overdue{
+    color: #E51616;
+    .horizone{
+        background-color: #E51616;
+    }
+}
+
+//// css create-project
+#create-project{
+    display: inline-block;
+    float: right;
+    height: fit-content;
+    width: fit-content;
+    font-family: 'Quicksand', sans-serif;
+    margin-top: 30px;
+    margin-right: 80px;
+    border-radius: 10px;
+    background-color: #FFFCE0;
+}
+#create-btn{
+    height: fit-content;
+    width: 500px;
+    font-family: 'Quicksand', sans-serif;
+    margin: 20px 0;
+    border-radius: 10px;
+    background-color: tomato;
+}

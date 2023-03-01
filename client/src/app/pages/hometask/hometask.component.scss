@@ -1,0 +1,202 @@
+.body{
+    background-color: #FFFEF6;
+}
+
+.navbar{
+    height: 60px;
+}
+
+.homeContainer{
+    width: 100%;
+    height: 89%;
+    display: flex;
+    flex-direction: row;
+    background-color: #FFFEF6;
+    // margin-left: 0rem;
+}
+
+
+/* sidebar */
+.menuDiv{
+    width: 270px;
+    background-color: #FFFDEF;
+    margin-left: -.4%;
+}
+
+#btnSpaceTop{
+    width: 269.8px;
+    height: 60px;
+    border: none;
+    border-top: 2px solid #ffef79;
+    border-right: 2px solid #ffef79;
+    background-color: #FFFDEF;
+    // margin-left: -5%;
+}
+
+#btnSpaceBottom{
+    width: 270px;
+    height: 79.5%;
+    border-right: 2px solid #ffef79;
+    background-color: #FFFDEF;
+    // background-color: cyan;
+    // margin-top: -3px;
+}
+
+.mat-button-toggle-group{
+    display: flex;
+    flex-direction: column;
+    border: none;
+    margin-right: -5px;
+}
+
+.mat-button-toggle{
+    width: 270px;    
+    height: 70px;
+    font-size: 20px;
+    background-color: transparent;
+    font-size: 1.5rem;
+    padding-top: 20px !important;
+    border-right: 2px solid #ffef79 !important;
+}
+
+#menuBtnCallendar{
+    width: 269px;
+}
+
+.mat-button-toggle-checked{
+    background-color: #FFFEF6 !important;
+    border: 2px solid #ffef79 !important;
+    border-right: none !important;
+}
+
+.mat-button-toggle:hover{
+    cursor: pointer;
+    background-color: #fffce1;
+}
+
+.mat-button-toggle-checked:hover{
+    cursor: pointer;
+    background-color: #fdfcee !important;
+}
+
+/* Home div */
+.infoDiv{
+    position: absolute;
+    width: 85.5%;
+    height: 117px;
+    background-color: #FFFEF6;
+    // background-color: antiquewhite;
+    border-top: 2px solid #ffef79;
+    padding-left: .5rem;
+    // margin-left: 5px;
+}
+
+.homeDiv{
+    background-color: #FFFEF6;
+    // background-color: bisque;
+    margin-left: 2px;
+}
+
+#funcTitle{
+    font-size: 30px;
+    margin-top: .6rem;
+}
+
+.projInfo{
+    font-size: 17px;
+    margin-top: -.4rem;
+    margin-left: 1rem;
+}
+
+.userDiv{
+    // position: absolute;
+    display: flex;
+    flex-direction: row;
+    width: 200px;
+    height: 48px;
+    // background-color: blue;
+    margin-left: 89rem;
+    margin-top: -6rem;
+}
+
+
+.usrIcon{
+    width: 48px;
+    height: 48px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;  
+    border-radius: 30px;
+    background-color: rgb(255, 205, 205);
+}
+
+#icon1{
+    margin: 0 auto;
+}
+
+.usrIcon1{
+    width: 48px;
+    height: 48px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+    border-radius: 30px;
+    background-color: rgb(250, 145, 145);
+    margin-left: -.7rem;
+}
+
+.usrIcon2{
+    width: 48px;
+    height: 48px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+    border-radius: 50px;
+    background-color: rgb(255, 100, 100);
+    margin-left: -.7rem;
+}
+
+.addUsr{
+    margin-top: 1rem;
+    margin-left: .5rem;
+}
+
+.addUsr:hover{
+    cursor: pointer;
+}
+
+.todoMainDiv{
+    width: 1590px;
+    height: 90%;
+    display: flex;
+    flex-direction: row;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    background-color: #FFFCE0;
+    padding: 1rem 1rem 0rem 1rem    ;
+    margin-top: 8.16rem;
+    margin-left: 1rem;
+    box-shadow: 0px -1px 8px 0px rgba(129, 129, 129, 0.75);
+}
+
+
+.todoDiv{
+    width: 23%;
+    background-color: rgb(230, 255, 255);
+}
+
+.spaceDiv{
+    margin-left: 20px;
+}
+
+.progressTitleDiv{
+    display: flex;
+    flex-direction: column;
+}
+
+.moreOptBtn{
+    
+}
