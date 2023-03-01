@@ -5,7 +5,7 @@
 <div class="homeContainer">
     <div class="menuDiv">
         <div id="btnSpaceTop"></div>
-        <mat-button-toggle-group class="toggleGroup">
+        <mat-button-toggle-group>
             <mat-button-toggle class="menuBtn">Tasks</mat-button-toggle>
             <mat-button-toggle class="menuBtn" id="menuBtnCallendar">Callendar</mat-button-toggle>
         </mat-button-toggle-group>
@@ -17,32 +17,45 @@
             <p class="projInfo">Priority: <span id="priorContent">HIGH</span></p>
             <p class="projInfo">Due date: <span id="dateContent">17 March 2023</span></p>
             <div class="userDiv">
-                <div class="usrIconDiv">
-                    <div class="usrIcon">
-                        <i class="fa-sharp fa-solid fa-user fa-2xl" id="icon"></i>
-                    </div>
-                    <div class="usrIcon1">
-                        <i class="fa-sharp fa-solid fa-user fa-2xl" id="icon"></i>
-                    </div>
-                    <div class="usrIcon2">
-                        <i class="fa-sharp fa-solid fa-user fa-2xl" id="icon"></i>
-                    </div>
-                    <div class="addUsr">
-                        <i class="fa-sharp fa-solid fa-user-plus fa-lg"></i>
-                    </div>
+                <div class="usrIcon">
+                    <i id="icon1" class="fa-sharp fa-solid fa-user fa-2xl" id="icon"></i>
+                </div>
+                <div class="usrIcon1">
+                    <i class="fa-sharp fa-solid fa-user fa-2xl" id="icon"></i>
+                </div>
+                <div class="usrIcon2">
+                    <i class="fa-sharp fa-solid fa-user fa-2xl" id="icon"></i>
+                </div>
+                <div class="addUsr">
+                    <i class="fa-sharp fa-solid fa-user-plus fa-lg"></i>
                 </div>
             </div>
         </div>
         <div class="todoMainDiv">
             <div class="todoDiv">
-                <p>Todo</p>
+                <div class="progressTitleDiv">
+                    <p>Todo</p>
+                    <button class="moreOptBtn">...</button>
+                </div>
             </div>
-            <div class="inProgressDiv">
-                <p>In Progress</p>
+            <div class="spaceDiv"></div>
+            <div class="todoDiv">
+                <div class="progressTitleDiv">
+                    
+                </div>
             </div>
-            <div class="completeDiv">
-                <p>Completed</p>
+            <div class="spaceDiv"></div>
+            <div class="todoDiv">
+                <div class="progressTitleDiv">
+                    
+                </div>
             </div>
-        </div>
+            <div class="spaceDiv"></div>
+            <div class="todoDiv">
+                <div class="progressTitleDiv">
+                    
+                </div>
+            </div>
+        </div>        
     </div>
 </div>
