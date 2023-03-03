@@ -15,13 +15,15 @@ hr{
 
 // css body
 #body{
-    padding: 30px;
+    padding:  2.3771790808%;
+    background-color: #666666;
 }
 
 //// css title
 #title{
+    width: fit-content;
     font-family: 'Ubuntu', sans-serif;
-    font-size: 25px;
+    font-size:  1.56rem;
     font-weight: bolder;
     padding: 0 10px;
 }
@@ -30,7 +32,7 @@ hr{
 #overview{
     display: inline-block;
     height: fit-content;
-    width: 500px;
+    width: 39.7%;
     font-family: 'Quicksand', sans-serif;
     margin: 20px 0;
     border-radius: 10px;
@@ -129,4 +131,25 @@ hr{
     margin: 0;
     font-weight: bolder;
     border-radius: 10px;
+}
+
+#px-ruler{
+    height: 5px;
+    width: 500px;
+    background-image: linear-gradient(to right, #ff0000, #ffe816 50%, #5bff32 50%, #4b93ff);
+    margin: 0;
+}
+
+#rem-ruler{
+    height: 5px;
+    width: 1.56rem *2;
+    background-image: linear-gradient(to right, #ff0000, #ffe816 50%, #5bff32 50%, #4b93ff);
+    margin: 0;
+}
+
+#pc-ruler{
+    height: 5px;
+    width: 39.7%;
+    background-image: linear-gradient(to right, #ff0000, #ffe816 50%, #5bff32 50%, #4b93ff);
+    margin: 0;
 }
