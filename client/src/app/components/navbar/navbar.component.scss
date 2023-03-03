@@ -1,7 +1,4 @@
-// .spacer{
-//     width: 100px;
 
-// }
 
 // .input{
 //     padding: 13px;
@@ -27,22 +24,28 @@
 // }
 
 .logo {
-  background-color: #ffacac;
-  width: 2.5rem;
-  height: 2.5rem;
-  border-radius: 2.5rem;
-
+  width: auto;
+  height: 3rem;
   padding-top: 0.3rem;
-  margin-right: 1rem;
-  margin-left: 1rem;
+  margin-left: 1.5rem;
 
-  p {
+  .logo-team{
+    width: 2.8rem;
+    height: 2.8rem;
+    border-radius: 1.4rem;
+    background-color: #ffacac;
+    margin-right: 0.8rem;
+  }
+
+  h3 {
     text-align: center;
+    padding-top: 0.5rem;
+    font-size: 1.3rem;
   }
 }
 
 .logoName {
-  margin-right: 8rem;
+  margin-right: 6rem;
 }
 
 .input {
@@ -54,21 +57,41 @@
   outline: none;
   padding-left: 0.5rem;
   width: 20rem;
+  height: 2rem;
+}
+
+.btn-page{
+  display: flex;
+  justify-content: space-between;
+
+  .btn-homeTask{
+    width: auto;
+    margin-left: 2rem;  
+  }
+
+  .btn-ViewAllProject{
+    width: auto;
+    margin-left: 3rem;
+  }
+
 }
 
 .userName {
-  
+  width: 4rem;
+  margin-left: 11rem;
   .image-user {
     display: flex;
     justify-content: center;
     align-items: center;
 
     .img {
+      margin-right:0.8rem;
       width: 2.5rem;
       height: 2.5rem;
     }
 
     p{
+        margin-right:0.8rem;
         padding-top: 0.5rem;
     }
   }
