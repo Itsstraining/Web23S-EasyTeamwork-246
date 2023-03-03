@@ -1,3 +1,8 @@
+.reponsive{
+  width: 100vw;
+  height: 100vh;
+}
+
 
 .container{
   width: 100%;
@@ -45,13 +50,14 @@
     .logo-team{
       width: 12%;
       height: 75%;
-      border-radius: 1.4rem;
+      border-radius: 100%;
       background-color: #ffacac;
     }
   
     h3 {
       text-align: center;
       padding-top: 15%;
+      font-family: 'Pacifico', cursive;
     }
   }
 
@@ -130,12 +136,13 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    // padding-bottom: 0.1%;
+    margin: 0 auto;
     
     #or{
       color: gray;
       vertical-align: middle;
       text-align: center;
+      
     }
     #hr{
       border-bottom: 2px solid gray;
@@ -150,7 +157,6 @@
     width: auto;
     height: 10%;
     margin-left: 8%;
-    
 
     button{
       width: 91.3%;
@@ -158,25 +164,26 @@
       border-radius: 1rem;
       background-color: #fff;
       color: black;
-      box-shadow: 0.5rem;
+      box-shadow: 10%;
       border: none;
       display: flex;
       justify-content: center;
       align-items: center;
 
-      i{
-        // width: 2.5rem;
-        // height: 2.5rem;
+      .img{
+        width: 25%;
         
-        color: orange;
+        img{
+          margin-top: 5%;
+          width: 85%;
+          height: 85%;
+        }
+      }
+      .gg{
+        width: 100%;
       }
     }
-
-
   }
-
-
-
 
   .option{
     // background-color: red;
@@ -189,6 +196,7 @@
     p{
       color: gray;
     }
+
     a{
       color: #00C2EE;
       cursor: pointer;  

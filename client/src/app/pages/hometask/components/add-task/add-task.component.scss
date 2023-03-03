@@ -1,3 +1,8 @@
+::ng-deep .mat-dialog-container{
+    // border-radius: 15px !important;
+    background-color: aqua;
+}
+
 .container{
     width: 30rem;
     height: 15rem;
@@ -6,6 +11,7 @@
     flex-direction: column;
     border: none;
     // background-color: red;
+    border-radius: 15px;
 }
 
 .addTitle{
@@ -13,11 +19,14 @@
     background-color: #FFFCE0;
     text-align: center;
     padding-top: 2%;
+    border-top-right-radius: 15px;
+    border-top-left-radius: 15px;
 }
 
 .infoDiv{
     margin-top: 5%;
     padding: 1%;
+    border-radius: 15px;
 }
 
 .txtIn{

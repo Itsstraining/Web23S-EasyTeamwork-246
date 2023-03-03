@@ -21,6 +21,7 @@ import {MatDialogModule} from '@angular/material/dialog';
     ScrollingModule,
     MatMenuModule,
     MatDialogModule,
+    MatMenuModule,
   ],
   exports:[
     MatToolbarModule,
@@ -31,6 +32,7 @@ import {MatDialogModule} from '@angular/material/dialog';
     ScrollingModule,
     MatMenuModule,
     MatDialogModule,
+    MatMenuModule,
   ]
 })
 export class MaterialModule { }

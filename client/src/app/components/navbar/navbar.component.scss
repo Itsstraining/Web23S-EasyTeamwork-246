@@ -1,35 +1,15 @@
-
-
-// .input{
-//     padding: 13px;
-//     border-radius: 8px;
-//     width: 700px;
-//     border: none;
-//     margin-left: 20px;
-//     background-color: beige;
-
-// }
-
-// .box{
-//     width: 500px;
-
-//     display: flex;
-//     justify-content: space-between;
-//     align-items:center;
-// }
-
-// .icon{
-//     width: 40px;
-
-// }
+.reponsive{
+  width: 100vw;
+  height: auto;
+}
 
 .logo {
   width: auto;
-  height: 3rem;
-  padding-top: 0.3rem;
-  margin-left: 1.5rem;
+  height: auto;
+  margin: auto 0;
+  margin-left: 2%;
 
-  .logo-team{
+  .logo-team {
     width: 2.8rem;
     height: 2.8rem;
     border-radius: 1.4rem;
@@ -40,63 +20,90 @@
   h3 {
     text-align: center;
     padding-top: 0.5rem;
-    font-size: 1.3rem;
+    font-size: 100%;
+    font-family: 'Pacifico', cursive;
+    color: #000;
   }
 }
 
 .logoName {
+  margin: auto 0;
   margin-right: 6rem;
 }
 
-.input {
-  border-radius: 1.5rem;
-  margin-right: 9rem;
-  background-color: #cfd8dc;
-  color: #000;
-  border: none;
-  outline: none;
-  padding-left: 0.5rem;
-  width: 20rem;
-  height: 2rem;
+.input-search {
+  // background-color: #e11d1d;
+  width: 30%;
+  height: 50%;
+  display: flex;
+  align-items: center;
+
+  .input {
+    border-radius: 1.5rem;
+    background-color: #cfd8dc;
+    color: #000;
+    border: none;
+    outline: none;
+    width: 85%;
+    height: 100%;
+    padding-left: 5%;
+  }
 }
 
-.btn-page{
+.btn-page {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
+  // background-color: #000;
+  width: 30%;
 
-  .btn-homeTask{
+  .btn-homeTask {
     width: auto;
-    margin-left: 2rem;  
+    margin-left: 14%;
   }
 
-  .btn-ViewAllProject{
+  .btn-ViewAllProject {
     width: auto;
-    margin-left: 3rem;
+    margin-right: 20%;
   }
-
 }
 
 .userName {
-  width: 4rem;
-  margin-left: 11rem;
+  // background-color: #ffacac;
+  width: 15%;
+
   .image-user {
     display: flex;
     justify-content: center;
     align-items: center;
 
     .img {
-      margin-right:0.8rem;
-      width: 2.5rem;
-      height: 2.5rem;
+      width: 23%;
+      height: 23%;
+      border-radius: 100%;
     }
 
-    p{
-        margin-right:0.8rem;
-        padding-top: 0.5rem;
+    p {
+      padding-top: 5%;
+      margin-left: 3%;
     }
 
-    i{
-      custor: poiter;
+    i {
+      cursor: pointer;
+      margin-left: 3%;
     }
   }
+}
+
+.change-account{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+
+.nav_bars_btn{
+  width: 28px;
+  height: 28px;
+  color: #fff;
+  display: none;
 }
