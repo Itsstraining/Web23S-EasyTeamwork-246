@@ -58,28 +58,28 @@
 
   .btn-homeTask {
     width: auto;
-    margin-left: 14%;
+    margin-left: 25%;
   }
 
   .btn-ViewAllProject {
     width: auto;
-    margin-right: 20%;
+    margin-right: 5%;
   }
 }
 
 .userName {
   // background-color: #ffacac;
   width: 15%;
-
+  margin-left: 5%;
   .image-user {
     display: flex;
     justify-content: center;
     align-items: center;
 
     .img {
-      width: 23%;
-      height: 23%;
-      border-radius: 100%;
+      width: 20%;
+      height: 20%;
+      border-radius: 60%;
     }
 
     p {
