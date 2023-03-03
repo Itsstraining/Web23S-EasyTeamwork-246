@@ -1,0 +1,121 @@
+.reponsive {
+  width: 100vw;
+  height: 100vh;
+}
+
+.container {
+  width: 100%;
+  height: 100%;
+  background-color: #bbdefb;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.interface-login {
+  width: 25%;
+  height: 80%;
+  background-color: white;
+  margin: auto auto;
+  border-radius: 10px;
+
+  .title {
+    height: 16%;
+    // background-color: aquamarine;
+    width: auto;
+    margin-top: 8%;
+    margin-left: 8%;
+
+    p {
+      width: 100%;
+      font-size: 200%;
+    }
+
+    span {
+      color: gray;
+    }
+  }
+
+  .logo {
+    // background-color: green;
+    width: auto;
+    height: 10%;
+    padding-top: 2.5%;
+    margin-left: 8%;
+
+    .logo-team {
+      width: 12%;
+      height: 75%;
+      border-radius: 100%;
+      background-color: #ffacac;
+    }
+
+    h3 {
+      text-align: center;
+      padding-top: 15%;
+      font-family: "Pacifico", cursive;
+    }
+  }
+
+  .input-email {
+    // background-color: aqua;
+    width: auto;
+    height: auto;
+    margin-left: 8%;
+    margin-right: 8%;
+
+    .Email {
+      width: auto;
+      height: 80%;
+      padding-bottom: 2.5%;
+      padding-top: 0.5%;
+      input {
+        width: 98%;
+        height: 3rem;
+        border: none;
+        outline: none;
+        border-bottom: 1.5px solid #00c2ee;
+      }
+    }
+
+    .Password {
+      width: auto;
+      height: 50%;
+      padding-bottom: 2.5%;
+      padding-top: 1%;
+      input {
+        width: 98%;
+        height: 3rem;
+        border: none;
+        outline: none;
+        border-bottom: 1.5px solid #00c2ee;
+      }
+    }
+  }
+
+  .btn-signIn {
+    // background-color: red;
+    width: auto;
+    height: 15%;
+    margin-left: 8%;
+
+    button {
+      width: 91.3%;
+      height: 45%;
+      border-radius: 1rem;
+      background-color: #fff;
+      color: black;
+      margin-top: 5.5%;
+      box-shadow: 10%;
+    }
+
+    a {
+      float: right;
+      margin-top: 2%;
+      padding-right: 8.5%;
+      text-decoration: underline;
+      
+      cursor: pointer;
+    }
+  }
+}
