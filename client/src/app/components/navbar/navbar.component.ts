@@ -19,4 +19,12 @@ export class NavbarComponent implements OnInit {
         }
       })
     }
+
+    hometask(){
+      this.router.navigate(['hometask']);
+    }
+
+    viewallproject(){
+      this.router.navigate(['viewallproject']);
+    }
 }
