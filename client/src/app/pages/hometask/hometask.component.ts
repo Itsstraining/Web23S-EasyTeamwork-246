@@ -1,6 +1,8 @@
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { Component } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { todoModel } from 'src/app/models/todo.model';
+import { AddTaskComponent } from './components/add-task/add-task.component';
 
 @Component({
   selector: 'app-hometask',
@@ -8,6 +10,15 @@ import { todoModel } from 'src/app/models/todo.model';
   styleUrls: ['./hometask.component.scss']
 })
 export class HometaskComponent {
+
+  constructor(private matDialog: MatDialog){}
+
+  todoMenu: boolean = true;
+
+  dialogOpen(){
+    this.matDialog.open(AddTaskComponent);
+  }
+
   todoList: todoModel[] = [
     {
       title: "Task1",
@@ -94,5 +105,13 @@ export class HometaskComponent {
         event.currentIndex,
       );
     }
+  }
+
+  todoMenuEdit(){
+
+  }
+
+  todoMenuDelete(){
+
   }
 }

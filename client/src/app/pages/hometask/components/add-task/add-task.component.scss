@@ -1,0 +1,47 @@
+.container{
+    width: 30rem;
+    height: 15rem;
+    font-size: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    border: none;
+    // background-color: red;
+}
+
+.addTitle{
+    font-family: 'Ubuntu', sans-serif;
+    background-color: #FFFCE0;
+    text-align: center;
+    padding-top: 2%;
+}
+
+.infoDiv{
+    margin-top: 5%;
+    padding: 1%;
+}
+
+.txtIn{
+    width: 60%;
+    float: right;
+}
+
+.txtIn:focus{
+    outline: none;
+    outline-style: none;
+}
+
+#addBTn{
+    font-family: 'Quicksand', sans-serif;
+    font-size: 1.6rem;
+    border: none;
+    border-radius: 7px;
+    background-color: #FFF6A6;
+    padding: 1%;
+    margin-top: 2%;
+    margin-left: 46%;
+}
+
+#addBTn:hover{
+    cursor: pointer;
+    background-color: #fff8b6;
+}
