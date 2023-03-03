@@ -166,13 +166,14 @@ hr{
     overflow-y: scroll;
     overflow-x: hidden;
 }
-#table-row{
-    height: 3.13rem;
+.table-row{
+    height: 2.5rem;
+    display: flex;
+    align-items: center;
     border-bottom: 0.06rem solid #666666;
 }
 .item-attribute{
-    display: inline-block;
-    justify-content: center;
+    display: inline-flex;
     align-items: center;
     height: 1.88rem;
     width: fit-content;
@@ -181,19 +182,17 @@ hr{
     font-weight: normal;
     padding-left: 1.88rem;
 }
-#usr-avatar{
-    background-image: url("https://cdn-icons-png.flaticon.com/512/3436/3436890.png");    
-}
-.avatar{
-    width: 1.88rem;
-    height: 1.88rem;
-    border-radius: 50%;
-    background-color: #159ACC;
-}
 #state{
     display: inline-block;
     width: 0.63rem;
     height: 0.63rem;
     border-radius: 50%;
     background-color: #159ACC;
+}
+.avatar{
+    width: 1.88rem;
+    height: 1.88rem;
+    border-radius: 50%;
+    background-color: #159ACC;
+    margin-right: 5%;
 }
