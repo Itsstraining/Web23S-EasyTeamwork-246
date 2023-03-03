@@ -10,10 +10,8 @@
     display: flex;
     flex-direction: row;
     background-color: #FFFEF6;
-    // background-color: transparent;
     margin-left: 0rem;
     overflow: hidden;
-    // background-image: url("https://wallpapercrafter.com/desktop/289246-milky-way-starry-sky-night-sky-star-night-sky.jpg");
 }
 
 
@@ -22,7 +20,6 @@
     width: 15%;
     height: 100%;
     background-color: #FFFDEF;
-    // background-color: transparent;
 }
 
 #btnSpaceTop{
@@ -32,7 +29,6 @@
     border-top: 2px solid #ffef79;
     border-right: 2px solid #ffef79;
     background-color: #FFFDEF;
-    // background-color: transparent;
     margin-bottom: -1.2%;
 }
 
@@ -247,6 +243,7 @@
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
+    padding: 0% 3%;
 }
 
 .cardAct > p{
@@ -291,7 +288,7 @@
     height: 5%;
     border: 3px dashed #fdf191;
     border-radius: 15px;
-    background-color: #fffce9;
+    background-color: #fffced;
     margin-top: 3%;
 }
 
@@ -309,10 +306,16 @@
 }
 
 #todoMenu{
-    margin-top: -3%;
-    margin: 0% 5% 0% 70%;
+    margin: 0% 0% 0% 75%;
 }
 
 #todoMenu:hover{
     cursor: pointer;
+}
+
+.userImg{
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    margin-right: 78%;
 }
