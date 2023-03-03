@@ -5,6 +5,14 @@
     <div id="title">
         <p>Projects</p>
     </div>
+    <div id="create-project">
+        <button id="create-btn">
+            <span id="create-content">
+                <i class="fa-solid fa-square-plus"></i>
+                Create project
+            </span>
+        </button>
+    </div>
     <div id="overview">
         <div id="overview-header">Overview</div>
         <div id="overview-body">
@@ -30,16 +38,103 @@
             </div>
         </div>
     </div>
-    <div id="create-project">
-        <button id="create-btn">
-            <i class="fa-solid fa-square-plus"></i>
-            <span>Create project</span>
-        </button>
-    </div>
     <div id="table">
-        <div id="table-header"></div>
+        <div id="table-header">
+            <div class="view-mode">
+                <div class="view-mode" id="search">
+                    <input type="text" placeholder="Search">
+                    <i class="fa-solid fa-search"></i>
+                </div>
+                <div class="view-mode" id="view-all">
+                    <button id="view-all-btn">
+                        <span id="view-all-content">
+                            <i class="fa-solid fa-eye"></i>
+                            View all
+                        </span>
+                    </button>
+                </div>
+                <div class="view-mode" id="view-in-progress">
+                    <button id="view-in-progress-btn">
+                        <span id="view-in-progress-content">
+                            <i class="fa-solid fa-eye"></i>
+                            View in progress
+                        </span>
+                    </button>
+                </div>
+                <div class="view-mode" id="view-completed">
+                    <button id="view-completed-btn">
+                        <span id="view-completed-content">
+                            <i class="fa-solid fa-eye"></i>
+                            View completed
+                        </span>
+                    </button>
+                </div>
+                <div class="view-mode" id="view-overdue">
+                    <button id="view-overdue-btn">
+                        <span id="view-overdue-content">
+                            <i class="fa-solid fa-eye"></i>
+                            View overdue
+                        </span>
+                    </button>
+                </div>
+                <div class="view-mode" id="view-marked">
+                    <button id="view-marked-btn">
+                        <span id="view-marked-content">
+                            <i class="fa-solid fa-eye"></i>
+                            View marked
+                            <img class="icon" src="https://cdn-icons-png.flaticon.com/512/2107/2107957.png" alt="yellow star">
+                        </span>
+                    </button>
+                </div>
+            </div>
+            <div id="table-attribute">
+                <div class="attribute">
+                    <img class="icon" src="https://cdn-icons-png.flaticon.com/512/2107/2107992.png" alt="empty star">
+                </div>
+                <div class="attribute">
+                    <span>Name</span>
+                </div>
+                <div class="attribute">
+                    <span>State</span>
+                </div>
+                <div class="attribute">
+                    <span>Due date</span>
+                </div>
+                <div class="attribute">
+                    <span>Members</span>
+                </div>
+                <div class="attribute">
+                    <span>Host</span>
+                </div>
+            </div>
+        </div>
         <div id="table-body">
-            <div class="table-row"></div>
+            <div class="table-row">
+                <div class="item-attribute">
+                    <img class="icon" src="https://cdn-icons-png.flaticon.com/512/2107/2107992.png" alt="empty star">
+                </div>
+                <div class="item-attribute">
+                    <span>Demo</span>
+                </div>
+                <div class="item-attribute">
+                    <div id="state"></div>
+                    <span> In progress</span>
+                </div>
+                <div class="item-attribute">
+                    <span>Due date</span>
+                </div>
+                <div class="item-attribute">
+                    <span>Members</span>
+                </div>
+                <div class="item-attribute">
+                        <img class="avatar" src="https://cdn-icons-png.flaticon.com/512/3436/3436890.png" alt="avatar">
+                    
+                    <span>Host</span>
+                </div>
+                <div class="item-attribute">
+                    <i class="fa-solid fa-ellipsis-vertical fa-sm"></i>
+                </div>
+            </div>
         </div>
     </div>
 </div>

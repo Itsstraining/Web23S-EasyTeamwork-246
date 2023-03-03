@@ -1,6 +1,6 @@
 body{
     margin: 0;
-    background-color: wheat;
+    background-color: rgb(0, 0, 0);
 }
 
 p{
@@ -12,22 +12,19 @@ hr{
     border: none;
 }
 
-// css navbar
-#navbar{
-    height: 60px;
-    width: 100%;
-    background-color: #FFDEDE;
-}
 
 // css body
 #body{
-    padding: 30px;
+    height: fit-content;
+    padding:  2.3771790808%;
+    background-color: #666666;
 }
 
 //// css title
 #title{
+    width: fit-content;
     font-family: 'Ubuntu', sans-serif;
-    font-size: 25px;
+    font-size:  1.56rem;
     font-weight: bolder;
     padding: 0 10px;
 }
@@ -36,49 +33,49 @@ hr{
 #overview{
     display: inline-block;
     height: fit-content;
-    width: 500px;
+    width: 31.25rem;
     font-family: 'Quicksand', sans-serif;
     margin: 20px 0;
     border-radius: 10px;
 }
 #overview-header{
     height: 30px;
-    font-size: 16px;
-    font-weight: 1000;
-    padding: 20px 0 0 30px;
+    font-size: 1rem;
+    font-weight: bolder;
+    padding: 1.25rem 0 0 1.88rem;
     border-radius: 10px 10px 0 0;
-    background-color: rgb(255, 255, 255);
-    border: 1px solid #FFFCE0;
+    background-color: white;
+    border: 0.06rem solid #FFFCE0;
+    border-bottom: none;
 }
 #overview-body{
     display: flex;
     height: 80px;
-    font-size: 10px;
-    font-weight: bolder;
-    padding: 15px 0 0 5px;
+    font-weight: bold;
+    padding: 0.94rem 0 0 0.94rem;
     border-radius: 0 0 10px 10px;
     background-color: #FFFCE0;
 }
 .overview-content{
     height: fit-content;
-    width: 90px;
-    padding: 10px 0;
-    border-radius: 10px;
-    margin-left: 5%
+    width: 4.38rem;
+    padding: 0.63rem 0;
+    border-radius: 0.63rem;
+    margin: 0 4%;
 }
 .amount{
-    font-size: 14px;
+    font-size: 0.88rem;
     text-align: center;
     margin-bottom: 5px;
 }
 .type{
-    font-size: 13px;
+    font-size: 0.81rem;
     text-align: center;
     margin-top: 5px;
 }
 .horizone{
     width: 65px;
-    height: 1px ;
+    height: 0.06rem ;
     margin: 0 auto;
 }
 #total{
@@ -112,17 +109,90 @@ hr{
     float: right;
     height: fit-content;
     width: fit-content;
-    font-family: 'Quicksand', sans-serif;
-    margin-top: 30px;
-    margin-right: 80px;
-    border-radius: 10px;
-    background-color: #FFFCE0;
+    margin-top: 0;
 }
 #create-btn{
-    height: fit-content;
-    width: 500px;
+    height: 2.5rem;
+    width: 10rem;
+    border-radius: 0.63rem;
+    background-color: #FFF6A6;
+    margin: auto;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#create-content{
     font-family: 'Quicksand', sans-serif;
-    margin: 20px 0;
-    border-radius: 10px;
-    background-color: tomato;
+    font-size: 1rem;
+    height: fit-content;
+    width: fit-content;
+    margin: 0;
+    font-weight: bold;
+}
+
+////css table
+#table{
+    height: 39.06rem;
+    width: 100%;
+    border-radius: 0.63rem;
+    background-color: #FFFCE0;
+}
+#table-header{
+    height: 5.50rem;
+    background-color: white;
+    border-radius: 0.63rem 0.63rem 0 0;
+    border: 0.06rem solid #FFFCE0;
+    border-bottom: none;
+}
+.view-mode{
+    display: inline;
+}
+.attribute{
+    display: inline-block;
+    height: fit-content;
+    width: fit-content;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 1rem;
+    font-weight: bolder;
+    padding: 1.88rem 0 0 1.88rem;
+}
+.icon{
+    width: 13px;
+    height: 13px;
+}
+#table-body{
+    height: 33.5rem;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+.table-row{
+    height: 2.5rem;
+    display: flex;
+    align-items: center;
+    border-bottom: 0.06rem solid #666666;
+}
+.item-attribute{
+    display: inline-flex;
+    align-items: center;
+    height: 1.88rem;
+    width: fit-content;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 1rem;
+    font-weight: normal;
+    padding-left: 1.88rem;
+}
+#state{
+    display: inline-block;
+    width: 0.63rem;
+    height: 0.63rem;
+    border-radius: 50%;
+    background-color: #159ACC;
+}
+.avatar{
+    width: 1.88rem;
+    height: 1.88rem;
+    border-radius: 50%;
+    background-color: #159ACC;
+    margin-right: 5%;
 }

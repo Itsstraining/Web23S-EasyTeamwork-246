@@ -1,15 +1,17 @@
+<app-navbar></app-navbar>
+
 <div class="homeContainer">
     <div class="menuDiv">
         <div id="btnSpaceTop"></div>
-        <mat-button-toggle-group>
-            <mat-button-toggle class="menuBtn">Tasks</mat-button-toggle>
+        <mat-button-toggle-group value="tasks">
+            <mat-button-toggle class="menuBtn" value="tasks">Tasks</mat-button-toggle>
             <mat-button-toggle class="menuBtn" id="menuBtnCallendar">Callendar</mat-button-toggle>
         </mat-button-toggle-group>
         <div id="btnSpaceBottom"></div>
     </div>
     <div class="homeDiv">
         <div class="infoDiv">
-            <h1 id="funcTitle">TASKS</h1>
+            <h1 id="funcTitle">Project Name</h1>
             <p class="projInfo">Priority: <span id="priorContent">HIGH</span></p>
             <p class="projInfo">Due date: <span id="dateContent">17 March 2023</span></p>
             <div class="userDiv">
@@ -27,57 +29,133 @@
                 </div>
             </div>
         </div>
-        <div class="todoMainDiv">
-            <div class="todoDiv">
-                <div class="progressTitleDiv">
-                    <p>Todo</p>
-                    <button class="moreOptBtn">...</button>
+        <div class="todoMainDiv" cdkDropListGroup>
+            <div class="dragContainer">
+                <div class="taskTitleDiv">
+                    <p class="taskTitle">Todo</p>
+                    <i class="fa-solid fa-ellipsis-vertical fa-xl" mat-button [matMenuTriggerFor]="menu" id="todoMenu"></i>
+                    <mat-menu #menu="matMenu">
+                        <button mat-menu-item (click)="todoMenuEdit()" >Edit</button>
+                        <button mat-menu-item (click)="todoMenuDelete()">Delete</button>
+                    </mat-menu>
+                </div>
+                <div class="addTaskDiv" (click)="dialogOpen()">
+                    <p id="addTask">+  Add New Task</p>
+                </div>
+                <div 
+                    cdkDropList
+                    [cdkDropListData]="todoList"
+                    class="todoLists"
+                    (cdkDropListDropped)="drop($event)">
+                    <div class="taskBox" *ngFor="let item of todoList" cdkDragBoundary=".todoMainDiv" cdkDrag>
+                        <mat-card class="todoCard">
+                            <mat-card-header class="cardTitle">{{item.title}}</mat-card-header>
+                            <mat-card-content class="cardInfo">Description: {{item.description}}</mat-card-content>
+                            <mat-card-content class="cardInfo">Due date: {{item.deadline}}</mat-card-content>
+                            <mat-card-actions class="cardAct">
+                                <img src="https://www.pngkit.com/png/detail/301-3012694_account-user-profile-avatar-comments-fa-user-circle.png" class="userImg" alt="usrImg">
+                                <div class="commentDiv">
+                                    <span>{{item.commentCount}}</span>
+                                    <i class="fa-sharp fa-solid fa-comment fa-xl"></i>
+                                </div>
+                            </mat-card-actions>
+                        </mat-card>
+                    </div>  
                 </div>
             </div>
-            <div class="spaceDiv"></div>
-            <div class="todoDiv">
-                <div class="progressTitleDiv">
-                    
+
+            <div class="dragContainer">
+                <div class="taskTitleDiv">
+                    <p class="taskTitle">In Progress</p>
+                    <button mat-button [matMenuTriggerFor]="menu"></button>
+                    <mat-menu #menu="matMenu">
+                        <button mat-menu-item>Edit</button>
+                        <button mat-menu-item>Delete</button>
+                    </mat-menu>
                 </div>
-                <div cdkDropListGroup>
-                    <div class="example-container">
-                      <h2>To do</h2>
-                  
-                      <!-- <div
-                        cdkDropList
-                        [cdkDropListData]="todo"
-                        class="example-list"
-                        (cdkDropListDropped)="drop($event)">
-                        <div class="example-box" *ngFor="let item of todo" cdkDrag>{{item}}</div>
-                      </div>
+                <div 
+                    cdkDropList
+                    [cdkDropListData]="inProgressList"
+                    class="todoLists"
+                    (cdkDropListDropped)="drop($event)">
+                    <div class="taskBox" *ngFor="let item of inProgressList" cdkDragBoundary=".todoMainDiv" cdkDrag>
+                        <mat-card class="todoCard">
+                            <mat-card-header class="cardTitle">{{item.title}}</mat-card-header>
+                            <mat-card-content class="cardInfo">Description: {{item.description}}</mat-card-content>
+                            <mat-card-content class="cardInfo">Due date: {{item.deadline}}</mat-card-content>
+                            <mat-card-actions class="cardAct">
+                                <img src="https://www.pngkit.com/png/detail/301-3012694_account-user-profile-avatar-comments-fa-user-circle.png" class="userImg" alt="usrImg">
+                                <div class="commentDiv">
+                                    <span>{{item.commentCount}}</span>
+                                    <i class="fa-sharp fa-solid fa-comment fa-xl"></i>
+                                </div>
+                            </mat-card-actions>
+                        </mat-card>
                     </div>
-                  
-                    <div class="example-container">
-                      <h2>Done</h2>
-                  
-                      <div
-                        cdkDropList
-                        [cdkDropListData]="done"
-                        class="example-list"
-                        (cdkDropListDropped)="drop($event)">
-                        <div class="example-box" *ngFor="let item of done" cdkDrag>{{item}}</div>
-                      </div>
+                </div>
+            </div>
+
+            <div class="dragContainer">
+                <div class="taskTitleDiv">
+                    <p class="taskTitle">Completed</p>
+                    <button mat-button [matMenuTriggerFor]="menu"></button>
+                    <mat-menu #menu="matMenu">
+                        <button mat-menu-item>Edit</button>
+                        <button mat-menu-item>Delete</button>
+                    </mat-menu>
+                </div>
+                <div 
+                    cdkDropList
+                    [cdkDropListData]="completeList"
+                    class="todoLists"
+                    (cdkDropListDropped)="drop($event)">
+                    <div class="taskBox" *ngFor="let item of completeList" cdkDragBoundary=".todoMainDiv" cdkDrag>
+                        <mat-card class="todoCard">
+                            <mat-card-header class="cardTitle">{{item.title}}</mat-card-header>
+                            <mat-card-content class="cardInfo">Description: {{item.description}}</mat-card-content>
+                            <mat-card-content class="cardInfo">Due date: {{item.deadline}}</mat-card-content>
+                            <mat-card-actions class="cardAct">
+                                <img src="https://www.pngkit.com/png/detail/301-3012694_account-user-profile-avatar-comments-fa-user-circle.png" class="userImg" alt="usrImg">
+                                <div class="commentDiv">
+                                    <span>{{item.commentCount}}</span>
+                                    <i class="fa-sharp fa-solid fa-comment fa-xl"></i>
+                                </div>
+                            </mat-card-actions>
+                        </mat-card>
                     </div>
-                  </div> -->
-                  
-            </div>
-            <div class="spaceDiv"></div>
-            <div class="todoDiv">
-                <div class="progressTitleDiv">
-                    
                 </div>
             </div>
-            <div class="spaceDiv"></div>
-            <div class="todoDiv">
-                <div class="progressTitleDiv">
-                    
+
+            <div class="dragContainer">
+                <div class="taskTitleDiv">
+                    <p class="taskTitle">Due</p>
+                    <button mat-button [matMenuTriggerFor]="menu"></button>
+                    <mat-menu #menu="matMenu">
+                        <button mat-menu-item>Edit</button>
+                        <button mat-menu-item>Delete</button>
+                    </mat-menu>
+                </div>
+                <div 
+                    cdkDropList
+                    [cdkDropListData]="dueList"
+                    class="todoLists"
+                    (cdkDropListDropped)="drop($event)">
+                    <div class="taskBox" *ngFor="let item of dueList" cdkDragBoundary=".todoMainDiv" cdkDrag>
+                        <mat-card class="todoCard">
+                            <mat-card-header class="cardTitle">{{item.title}}</mat-card-header>
+                            <mat-card-content class="cardInfo">Description: {{item.description}}</mat-card-content>
+                            <mat-card-content class="cardInfo">Due date: {{item.deadline}}</mat-card-content>
+                            <mat-card-actions class="cardAct">
+                                <img src="https://www.pngkit.com/png/detail/301-3012694_account-user-profile-avatar-comments-fa-user-circle.png" class="userImg" alt="usrImg">
+                                <div class="commentDiv">
+                                    <span>{{item.commentCount}}</span>
+                                    <i class="fa-sharp fa-solid fa-comment fa-xl"></i>
+                                </div>
+                            </mat-card-actions>
+                        </mat-card>
+                    </div>
                 </div>
             </div>
-        </div>        
+        </div>       
     </div>
 </div>
