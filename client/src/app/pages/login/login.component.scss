@@ -18,36 +18,40 @@
   
   .title{
     
-    height: 18%;
+    height: 16%;
     // background-color: aquamarine;
     width: auto;
-    margin-top: 1.5rem;
-    margin-left: 1.5rem;
+    margin-top: 8%;
+    margin-left: 8%;
 
     p{
       width: 100%;
-      font-size: 1.5rem;
+      font-size: 200%;
       
+    }
+
+    span{
+      color: gray; 
     }
   }
 
   .logo {
     // background-color: green;
     width: auto;
-    height: 3rem;
-    padding-top: 0.3rem;
-    margin-left: 1.5rem;
+    height: 10%;
+    padding-top: 2.5%;
+    margin-left: 8%;
 
     .logo-team{
-      width: 2.8rem;
-      height: 2.8rem;
+      width: 12%;
+      height: 75%;
       border-radius: 1.4rem;
       background-color: #ffacac;
     }
   
     h3 {
       text-align: center;
-      padding-top: 0.5rem;
+      padding-top: 15%;
     }
   }
 
@@ -56,15 +60,17 @@
     // background-color: aqua;
     width: auto;
     height: auto;
-    margin-left: 1.5rem;
+    margin-left: 8%;
+    margin-right: 8%;
     
 
     .Email{
       width: auto;
-      height: 3rem;
-      padding-bottom: 0.5rem;
+      height:80%;
+      padding-bottom: 2.5%;
+      padding-top: 0.5%;  
       input{
-        width: 20rem;
+        width: 98%;
         height: 3rem;
         border: none;
         outline: none;
@@ -72,18 +78,20 @@
       }
     }
 
-    .Password{ 
+    .Password{
       width: auto;
-      height: 3rem;
-      padding-bottom: 0.5rem;
+      height:50%;
+      padding-bottom: 2.5%;
+      padding-top: 1%;
       input{
-        width: 20rem;
+        width: 98%;
         height: 3rem;
         border: none;
         outline: none;
         border-bottom: 1.5px solid #00C2EE;
       }
     }
+
 
   }
   
@@ -91,25 +99,26 @@
   .btn-signIn{
     // background-color: red;
     width: auto;
-    height: 6rem;
-    margin-left: 1.5rem;
+    height: 15%;
+    margin-left: 8%;
 
 
     button{
-      width: 20.3rem;
-      height: 2.5rem;
+      width: 91.3%;
+      height: 45%;
       border-radius: 1rem;
       background-color: #fff;
       color: black;
-      margin-top: 1rem;
-      box-shadow: 0.5rem;
+      margin-top: 5.5%;
+      box-shadow: 10%;
     }
 
     a{
       float: right;
-      margin-top: 1rem;
-      padding-right: 1.5rem;
-
+      margin-top: 2%;
+      padding-right: 8.5%;
+      color: gray; 
+      cursor: pointer;
     }
   }
   
@@ -117,11 +126,11 @@
   .word-Or{
     // background-color: greenyellow;
     width: auto;
-    height: 4rem;
-    // margin-left: 0.1rem;
+    height: 10%;
     display: flex;
     align-items: center;
     justify-content: center;
+    // padding-bottom: 0.1%;
     
     #or{
       color: gray;
@@ -130,7 +139,7 @@
     }
     #hr{
       border-bottom: 2px solid gray;
-      width: 1.5rem;
+      width: 1rem;
     }
     
 
@@ -139,14 +148,13 @@
   .signInWithGoogle{
     // background-color: grey;
     width: auto;
-    height: 3rem;
-    margin-left: 1.5rem;
-    
+    height: 10%;
+    margin-left: 8%;
     
 
     button{
-      width: 20.3rem;
-      height: 2.5rem;
+      width: 91.3%;
+      height:70%;
       border-radius: 1rem;
       background-color: #fff;
       color: black;
@@ -161,10 +169,6 @@
         // height: 2.5rem;
         
         color: orange;
-      }
-
-      span{
-        margin-bottom: 10px;
       }
     }
 
@@ -181,10 +185,14 @@
     display: flex;
     justify-content: center;
     align-items: center;
-
+   
+    p{
+      color: gray;
+    }
     a{
       color: #00C2EE;
-      padding-bottom: 0.7rem;
+      cursor: pointer;  
+      padding-bottom: 3.5%;
     }
   }
 
