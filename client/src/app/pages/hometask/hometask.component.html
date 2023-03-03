@@ -36,48 +36,29 @@
             </div>
             <div class="spaceDiv"></div>
             <div class="todoDiv">
-                <div class="progressTitleDiv">
-                    
-                </div>
                 <div cdkDropListGroup>
-                    <div class="example-container">
-                      <h2>To do</h2>
-                  
-                      <!-- <div
-                        cdkDropList
-                        [cdkDropListData]="todo"
-                        class="example-list"
-                        (cdkDropListDropped)="drop($event)">
-                        <div class="example-box" *ngFor="let item of todo" cdkDrag>{{item}}</div>
-                      </div>
+                    <div class="itemContainer">
+                        <h2>Test group 1</h2>
+                        <div 
+                            cdkDropList
+                            [cdkDropListData]="items"
+                            class="testList"
+                            (cdkDropListDropped)="drop($event)">
+                            <div class="test1Box" *ngFor="let item of items" cdkDrag>{{item}}</div>  
+                        </div>
                     </div>
-                  
-                    <div class="example-container">
-                      <h2>Done</h2>
-                  
-                      <div
-                        cdkDropList
-                        [cdkDropListData]="done"
-                        class="example-list"
-                        (cdkDropListDropped)="drop($event)">
-                        <div class="example-box" *ngFor="let item of done" cdkDrag>{{item}}</div>
-                      </div>
+
+                    <div class="itemContainer">
+                        <h3>Test group 2</h3>
+                        <div 
+                            cdkDropList
+                            [cdkDropListData]="people"
+                            class="testList"
+                            (cdkDropListDropped)="drop($event)">
+                            <div class="test1Box" *ngFor="let ppl of people" cdkDrag>{{ppl}}</div>
+                        </div>
                     </div>
-                  </div> -->
-                  
-            </div>
-            <div class="spaceDiv"></div>
-            <div class="todoDiv">
-                <div class="progressTitleDiv">
-                    
                 </div>
-            </div>
-            <div class="spaceDiv"></div>
-            <div class="todoDiv">
-                <div class="progressTitleDiv">
-                    
-                </div>
-            </div>
         </div>        
     </div>
 </div>
