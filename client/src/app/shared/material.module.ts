@@ -4,6 +4,7 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatButtonModule} from '@angular/material/button';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {DragDropModule} from '@angular/cdk/drag-drop';
+import {MatMenuModule} from '@angular/material/menu';
 
 @NgModule({
   declarations: [],
@@ -13,12 +14,14 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
     MatButtonModule,
     MatButtonToggleModule,
     DragDropModule,
+    MatMenuModule,
   ],
   exports:[
     MatToolbarModule,
     MatButtonModule,
     MatButtonToggleModule,
     DragDropModule,
+    MatMenuModule,
   ]
 })
 export class MaterialModule { }
