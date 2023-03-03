@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "easyteamwork-943e6": {
+      "hosting": {
+        "client": [
+          "easyteamwork-943e6"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "easyteamwork-943e6"
+  }
+}

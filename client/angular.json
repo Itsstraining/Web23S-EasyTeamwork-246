@@ -105,6 +105,16 @@
             ],
             "scripts": []
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {
+            "prerender": false,
+            "ssr": false,
+            "browserTarget": "client:build:production",
+            "firebaseProject": "easyteamwork-943e6",
+            "firebaseHostingSite": "easyteamwork-943e6"
+          }
         }
       }
     }

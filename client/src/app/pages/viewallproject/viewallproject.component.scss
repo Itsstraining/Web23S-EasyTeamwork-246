@@ -171,7 +171,7 @@ hr{
     border-bottom: 0.06rem solid #666666;
 }
 .item-attribute{
-    display: inline-flex;
+    display: inline-block;
     justify-content: center;
     align-items: center;
     height: 1.88rem;
@@ -180,6 +180,9 @@ hr{
     font-size: 1rem;
     font-weight: normal;
     padding-left: 1.88rem;
+}
+#usr-avatar{
+    background-image: url("https://cdn-icons-png.flaticon.com/512/3436/3436890.png");    
 }
 .avatar{
     width: 1.88rem;
