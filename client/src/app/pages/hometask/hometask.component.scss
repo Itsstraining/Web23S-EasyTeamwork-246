@@ -2,65 +2,64 @@
     background-color: #FFFEF6;
 }
 
-.navbar{
-    height: 60px;
-}
-
 .homeContainer{
     width: 100%;
-    height: 89%;
+    height: 100%;
     display: flex;
     flex-direction: row;
     background-color: #FFFEF6;
-    // margin-left: 0rem;
+    // background-color: blue;
+    margin-left: 0rem;
+    overflow: hidden;
 }
 
 
 /* sidebar */
 .menuDiv{
-    width: 270px;
+    width: 15%;
+    height: 95%;
     background-color: #FFFDEF;
-    margin-left: -.4%;
 }
 
 #btnSpaceTop{
-    width: 269.8px;
-    height: 60px;
+    // width: 93.7%;
+    width: 99%;
+    height: 13%;
     border: none;
     border-top: 2px solid #ffef79;
     border-right: 2px solid #ffef79;
     background-color: #FFFDEF;
-    // margin-left: -5%;
+    // background-color: cyan;
+    margin-bottom: -1.2%;
 }
 
 #btnSpaceBottom{
-    width: 270px;
-    height: 79.5%;
+    width: 99%;
+    height: 80%;
     border-right: 2px solid #ffef79;
     background-color: #FFFDEF;
     // background-color: cyan;
-    // margin-top: -3px;
+    margin-top: -1%;
 }
 
 .mat-button-toggle-group{
     display: flex;
     flex-direction: column;
     border: none;
-    margin-right: -5px;
 }
 
 .mat-button-toggle{
-    width: 270px;    
-    height: 70px;
-    font-size: 20px;
+    width: 99%;    
+    height: 3.9rem;
+    font-size: 50%;
     background-color: transparent;
     font-size: 1.5rem;
-    padding-top: 20px !important;
+    padding-top: 6% !important;
     border-right: 2px solid #ffef79 !important;
 }
 
 #menuBtnCallendar{
-    width: 269px;
+    width: 98.5%;
 }
 
 .mat-button-toggle-checked{
@@ -81,48 +80,47 @@
 
 /* Home div */
 .infoDiv{
-    position: absolute;
-    width: 85.5%;
-    height: 117px;
+    width: 100%;
+    height: 10%;
     background-color: #FFFEF6;
-    // background-color: antiquewhite;
     border-top: 2px solid #ffef79;
-    padding-left: .5rem;
+    padding-left: 1%;
     // margin-left: 5px;
 }
 
 .homeDiv{
-    background-color: #FFFEF6;
-    // background-color: bisque;
-    margin-left: 2px;
+    width: 100%;
+    // height: 80%;
+    // background-color: #FFFEF6;
+    // background-color: red;
+    // margin-left: 2px;
 }
 
 #funcTitle{
-    font-size: 30px;
-    margin-top: .6rem;
+    font-size: 2rem;
+    margin-top: 1%;
 }
 
 .projInfo{
-    font-size: 17px;
+    font-size: 1rem;
     margin-top: -.4rem;
     margin-left: 1rem;
 }
 
 .userDiv{
-    // position: absolute;
+    width: 10%;
+    height: 50%;
     display: flex;
     flex-direction: row;
-    width: 200px;
-    height: 48px;
     // background-color: blue;
-    margin-left: 89rem;
+    margin-left: 88%;
     margin-top: -6rem;
 }
 
 
 .usrIcon{
-    width: 48px;
-    height: 48px;
+    width: 30%;
+    height: 100%;
     display: flex;
     flex-direction: column;
     text-align: center;
@@ -131,13 +129,9 @@
     background-color: rgb(255, 205, 205);
 }
 
-#icon1{
-    margin: 0 auto;
-}
-
 .usrIcon1{
-    width: 48px;
-    height: 48px;
+    width: 30%;
+    height: 100%;
     display: flex;
     flex-direction: column;
     text-align: center;
@@ -148,8 +142,8 @@
 }
 
 .usrIcon2{
-    width: 48px;
-    height: 48px;
+    width: 30%;
+    height: 100%;
     display: flex;
     flex-direction: column;
     text-align: center;
@@ -160,7 +154,14 @@
 }
 
 .addUsr{
-    margin-top: 1rem;
+    width: 15%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+    // background-color: red;
+    // margin-top: 10%;
     margin-left: .5rem;
 }
 
@@ -169,23 +170,25 @@
 }
 
 .todoMainDiv{
-    width: 1590px;
-    height: 90%;
+    width: 96%;
+    height: 89%;
     display: flex;
     flex-direction: row;
     border-top-left-radius: 15px;
     border-top-right-radius: 15px;
     background-color: #FFFCE0;
-    padding: 1rem 1rem 0rem 1rem    ;
-    margin-top: 8.16rem;
+    padding: 1rem 1rem 0rem 1rem;
+    margin-top: 4%;
     margin-left: 1rem;
     box-shadow: 0px -1px 8px 0px rgba(129, 129, 129, 0.75);
+    overflow: hidden;
+    overflow-y: scroll;
 }
 
 
 .todoDiv{
     width: 23%;
-    background-color: rgb(230, 255, 255);
+    background-color: rgb(0, 216, 216);
 }
 
 .spaceDiv{
