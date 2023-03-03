@@ -37,25 +37,30 @@
   }
 
   .logo {
-    // background-color: green;
     width: auto;
-    height: 10%;
-    padding-top: 2.5%;
+    height: auto;
+    margin: 5% 0;
     margin-left: 8%;
-
+  
     .logo-team {
-      width: 12%;
-      height: 75%;
-      border-radius: 100%;
+      // width: 14%;
+      // height: 50%;
+      // border-radius: 100%;
+      width: 2.8rem;
+      height: 2.7rem;
+      border-radius: 1.4rem;
       background-color: #ffacac;
     }
-
+  
     h3 {
       text-align: center;
-      padding-top: 15%;
-      font-family: "Pacifico", cursive;
+      padding-top: 18%;
+      font-size: 100%;
+      font-family: 'Pacifico', cursive;
+      color: #000;
     }
   }
+
 
   .input-email {
     // background-color: aqua;
