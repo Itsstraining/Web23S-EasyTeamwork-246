@@ -15,7 +15,7 @@ export class NavbarComponent implements OnInit {
       onAuthStateChanged(this.auth, (user) => {
         if(!user) {
           this.authService.currentUser = user;
-          this.router.navigate([''])
+          this.router.navigate(['/'])
         }
       })
     }
