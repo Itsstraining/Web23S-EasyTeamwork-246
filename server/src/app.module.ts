@@ -5,12 +5,7 @@ import { AppService } from './app.service';
 import { UsersModule } from './module/users.module';
 
 @Module({
-  imports: [
-    // //tao file .env 
-    //MONGODB_URL=mongodb+srv://user:password@cluster0.fidun.mongodb.net/Hotel?retryWrites=true&w=majority
-    MongooseModule.forRoot(process.env.MONGODB_URL),
-    UsersModule,
-  ],
+  imports: [],
   controllers: [AppController],
   providers: [AppService],
 })
