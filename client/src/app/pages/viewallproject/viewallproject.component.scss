@@ -17,7 +17,7 @@ hr{
 #body{
     height: fit-content;
     padding:  2.3771790808%;
-    background-color: #666666;
+    background-color: #FFFEF6;
 }
 
 //// css title
@@ -136,7 +136,6 @@ hr{
     height: 39.06rem;
     width: 100%;
     border-radius: 0.63rem;
-    background-color: #FFFCE0;
 }
 #table-header{
     height: 5.50rem;
@@ -147,6 +146,7 @@ hr{
 }
 .view-mode{
     display: inline;
+    border: none;
 }
 .attribute{
     display: inline-block;

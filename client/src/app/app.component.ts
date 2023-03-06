@@ -18,8 +18,8 @@ export class AppComponent implements OnInit{
     onAuthStateChanged(this.auth, (user) => {
       if(user) {
         this.authService.currentUser = user;
-        this.router.navigate(['/viewallproject'])
-        console.log(user)
+        // this.router.navigate(['/viewallproject'])
+        // console.log(user)
       }else{
         console.log("No user");
         this.authService.currentUser = null;

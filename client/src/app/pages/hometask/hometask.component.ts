@@ -1,7 +1,7 @@
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { todoModel } from 'src/app/models/todo.model';
+import { TaskModel } from 'src/models/todo.model';
 import { AddTaskComponent } from './components/add-task/add-task.component';
 
 @Component({
@@ -19,7 +19,7 @@ export class HometaskComponent {
     this.matDialog.open(AddTaskComponent);
   }
 
-  todoList: todoModel[] = [
+  todoList: TaskModel[] = [
     {
       title: "Task1",
       description: "des 1",
@@ -38,7 +38,7 @@ export class HometaskComponent {
     }
   ];
 
-  inProgressList: todoModel[] = [
+  inProgressList: TaskModel[] = [
     {
       title: "Task2",
       description: "des 3",
@@ -58,7 +58,7 @@ export class HometaskComponent {
     }
   ];
 
-  completeList: todoModel[] = [
+  completeList: TaskModel[] = [
     {
       title: "Task4",
       description: "des 5",
@@ -78,7 +78,7 @@ export class HometaskComponent {
     }
   ];
   
-  dueList: todoModel[] = [
+  dueList: TaskModel[] = [
     {
       title: "Task6",
       description: "des 7",
@@ -94,7 +94,7 @@ export class HometaskComponent {
   ];
 
 
-  drop(event: CdkDragDrop<todoModel[]>){
+  drop(event: CdkDragDrop<TaskModel[]>){
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
