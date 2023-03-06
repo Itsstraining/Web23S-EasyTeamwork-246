@@ -1,14 +1,12 @@
 import { Module } from '@nestjs/common';
-import { MongooseModule } from '@nestjs/mongoose/dist';
+import { MongooseModule } from '@nestjs/mongoose';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { TaskController } from './tasks/controller/task/task.controller';
-import { TaskService } from './tasks/services/task/task.service';
-import { TasksModule } from './tasks/tasks.module';
+import { UsersModule } from './module/users.module';
 
 @Module({
-  imports: [TasksModule,],
-  controllers: [AppController, TaskController],
-  providers: [AppService, TaskService],
+  imports: [],
+  controllers: [AppController],
+  providers: [AppService],
 })
-export class AppModule {}
+export class AppModule { }

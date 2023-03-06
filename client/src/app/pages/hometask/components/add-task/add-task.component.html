@@ -1,11 +1,16 @@
 <div class="container">
     <div class="addTitle">
         <h1>Add Task</h1>
+        <div id="closeBtn" (click)="closeDialog()">
+            <img id="closeImg" src="https://cdn-icons-png.flaticon.com/512/1828/1828778.png">
+        </div>
     </div>
     <div class="infoDiv">
-        <p>Task Name:<span><input class="txtIn" type="text"></span></p>
-        <p>Task Description:<span><input class="txtIn" type="text"></span></p>
-        <p>Task Due date:<span><input class="txtIn" type="text"></span></p>
+        <div class="inputDiv">
+            <p>Task Name:<span><input class="txtIn" type="text" placeholder="task name..."></span></p>
+            <p>Task Description:<span><input class="txtIn" type="text" placeholder="description..."></span></p>
+            <p>Task Due date:<span><input class="txtIn" type="text" placeholder="due date..."></span></p>
+        </div>
         <button id="addBTn" (click)="addTask()">Add </button>
     </div>
 </div>
