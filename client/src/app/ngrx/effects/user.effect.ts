@@ -8,12 +8,12 @@ import * as UserActions from '../action/user.action';
 export class UserEffect{
     constructor(private action$: Actions, private userService: UserService){}
 
-    login$ = createEffect(() =>{
-        this.action$.pipe(
-            ofType(UserActions.login),
-            switchMap(() => this.userService.lo)
-        )
-    })
+    // login$ = createEffect(() =>{
+    //     this.action$.pipe(
+    //         ofType(UserActions.login),
+    //         switchMap(() => this.userService.lo)
+    //     )
+    // })
 
     
 }
