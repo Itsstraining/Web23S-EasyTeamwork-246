@@ -11,12 +11,12 @@ import { AddTaskComponent } from './components/add-task/add-task.component';
 })
 export class HometaskComponent {
 
-  constructor(private matDialog: MatDialog){}
+  constructor(private matDialog: MatDialog) { }
 
   todoMenu: boolean = true;
 
-  dialogOpen(){
-    this.matDialog.open(AddTaskComponent);
+  dialogOpen() {
+    this.matDialog.open(AddTaskComponent)
   }
 
   todoList: todoModel[] = [
@@ -25,12 +25,12 @@ export class HometaskComponent {
       description: "des 1",
       deadline: "12 March 2023",
       commentCount: 2,
-    },{
+    }, {
       title: "Task12",
       description: "des 2",
       deadline: "5 March 2023",
       commentCount: 2,
-    },{
+    }, {
       title: "Task10",
       description: "des 22",
       deadline: "5 March 2023",
@@ -50,7 +50,7 @@ export class HometaskComponent {
       description: "des 4",
       deadline: "5 March 2023",
       commentCount: 2,
-    },{
+    }, {
       title: "Task11",
       description: "des 23",
       deadline: "5 March 2023",
@@ -70,14 +70,14 @@ export class HometaskComponent {
       description: "des 6",
       deadline: "5 March 2023",
       commentCount: 2,
-    },{
+    }, {
       title: "Task15",
       description: "des 54",
       deadline: "5 March 2023",
       commentCount: 2,
     }
   ];
-  
+
   dueList: todoModel[] = [
     {
       title: "Task6",
@@ -94,7 +94,7 @@ export class HometaskComponent {
   ];
 
 
-  drop(event: CdkDragDrop<todoModel[]>){
+  drop(event: CdkDragDrop<todoModel[]>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
@@ -107,11 +107,11 @@ export class HometaskComponent {
     }
   }
 
-  todoMenuEdit(){
+  todoMenuEdit() {
 
   }
 
-  todoMenuDelete(){
+  todoMenuDelete() {
 
   }
 }
