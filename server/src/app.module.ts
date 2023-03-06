@@ -7,7 +7,7 @@ import { UsersModule } from './module/users.module';
 @Module({
   imports: [
     // //tao file .env 
-    //MONGODB_URL=mongodb+srv://user:password@cluster0.fidun.mongodb.net/Hotel?retryWrites=true&w=majority
+    //MONGODB_URL=mongodb+srv://easyteamwork:easyteamwork@cluster0.za2rizv.mongodb.net/todotask?retryWrites=true&w=majority
     MongooseModule.forRoot(process.env.MONGODB_URL),
     UsersModule,
   ],
