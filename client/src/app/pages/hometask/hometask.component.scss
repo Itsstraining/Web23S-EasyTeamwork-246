@@ -1,9 +1,3 @@
-
-
-.body{
-    // background-color: #FFFEF6;
-}
-
 .homeContainer{
     width: 100%;
     height: 100%;
@@ -18,18 +12,19 @@
 /* sidebar */
 .menuDiv{
     width: 15%;
-    height: 100%;
+    height: 80%;
     background-color: #FFFDEF;
 }
 
 #btnSpaceTop{
     width: 99%;
-    height: 13%;
+    height: 7%;
     border: none;
     border-top: 2px solid #ffef79;
     border-right: 2px solid #ffef79;
     background-color: #FFFDEF;
     margin-bottom: -1.2%;
+    border-bottom-right-radius: 8px;
 }
 
 #btnSpaceBottom{
@@ -37,7 +32,6 @@
     height: 100%;
     border-right: 2px solid #ffef79;
     background-color: #FFFDEF;
-    // background-color: transparent;
     margin-top: -1%;
 }
 
@@ -45,6 +39,8 @@
     display: flex;
     flex-direction: column;
     border: none;
+    // border-radius: 10px;
+    // border: 1px solid #ffef79;
 }
 
 .mat-button-toggle{
@@ -77,6 +73,11 @@
 .mat-button-toggle-checked:hover{
     cursor: pointer;
     background-color: #fdfcee !important;
+}
+
+.mat-button-toggle-checked:active{
+    border: 2px solid #ffef79 !important;
+    border-right: none !important;
 }
 
 /* Home div */
@@ -116,7 +117,7 @@
     display: flex;
     flex-direction: row;
     margin-left: 88%;
-    margin-top: -6%;
+    margin-top: -5%;
 }
 
 
@@ -171,7 +172,7 @@
 
 .todoMainDiv{
     width: 96%;
-    height: 81%;
+    height: 80%;
     display: flex;
     flex-direction: row;
     border-top-left-radius: 15px;
@@ -181,6 +182,7 @@
     margin-top: 4%;
     margin-left: 1rem;
     box-shadow: 0px -4px 8px 0px rgba(129, 129, 129, 0.75);
+    // overflow-y: visible;
     overflow-y: scroll;
 }
 
@@ -190,12 +192,22 @@
 }
 
 .taskTitleDiv{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
+    height: 5%;
 }
 
-.taskTitleDiv > p{
+.taskDiv{    
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 500;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    // background-color: #67dcff;
+}
+
+.taskDiv > p{
     padding: 0;
     margin: 0;
 }
@@ -211,10 +223,11 @@
 .taskBox{
     margin-top: 2%;
     border-radius: 15px;
+    margin-bottom: 3%;
 }
 
 .taskTitle{
-    font-size: 1.5rem;
+    font-size: 1.4rem;
     display: flex;
     flex-direction: row;
 }
@@ -246,11 +259,6 @@
     padding: 0% 3%;
 }
 
-.cardAct > p{
-    // margin-top: 3%;
-    // margin-right: 2%;
-}
-
 .cardAct > i:hover{
     cursor: pointer;
 }
@@ -267,7 +275,7 @@
 }
   
 .cdk-drag-animating {
-    transition: transform 150ms cubic-bezier(0, 0, 0.2, 1);
+    transition: transform 600ms cubic-bezier(0, 0, 0.2, 1);
 }
 
 .addTaskPop{
@@ -293,7 +301,7 @@
 .addTaskDiv{
     width: 98%;
     height: 5%;
-    border: 3px dashed #fdf191;
+    border: 3px dashed #666666;
     border-radius: 15px;
     background-color: #fffced;
     margin-top: 3%;
@@ -308,12 +316,8 @@
     font-weight: 500;
     font-size: 1.3rem;
     text-align: center;
-    color: #ffe100;
+    color: #666666;
     margin-top: 2%;
-}
-
-#todoMenu{
-    margin: 0% 0% 0% 75%;
 }
 
 #todoMenu:hover{
@@ -324,4 +328,8 @@
     width: 36px;
     height: 36px;
     border-radius: 50%;
+}
+
+#commentSpace{
+    margin-left: 20%;
 }

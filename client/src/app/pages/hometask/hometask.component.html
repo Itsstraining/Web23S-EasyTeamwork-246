@@ -32,13 +32,15 @@
         <div class="todoMainDiv" cdkDropListGroup>
             <div class="dragContainer">
                 <div class="taskTitleDiv">
-                    <p class="taskTitle">Todo</p>
-                    <i class="fa-solid fa-ellipsis-vertical fa-xl" mat-button [matMenuTriggerFor]="menu" id="todoMenu"></i>
-                    <mat-menu #menu="matMenu">
-                        <button mat-menu-item (click)="todoMenuEdit()" >Edit</button>
-                        <button mat-menu-item (click)="todoMenuDelete()">Delete</button>
-                    </mat-menu>
+                    <div class="taskDiv">
+                        <p class="taskTitle">Todo</p>
+                        <i class="fa-solid fa-ellipsis-vertical fa-xl" mat-button [matMenuTriggerFor]="menu" id="todoMenu"></i>
+                    </div>
                 </div>
+                <mat-menu #menu="matMenu">
+                    <button mat-menu-item (click)="todoMenuEdit()" >Edit</button>
+                    <button mat-menu-item (click)="todoMenuDelete()">Delete</button>
+                </mat-menu>
                 <div class="addTaskDiv" (click)="dialogOpen()">
                     <p id="addTask">+  Add New Task</p>
                 </div>
@@ -56,7 +58,7 @@
                                 <img src="https://www.pngkit.com/png/detail/301-3012694_account-user-profile-avatar-comments-fa-user-circle.png" class="userImg" alt="usrImg">
                                 <div class="commentDiv">
                                     <span>{{item.commentCount}}</span>
-                                    <i class="fa-sharp fa-solid fa-comment fa-xl"></i>
+                                    <i class="fa-sharp fa-solid fa-comment fa-xl" id="commentSpace"></i>
                                 </div>
                             </mat-card-actions>
                         </mat-card>
@@ -66,12 +68,10 @@
 
             <div class="dragContainer">
                 <div class="taskTitleDiv">
-                    <p class="taskTitle">In Progress</p>
-                    <button mat-button [matMenuTriggerFor]="menu"></button>
-                    <mat-menu #menu="matMenu">
-                        <button mat-menu-item>Edit</button>
-                        <button mat-menu-item>Delete</button>
-                    </mat-menu>
+                    <div class="taskDiv">
+                        <p class="taskTitle">In Progress</p>
+                        <i class="fa-solid fa-ellipsis-vertical fa-xl" mat-button [matMenuTriggerFor]="menu" id="todoMenu"></i>
+                    </div>
                 </div>
                 <div 
                     cdkDropList
@@ -87,7 +87,7 @@
                                 <img src="https://www.pngkit.com/png/detail/301-3012694_account-user-profile-avatar-comments-fa-user-circle.png" class="userImg" alt="usrImg">
                                 <div class="commentDiv">
                                     <span>{{item.commentCount}}</span>
-                                    <i class="fa-sharp fa-solid fa-comment fa-xl"></i>
+                                    <i class="fa-sharp fa-solid fa-comment fa-xl" id="commentSpace"></i>
                                 </div>
                             </mat-card-actions>
                         </mat-card>
@@ -97,12 +97,10 @@
 
             <div class="dragContainer">
                 <div class="taskTitleDiv">
-                    <p class="taskTitle">Completed</p>
-                    <button mat-button [matMenuTriggerFor]="menu"></button>
-                    <mat-menu #menu="matMenu">
-                        <button mat-menu-item>Edit</button>
-                        <button mat-menu-item>Delete</button>
-                    </mat-menu>
+                    <div class="taskDiv">
+                        <p class="taskTitle">Completed</p>
+                        <i class="fa-solid fa-ellipsis-vertical fa-xl" mat-button [matMenuTriggerFor]="menu" id="todoMenu"></i>
+                    </div>
                 </div>
                 <div 
                     cdkDropList
@@ -118,7 +116,7 @@
                                 <img src="https://www.pngkit.com/png/detail/301-3012694_account-user-profile-avatar-comments-fa-user-circle.png" class="userImg" alt="usrImg">
                                 <div class="commentDiv">
                                     <span>{{item.commentCount}}</span>
-                                    <i class="fa-sharp fa-solid fa-comment fa-xl"></i>
+                                    <i class="fa-sharp fa-solid fa-comment fa-xl" id="commentSpace"></i>
                                 </div>
                             </mat-card-actions>
                         </mat-card>
@@ -128,12 +126,10 @@
 
             <div class="dragContainer">
                 <div class="taskTitleDiv">
-                    <p class="taskTitle">Due</p>
-                    <button mat-button [matMenuTriggerFor]="menu"></button>
-                    <mat-menu #menu="matMenu">
-                        <button mat-menu-item>Edit</button>
-                        <button mat-menu-item>Delete</button>
-                    </mat-menu>
+                    <div class="taskDiv">
+                        <p class="taskTitle">Due</p>
+                        <i class="fa-solid fa-ellipsis-vertical fa-xl" mat-button [matMenuTriggerFor]="menu" id="todoMenu"></i>
+                    </div>
                 </div>
                 <div 
                     cdkDropList
@@ -149,7 +145,7 @@
                                 <img src="https://www.pngkit.com/png/detail/301-3012694_account-user-profile-avatar-comments-fa-user-circle.png" class="userImg" alt="usrImg">
                                 <div class="commentDiv">
                                     <span>{{item.commentCount}}</span>
-                                    <i class="fa-sharp fa-solid fa-comment fa-xl"></i>
+                                    <i class="fa-sharp fa-solid fa-comment fa-xl" id="commentSpace"></i>
                                 </div>
                             </mat-card-actions>
                         </mat-card>
