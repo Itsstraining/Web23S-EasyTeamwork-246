@@ -41,11 +41,12 @@
       <mat-menu #menu="matMenu">
         <button
           mat-menu-item
-
+        (click)="userService.logoutWithGoogle()"
           style="
             display: flex;
             align-items: center;
             justify-content: space-between;
+  
           "
         >
           <i class="fa-solid fa-right-from-bracket"></i>
