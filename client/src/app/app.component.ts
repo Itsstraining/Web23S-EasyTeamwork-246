@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Auth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { onAuthStateChanged } from '@firebase/auth';
+import { UserService } from './services/users/user.service';
 
 @Component({
   selector: 'app-root',
@@ -10,8 +11,7 @@ import { onAuthStateChanged } from '@firebase/auth';
 })
 export class AppComponent implements OnInit{
   title = 'client';
-
-  constructor(private auth: Auth,private router:Router){}
+  constructor(private auth: Auth, private userService: UserService,private router:Router){}
 
   ngOnInit() :void{
   }
