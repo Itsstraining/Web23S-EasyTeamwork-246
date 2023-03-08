@@ -113,7 +113,6 @@ hr{
     :hover{
         cursor: pointer;
         background-color: #c9c17e;
-        color: black;
     }
 }
 #create-btn{
@@ -142,6 +141,7 @@ hr{
 #table{
     margin: 0 auto;
     height: 39.06rem;
+    min-width: 78.13rem;
     width: 100%;
     border-radius: 0.63rem;
     background-color: #FFFCE0;
@@ -323,9 +323,17 @@ hr{
 #item-date{
     // width: 10.31rem;
     width: 15%;
+    margin-left: 2%;
+}
+#date-content{
+    width: 9.38rem;
+    height: fit-content;
     display: flex;
     justify-content: space-between;
-    margin-left: 2%;
+    align-items: center;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 1rem;
+    font-weight: normal;
 }
 #item-mems{
     display: flex;

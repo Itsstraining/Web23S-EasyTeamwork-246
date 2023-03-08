@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { Auth, onAuthStateChanged } from '@angular/fire/auth';
-import { Router } from '@angular/router';
+import { Component} from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { AddProjectComponent } from './components/add-project/add-project.component';
 
 @Component({
   selector: 'app-viewallproject',
@@ -8,4 +8,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./viewallproject.component.scss']
 })
 export class ViewallprojectComponent {
+  constructor(private matDialog: MatDialog ){ }
+  dialogOpen(){
+    this.matDialog.open(AddProjectComponent)
+  }
 }

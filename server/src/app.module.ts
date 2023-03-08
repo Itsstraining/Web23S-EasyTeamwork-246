@@ -3,6 +3,8 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UsersModule } from './module/users.module';
+import { ProjectsController } from './controllers/projects/projects.controller';
+import { ProjectsService } from './services/projects/projects.service';
 import { MailerModule } from '@nestjs-modules/mailer';
 
 @Module({
@@ -20,7 +22,7 @@ import { MailerModule } from '@nestjs-modules/mailer';
 
     })
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [AppController, ProjectsController],
+  providers: [AppService, ProjectsService],
 })
 export class AppModule { }

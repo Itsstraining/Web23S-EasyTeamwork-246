@@ -6,7 +6,7 @@
         <p>Projects</p>
     </div>
     <div id="create-project">
-        <button id="create-btn">
+        <button (click)="dialogOpen()" id="create-btn">
             <span id="create-content">
                 <i class="fa-solid fa-square-plus"></i>
                 Create project
@@ -18,22 +18,30 @@
         <div id="overview-body">
             <div class="overview-content" id="total">
                 <div class="amount"><span>number</span></div>
-                <div class="horizone"><hr></div>
+                <div class="horizone">
+                    <hr>
+                </div>
                 <div class="type"><span>Total</span></div>
             </div>
             <div class="overview-content" id="in-progress">
                 <div class="amount"><span>number</span></div>
-                <div class="horizone"><hr></div>
+                <div class="horizone">
+                    <hr>
+                </div>
                 <div class="type"><span>In progress</span></div>
             </div>
             <div class="overview-content" id="completed">
                 <div class="amount"><span>number</span></div>
-                <div class="horizone"><hr></div>
+                <div class="horizone">
+                    <hr>
+                </div>
                 <div class="type"><span>Completed</span></div>
             </div>
             <div class="overview-content" id="overdue">
                 <div class="amount"><span>number</span></div>
-                <div class="horizone"><hr></div>
+                <div class="horizone">
+                    <hr>
+                </div>
                 <div class="type"><span>Overdue</span></div>
             </div>
         </div>
@@ -81,7 +89,8 @@
                     <button id="view-marked-btn">
                         <span id="view-marked-content">
                             View marked
-                            <img class="icon" src="https://cdn-icons-png.flaticon.com/512/2107/2107957.png" alt="yellow star">
+                            <img class="icon" src="https://cdn-icons-png.flaticon.com/512/2107/2107957.png"
+                                alt="yellow star">
                         </span>
                     </button>
                 </div>
@@ -117,7 +126,8 @@
             <div class="table-row">
                 <div class="item-attribute" id="item-mark">
                     <button>
-                        <img class="icon" src="https://cdn-icons-png.flaticon.com/512/2107/2107992.png" alt="empty star">
+                        <img class="icon" src="https://cdn-icons-png.flaticon.com/512/2107/2107992.png"
+                            alt="empty star">
                     </button>
                 </div>
                 <div class="item-attribute" id="item-name">
@@ -128,8 +138,10 @@
                     <span> In progress</span>
                 </div>
                 <div class="item-attribute" id="item-date">
-                    <span>2023-03-17</span>
-                    <span style="color: #666666;">00:00</span>
+                    <div id="date-content">
+                        <span>2023-03-17</span>
+                        <span style="color: #666666;">00:00</span>
+                    </div>
                 </div>
                 <div class="item-attribute" id="item-mems">
                     <span>4</span>

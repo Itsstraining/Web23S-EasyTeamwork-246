@@ -8,7 +8,13 @@ import {MatCardModule} from '@angular/material/card';
 import {ScrollingModule} from '@angular/cdk/scrolling';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatDialogModule} from '@angular/material/dialog';
-
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatNativeDateModule} from '@angular/material/core';
+import {MatIconModule} from '@angular/material/icon';
+import {MatInputModule} from '@angular/material/input';
+import {MatRadioModule} from '@angular/material/radio';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 @NgModule({
   declarations: [],
@@ -23,6 +29,13 @@ import {MatDialogModule} from '@angular/material/dialog';
     MatMenuModule,
     MatDialogModule,
     MatMenuModule,
+    MatDatepickerModule,
+    MatFormFieldModule,
+    MatNativeDateModule,
+    MatIconModule,
+    MatInputModule,
+    MatRadioModule,
+    MatCheckboxModule,
   ],
   exports:[
     MatToolbarModule,
@@ -34,6 +47,13 @@ import {MatDialogModule} from '@angular/material/dialog';
     MatMenuModule,
     MatDialogModule,
     MatMenuModule,
+    MatDatepickerModule,
+    MatFormFieldModule,
+    MatNativeDateModule,
+    MatIconModule,
+    MatInputModule,
+    MatRadioModule,
+    MatCheckboxModule,
   ]
 })
 export class MaterialModule { }
