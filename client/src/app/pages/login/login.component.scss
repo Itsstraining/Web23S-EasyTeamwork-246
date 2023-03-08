@@ -65,16 +65,17 @@
   .input-email{
     // background-color: aqua;
     width: auto;
-    height: auto;
+    height: 23%;
     margin-left: 8%;
     margin-right: 8%;
     
 
     .Email{
       width: auto;
-      height:80%;
+      height:35%;
       padding-bottom: 2.5%;
-      padding-top: 0.5%;  
+      padding-top: 0.5%;
+      margin-top: 5%;
       input{
         width: 98%;
         height: 3rem;
@@ -188,10 +189,11 @@
   .option{
     // background-color: red;
     width: auto;
-    height: 4rem;
+    height: 8%;
     display: flex;
     justify-content: center;
     align-items: center;
+
    
     p{
       color: gray;
@@ -201,6 +203,11 @@
       color: #00C2EE;
       cursor: pointer;  
       padding-bottom: 3.5%;
+      text-decoration: none;
+    }
+
+    a:hover{
+      text-decoration: underline;
     }
   }
 
