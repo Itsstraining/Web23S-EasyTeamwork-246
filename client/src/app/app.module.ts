@@ -15,8 +15,10 @@ import { provideStorage,getStorage } from '@angular/fire/storage';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { HttpClientModule} from '@angular/common/http';
-import { userReducer } from '../Ngrx/Reducers/user.reducer';
-import { UserEffect } from '../Ngrx/Effects/user.effect';
+import { userReducer } from 'src/NgRx/Reducers/user.reducer';
+import { UserEffect } from 'src/NgRx/Effects/user.effect';
+import { TaskReducer } from 'src/NgRx/Reducers/tasks.reducer';
+import { TaskEffects } from 'src/NgRx/Effects/tasks.effect';
 
 @NgModule({
   declarations: [
@@ -34,10 +36,12 @@ import { UserEffect } from '../Ngrx/Effects/user.effect';
     provideMessaging(() => getMessaging()),
     provideStorage(() => getStorage()),
     StoreModule.forRoot({
-      user : userReducer
+      user : userReducer,
+      task: TaskReducer
     }, {}),
     EffectsModule.forRoot([
-      UserEffect
+      UserEffect,
+      TaskEffects
     ]),
     HttpClientModule,
   ],

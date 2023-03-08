@@ -1,5 +1,5 @@
 import { createAction, props } from "@ngrx/store";
-import { TaskModel } from "src/models/todo.model";
+import { TaskModel } from "src/models/task.model";
 
 export const getAllTasks = createAction(
     "[Task] Get all tasks"

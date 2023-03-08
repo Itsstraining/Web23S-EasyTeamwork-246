@@ -1,4 +1,4 @@
-import { TaskModel } from "src/models/todo.model";
+import { TaskModel } from "src/models/task.model";
 
 export interface TaskState{
     tasks: TaskModel[];

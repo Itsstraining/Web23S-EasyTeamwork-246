@@ -10,7 +10,6 @@ import { UserService } from './services/users/user.service';
 })
 export class AppComponent implements OnInit{
   title = 'client';
-
   constructor(private auth: Auth, private userService: UserService,private router:Router){}
 
   ngOnInit() :void{
