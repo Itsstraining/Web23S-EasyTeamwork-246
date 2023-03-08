@@ -1,6 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
-import * as UserActions from '../Actions/user.action';
-import { UserState } from '../States/user.state';
+import * as UserActions from '.././Actions/user.action';
+import { UserState } from '.././States/user.state';
 
 const initialState: UserState = {
   users: [],
@@ -34,4 +34,25 @@ export const userReducer = createReducer(
       error: '',
     };
   }),
+  on(UserActions.logout, (state) => {
+    return {
+      ...state,
+      loading: true,
+      error: '',
+    };
+  }),
+  on(UserActions.logoutSuccess, (state) => {
+    return {
+      ...state,
+      loading: false,
+      error: '',
+    };
+  }),
+  on(UserActions.logoutFail, (state,{error}) => {
+    return {
+      ...state,
+      loading: false,
+      error: '',
+    };
+  })
 );

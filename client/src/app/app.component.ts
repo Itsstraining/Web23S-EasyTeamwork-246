@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Auth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
-import { UserService } from './services/uers/user.service';
+import { UserService } from './services/users/user.service';
 
 @Component({
   selector: 'app-root',
