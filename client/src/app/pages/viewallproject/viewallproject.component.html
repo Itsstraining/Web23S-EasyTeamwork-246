@@ -6,7 +6,7 @@
         <p>Projects</p>
     </div>
     <div id="create-project">
-        <button id="create-btn">
+        <button (click)="dialogOpen()" id="create-btn">
             <span id="create-content">
                 <i class="fa-solid fa-square-plus"></i>
                 Create project
@@ -128,8 +128,10 @@
                     <span> In progress</span>
                 </div>
                 <div class="item-attribute" id="item-date">
-                    <span>2023-03-17</span>
-                    <span style="color: #666666;">00:00</span>
+                    <div id="date-content">
+                        <span>2023-03-17</span>
+                        <span style="color: #666666;">00:00</span>
+                    </div>
                 </div>
                 <div class="item-attribute" id="item-mems">
                     <span>4</span>

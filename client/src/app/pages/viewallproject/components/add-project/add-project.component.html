@@ -1,0 +1,25 @@
+<div class="container">
+    <div class="addTitle">
+        <span>Add new Project</span>
+        <div id="closeBtn" (click)="closeDialog()">
+            <img id="closeImg" src="https://cdn-icons-png.flaticon.com/512/1828/1828778.png">
+        </div>
+    </div>
+    <div class="infoDiv">
+        <div class="inputDiv">
+            <div>
+                <span>Task Name:</span>
+                <input class="txtIn" type="text" placeholder="task name...">
+            </div>
+            <div>
+                <span>Task Description:</span>
+                <input class="txtIn" type="text" placeholder="description...">
+            </div>
+            <div>
+                <span>Task Due date:</span>
+                <input class="txtIn" type="text" placeholder="due date...">
+            </div>
+        </div>
+        <button id="add-btn" (click)="addProject()">Add </button>
+    </div>
+</div>
