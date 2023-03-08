@@ -8,10 +8,11 @@ import {
 } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { UserState } from 'src/Ngrx/States/user.state';
+import { UserState } from '../../../NgRx/States/user.state';
 import { UserModel } from 'src/models/user.model';
-import * as UserActions from '../../../Ngrx/Actions/user.action';
+import * as UserActions from '../../../NgRx/Actions/user.action';
 import { environment } from 'src/environments/environment';
+
 @Injectable({
   providedIn: 'root',
 })

@@ -6,13 +6,13 @@
         <P>Easy Teamwork!</P>
         <span>Sign in to continue</span>
       </div>
-  
+
       <div class="logo">
         <div class="logo-team">
           <h3>ET</h3>
         </div>
       </div>
-  
+
       <div class="input-email">
         <div class="Email">
           <input type="text" placeholder="Email" />
@@ -21,12 +21,12 @@
           <input type="password" placeholder="Password" />
         </div>
       </div>
-  
+
       <div class="btn-signIn">
         <button mat-raised-button>Sign in</button>
         <a>Forgot Password?</a>
       </div>
-  
+
       <div class="word-Or">
         <table>
           <tr>
@@ -39,17 +39,17 @@
             <td>&nbsp;</td>
           </tr>
         </table>
-        <!-- <hr style="width: 20px; 
+        <!-- <hr style="width: 20px;
                    font-weight: bold;">
-  
+
                <span>Or</span>
-  
-               <hr style="width: 20px; 
+
+               <hr style="width: 20px;
                    font-weight: bold;"> -->
       </div>
-  
+
       <div class="signInWithGoogle">
-        <button mat-raised-button (click)="authService.loginWithGoogle()">
+        <button mat-raised-button (click)="userService.loginWithGoogle()">
           <!-- <i class="fa-brands fa-google" ></i> -->
           <div style="display: flex;align-items: center;justify-content: center;">
             <div class="img">
@@ -61,14 +61,14 @@
           </div>
         </button>
       </div>
-  
+
       <div class="option">
         <p>Don't have an account?</p>
         <a href="createaccount">Create account</a>
       </div>
     </div>
   </div>
-  
+
 
 </div>
 
