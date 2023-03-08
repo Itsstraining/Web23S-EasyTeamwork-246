@@ -8,6 +8,8 @@ import { TaskController } from './controllers/task/task.controller';
 import { TaskModule } from './module/task.module';
 import { Task, TaskSchema } from './schemas/task.schema';
 // import { MailerModule } from '@nestjs-modules/mailer';
+import { ProjectsController } from './controllers/projects/projects.controller';
+import { ProjectsService } from './services/projects/projects.service';
 
 @Module({
   imports: [
@@ -25,7 +27,7 @@ import { Task, TaskSchema } from './schemas/task.schema';
 
     // })
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [AppController, ProjectsController],
+  providers: [AppService, ProjectsService],
 })
 export class AppModule { }

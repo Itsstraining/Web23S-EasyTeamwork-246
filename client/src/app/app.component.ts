@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Auth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
-import { onAuthStateChanged } from '@firebase/auth';
 import { UserService } from './services/users/user.service';
 
 @Component({
