@@ -1,4 +1,4 @@
-import { UserModel } from "./users.model";
+import { UserModel } from "./user.model";
 
 export type Status = 'todo' | 'in-progress' | 'completed' | 'due'
 export type Complexity = 'easy' | 'medium' | 'hard'

@@ -1,4 +1,5 @@
-import { Controller, Get, Query } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Post, Put, Query } from '@nestjs/common';
+import { TaskModel } from 'src/models/task.modle';
 import { TaskService } from 'src/services/task/task.service';
 
 @Controller('task')
@@ -8,11 +9,26 @@ export class TaskController {
 
     @Get()
     getAll() {
-        return this.getAll();
+        return this.taskService.getAll();
     }
 
-    @Get('/get')
+    @Get('/ID')
     getById(@Query('id') id: string) {
         return this.taskService.getById(id);
+    }
+
+    @Post("/create")
+    create(@Body() task: TaskModel) {
+        return this.taskService.create(task);
+    }
+
+    @Put("/update")
+    update(@Query('id') id: string, @Body() task: TaskModel) {
+        return this.taskService.update(task, id);
+    }
+
+    @Delete("/delete")
+    delete(@Query('id') id: string) {
+        return this.taskService.delete(id);
     }
 }

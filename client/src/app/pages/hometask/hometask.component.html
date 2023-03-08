@@ -41,23 +41,25 @@
                     <button mat-menu-item (click)="todoMenuEdit()" >Edit</button>
                     <button mat-menu-item (click)="todoMenuDelete()">Delete</button>
                 </mat-menu>
-                <div class="addTaskDiv" (click)="dialogOpen()">
+                <div class="addTaskDiv" (click)="dialogAddTaskOpen('400ms', '500ms')">
                     <p id="addTask">+  Add New Task</p>
                 </div>
                 <div 
                     cdkDropList
                     [cdkDropListData]="todoList"
                     class="todoLists"
-                    (cdkDropListDropped)="drop($event)">
+                    (cdkDropListDropped)="drop($event)"
+                >
                     <div class="taskBox" *ngFor="let item of todoList" cdkDragBoundary=".todoMainDiv" cdkDrag>
+                        <app-task-card></app-task-card>
                         <mat-card class="todoCard">
-                            <mat-card-header class="cardTitle">{{item.title}}</mat-card-header>
+                            <mat-card-header class="cardTitle">{{item.name}}</mat-card-header>
                             <mat-card-content class="cardInfo">Description: {{item.description}}</mat-card-content>
                             <mat-card-content class="cardInfo">Due date: {{item.deadline}}</mat-card-content>
                             <mat-card-actions class="cardAct">
                                 <img src="https://www.pngkit.com/png/detail/301-3012694_account-user-profile-avatar-comments-fa-user-circle.png" class="userImg" alt="usrImg">
                                 <div class="commentDiv">
-                                    <span>{{item.commentCount}}</span>
+                                    <span>{{item.comment_count}}</span>
                                     <i class="fa-sharp fa-solid fa-comment fa-xl" id="commentSpace"></i>
                                 </div>
                             </mat-card-actions>
@@ -80,13 +82,13 @@
                     (cdkDropListDropped)="drop($event)">
                     <div class="taskBox" *ngFor="let item of inProgressList" cdkDragBoundary=".todoMainDiv" cdkDrag>
                         <mat-card class="todoCard">
-                            <mat-card-header class="cardTitle">{{item.title}}</mat-card-header>
+                            <mat-card-header class="cardTitle">{{item.name}}</mat-card-header>
                             <mat-card-content class="cardInfo">Description: {{item.description}}</mat-card-content>
                             <mat-card-content class="cardInfo">Due date: {{item.deadline}}</mat-card-content>
                             <mat-card-actions class="cardAct">
                                 <img src="https://www.pngkit.com/png/detail/301-3012694_account-user-profile-avatar-comments-fa-user-circle.png" class="userImg" alt="usrImg">
                                 <div class="commentDiv">
-                                    <span>{{item.commentCount}}</span>
+                                    <span>{{item.comment_count}}</span>
                                     <i class="fa-sharp fa-solid fa-comment fa-xl" id="commentSpace"></i>
                                 </div>
                             </mat-card-actions>
@@ -109,13 +111,13 @@
                     (cdkDropListDropped)="drop($event)">
                     <div class="taskBox" *ngFor="let item of completeList" cdkDragBoundary=".todoMainDiv" cdkDrag>
                         <mat-card class="todoCard">
-                            <mat-card-header class="cardTitle">{{item.title}}</mat-card-header>
+                            <mat-card-header class="cardTitle">{{item.name}}</mat-card-header>
                             <mat-card-content class="cardInfo">Description: {{item.description}}</mat-card-content>
                             <mat-card-content class="cardInfo">Due date: {{item.deadline}}</mat-card-content>
                             <mat-card-actions class="cardAct">
                                 <img src="https://www.pngkit.com/png/detail/301-3012694_account-user-profile-avatar-comments-fa-user-circle.png" class="userImg" alt="usrImg">
                                 <div class="commentDiv">
-                                    <span>{{item.commentCount}}</span>
+                                    <span>{{item.comment_count}}</span>
                                     <i class="fa-sharp fa-solid fa-comment fa-xl" id="commentSpace"></i>
                                 </div>
                             </mat-card-actions>
@@ -138,13 +140,13 @@
                     (cdkDropListDropped)="drop($event)">
                     <div class="taskBox" *ngFor="let item of dueList" cdkDragBoundary=".todoMainDiv" cdkDrag>
                         <mat-card class="todoCard">
-                            <mat-card-header class="cardTitle">{{item.title}}</mat-card-header>
+                            <mat-card-header class="cardTitle">{{item.name}}</mat-card-header>
                             <mat-card-content class="cardInfo">Description: {{item.description}}</mat-card-content>
                             <mat-card-content class="cardInfo">Due date: {{item.deadline}}</mat-card-content>
                             <mat-card-actions class="cardAct">
                                 <img src="https://www.pngkit.com/png/detail/301-3012694_account-user-profile-avatar-comments-fa-user-circle.png" class="userImg" alt="usrImg">
                                 <div class="commentDiv">
-                                    <span>{{item.commentCount}}</span>
+                                    <span>{{item.comment_count}}</span>
                                     <i class="fa-sharp fa-solid fa-comment fa-xl" id="commentSpace"></i>
                                 </div>
                             </mat-card-actions>

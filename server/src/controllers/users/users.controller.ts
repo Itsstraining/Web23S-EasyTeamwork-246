@@ -1,4 +1,4 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Post, Get, Query } from '@nestjs/common';
 import { UserModel } from 'src/models/users.model';
 import { UsersService } from 'src/services/users/users.service';
 
@@ -15,5 +15,10 @@ export class UsersController {
         } else {
             return this.userService.signIn(user)
         }
+    }
+
+    @Get('getId')
+    getId(@Query() user: UserModel) {
+        return this.userService.findUserById(user.uid);
     }
 }

@@ -24,6 +24,7 @@ export const TaskReducer = createReducer(
         ...state,
         tasks: [],
         loading: false,
+        isSuccess: false,
         error: action.error,
     })),
 );

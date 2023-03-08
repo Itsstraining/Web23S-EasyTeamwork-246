@@ -1,98 +1,91 @@
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { TaskModel } from 'src/models/todo.model';
+import { Store } from '@ngrx/store';
+import { map, Observable } from 'rxjs';
+import { TaskService } from 'src/app/services/tasks/task.service';
+import { TaskModel } from 'src/models/task.model';
 import { AddTaskComponent } from './components/add-task/add-task.component';
+import { TaskCardComponent } from './components/task-card/task-card.component';
+import { TaskInfoComponent } from './components/task-info/task-info.component';
+import * as TaskActions from '../../../NgRx/Actions/tasks.action';
 
 @Component({
   selector: 'app-hometask',
   templateUrl: './hometask.component.html',
   styleUrls: ['./hometask.component.scss']
 })
-export class HometaskComponent {
+export class HometaskComponent  implements OnInit{
 
-  constructor(private matDialog: MatDialog) { }
+  constructor(
+    private matDialog: MatDialog, private taskService: TaskService,
+    private store: Store<{task: TaskModel}>
+  ){ 
+    this.task$ = this.store.select('task');
+  }
+
+  task$ !: Observable<any>;
+
+  todoList: TaskModel[] = [];
+  inProgressList: TaskModel[] = [];
+  completeList: TaskModel[] = [];  
+  dueList: TaskModel[] = [];
+  taskList: TaskModel[] = [];
 
   todoMenu: boolean = true;
 
-  dialogOpen() {
-    this.matDialog.open(AddTaskComponent)
+  ngOnInit(){
+    this.store.dispatch(TaskActions.getAllTasks())
+    this.task$.subscribe( (data: any) => {
+      if(data != null){
+        this.taskList = data.tasks;
+        // console.log(data.tasks);
+      }else{
+        console.log('No data');
+      }
+    });
+    this.sortList();
   }
 
-  todoList: TaskModel[] = [
-    {
-      title: "Task1",
-      description: "des 1",
-      deadline: "12 March 2023",
-      commentCount: 2,
-    }, {
-      title: "Task12",
-      description: "des 2",
-      deadline: "5 March 2023",
-      commentCount: 2,
-    }, {
-      title: "Task10",
-      description: "des 22",
-      deadline: "5 March 2023",
-      commentCount: 2,
-    }
-  ];
+  sortList(){
+    console.log("sort running");
+    // for(let i = 0; i < this.taskList.length; i++){
+    //   if(this.taskList[i].status == "todo"){
+    //     this.todoList.push(this.taskList[i]);
+    //   }else if(this.taskList[i].status == "in-progress"){
+    //     this.inProgressList.push(this.taskList[i]);
+    //   }else if(this.taskList[i].status == "completed"){
+    //     this.completeList.push(this.taskList[i]);
+    //   }else if(this.taskList[i].status == "due"){
+    //     this.dueList.push(this.taskList[i]);
+    //   }else{
+    //     this.dueList.push(this.taskList[i]);
+    //   }
+    // }
+  }
 
-  inProgressList: TaskModel[] = [
-    {
-      title: "Task2",
-      description: "des 3",
-      deadline: "12 March 2023",
-      commentCount: 2,
-    },
-    {
-      title: "Task3",
-      description: "des 4",
-      deadline: "5 March 2023",
-      commentCount: 2,
-    }, {
-      title: "Task11",
-      description: "des 23",
-      deadline: "5 March 2023",
-      commentCount: 2,
+  dialogAddTaskOpen(enterAnimationDuration: string, exitAnimationDuration: string) {
+    this.matDialog.open(AddTaskComponent, {enterAnimationDuration, exitAnimationDuration});
+    this.todoList.push(this.taskList[1]);
+    for(let i = 0; i < this.taskList.length; i++){
+      if(this.taskList[i].status == 'todo'){
+        this.todoList.push(this.taskList[i]);
+      }else if(this.taskList[i].status == 'in-progress'){
+        this.inProgressList.push(this.taskList[i]);
+      }else if(this.taskList[i].status == 'completed'){
+        this.completeList.push(this.taskList[i]);
+      }else if(this.taskList[i].status == 'due'){
+        this.dueList.push(this.taskList[i]);
+      }else{
+        this.dueList.push(this.taskList[i]);
+      }
     }
-  ];
+    console.log(this.todoList);
+  }
 
-  completeList: TaskModel[] = [
-    {
-      title: "Task4",
-      description: "des 5",
-      deadline: "12 March 2023",
-      commentCount: 2,
-    },
-    {
-      title: "Task5",
-      description: "des 6",
-      deadline: "5 March 2023",
-      commentCount: 2,
-    }, {
-      title: "Task15",
-      description: "des 54",
-      deadline: "5 March 2023",
-      commentCount: 2,
-    }
-  ];
-  
-  dueList: TaskModel[] = [
-    {
-      title: "Task6",
-      description: "des 7",
-      deadline: "12 March 2023",
-      commentCount: 2,
-    },
-    {
-      title: "Task7",
-      description: "des 8",
-      deadline: "5 March 2023",
-      commentCount: 2,
-    }
-  ];
-
+  dialogTaskInfoOpen(enterAnimationDuration: string, exitAnimationDuration: string){
+    this.matDialog.open(TaskInfoComponent, {enterAnimationDuration, exitAnimationDuration})
+  }
 
   drop(event: CdkDragDrop<TaskModel[]>){
     if (event.previousContainer === event.container) {

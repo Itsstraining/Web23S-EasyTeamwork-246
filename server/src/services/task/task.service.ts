@@ -19,10 +19,45 @@ export class TaskService {
         }
     }
 
-    async getById(id: string): Promise<TaskModel | null> {
+    async getById(id: string) {
         try{
-            let data = await this.taskModel.findById({id: id}).exec();
+            let data = await this.taskModel.find({task_id: id}).exec();
             return data;
+        }catch(e){
+            console.log(e);
+            return null;
+        }
+    }
+
+    async create(newTask: TaskModel) {
+        try{
+            let data = await this.taskModel.create(newTask);
+            return data;
+        }catch(e){
+            console.log(e);
+            return null;
+        }
+    }
+
+    async update(task: TaskModel, id: string) {
+        try{
+            console.log(task);
+            let data = await this.taskModel.updateOne({task_id: id}, {$set: {
+                task_name: task.name,
+                task_description: task.description,
+                task_status: task.status,
+                task_priority: task.complexity,
+            }});
+            return data;
+        }catch(e){
+            console.log("error: " + e);
+            return null;
+        }
+    }
+
+    async delete(id: string) {
+        try{
+            this.taskModel.deleteOne({task_id: id}).exec();
         }catch(e){
             console.log(e);
             return null;

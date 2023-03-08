@@ -1,5 +1,7 @@
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
 import { HydratedDocument } from "mongoose";
+import { Complexity, Status } from "src/models/task.modle";
+import { UserModel } from "src/models/users.model";
 
 export type TaskDocument = HydratedDocument<Task>;
 
@@ -13,7 +15,7 @@ export class Task {
     project_id: string;
 
     @Prop()
-    assignee: string;
+    assignee: UserModel[];
 
     @Prop()
     name: string;
@@ -22,10 +24,10 @@ export class Task {
     description: string;
 
     @Prop()
-    status: "todo" | "in-progress" | "done";
+    status: Status;
 
     @Prop()
-    complexity: "easy" | "medium" | "hard";
+    complexity: Complexity;
 
     @Prop()
     created_at: string;
