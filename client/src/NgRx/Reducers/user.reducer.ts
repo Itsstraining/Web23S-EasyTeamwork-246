@@ -34,4 +34,25 @@ export const userReducer = createReducer(
       error: '',
     };
   }),
+  on(UserActions.logout, (state) => {
+    return {
+      ...state,
+      loading: true,
+      error: '',
+    };
+  }),
+  on(UserActions.logoutSuccess, (state) => {
+    return {
+      ...state,
+      loading: false,
+      error: '',
+    };
+  }),
+  on(UserActions.logoutFail, (state,{error}) => {
+    return {
+      ...state,
+      loading: false,
+      error: '',
+    };
+  })
 );
