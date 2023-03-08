@@ -5,13 +5,13 @@
         <h3>ET</h3>
       </div>
     </div>
-  
+
     <b class="logoName">Easy Teamwork</b>
-  
+
     <div class="input-search">
       <input class="input" type="text" placeholder="Search ..." />
     </div>
-  
+
     <!-- <div class="box-btn-page"></div> -->
     <div class="btn-page">
       <button
@@ -31,18 +31,17 @@
         ViewAllProject
       </button>
     </div>
-  
+
     <div class="userName">
       <div class="image-user">
-        <img *ngIf="authService.currentUser" [src]="authService.currentUser.photoURL" alt="" class="img" />
-        <p *ngIf="authService.currentUser">{{authService.currentUser.displayName}}</p>
+        <img [src]="userService.userInfo.photoURL" alt="" class="img" />
+        <p>{{userService.userInfo.displayName}}</p>
         <i class="fa-solid fa-caret-down" [matMenuTriggerFor]="menu"></i>
       </div>
       <mat-menu #menu="matMenu">
         <button
           mat-menu-item
-          *ngIf="authService.currentUser!=null"
-          (click)="authService.logoutwithGoogle()"
+
           style="
             display: flex;
             align-items: center;
@@ -54,7 +53,7 @@
         </button>
       </mat-menu>
     </div>
-  
+
     <!-- <div class="nav_bars_btn">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
         <path
@@ -63,5 +62,5 @@
       </svg>
     </div> -->
   </mat-toolbar>
-  
+
 </div>
