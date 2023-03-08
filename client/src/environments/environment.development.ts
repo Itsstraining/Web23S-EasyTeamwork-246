@@ -6,4 +6,7 @@ export const environment = {
     apiKey: 'AIzaSyDgcXOqNctHTGV8oOWfKti9LnEPkJDHge0',
     authDomain: 'easyteamwork-943e6.firebaseapp.com',
     messagingSenderId: '82095840945',
-  },};
+  },
+  production: false,
+  baseURL: 'http://localhost:3000/api/',
+};

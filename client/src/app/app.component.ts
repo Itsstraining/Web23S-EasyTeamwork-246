@@ -15,19 +15,5 @@ export class AppComponent implements OnInit{
   constructor(private auth: Auth, private authService: AuthService,private router:Router){}
 
   ngOnInit() :void{
-    onAuthStateChanged(this.auth, (user) => {
-      if(user) {
-        this.authService.currentUser = user;
-        // this.router.navigate(['/viewallproject'])
-        // console.log(user)
-      }else{
-        console.log("No user");
-        this.authService.currentUser = null;
-      }
-    })
-  }
-
-  callback(){
-
   }
 }
