@@ -49,7 +49,7 @@
       </div>
   
       <div class="signInWithGoogle">
-        <button mat-raised-button *ngIf="authService.currentUser == null" (click)="authService.loginWithGoogle()">
+        <button mat-raised-button (click)="authService.loginWithGoogle()">
           <!-- <i class="fa-brands fa-google" ></i> -->
           <div style="display: flex;align-items: center;justify-content: center;">
             <div class="img">

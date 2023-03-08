@@ -116,11 +116,14 @@
 
     a {
       float: right;
-      margin-top: 2%;
+      margin-top: 5%;
       padding-right: 8.5%;
-      text-decoration: underline;
-      
+      text-decoration: none;
       cursor: pointer;
+    }
+
+    a:hover{
+      text-decoration: underline;
     }
   }
 }
