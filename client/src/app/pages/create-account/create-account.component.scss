@@ -6,7 +6,7 @@
 .container {
   width: 100%;
   height: 100%;
-  background-color: #bbdefb;
+  background-color: #AA77FF;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -21,7 +21,6 @@
 
   .title {
     height: 16%;
-    // background-color: aquamarine;
     width: auto;
     margin-top: 8%;
     margin-left: 8%;
@@ -43,9 +42,6 @@
     margin-left: 8%;
   
     .logo-team {
-      // width: 14%;
-      // height: 50%;
-      // border-radius: 100%;
       width: 2.8rem;
       height: 2.7rem;
       border-radius: 1.4rem;

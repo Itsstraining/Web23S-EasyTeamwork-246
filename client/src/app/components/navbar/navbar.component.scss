@@ -40,7 +40,7 @@
 
   .input {
     border-radius: 1.5rem;
-    background-color: #cfd8dc;
+    background-color: #fff;
     color: #000;
     border: none;
     outline: none;
@@ -106,4 +106,12 @@
 //   height: 28px;
 //   color: #fff;
 //   display: none;
+// }
+
+.mat-toolbar.mat-primary{
+  background-color: #AA77FF;
+}
+
+// .btn-ViewAllProject .btn-homeTask .mdc-button.mdc-button--raised.mat-mdc-raised-button.mat-unthemed.mat-mdc-button-base{
+//   background-color: yellow !important;
 // }
