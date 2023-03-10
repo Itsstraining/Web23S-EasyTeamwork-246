@@ -110,9 +110,11 @@ hr{
     height: fit-content;
     width: fit-content;
     margin-top: 0;
+    transition: 0.5s;
     :hover{
         cursor: pointer;
         background-color: #c9c17e;
+        transition: 0.5s;
     }
 }
 #create-btn{
@@ -126,6 +128,13 @@ hr{
     display: flex;
     justify-content: center;
     align-items: center;
+    transition: 0.5s;
+    :hover{
+        cursor: pointer;
+        background-color: #c9c17e;
+        color: black;
+        transition: 0.5s;
+    }
 }
 #create-content{
     color: #666666;
@@ -212,11 +221,13 @@ hr{
         padding: 0 0.63rem;
         margin: 0;
         border-radius: 0.63rem;
+        transition: 0.5s;
     }
     :hover{
         cursor: pointer;
         background-color: #c9c17e;
         color: black;
+        transition: 0.5s;
     }
 }
 #view-all{

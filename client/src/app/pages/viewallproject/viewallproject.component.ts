@@ -12,4 +12,18 @@ export class ViewallprojectComponent {
   dialogOpen(){
     this.matDialog.open(AddProjectComponent)
   }
+
+  //Dữ liệu tĩnh
+  projectList = [
+    {
+      marked: false,
+      project_id: "001",
+      name: "E.T Project",
+      owner: "Hồ Văn Hiền",
+      due_date: new Date(),
+      status: "In-progress",
+      disable: false,
+      members: 10,
+    }
+  ]
 }
