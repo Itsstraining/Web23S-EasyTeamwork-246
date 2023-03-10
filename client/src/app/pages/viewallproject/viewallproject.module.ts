@@ -5,12 +5,14 @@ import { ViewallprojectRoutingModule } from './viewallproject-routing.module';
 import { ViewallprojectComponent } from './viewallproject.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { AddProjectComponent } from './components/add-project/add-project.component';
+import { ShareProjectComponent } from './components/share-project/share-project.component';
 
 
 @NgModule({
   declarations: [
     ViewallprojectComponent,
-    AddProjectComponent
+    AddProjectComponent,
+    ShareProjectComponent
   ],
   imports: [
     CommonModule,

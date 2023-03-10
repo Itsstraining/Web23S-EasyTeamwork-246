@@ -5,12 +5,13 @@ import {
   authState,
   GoogleAuthProvider,
   signInWithPopup,
+  User,
 } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { UserState } from '../../../NgRx/States/user.state';
+import { UserState } from '../../../Ngrx/States/user.state';
 import { UserModel } from 'src/models/user.model';
-import * as UserActions from '../../../NgRx/Actions/user.action';
+import * as UserActions from '../../../Ngrx//Actions/user.action';
 import { environment } from 'src/environments/environment';
 import { async } from '@firebase/util';
 
@@ -20,6 +21,7 @@ import { async } from '@firebase/util';
 export class UserService {
   public baseUrl: string = environment.baseURL + 'users/';
   public userInfo: any;
+  user !: User | null | undefined;
 
   constructor(
     public auth: Auth,
@@ -55,7 +57,7 @@ export class UserService {
             photoURL: result.user?.photoURL,
           };
           resolve(account);
-          this.router.navigate(['viewallproject']);
+          this.router.navigate(['/viewallproject']);
           this.http
             .post(this.baseUrl + 'login', {
               uid: account.uid,
@@ -79,7 +81,7 @@ export class UserService {
         await this.auth.signOut();
         localStorage.removeItem('userInfo');
         resolve('Logout Success');
-        this.router.navigate(['/']);
+        this.router.navigate(['/login']);
       } catch (error) {
         reject(error);
       }
