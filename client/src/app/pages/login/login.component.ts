@@ -11,4 +11,7 @@ export class LoginComponent {
 
     constructor(public userService: UserService,public router:Router){}
 
+    create_account(){
+      this.router.navigate(['/createaccount']);
+    }
 }
