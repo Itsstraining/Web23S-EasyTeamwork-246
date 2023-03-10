@@ -1,6 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
-import * as UserActions from '../../Ngrx/Actions/user.action';
-import { UserState } from '../../Ngrx/States/user.state';
+import * as UserActions from '../../NgRx/Actions/user.action';
+import { UserState } from '../../NgRx/States/user.state';
 
 const initialState: UserState = {
   users: [],
