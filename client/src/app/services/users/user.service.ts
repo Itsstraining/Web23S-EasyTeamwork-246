@@ -57,7 +57,7 @@ export class UserService {
             photoURL: result.user?.photoURL,
           };
           resolve(account);
-          this.router.navigate(['/hometask']);
+          this.router.navigate(['/viewallproject']);
           this.http
             .post(this.baseUrl + 'login', {
               uid: account.uid,

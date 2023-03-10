@@ -1,11 +1,12 @@
 ::ng-deep .cdk-overlay-pane{
     width: 35.94rem;
-    height: 35.94rem;
+    height: 400px;
 }
 
 ::ng-deep .mat-mdc-dialog-container .mdc-dialog__surface{
     border-radius: 0.94rem;
     border: 0.06rem solid #F9F6DD;
+    padding: 0;
 }
 
 .table{
@@ -19,7 +20,7 @@
 
 .header{
     display: flex;
-    height: 2.5rem;
+    height: 50px;
     font-family: 'Quicksand', sans-serif;
     font-size: 1.56rem;
     font-weight: bolder;
@@ -57,9 +58,9 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 95%;
-    margin-top: 2%;
-    margin-left: 1%;
+    width: 85%;
+    margin: 0 auto;
+    margin-top: 4%;
     padding: 1%;
     border-radius: 0.94rem;
     font-size: 1rem;
@@ -110,8 +111,9 @@
     background-color: #c9c17e;
 }
 
-::ng-deep .mdc-text-field{
-    background-color: #c9c17e;
+::ng-deep .mdc-text-field--filled:not(.mdc-text-field--disabled){
+    background-color: #fffcd5;
+    border-radius: 0;
 }
 
 ::ng-deep .mat-mdc-form-field-subscript-wrapper{
@@ -121,8 +123,10 @@
 ::ng-deep .mat-mdc-raised-button>.mat-icon{
     margin: 0;
 }
-
-::ng-deep .mat-mdc-raised-button.mat-unthemed{
-    height: 55px;
+#calendat-btn{
+    height: 56px;
     background-color: #FFF6A6;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
 }
