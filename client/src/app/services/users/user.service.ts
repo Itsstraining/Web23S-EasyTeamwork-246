@@ -9,11 +9,10 @@ import {
 } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { UserState } from '../../../Ngrx/States/user.state';
+import { UserState } from 'src/NgRx/States/user.state';
 import { UserModel } from 'src/models/user.model';
-import * as UserActions from '../../../Ngrx//Actions/user.action';
+import * as UserActions from 'src/NgRx/Actions/user.action';
 import { environment } from 'src/environments/environment';
-import { async } from '@firebase/util';
 
 @Injectable({
   providedIn: 'root',

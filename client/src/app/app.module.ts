@@ -19,6 +19,8 @@ import { userReducer } from 'src/NgRx/Reducers/user.reducer';
 import { UserEffect } from 'src/NgRx/Effects/user.effect';
 import { TaskReducer } from 'src/NgRx/Reducers/tasks.reducer';
 import { TaskEffects } from 'src/NgRx/Effects/tasks.effect';
+import { ProjectEffects } from 'src/NgRx/Effects/projects.effect';
+import { ProjectReducer } from 'src/NgRx/Reducers/projects.reducer';
 import { FormsModule } from '@angular/forms';
 
 @NgModule({
@@ -38,11 +40,13 @@ import { FormsModule } from '@angular/forms';
     provideStorage(() => getStorage()),
     StoreModule.forRoot({
       user : userReducer,
-      task: TaskReducer
+      task: TaskReducer,
+      project: ProjectReducer
     }, {}),
     EffectsModule.forRoot([
       UserEffect,
-      TaskEffects
+      TaskEffects,
+      ProjectEffects
     ]),
     HttpClientModule,
     FormsModule,
