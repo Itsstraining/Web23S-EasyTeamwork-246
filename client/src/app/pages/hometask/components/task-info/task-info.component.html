@@ -1,3 +1,45 @@
 <div class="container">
-    
+    <div class="taskNameDiv">
+        <input id="nameInput" type="text" [(ngModel)]="task.name" />
+        <div id="closeBtn" (click)="closeDialog()">
+            <img id="closeImg" src="https://cdn-icons-png.flaticon.com/512/1828/1828778.png">
+        </div>
+    </div>
+    <div class="taskInfoDiv">
+        <div class="desDiv">
+            <p>Description: </p>
+            <textarea class="infoInput" [(ngModel)]="task.description" rows="3" cols="60" placeholder="Description..."></textarea>
+        </div>
+        <div class="restDiv">
+            <div class="statDiv">
+                <p>Status:</p>
+                <mat-form-field appearance="fill">
+                    <mat-select [(value)]="task.status">
+                        <mat-option value="todo">Todo</mat-option>
+                        <mat-option value="in-progress">In Progress</mat-option>
+                        <mat-option value="completed">Completed</mat-option>
+                        <mat-option value="due">Due</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="statDiv">
+                <p>complexity:</p>
+                <mat-form-field appearance="fill">
+                    <mat-select [(value)]="task.complexity">
+                        <mat-option value="easy">Easy</mat-option>
+                        <mat-option value="medium">Medium</mat-option>
+                        <mat-option value="hard">Hard</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="dateDiv">
+                <p>Due date: <span id="dueDate">{{task.deadline}}</span></p>
+                <p>Created date: <span id="createDate">{{task.created_at}}</span></p>
+            </div>
+        </div>
+    </div>
+    <div class="btnDiv">
+        <button class="button" id="upButton">Update</button>
+        <button class="button" id="delButton">Delete</button>
+    </div>
 </div>

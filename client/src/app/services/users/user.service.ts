@@ -39,7 +39,7 @@ export class UserService {
         };
         this.authstore.dispatch(UserActions.loginSuccess({ user: account }));
         this.userInfo = account;
-        console.log(account);
+        // console.log(account);
       }
     });
   }
