@@ -19,6 +19,7 @@ import { userReducer } from 'src/NgRx/Reducers/user.reducer';
 import { UserEffect } from 'src/NgRx/Effects/user.effect';
 import { TaskReducer } from 'src/NgRx/Reducers/tasks.reducer';
 import { TaskEffects } from 'src/NgRx/Effects/tasks.effect';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { TaskEffects } from 'src/NgRx/Effects/tasks.effect';
       TaskEffects
     ]),
     HttpClientModule,
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

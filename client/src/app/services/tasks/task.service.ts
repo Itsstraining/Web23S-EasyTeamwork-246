@@ -17,7 +17,7 @@ export class TaskService {
   }
 
   getById(id: string){
-    return this.httpClient.get(`${this.url}/ID${id}`);
+    return this.httpClient.get(`${this.url}/ID?id=${id}`);
   }
 
   create(task: TaskModel){

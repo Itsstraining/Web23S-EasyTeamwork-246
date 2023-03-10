@@ -7,6 +7,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { AddTaskComponent } from './components/add-task/add-task.component';
 import { TaskInfoComponent } from './components/task-info/task-info.component';
 import { TaskCardComponent } from './components/task-card/task-card.component';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -20,6 +21,7 @@ import { TaskCardComponent } from './components/task-card/task-card.component';
     CommonModule,
     HometaskRoutingModule,
     SharedModule,
+    FormsModule,
   ]
 })
 export class HometaskModule { }

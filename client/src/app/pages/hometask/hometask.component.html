@@ -1,6 +1,7 @@
 <app-navbar></app-navbar>
 
 <div class="homeContainer">
+    <!-- <button (click)="taskIdGen()">click me</button> -->
     <div class="menuDiv">
         <div id="btnSpaceTop"></div>
         <mat-button-toggle-group value="tasks">
@@ -34,13 +35,9 @@
                 <div class="taskTitleDiv">
                     <div class="taskDiv">
                         <p class="taskTitle">Todo</p>
-                        <i class="fa-solid fa-ellipsis-vertical fa-xl" mat-button [matMenuTriggerFor]="menu" id="todoMenu"></i>
+                        <!-- <i class="fa-solid fa-ellipsis-vertical fa-xl" mat-button [matMenuTriggerFor]="menu" id="todoMenu"></i> -->
                     </div>
                 </div>
-                <mat-menu #menu="matMenu">
-                    <button mat-menu-item (click)="todoMenuEdit()" >Edit</button>
-                    <button mat-menu-item (click)="todoMenuDelete()">Delete</button>
-                </mat-menu>
                 <div class="addTaskDiv" (click)="dialogAddTaskOpen('400ms', '500ms')">
                     <p id="addTask">+  Add New Task</p>
                 </div>
@@ -48,10 +45,9 @@
                     cdkDropList
                     [cdkDropListData]="todoList"
                     class="todoLists"
-                    (cdkDropListDropped)="drop($event)"
-                >
-                    <div class="taskBox" *ngFor="let item of todoList" cdkDragBoundary=".todoMainDiv" cdkDrag>
-                        <app-task-card></app-task-card>
+                    (cdkDropListDropped)="drop($event, 'todo')">
+                    
+                    <div class="taskBox" *ngFor="let item of todoList" cdkDragBoundary=".todoMainDiv" cdkDrag (click)="dialogTaskInfoOpen('400ms', '500ms', item.task_id)">
                         <mat-card class="todoCard">
                             <mat-card-header class="cardTitle">{{item.name}}</mat-card-header>
                             <mat-card-content class="cardInfo">Description: {{item.description}}</mat-card-content>
@@ -72,15 +68,15 @@
                 <div class="taskTitleDiv">
                     <div class="taskDiv">
                         <p class="taskTitle">In Progress</p>
-                        <i class="fa-solid fa-ellipsis-vertical fa-xl" mat-button [matMenuTriggerFor]="menu" id="todoMenu"></i>
+                        <!-- <i class="fa-solid fa-ellipsis-vertical fa-xl" mat-button [matMenuTriggerFor]="menu" id="todoMenu"></i> -->
                     </div>
                 </div>
                 <div 
                     cdkDropList
                     [cdkDropListData]="inProgressList"
                     class="todoLists"
-                    (cdkDropListDropped)="drop($event)">
-                    <div class="taskBox" *ngFor="let item of inProgressList" cdkDragBoundary=".todoMainDiv" cdkDrag>
+                    (cdkDropListDropped)="drop($event, 'inPogress')">
+                    <div class="taskBox" *ngFor="let item of inProgressList" cdkDragBoundary=".todoMainDiv" cdkDrag (click)="dialogTaskInfoOpen('400ms', '500ms', item.task_id)">
                         <mat-card class="todoCard">
                             <mat-card-header class="cardTitle">{{item.name}}</mat-card-header>
                             <mat-card-content class="cardInfo">Description: {{item.description}}</mat-card-content>
@@ -101,15 +97,15 @@
                 <div class="taskTitleDiv">
                     <div class="taskDiv">
                         <p class="taskTitle">Completed</p>
-                        <i class="fa-solid fa-ellipsis-vertical fa-xl" mat-button [matMenuTriggerFor]="menu" id="todoMenu"></i>
+                        <!-- <i class="fa-solid fa-ellipsis-vertical fa-xl" mat-button [matMenuTriggerFor]="menu" id="todoMenu"></i> -->
                     </div>
                 </div>
                 <div 
                     cdkDropList
                     [cdkDropListData]="completeList"
                     class="todoLists"
-                    (cdkDropListDropped)="drop($event)">
-                    <div class="taskBox" *ngFor="let item of completeList" cdkDragBoundary=".todoMainDiv" cdkDrag>
+                    (cdkDropListDropped)="drop($event, 'completed')">
+                    <div class="taskBox" *ngFor="let item of completeList" cdkDragBoundary=".todoMainDiv" cdkDrag (click)="dialogTaskInfoOpen('400ms', '500ms', item.task_id)">
                         <mat-card class="todoCard">
                             <mat-card-header class="cardTitle">{{item.name}}</mat-card-header>
                             <mat-card-content class="cardInfo">Description: {{item.description}}</mat-card-content>
@@ -130,15 +126,15 @@
                 <div class="taskTitleDiv">
                     <div class="taskDiv">
                         <p class="taskTitle">Due</p>
-                        <i class="fa-solid fa-ellipsis-vertical fa-xl" mat-button [matMenuTriggerFor]="menu" id="todoMenu"></i>
+                        <!-- <i class="fa-solid fa-ellipsis-vertical fa-xl" mat-button [matMenuTriggerFor]="menu" id="todoMenu"></i> -->
                     </div>
                 </div>
                 <div 
                     cdkDropList
                     [cdkDropListData]="dueList"
                     class="todoLists"
-                    (cdkDropListDropped)="drop($event)">
-                    <div class="taskBox" *ngFor="let item of dueList" cdkDragBoundary=".todoMainDiv" cdkDrag>
+                    (cdkDropListDropped)="drop($event, 'due')">
+                    <div class="taskBox" *ngFor="let item of dueList" cdkDragBoundary=".todoMainDiv" cdkDrag (click)="dialogTaskInfoOpen('400ms', '500ms', item.task_id)">
                         <mat-card class="todoCard">
                             <mat-card-header class="cardTitle">{{item.name}}</mat-card-header>
                             <mat-card-content class="cardInfo">Description: {{item.description}}</mat-card-content>
