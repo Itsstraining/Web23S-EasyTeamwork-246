@@ -20,4 +20,6 @@ export class NavbarComponent implements OnInit {
     viewallproject(){
       this.router.navigate(['viewallproject']);
     }
+
+    
 }
