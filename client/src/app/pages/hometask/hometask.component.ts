@@ -15,7 +15,7 @@ import * as TaskActions from '../../../NgRx/Actions/tasks.action';
   templateUrl: './hometask.component.html',
   styleUrls: ['./hometask.component.scss']
 })
-export class HometaskComponent  implements OnInit{
+export class HometaskComponent implements OnInit{
 
   constructor(
     private matDialog: MatDialog, private taskService: TaskService,
@@ -31,63 +31,56 @@ export class HometaskComponent  implements OnInit{
   completeList: TaskModel[] = [];  
   dueList: TaskModel[] = [];
   taskList: TaskModel[] = [];
+  singleTask: TaskModel[] =[];
+  prj_id: string = '';
+  task_id: string = '';
 
   todoMenu: boolean = true;
 
   ngOnInit(){
+    this.todoList = [];
+    this.inProgressList = [];
+    this.completeList = [];
+    this.dueList = [];
+    this.taskList = [];
+    this.getAllTasks();
+  }
+
+  getAllTasks(){
     this.store.dispatch(TaskActions.getAllTasks())
     this.task$.subscribe( (data: any) => {
       if(data != null){
         this.taskList = data.tasks;
-        // console.log(data.tasks);
+        this.todoList = this.taskList.filter((task) => task.status === 'todo');
+        this.inProgressList = this.taskList.filter((task) => task.status === 'in-progress');
+        this.completeList = this.taskList.filter((task) => task.status === 'completed');
+        this.dueList = this.taskList.filter((task) => task.status === 'due');
       }else{
         console.log('No data');
       }
     });
-    this.sortList();
-  }
-
-  sortList(){
-    console.log("sort running");
-    // for(let i = 0; i < this.taskList.length; i++){
-    //   if(this.taskList[i].status == "todo"){
-    //     this.todoList.push(this.taskList[i]);
-    //   }else if(this.taskList[i].status == "in-progress"){
-    //     this.inProgressList.push(this.taskList[i]);
-    //   }else if(this.taskList[i].status == "completed"){
-    //     this.completeList.push(this.taskList[i]);
-    //   }else if(this.taskList[i].status == "due"){
-    //     this.dueList.push(this.taskList[i]);
-    //   }else{
-    //     this.dueList.push(this.taskList[i]);
-    //   }
-    // }
   }
 
   dialogAddTaskOpen(enterAnimationDuration: string, exitAnimationDuration: string) {
-    this.matDialog.open(AddTaskComponent, {enterAnimationDuration, exitAnimationDuration});
-    this.todoList.push(this.taskList[1]);
-    for(let i = 0; i < this.taskList.length; i++){
-      if(this.taskList[i].status == 'todo'){
-        this.todoList.push(this.taskList[i]);
-      }else if(this.taskList[i].status == 'in-progress'){
-        this.inProgressList.push(this.taskList[i]);
-      }else if(this.taskList[i].status == 'completed'){
-        this.completeList.push(this.taskList[i]);
-      }else if(this.taskList[i].status == 'due'){
-        this.dueList.push(this.taskList[i]);
-      }else{
-        this.dueList.push(this.taskList[i]);
-      }
-    }
-    console.log(this.todoList);
+    let addTaskDialog = this.matDialog.open(AddTaskComponent, {enterAnimationDuration, exitAnimationDuration, autoFocus: false});
+    this.prj_id = this.taskList[0].project_id;
+    this.chckId();
+    let instance = addTaskDialog.componentInstance;
+    instance.prj_id = this.prj_id;
+    instance.task_id = this.task_id;
   }
 
-  dialogTaskInfoOpen(enterAnimationDuration: string, exitAnimationDuration: string){
-    this.matDialog.open(TaskInfoComponent, {enterAnimationDuration, exitAnimationDuration})
+  dialogTaskInfoOpen(enterAnimationDuration: string, exitAnimationDuration: string, tId: string){
+    let taskInfoDialog = this.matDialog.open(TaskInfoComponent, {enterAnimationDuration, exitAnimationDuration, autoFocus: false});
+    let instance = taskInfoDialog.componentInstance;
+    this.taskList.filter((task) => {
+      if(task.task_id === tId){ 
+        instance.task = task;
+      }});
+    // instance.task_id = tId;
   }
 
-  drop(event: CdkDragDrop<TaskModel[]>){
+  drop(event: CdkDragDrop<TaskModel[]>, listName: string){
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
@@ -97,6 +90,22 @@ export class HometaskComponent  implements OnInit{
         event.previousIndex,
         event.currentIndex,
       );
+      // console.log(event.currentIndex);
+      // switch(listName){
+      //   case 'todo':
+          
+      //     // this.todoList[event.currentIndex] = ;
+      //     break;
+      //   case 'inPogress':
+      //     event.container.data[event.currentIndex].status = 'in-progress';
+      //     break;
+      //   case 'completed':
+      //     event.container.data[event.currentIndex].status = 'completed';
+      //     break;
+      //   case 'due':
+      //     event.container.data[event.currentIndex].status = 'due';
+      //     break;
+      // }
     }
   }
 
@@ -104,7 +113,23 @@ export class HometaskComponent  implements OnInit{
 
   }
 
-  todoMenuDelete() {
+  taskIdGen(){
+    let id = 't';
+    let possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    for(let i = 0; i < 10; i++){
+      id += possible.charAt(Math.floor(Math.random() * possible.length));
+    }
+    return id;
+  }
 
+  chckId(){
+    let tempID = this.taskIdGen();
+    for(let i =0; i < this.taskList.length; i++){
+      if(this.taskList[i].task_id == tempID){
+        console.log("id conflict");
+      }else{
+        this.task_id = tempID;
+      }
+    }
   }
 }

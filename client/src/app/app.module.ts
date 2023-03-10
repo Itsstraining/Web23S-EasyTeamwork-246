@@ -21,6 +21,7 @@ import { TaskReducer } from 'src/NgRx/Reducers/tasks.reducer';
 import { TaskEffects } from 'src/NgRx/Effects/tasks.effect';
 import { ProjectEffects } from 'src/NgRx/Effects/projects.effect';
 import { ProjectReducer } from 'src/NgRx/Reducers/projects.reducer';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import { ProjectReducer } from 'src/NgRx/Reducers/projects.reducer';
       ProjectEffects
     ]),
     HttpClientModule,
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
