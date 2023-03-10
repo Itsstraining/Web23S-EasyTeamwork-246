@@ -9,9 +9,13 @@ export class Project {
     @Prop()
     project_id: string;
     @Prop()
+    marked: boolean;
+    @Prop()
     name: string;
     @Prop()
     owner: string;
+    @Prop()
+    owner_id: string;
     @Prop()
     due_date: Date;
     @Prop()
