@@ -122,7 +122,7 @@
                 </div>
             </div>
         </div>
-        <div id="table-body">
+        <div id="table-body" *ngFor="let item of projectList">
             <div class="table-row">
                 <div class="item-attribute" id="item-mark">
                     <button>
@@ -131,24 +131,24 @@
                     </button>
                 </div>
                 <div class="item-attribute" id="item-name">
-                    <span>E.T Project</span>
+                    <span>{{item.name}}</span>
                 </div>
                 <div class="item-attribute" id="item-state">
                     <div id="state-dot"></div>
-                    <span> In progress</span>
+                    <span> {{item.status}}</span>
                 </div>
                 <div class="item-attribute" id="item-date">
                     <div id="date-content">
-                        <span>2023-03-17</span>
+                        <span>{{item.due_date}}</span>
                         <span style="color: #666666;">00:00</span>
                     </div>
                 </div>
                 <div class="item-attribute" id="item-mems">
-                    <span>4</span>
+                    <span>{{item.members}}</span>
                 </div>
                 <div class="item-attribute" id="item-host">
                     <img class="avatar" src="https://cdn-icons-png.flaticon.com/512/3436/3436890.png" alt="avatar">
-                    <span>Leon The Mighty Lion King</span>
+                    <span>{{item.owner}}</span>
                 </div>
                 <div class="item-attribute" id="item-options">
                     <button>
