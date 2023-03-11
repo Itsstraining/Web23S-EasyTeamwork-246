@@ -197,6 +197,10 @@ hr{
         border-right: none;
         transition: 0.25s;
     }
+    :hover{
+        cursor: pointer;
+        background-color: initial;
+    }
     :focus{
         outline: none;
         outline-style: none;
