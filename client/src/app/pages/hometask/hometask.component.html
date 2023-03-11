@@ -35,18 +35,20 @@
                 <div class="taskTitleDiv">
                     <div class="taskDiv">
                         <p class="taskTitle">Todo</p>
+                        <span class="task-col-count" *ngIf="todoList.length > 0"
+                          style="border-radius: 50%;background-color: #90CAF9;width: 10%;text-align: center;font-size: 20px;">{{todoList.length}}</span>
                         <!-- <i class="fa-solid fa-ellipsis-vertical fa-xl" mat-button [matMenuTriggerFor]="menu" id="todoMenu"></i> -->
                     </div>
                 </div>
                 <div class="addTaskDiv" (click)="dialogAddTaskOpen('400ms', '500ms')">
                     <p id="addTask">+  Add New Task</p>
                 </div>
-                <div 
+                <div
                     cdkDropList
                     [cdkDropListData]="todoList"
                     class="todoLists"
                     (cdkDropListDropped)="drop($event, 'todo')">
-                    
+
                     <div class="taskBox" *ngFor="let item of todoList" cdkDragBoundary=".todoMainDiv" cdkDrag (click)="dialogTaskInfoOpen('400ms', '500ms', item.task_id)">
                         <mat-card class="todoCard">
                             <mat-card-header class="cardTitle">{{item.name}}</mat-card-header>
@@ -60,7 +62,7 @@
                                 </div>
                             </mat-card-actions>
                         </mat-card>
-                    </div>  
+                    </div>
                 </div>
             </div>
 
@@ -68,10 +70,12 @@
                 <div class="taskTitleDiv">
                     <div class="taskDiv">
                         <p class="taskTitle">In Progress</p>
+                        <span class="task-col-count" *ngIf="inProgressList.length > 0"
+                          style="border-radius: 50%;background-color: #FFF59D;width: 10%;text-align: center;font-size: 20px;">{{inProgressList.length}}</span>
                         <!-- <i class="fa-solid fa-ellipsis-vertical fa-xl" mat-button [matMenuTriggerFor]="menu" id="todoMenu"></i> -->
                     </div>
                 </div>
-                <div 
+                <div
                     cdkDropList
                     [cdkDropListData]="inProgressList"
                     class="todoLists"
@@ -97,10 +101,12 @@
                 <div class="taskTitleDiv">
                     <div class="taskDiv">
                         <p class="taskTitle">Completed</p>
+                        <span class="task-col-count" *ngIf="completeList.length > 0"
+                          style="border-radius: 50%;background-color: #81C784;width: 10%;text-align: center;font-size: 20px;">{{completeList.length}}</span>
                         <!-- <i class="fa-solid fa-ellipsis-vertical fa-xl" mat-button [matMenuTriggerFor]="menu" id="todoMenu"></i> -->
                     </div>
                 </div>
-                <div 
+                <div
                     cdkDropList
                     [cdkDropListData]="completeList"
                     class="todoLists"
@@ -126,10 +132,12 @@
                 <div class="taskTitleDiv">
                     <div class="taskDiv">
                         <p class="taskTitle">Due</p>
+                        <span class="task-col-count" *ngIf="dueList.length > 0"
+                          style="border-radius: 50%;background-color: #4DD0E1;width: 10%;text-align: center;font-size: 20px;">{{dueList.length}}</span>
                         <!-- <i class="fa-solid fa-ellipsis-vertical fa-xl" mat-button [matMenuTriggerFor]="menu" id="todoMenu"></i> -->
                     </div>
                 </div>
-                <div 
+                <div
                     cdkDropList
                     [cdkDropListData]="dueList"
                     class="todoLists"
@@ -150,6 +158,6 @@
                     </div>
                 </div>
             </div>
-        </div>       
+        </div>
     </div>
 </div>

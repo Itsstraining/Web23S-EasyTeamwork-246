@@ -73,11 +73,11 @@ export class ViewallprojectComponent implements OnInit {
       this.is_in_progress = true;
       this.is_completed = false;
       this.is_overdue = false;
-    } else if (status == "completed") {
+    } if (status == "completed") {
       this.is_in_progress = false;
       this.is_completed = true;
       this.is_overdue = false;
-    } else if (status == "overdue") {
+    } if (status == "overdue") {
       this.is_in_progress = false;
       this.is_completed = false;
       this.is_overdue = true;
