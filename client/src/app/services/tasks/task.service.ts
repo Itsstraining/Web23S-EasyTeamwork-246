@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Socket } from 'ngx-socket-io';
 import { environment } from 'src/environments/environment';
 import { TaskModel } from 'src/models/task.model';
 
@@ -8,12 +9,16 @@ import { TaskModel } from 'src/models/task.model';
 })
 export class TaskService {
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient, private socket: Socket) { }
 
   url = `${environment.baseURL}task`;
 
   getAllTasks(){
     return  this.httpClient.get(`${this.url}`);
+  }
+
+  getAllTasksByProjectId(project_id: string){
+    return this.httpClient.get(`${this.url}/project?id=${project_id}`);
   }
 
   getById(id: string){
@@ -25,10 +30,19 @@ export class TaskService {
   }
 
   update(task: TaskModel, id: string){
-    return this.httpClient.put(`${this.url}/update${id}`, task);
+    return this.httpClient.put(`${this.url}/update?id=${id}`, task);
   }
 
   delete(id: string){
-    return this.httpClient.delete(`${this.url}/delete${id}`);
+    return this.httpClient.delete(`${this.url}/delete?id=${id}`);
+  }
+
+  getTasksByProjectId(project_id: string){
+    const channel = 'task_' + project_id;
+    return this.socket.fromEvent(channel);
+  }
+
+  sendTask(task: TaskModel){
+    this.socket.emit('task', task);
   }
 }

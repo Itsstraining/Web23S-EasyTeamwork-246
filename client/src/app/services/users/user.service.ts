@@ -13,7 +13,6 @@ import { UserState } from '../../../NgRx/States/user.state';
 import { UserModel } from 'src/models/user.model';
 import * as UserActions from '../../../NgRx/Actions/user.action';
 import { environment } from 'src/environments/environment';
-import { async } from '@firebase/util';
 
 @Injectable({
   providedIn: 'root',

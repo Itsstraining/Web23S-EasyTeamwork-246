@@ -19,7 +19,13 @@ import { userReducer } from 'src/NgRx/Reducers/user.reducer';
 import { UserEffect } from 'src/NgRx/Effects/user.effect';
 import { TaskReducer } from 'src/NgRx/Reducers/tasks.reducer';
 import { TaskEffects } from 'src/NgRx/Effects/tasks.effect';
+import { ProjectEffects } from 'src/NgRx/Effects/projects.effect';
+import { ProjectReducer } from 'src/NgRx/Reducers/projects.reducer';
 import { FormsModule } from '@angular/forms';
+import { SocketIoModule } from 'ngx-socket-io';
+import { SocketIoConfig } from 'ngx-socket-io/src/config/socket-io.config';
+
+const config: SocketIoConfig = { url: 'http://localhost:3000/', options: {} };
 
 @NgModule({
   declarations: [
@@ -38,14 +44,17 @@ import { FormsModule } from '@angular/forms';
     provideStorage(() => getStorage()),
     StoreModule.forRoot({
       user : userReducer,
-      task: TaskReducer
+      task: TaskReducer,
+      project: ProjectReducer
     }, {}),
     EffectsModule.forRoot([
       UserEffect,
-      TaskEffects
+      TaskEffects,
+      ProjectEffects
     ]),
     HttpClientModule,
     FormsModule,
+    SocketIoModule.forRoot(config),
   ],
   providers: [],
   bootstrap: [AppComponent]

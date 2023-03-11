@@ -23,28 +23,28 @@
         <div id="overview-header">Overview</div>
         <div id="overview-body">
             <div class="overview-content" id="total">
-                <div class="amount"><span>number</span></div>
+                <div class="amount"><span>{{total_amount}}</span></div>
                 <div class="horizone">
                     <hr>
                 </div>
                 <div class="type"><span>Total</span></div>
             </div>
             <div class="overview-content" id="in-progress">
-                <div class="amount"><span>number</span></div>
+                <div class="amount"><span>{{in_progress_amount}}</span></div>
                 <div class="horizone">
                     <hr>
                 </div>
                 <div class="type"><span>In progress</span></div>
             </div>
             <div class="overview-content" id="completed">
-                <div class="amount"><span>number</span></div>
+                <div class="amount"><span>{{completed_amount}}</span></div>
                 <div class="horizone">
                     <hr>
                 </div>
                 <div class="type"><span>Completed</span></div>
             </div>
             <div class="overview-content" id="overdue">
-                <div class="amount"><span>number</span></div>
+                <div class="amount"><span>{{overdue_amount}}</span></div>
                 <div class="horizone">
                     <hr>
                 </div>
@@ -128,38 +128,48 @@
                 </div>
             </div>
         </div>
-        <div id="table-body" *ngFor="let item of projectList">
-            <div class="table-row">
-                <div class="item-attribute" id="item-mark">
-                    <button>
-                        <img class="icon" src="https://cdn-icons-png.flaticon.com/512/2107/2107992.png"
-                            alt="empty star">
-                    </button>
-                </div>
-                <div class="item-attribute" id="item-name">
-                    <span>{{item.name}}</span>
-                </div>
-                <div class="item-attribute" id="item-state">
-                    <div id="state-dot"></div>
-                    <span> {{item.status}}</span>
-                </div>
-                <div class="item-attribute" id="item-date">
-                    <div id="date-content">
-                        <span>{{item.due_date}}</span>
-                        <span style="color: #666666;">00:00</span>
+        <div id="table-body" >
+            <div class="item">
+                <div class="table-row" *ngFor="let item of projectList">
+                    <div class="item-attribute" id="item-mark">
+                        <button>
+                            <img class="icon" src="https://cdn-icons-png.flaticon.com/512/2107/2107992.png"
+                                alt="empty star">
+                        </button>
                     </div>
-                </div>
-                <div class="item-attribute" id="item-mems">
-                    <span>{{item.members}}</span>
-                </div>
-                <div class="item-attribute" id="item-host">
-                    <img class="avatar" src="https://cdn-icons-png.flaticon.com/512/3436/3436890.png" alt="avatar">
-                    <span>{{item.owner}}</span>
-                </div>
-                <div class="item-attribute" id="item-options">
-                    <button>
-                        <i class="fa-solid fa-ellipsis-vertical fa-sm"></i>
-                    </button>
+                    <div class="item-attribute" id="item-name">
+                        <span>{{item.name}}</span>
+                    </div>
+                    <div *ngIf="is_in_progress === true" class="item-attribute" id="item-state">
+                        <div style="background-color: #159ACC;" id="state-dot"></div>
+                        <span style="color: #199CAE;"> In-progress</span>
+                    </div>
+                    <div *ngIf="is_completed === true" class="item-attribute" id="item-state">
+                        <div style="background-color: #33FF00;" id="state-dot"></div>
+                        <span style="color: #28C700;"> Completed</span>
+                    </div>
+                    <div *ngIf="is_overdue === true" class="item-attribute" id="item-state">
+                        <div style="background-color: #FF0000;" id="state-dot"></div>
+                        <span style="color: #E51616;"> Overdue</span>
+                    </div>
+                    <div class="item-attribute" id="item-date">
+                        <div id="date-content">
+                            <span>{{item.due_date}}</span>
+                            <span style="color: #666666;">00:00</span>
+                        </div>
+                    </div>
+                    <div class="item-attribute" id="item-mems">
+                        <span>{{item.members.length}}</span>
+                    </div>
+                    <div class="item-attribute" id="item-host">
+                        <img class="avatar" src="https://cdn-icons-png.flaticon.com/512/3436/3436890.png" alt="avatar">
+                        <span>{{item.owner}}</span>
+                    </div>
+                    <div class="item-attribute" id="item-options">
+                        <button>
+                            <i class="fa-solid fa-ellipsis-vertical fa-sm"></i>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
