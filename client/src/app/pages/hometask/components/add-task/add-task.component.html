@@ -1,15 +1,43 @@
 <div class="container">
     <div class="addTitle">
         <h1>Add Task</h1>
+        <!-- <p>{{p_id}}</p> -->
         <div id="closeBtn" (click)="closeDialog()">
             <img id="closeImg" src="https://cdn-icons-png.flaticon.com/512/1828/1828778.png">
         </div>
     </div>
     <div class="infoDiv">
         <div class="inputDiv">
-            <p>Task Name:<span><input class="txtIn" type="text" placeholder="task name..."></span></p>
-            <p>Task Description:<span><input class="txtIn" type="text" placeholder="description..."></span></p>
-            <p>Task Due date:<span><input class="txtIn" type="text" placeholder="due date..."></span></p>
+            <div class="row">
+                <mat-form-field class="input">
+                    <mat-label>Task name</mat-label>
+                    <input matInput [(ngModel)]="taskName">
+                </mat-form-field>
+            </div>
+            <div class="row">
+                <mat-form-field class="input">
+                    <mat-label>Task description</mat-label>
+                    <input matInput [(ngModel)]="taskDescription">
+                </mat-form-field>
+            </div>
+            <div class="row">
+                <mat-form-field class="input" appearance="fill">
+                    <mat-label>Due date</mat-label>
+                    <input matInput placeholder="MM/DD/YYYY" [(ngModel)]="dateRaw" [matDatepicker]="picker">
+                    <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+                <button id="calendar-btn" mat-raised-button (click)="picker.open()">
+                    <mat-icon>calendar_today</mat-icon>
+                </button>
+            </div>
+            <div id="taskComplex">
+                <p>Task Complexity: </p>
+                <span>
+                <mat-slider min="1" max="3" step="1" showTickMarks discrete [displayWith]="displayComplex" >
+                    <input matSliderThumb [(ngModel)]="taskComplexRaw">
+                </mat-slider>
+                </span>
+            </div>
         </div>
         <button id="addBTn" (click)="addTask()">Add </button>
     </div>

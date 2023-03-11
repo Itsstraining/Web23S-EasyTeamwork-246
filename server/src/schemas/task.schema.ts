@@ -27,6 +27,12 @@ export class Task {
     status: Status;
 
     @Prop()
+    comment_count: number;
+
+    @Prop()
+    deadline: string;
+
+    @Prop()
     complexity: Complexity;
 
     @Prop()
