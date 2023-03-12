@@ -54,6 +54,7 @@ export class ViewallprojectComponent implements OnInit {
             this.overdue_amount++;
           }
           this.getProjectStatus(this.projectList[i].status, this.projectList[i].is_in_progress, this.projectList[i].is_completed, this.projectList[i].is_overdue);
+          this.getDate(this.projectList[i].due_date);
         }
         this.total_amount = this.projectList.length;
       }
@@ -77,5 +78,11 @@ export class ViewallprojectComponent implements OnInit {
       is_completed = false;
       is_overdue = true;
     }
+  }
+
+  getDate(date: any) {
+    let d = date;
+    let arr = d.split("T");
+    date = arr[0];
   }
 }

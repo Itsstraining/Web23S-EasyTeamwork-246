@@ -12,7 +12,7 @@ const initialState: ProjectState = {
 
 export const ProjectReducer = createReducer(
     initialState,
-    on(ProjectActions.getAllProjects, (state) => ({...state, loading: false})),
+    on(ProjectActions.getAllProjects, (state) => ({...state, loading: true})),
     on(ProjectActions.getAllProjectsSuccess, (state, action) => ({
         ...state,
         projects: action.projects,
