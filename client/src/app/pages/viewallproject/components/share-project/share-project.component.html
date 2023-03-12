@@ -1,37 +1,87 @@
 <div class="table">
-    <div class="header">
-        <span>Share Project</span>
-        <div id="closeBtn" >
-            <img id="close-icon" src="https://cdn-icons-png.flaticon.com/512/1828/1828778.png">
-        </div>
+  <div class="header">
+    <span>Share Project</span>
+    <div id="closeBtn" (click)="closeDialogShare()">
+      <img
+        id="close-icon"
+        src="https://cdn-icons-png.flaticon.com/512/1828/1828778.png"
+      />
     </div>
+  </div>
 
-    <div class="body">
-        <div class="row">
-            <input class="input" type="text" placeholder="Thêm người để gửi đường liên kết tới">
-        </div>
-        <div class="row2">
-            <textarea class="input" type="text" placeholder="Lời nhắn" style="resize: vertical;"></textarea>
-        </div>
+  <div class="body">
+    <div class="row" (click)="showAccountGG()">
+      <input
+        class="input"
+        type="text"
+        placeholder="Thêm người để gửi đường liên kết tới"
+      />
     </div>
-    <div class="content">
-        <p>Quyền truy cập chung</p>
-        <div class="notification" style="display: flex;">
-            <div class="left">
-                <i class="fa-solid fa-earth-americas"></i>
-            </div>
-            <div class="middle">
-                <span>Bất kỳ ai có đường liên kết</span>
-                <p>Bất kỳ ai có kết nối Internet và có đường liên kết này đều có thể xem</p>
-            </div>
-            <div class="right">
-                <span>Người xem</span>
-            </div>
-        </div>
+    <div class="row2">
+      <textarea
+        class="input"
+        type="text"
+        placeholder="Lời nhắn"
+        style="resize: vertical"
+      ></textarea>
     </div>
-    <div class="footer">
-        <button>Sao chép đường liên kết</button>
-        <button>Hủy</button>
-        <button>Gửi</button>
+  </div>
+  <div class="content">
+    <p style="margin: 2% 7%">Quyền truy cập chung</p>
+    <div
+      class="notification"
+      style="
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 2% 7%;
+      "
+    >
+      <div
+        class="left"
+        style="
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin-bottom: 4%;
+          margin-right: 4%;
+        "
+      >
+        <i class="fa-solid fa-earth-americas"></i>
+      </div>
+      <div class="middle">
+        <span style="font-size: 1.1rem">Bất kỳ ai có đường liên kết</span>
+        <p style="color: grey; font-size: 0.8rem">
+          Bất kỳ ai có kết nối Internet và có đường liên kết này đều có thể xem
+        </p>
+      </div>
+      <div
+        class="right"
+        style="
+          color: grey;
+          margin-left: 13%;
+          margin-bottom: 1.5%;
+          font-size: 1rem;
+        "
+      >
+        <span>Người xem</span>
+      </div>
     </div>
+  </div>
+  <div
+    class="footer"
+    style="
+      margin: 2% 7%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    "
+  >
+    <button style="border: 0.01px solid #000">
+      <i class="fa-solid fa-copy"></i>Sao chép đường liên kết
+    </button>
+    <button>Yều cầu chia sẻ</button>
+    <button>Hủy</button>
+    <button>Gửi</button>
+  </div>
 </div>

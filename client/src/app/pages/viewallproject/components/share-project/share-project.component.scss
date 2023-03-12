@@ -1,12 +1,12 @@
 ::ng-deep .cdk-overlay-pane {
   width: 35.94rem;
   height: fit-content;
+}
 
-  ::ng-deep .mat-mdc-dialog-container .mdc-dialog__surface {
-    border-radius: 0.94rem;
-    border: 0.06rem solid #F9F6DD;
-    padding: 0;
-  }
+::ng-deep .mat-mdc-dialog-container .mdc-dialog__surface {
+  border-radius: 0.94rem;
+  border: 0.06rem solid #F9F6DD;
+  padding: 0;
 }
 
 .table {
@@ -19,7 +19,7 @@
 .header {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   height: 50px;
   font-family: 'Quicksand', sans-serif;
   font-size: 1.56rem;
@@ -64,7 +64,7 @@
 
   .row {
     width: 100%;
-    margin: 1.5% 0;
+    margin: 1% 0;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -106,51 +106,24 @@
     width: 100%;
     margin: 10% 10%;
     flex-direction: column;
-    background-color: #000;
-
-    .notification {
-      width: 100%;
-      background-color: red;
-      justify-content: space-between;
-      align-items: center;
-      flex-direction: row;
-
-      .left {
-        width: 15%;
-        background-color: aqua;
-
-        i {
-          width: 2rem;
-          height: 2rem;
-          margin: 1rem 0;
-          box-shadow: green;
-        }
-
-
-      }
-
-      .middle {
-        width: 70%;
-        margin: 0;
-        background-color: greenyellow;
-
-        p {
-          color: gray;
-          font-size: 15px;
-          margin: 0;
-        }
-      }
-
-      .right {
-        width: 15%;
-        margin: 0;
-        background-color: aquamarine;
-
-        span {
-          color: gray;
-        }
-      }
-    }
   }
 
+}
+
+
+button{
+  padding: 2% 2%;
+  border-radius: 0.94rem;
+  border: 0.06rem solid #F9F6DD;
+  background-color: #F9F6DD;
+  color: #1860D3;
+}
+button:hover{
+  cursor: pointer;
+  text-decoration: underline;
+  background-color: #FFF6A6;
+}
+
+.fa-solid fa-copy{
+  margin-right:0.5%;
 }
