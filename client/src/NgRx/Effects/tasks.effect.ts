@@ -68,4 +68,52 @@ export class TaskEffects{
             })
         )
     );
+
+    deleteTask$ = createEffect(
+        () => this.$action.pipe(
+            ofType(TaskActions.deleteTask),
+            switchMap((data) => {
+                return this.taskService.delete(data.task_id);
+            }
+            ),
+            map((data) => {
+                return TaskActions.deleteTaskSuccess({ task: <TaskModel>data });
+            }
+            ),
+            catchError((error) => {
+                return of(TaskActions.deleteTaskFailure({error: error}))
+            }
+            )
+        )
+    );
+
+    getTasksByProjectId$ = createEffect(
+        () => this.$action.pipe(
+            ofType(TaskActions.getTasksByProjectId),
+            switchMap((data) => {
+                return this.taskService.getTasksByProjectId(data.project_id);
+            }),
+            map((data) => {
+                return TaskActions.getTasksByProjectIdSuccess({ tasks: <Array<TaskModel>>data });
+            }),
+            catchError((error) => {
+                return of(TaskActions.getTasksByProjectIdFailure({error: error}))
+            })
+        )
+    );
+
+    // sendTask$ = createEffect(
+    //     () => this.$action.pipe(
+    //         ofType(TaskActions.sendTask),
+    //         switchMap((data) => {
+    //             return this.taskService.sendTask(data.task);
+    //         }),
+    //         map((data) => {
+    //             return TaskActions.sendTaskSuccess({ task: <TaskModel>data });
+    //         }),
+    //         catchError((error) => {
+    //             return of(TaskActions.sendTaskFailure({error: error}))
+    //         })
+    //     )
+    // );
 }

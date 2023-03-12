@@ -3,102 +3,108 @@
     height: 100%;
     display: flex;
     flex-direction: row;
-    background-color: #FFFEF6;
+    background-color: #FBF8FF;
     margin-left: 0rem;
     overflow: hidden;
+    border-top: 2px solid #ffe600;
 }
 
 
 /* sidebar */
 .menuDiv{
-    width: 15%;
-    height: 80%;
-    background-color: #FFFDEF;
+    width: 16rem;
+    height: 60rem;
+    background-color: #f1e9ff;
+    // padding-top: 4.5rem;
 }
 
 #btnSpaceTop{
-    width: 99%;
-    height: 7%;
-    border: none;
-    border-top: 2px solid #ffef79;
-    border-right: 2px solid #ffef79;
-    background-color: #FFFDEF;
-    margin-bottom: -1.2%;
-    border-bottom-right-radius: 8px;
+    width: 98.4%;
+    height: 4.5rem;
+    background-color: #f1e9ff;
+    border: 1px solid #ffe600;
+    border-top: none;
+    border-bottom: none;
 }
 
 #btnSpaceBottom{
-    width: 99%;
+    width: 99.4%;
     height: 100%;
-    border-right: 2px solid #ffef79;
-    background-color: #FFFDEF;
-    margin-top: -1%;
+    background-color: #f1e9ff;
+    border-right: 1px solid #ffe600;
+    margin-top: -2%;
 }
 
 .mat-button-toggle-group{    
     display: flex;
     flex-direction: column;
     border: none;
-    // border-radius: 10px;
-    // border: 1px solid #ffef79;
 }
 
-.mat-button-toggle{
+::ng-deep .mat-button-toggle{
     font-family: 'Ubuntu', sans-serif;
     font-weight: 400;
-    width: 99%;    
+    width: 98.7%;    
     height: 3.9rem;
     font-size: 50%;
     background-color: transparent;
     font-size: 1.5rem;
     padding-top: 6% !important;
-    border-right: 2px solid #ffef79 !important;
+    border-right: 1px solid #ffe600;
 }
 
 #menuBtnCallendar{
-    width: 98.5%;
+    
+    padding-right: 1px;
 }
 
-.mat-button-toggle-checked{
-    background-color: #FFFEF6 !important;
-    border: 2px solid #ffef79 !important;
+::ng-deep .mat-button-toggle-checked{
+    // position: absolute;
+    width: 99%;
+    background-color: #fbf8ff !important;
     border-right: none !important;
+    border-radius: 0px;
+    border-top: 1px solid #ffe600;
+    border-bottom: 1px solid #ffe600;
+    border-left: 1px solid #ffe600;
+    padding-right: 1px;
 }
 
 .mat-button-toggle:hover{
     cursor: pointer;
-    background-color: #fffce1;
+    background-color: #f5f0fd;
 }
 
 .mat-button-toggle-checked:hover{
     cursor: pointer;
-    background-color: #fdfcee !important;
+    background-color: #f5f0fd !important;
 }
 
 .mat-button-toggle-checked:active{
-    border: 2px solid #ffef79 !important;
     border-right: none !important;
 }
 
 /* Home div */
 .infoDiv{
-    width: 100%;
+    width: 99%;
     height: 10%;
-    background-color: #FFFEF6;
-    border-top: 2px solid #ffef79;
+    background-color: #FBF8FF;
     padding-left: 1%;
-}
-
-.infoDiv > h1{    
-    font-family: 'Ubuntu', sans-serif;
-    font-weight: 500;
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: space-between;
+    // vertical-align: middle;
 }
 
 .homeDiv{
+    // position: absolute;
     width: 100%;
+    background-color: #FBF8FF;
 }
 
 #funcTitle{
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: 500;
     font-size: 2rem;
     margin-top: 1%;
 }
@@ -106,23 +112,23 @@
 .projInfo{
     font-size: 1.2rem;
     font-family: 'Quicksand', sans-serif;
-    font-weight: 5 00;
+    font-weight: 500;
     margin-top: -.4rem;
     margin-left: 1rem;
 }
 
 .userDiv{
-    width: 10%;
-    height: 50%;
+    width: 10rem;
+    min-height: 3.3rem;
     display: flex;
     flex-direction: row;
-    margin-left: 88%;
+    margin-left: 84%;
     margin-top: -5%;
 }
 
 
 .usrIcon{
-    width: 30%;
+    width: 40%;
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -133,7 +139,7 @@
 }
 
 .usrIcon1{
-    width: 30%;
+    width: 40%;
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -145,7 +151,7 @@
 }
 
 .usrIcon2{
-    width: 30%;
+    width: 40%;
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -171,16 +177,17 @@
 }
 
 .todoMainDiv{
-    width: 96%;
+    width: 96.5%;
     height: 80%;
     display: flex;
     flex-direction: row;
     border-top-left-radius: 15px;
     border-top-right-radius: 15px;
-    background-color: #FFFCE0;
+    background-color: #e8daff;
     padding: 1rem 0rem 0rem 0rem;
     margin-top: 4%;
-    margin-left: 1rem;
+    margin-left: 2rem;
+    border: 1px solid #ffe600;
     box-shadow: 0px -4px 8px 0px rgba(129, 129, 129, 0.75);
     // overflow-y: visible;
     overflow-y: scroll;
@@ -238,19 +245,41 @@
     float: right;
 }
 
+.mat-mdc-card-content{
+    padding-bottom: .8rem;
+}
+
 .todoCard{
     font-family: 'Quicksand', sans-serif;
     font-weight: 500;
     border-radius: 15px !important;
+    overflow: hidden;
+    transition: box-shadow 200ms cubic-bezier(0, 0, 0.2, 1);
+    border: 1px solid #ffe600 !important;
+    :hover{
+        cursor: grab;
+    }
+    :active{
+        cursor: grabbing;
+    }
+}
+
+.cdk-drag-dragging{
+    cursor: grabbing;
 }
 
 .cardTitle{
     font-size: 1.4rem;
+    font-weight: 500;
     margin-bottom: 1%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }
 
 .cardInfo{
-    font-size: 1rem;
+    font-size: 1.2rem;
+    font-weight: 400;
     margin-left: 3%;
 }
 
@@ -306,10 +335,10 @@
 
 .addTaskDiv{
     width: 98%;
-    height: 5%;
+    height: 2.5rem;
     border: 3px dashed #666666;
     border-radius: 15px;
-    background-color: #fffced;
+    background-color: #FBF8FF;
     margin-top: 3%;
 }
 
@@ -338,4 +367,19 @@
 
 #commentSpace{
     margin-left: 20%;
+}
+
+// .infoads{
+//     display: flex;
+//     flex-direction: column;
+//     justify-content: space-between;
+// }
+
+#infoBtn{
+    width: 24px;
+    height: 24px;
+}
+
+#infoBtn:hover{
+    cursor: pointer;
 }
