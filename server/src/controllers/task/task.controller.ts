@@ -17,6 +17,11 @@ export class TaskController {
         return this.taskService.getById(id);
     }
 
+    @Get('/project')
+    getByPrjId(@Query('id') id: string) {
+        return this.taskService.getByPrjId(id);
+    }
+
     @Post("/create")
     create(@Body() task: TaskModel) {
         return this.taskService.create(task);

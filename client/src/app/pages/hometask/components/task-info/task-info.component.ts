@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { TaskModel } from 'src/models/task.model';
+import { Complexity, Status, TaskModel } from 'src/models/task.model';
 import * as TaskActions from '../../../../../NgRx/Actions/tasks.action';
 import { AddTaskComponent } from '../add-task/add-task.component';
 
@@ -11,7 +11,10 @@ import { AddTaskComponent } from '../add-task/add-task.component';
   templateUrl: './task-info.component.html',
   styleUrls: ['./task-info.component.scss']
 })
+// export type Mutable<T> = { -readonly [P in keyof T]: T[P] }
+
 export class TaskInfoComponent implements OnInit{
+  
 
   taskById$ !: Observable<any>;
   task: TaskModel = {
@@ -28,7 +31,12 @@ export class TaskInfoComponent implements OnInit{
     updated_at: ''
   };
 
-  task_id !: string;
+  temp: Mutable<TaskModel> = this.task;
+
+  taskName!: string;
+  taskDescription!: string;
+  taskComplex!: Complexity;
+  taskStatus!: Status;
 
   constructor(
     private store: Store<{task: TaskModel}>,
@@ -37,16 +45,42 @@ export class TaskInfoComponent implements OnInit{
     this.taskById$ = this.store.select('task');
    }
 
-
-
   ngOnInit(): void {
-    
+    // this.temp = this.task;
+    this.temp.assignee = this.task.assignee;
+    this.temp.comment_count = this.task.comment_count;
+    this.temp.complexity = this.task.complexity;
+    this.temp.created_at = this.task.created_at;
+    this.temp.deadline = this.task.deadline;
+    this.temp.description = this.task.description;
+    this.temp.name = this.task.name;
+    this.temp.project_id = this.task.project_id;
+    this.temp.status = this.task.status;
+    this.temp.task_id = this.task.task_id;
+    this.temp.updated_at = this.getDate();
   }
 
-  getTaskID(){
+  getDate(){
+    const date = new Date();
+
+    return date.toLocaleDateString();
+  }
+
+  updateTask(){
+    this.store.dispatch(TaskActions.updateTask({task: this.temp, id: this.temp.task_id}));
+    this.closeDialog();
+  }
+
+  deleteTask(){
+    this.store.dispatch(TaskActions.deleteTask({task_id: this.temp.task_id}));
+    this.closeDialog();
   }
 
   closeDialog(){
     this.dialogRef.close();
   }
 }
+
+type Mutable<Type> = {
+  -readonly [Key in keyof Type]: Type[Key];
+};

@@ -29,6 +29,16 @@ export class TaskService {
         }
     }
 
+    async getByPrjId(id: string) {
+        try{
+            let data = await this.taskModel.find({project_id: id}).exec();
+            return data;
+        }catch(e){
+            console.log(e);
+            return null;
+        }
+    }
+
     async create(newTask: TaskModel) {
         try{
             let data = await this.taskModel.create(newTask);
@@ -41,12 +51,11 @@ export class TaskService {
 
     async update(task: TaskModel, id: string) {
         try{
-            console.log(task);
             let data = await this.taskModel.updateOne({task_id: id}, {$set: {
-                task_name: task.name,
-                task_description: task.description,
-                task_status: task.status,
-                task_priority: task.complexity,
+                name: task.name,
+                description: task.description,
+                status: task.status,
+                complexity: task.complexity,
             }});
             return data;
         }catch(e){
@@ -57,7 +66,8 @@ export class TaskService {
 
     async delete(id: string) {
         try{
-            this.taskModel.deleteOne({task_id: id}).exec();
+            let data = this.taskModel.deleteOne({task_id: id}).exec();
+            return data;
         }catch(e){
             console.log(e);
             return null;
