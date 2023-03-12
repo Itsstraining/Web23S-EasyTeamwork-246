@@ -102,17 +102,18 @@ export class TaskEffects{
         )
     );
 
-    // getById$ = createEffect(
+    // sendTask$ = createEffect(
     //     () => this.$action.pipe(
-    //         ofType(TaskActions.getById),
+    //         ofType(TaskActions.sendTask),
     //         switchMap((data) => {
-    //             return this.taskService.getById(data.id);
+    //             return this.taskService.sendTask(data.task);
     //         }),
     //         map((data) => {
-    //             return TaskActions.getByIdSuccess({ task: <TaskModel>data });
+    //             return TaskActions.sendTaskSuccess({ task: <TaskModel>data });
     //         }),
     //         catchError((error) => {
-    //             return of(TaskActions.getByIdFailure({error: error}))
-    //         }))
+    //             return of(TaskActions.sendTaskFailure({error: error}))
+    //         })
+    //     )
     // );
 }

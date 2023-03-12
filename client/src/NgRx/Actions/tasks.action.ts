@@ -54,7 +54,6 @@ export const updateTaskFailure = createAction(
     props<{ error: string }>()
 );
 
-
 export const deleteTask = createAction(
     "[Task] Delete task",
     props<{ task_id: string }>()
@@ -69,14 +68,28 @@ export const deleteTaskFailure = createAction(
 );
 
 export const getTasksByProjectId = createAction(
-    "[Task] Get tasks by project id",
+    "[Task Socket] Get tasks by project id",
     props<{ project_id: string }>()
 );
 export const getTasksByProjectIdSuccess = createAction(
-    "[Task] Get tasks by project id success",
+    "[Task Socket] Get tasks by project id success",
     props<{ tasks: TaskModel[] }>()
 );
 export const getTasksByProjectIdFailure = createAction(
-    "[Task] Get tasks by project id failure",
+    "[Task Socket] Get tasks by project id failure",
+    props<{ error: string }>()
+);
+
+
+export const sendTask = createAction(
+    "[Task Socket] Send task",
+    props<{ task: TaskModel }>()
+);
+export const sendTaskSuccess = createAction(
+    "[Task Socket] Send task success",
+    props<{ task: TaskModel }>()
+);
+export const sendTaskFailure = createAction(
+    "[Task Socket] Send task failure",
     props<{ error: string }>()
 );

@@ -26,6 +26,8 @@ export class HometaskComponent implements OnInit{
   }
 
   task$ !: Observable<TaskModel>;
+  taskPrj$ !: Observable<any>;
+  
 
   todoList: TaskModel[] = [];
   inProgressList: TaskModel[] = [];
@@ -33,6 +35,7 @@ export class HometaskComponent implements OnInit{
   dueList: TaskModel[] = [];
   taskList: TaskModel[] = [];
   singleTask: TaskModel[] =[];
+  taskPrj: TaskModel[] = [];
   prj_id: string = '';
   task_id: string = '';
 
@@ -40,6 +43,7 @@ export class HometaskComponent implements OnInit{
 
   todoMenu: boolean = true;
   infoOpened: boolean = false;
+  isFirstLoad: boolean = true;
 
   ngOnInit(){
     this.todoList = [];
@@ -48,9 +52,14 @@ export class HometaskComponent implements OnInit{
     this.dueList = [];
     this.taskList = [];
     this.getAllTasks();
+    // this.store.dispatch(TaskActions.getTasksByProjectId({project_id: 'prj01'}));
+    // this.taskPrj$.subscribe((data: any) => {
+    //   console.log(data.tasks);
+    //   this.taskPrj.push(data.tasks);
+    // });
   }
 
-  getAllTasks(){
+  getAllTasks(){    
     this.store.dispatch(TaskActions.getAllTasks());
     this.task$.subscribe( (data: any) => {
       if(data != null){
@@ -65,36 +74,31 @@ export class HometaskComponent implements OnInit{
     });
   }
 
-  taskPrj$ !: Observable<any>;
-  taskPrj: TaskModel[] = [];
+  // getTaskByPrjId(){
+  //   this.store.dispatch(TaskActions.getTasksByProjectId({project_id: 'prj01', isFirstLoad: false}));
+  //   this.taskPrj$.subscribe((data: any) => {
+  //     console.log(data.tasks);
+  //     this.taskPrj.push(data.tasks);
+  //   });
+  // }
 
-  getTaskByPrjId(){
-    // let prj_id = this.taskList[0].project_id;
-    this.taskPrj$ = this.taskService.getAllTasksByProjectId('prj0002');
-    // this.store.dispatch(TaskActions.getTasksByProjectId({project_id: 'prj01'}));
-    this.taskPrj$.subscribe((data: any) => {
-      console.log(data.tasks);
-      // this.taskPrj = data.tasks;
-      this.taskPrj.push(data.tasks);
-    });
-  }
-
-  sendTask(){
-    let task : TaskModel = {
-      task_id: 'task01',
-      project_id: 'prj01',
-      name: 'Task 01',
-      description: 'Task 01 description',
-      status: 'todo',
-      complexity: 'easy',
-      assignee: [],
-      deadline: '2021-08-01',
-      created_at: '2021-07-01',
-      updated_at: '2021-07-01',
-      comment_count: 0,
-    }
-    this.taskService.sendTask(task);
-  }
+  // sendTask(){
+  //   let taskSocket: TaskModel = {
+  //     task_id: 'task0001',
+  //     project_id: 'prj0001',
+  //     name: 'Task 1',
+  //     assignee: [],
+  //     description: 'Task 1 description',
+  //     status: 'todo',
+  //     complexity: 'easy',
+  //     comment_count: 0,
+  //     deadline: '2021-05-01',
+  //     created_at: '2021-04-01',
+  //     updated_at: '2021-04-01',
+  //   }
+  //   // this.store.dispatch(TaskActions.sendTask({task: taskSocket}));
+  //   this.taskService.sendTask(taskSocket);
+  // }
 
   dialogAddTaskOpen(enterAnimationDuration: string, exitAnimationDuration: string) {
     let addTaskDialog = this.matDialog.open(AddTaskComponent, {enterAnimationDuration, exitAnimationDuration, autoFocus: false});
@@ -103,6 +107,7 @@ export class HometaskComponent implements OnInit{
     let instance = addTaskDialog.componentInstance;
     instance.prj_id = this.prj_id;
     instance.task_id = this.task_id;
+    console.log(this.isFirstLoad);
   }
 
   dialogTaskInfoOpen(enterAnimationDuration: string, exitAnimationDuration: string, tId: string){
@@ -194,8 +199,6 @@ export class HometaskComponent implements OnInit{
       }
     }
   }
-
-  
 }
 
 type Mutable<Type> = {

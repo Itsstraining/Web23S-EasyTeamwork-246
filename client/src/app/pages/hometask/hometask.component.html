@@ -1,9 +1,10 @@
 <app-navbar></app-navbar>
 
-<!-- <button (click)="getTaskByPrjId()">get tasks</button>
-
-<button (click)="sendTask()">send task</button>
+<!--socket test-->
+<!-- <button (click)="getTaskByPrjId()">get tasks</button> -->
+<!-- <button (click)="sendTask()">send task</button>
 <p *ngFor="let item of taskPrj">{{item.name}}</p> -->
+<!--socket test-->
 
 <div class="homeContainer">
     <mat-button-toggle-group value="tasks" class="menuDiv">
@@ -44,7 +45,7 @@
                 <div class="addTaskDiv" (click)="dialogAddTaskOpen('400ms', '100ms')">
                     <p id="addTask">+  Add New Task</p>
                 </div>
-                <div 
+                <div
                     cdkDropList
                     [cdkDropListData]="todoList"
                     class="todoLists"
@@ -68,7 +69,7 @@
                                 </div>
                             </mat-card-actions>
                         </mat-card>
-                    </div>  
+                    </div>
                 </div>
             </div>
 
@@ -78,7 +79,7 @@
                         <p class="taskTitle">In Progress</p>
                     </div>
                 </div>
-                <div 
+                <div
                     cdkDropList
                     [cdkDropListData]="inProgressList"
                     class="todoLists"
@@ -111,7 +112,7 @@
                         <p class="taskTitle">Completed</p>
                     </div>
                 </div>
-                <div 
+                <div
                     cdkDropList
                     [cdkDropListData]="completeList"
                     class="todoLists"
@@ -144,7 +145,7 @@
                         <p class="taskTitle">Due</p>
                     </div>
                 </div>
-                <div 
+                <div
                     cdkDropList
                     [cdkDropListData]="dueList"
                     class="todoLists"
@@ -170,6 +171,6 @@
                     </div>
                 </div>
             </div>
-        </div>       
+        </div>
     </div>
 </div>
