@@ -13,6 +13,7 @@ import { UserState } from '../../../NgRx/States/user.state';
 import { UserModel } from 'src/models/user.model';
 import * as UserActions from '../../../NgRx/Actions/user.action';
 import { environment } from 'src/environments/environment';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -85,5 +86,13 @@ export class UserService {
         reject(error);
       }
     });
+  }
+
+  getAllUser() {
+    return this.http.get(this.baseUrl + 'getAllUsers') as Observable<UserModel[]>;
+  }
+
+  getUserById(id: string | null) {
+    return this.http.get(`${this.baseUrl}getId/${id}`) as Observable<UserModel>;
   }
 }
