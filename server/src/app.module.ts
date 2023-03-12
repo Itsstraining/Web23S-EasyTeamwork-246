@@ -11,6 +11,7 @@ import { Task, TaskSchema } from './schemas/task.schema';
 import { ProjectsController } from './controllers/projects/projects.controller';
 import { ProjectsService } from './services/projects/projects.service';
 import { ProjectModule } from './module/project.module';
+import { TasksGateway } from './gateways/tasks/tasks.gateway';
 
 @Module({
   imports: [
@@ -30,6 +31,6 @@ import { ProjectModule } from './module/project.module';
     // })
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, TasksGateway],
 })
 export class AppModule { }
