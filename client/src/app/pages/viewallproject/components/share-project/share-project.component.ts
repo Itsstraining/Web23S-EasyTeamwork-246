@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
+import { ProjectService } from 'src/app/services/projects/project.service';
+import { ProjectModel } from 'src/models/projects.model';
 
 @Component({
   selector: 'app-share-project',
@@ -7,13 +9,17 @@ import { MatDialogRef } from '@angular/material/dialog';
   styleUrls: ['./share-project.component.scss']
 })
 export class ShareProjectComponent {
-  constructor( public dialogRef: MatDialogRef<ShareProjectComponent> ) { }
+  constructor( public dialogRef: MatDialogRef<ShareProjectComponent>, private projectService: ProjectService) { }
 
-  shareProject(){
+  // userInput = this.projectService.getAll();
 
-  }
+  shareProject(){}
 
   closeDialogShare(){
     this.dialogRef.close();
+  }
+
+  showAccountGG(){
+    
   }
 }
