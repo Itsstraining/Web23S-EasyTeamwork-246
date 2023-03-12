@@ -12,4 +12,8 @@ export interface ProjectModel {
     status: Status;
     disable: boolean;
     members: UserModel[];
+
+    is_in_progress: boolean;
+    is_completed: boolean;
+    is_overdue: boolean;
 }
