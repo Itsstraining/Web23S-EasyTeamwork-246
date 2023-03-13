@@ -21,35 +21,35 @@ export class InvitationComponent implements OnInit {
   tempProject!: ProjectModel;
 
   constructor(
-    private userService: UserService, 
+    private userService: UserService,
     private invitationService: InvitationService,
     private projectService: ProjectService,
     private notificationService: NotificationService,
     ) { }
 
   ngOnInit(): void {
-    this.userService.getUserById(this.invitation.owner_id).subscribe(user => {  
+    this.userService.getUserById(this.invitation.owner_id).subscribe(user => {
       this.sender = user;
     });
-    this.userService.getUserById(this.userService.user.uid).subscribe(user => {  
+    this.userService.getUserById(this.userService.user.uid).subscribe(user => {
       this.currentUser = user;
     });
-    this.projectService.getAll(this.invitation.project_id).subscribe(
-      project => {
-        this.tempProject = project;
-      }
-    );
+    // this.projectService.getAll(this.invitation.project_id).subscribe(
+    //   project => {
+    //     this.tempProject = project;
+    //   }
+    // );
   }
 
   replyInvitation(isAgree: number) {
     this.invitation.status =  isAgree;
-    
-    this.projectService.getAll(this.tempProject.project_id).subscribe((res) => {
-      if(res.disabled){
-        window.alert('Project no longer exists!!');
-        return;
-      }
-    });
+
+    // this.projectService.getAll(this.tempProject.project_id).subscribe((res) => {
+    //   if(res.disabled){
+    //     window.alert('Project no longer exists!!');
+    //     return;
+    //   }
+    // });
     this.invitationService.updateInvitationById(this.invitation.id, this.invitation).subscribe(
       invitation => {
         this.invitationService.deleteInvitationById(this.invitation.id).subscribe(
@@ -66,12 +66,12 @@ export class InvitationComponent implements OnInit {
   addMemToProject(isAgree: number) {
     if(isAgree == 1) {
       this.tempProject.members.push(this.currentUser);
-      
-      this.projectService.update(this.invitation.project_id, this.tempProject).subscribe(
-        invitation => {
-          window.alert('Member has been added to project');
-        }
-      );
+
+      // this.projectService.update(this.invitation.project_id, this.tempProject).subscribe(
+      //   invitation => {
+      //     window.alert('Member has been added to project');
+      //   }
+      // );
       this.createNotification(isAgree);
     }
   }
