@@ -129,7 +129,7 @@
             </div>
         </div>
         <div id="table-body" >
-            <div class="item">
+            <div class="item" *ngIf="projectList != null">
                 <div class="table-row" *ngFor="let item of projectList">
                     <div class="item-attribute" id="item-mark">
                         <button>
@@ -137,7 +137,7 @@
                                 alt="empty star">
                         </button>
                     </div>
-                    <div class="item-attribute" id="item-name">
+                    <div class="item-attribute" id="item-name" [routerLink]="['/hometask/',item.project_id]">
                         <span>{{item.name}}</span>
                     </div>
                     <div *ngIf="item.is_in_progress" class="item-attribute" id="item-state">
@@ -166,9 +166,12 @@
                         <span>{{item.owner}}</span>
                     </div>
                     <div class="item-attribute" id="item-options">
-                        <button>
+                        <button [matMenuTriggerFor]="menu">
                             <i class="fa-solid fa-ellipsis-vertical fa-sm"></i>
                         </button>
+                        <mat-menu #menu="matMenu" >
+                          <button mat-menu-item (click)="deleteProject(item.project_id)">Delete</button>
+                        </mat-menu>
                     </div>
                 </div>
             </div>

@@ -47,10 +47,13 @@ export class ViewallprojectComponent implements OnInit {
       this.ngOnInit();
   });
   }
-  opendialogShare(){
+  opendialogShare() {
     this.matDialog.open(ShareProjectComponent)
   }
   ngOnInit(): void {
+    this.projectList = [];
+    this.ownedProjects = [];
+
     this.getAllProject();
   }
 
@@ -59,8 +62,22 @@ export class ViewallprojectComponent implements OnInit {
     this.store.dispatch(ProjectActions.getAllProjects());
     this.project$.subscribe((data) => {
       if (data) {
+        // Get all projects
         this.projectList = data.projects;
-        this.in_progress_list = this.projectList.filter((projects) => projects.status == "in-progress");
+        // Get owned projects
+        for (let i = 0; i < this.projectList.length; i++) {
+          for(let j = 0; j < this.projectList[i].members.length; j++){
+            if(this.projectList[i].members[j].uid == this.userService.userInfo.uid){
+              this.ownedProjects.push(this.projectList[i]);
+            }
+          }
+        }
+        // this.ownedProjects = this.projectList.filter((project) => project.owner_id == this.userService.userInfo.uid);
+        console.log("Owned project", this.ownedProjects);
+        // Update projects list
+        this.projectList = this.ownedProjects;
+        // Get project status list
+        this.in_progress_list = this.projectList.filter((project) => project.status == "in-progress");
         this.completed_list = this.projectList.filter((project) => project.status == "completed");
         this.overdue_list = this.projectList.filter((project) => project.status == "overdue");
 
@@ -87,4 +104,11 @@ export class ViewallprojectComponent implements OnInit {
   //     is_overdue = true;
   //   }
   // }
+  
+  deleteProject(project_id: string) {
+    this.projectService.delete(project_id).subscribe((data) => {
+      console.log("Delete project", data);
+      this.ngOnInit();
+    });
+  }
 }
