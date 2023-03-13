@@ -129,15 +129,15 @@
             </div>
         </div>
         <div id="table-body" >
-            <div class="item">
-                <div class="table-row" *ngFor="let item of projectList" [routerLink]="['/hometask/',item.project_id]">
+            <div class="item" *ngIf="projectList != null">
+                <div class="table-row" *ngFor="let item of projectList">
                     <div class="item-attribute" id="item-mark">
                         <button>
                             <img class="icon" src="https://cdn-icons-png.flaticon.com/512/2107/2107992.png"
                                 alt="empty star">
                         </button>
                     </div>
-                    <div class="item-attribute" id="item-name">
+                    <div class="item-attribute" id="item-name" [routerLink]="['/hometask/',item.project_id]">
                         <span>{{item.name}}</span>
                     </div>
                     <div  class="item-attribute" id="item-state">
@@ -166,9 +166,12 @@
                         <span>{{item.owner_id}}</span>
                     </div>
                     <div class="item-attribute" id="item-options">
-                        <button>
+                        <button [matMenuTriggerFor]="menu">
                             <i class="fa-solid fa-ellipsis-vertical fa-sm"></i>
                         </button>
+                        <mat-menu #menu="matMenu" (deleteProjectEvent)="deleteProjectEvent($event)">
+                          <button mat-menu-item>Delete</button>
+                        </mat-menu>
                     </div>
                 </div>
             </div>

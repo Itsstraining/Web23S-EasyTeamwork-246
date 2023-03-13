@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { InvitationService } from 'src/app/services/invitation/invitation.service';
-import { NotificationService } from 'src/app/services/notification.service';
+import { NotificationService } from 'src/app/services/notification/notification.service';
+
 import { ProjectService } from 'src/app/services/projects/project.service';
 import { UserService } from 'src/app/services/users/user.service';
 import { InvitationModel } from 'src/models/invitation.model';
