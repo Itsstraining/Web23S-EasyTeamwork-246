@@ -11,7 +11,7 @@
       <!-- <input class="input" type="text" placeholder="Thêm người để gửi đường liên kết tới"
         [matAutocomplete]="autocomplete" fullWidth/> -->
     </div>
-    <mat-autocomplete #autocomplete>
+    <!-- <mat-autocomplete #autocomplete (selectedChange)="onTagAdd($event)">
       <mat-option class="option" *ngFor="let option of options" [value]="option">
         <h6>{{option.email}}</h6>
         <img [src]="option.photoURL" alt="">
@@ -21,7 +21,7 @@
     <div class="row2">
       <textarea class="input" type="text" placeholder="Lời nhắn" style="resize: vertical"></textarea>
     </div>
-  </div>
+  <div>
   <div class="content">
     <p style="margin: 2% 7%">Quyền truy cập chung</p>
     <div class="notification" style="
