@@ -55,6 +55,12 @@ export class AddTaskComponent{
   addTask(){
     let date = this.dateRaw.toString();
     let formatDate = date.split(' ');
+    let create_date = this.getDate();
+    let created_date = create_date.split('/');
+
+    if(parseInt(created_date[0]) < 10){
+      created_date[0] = '0' + created_date[0];
+    }
 
     if(this.taskComplexRaw){
       if(this.taskComplexRaw == '1'){
@@ -108,6 +114,8 @@ export class AddTaskComponent{
     }
 
     this.due_date = formatDate[1] + "/" + formatDate[2] + "/"  + formatDate[3];
+
+
     let task: TaskModel = {
       task_id: this.task_id,
       project_id: this.prj_id,
@@ -118,7 +126,7 @@ export class AddTaskComponent{
       complexity: this.taskComplex,
       deadline: this.due_date,
       comment_count: 0,
-      created_at: this.getDate(),
+      created_at: created_date[0] + '/' + created_date[1] + '/' + created_date[2],
       updated_at: ''
     };
 

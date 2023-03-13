@@ -34,8 +34,8 @@ export class HometaskComponent implements OnInit{
   completeList: TaskModel[] = [];  
   dueList: TaskModel[] = [];
   taskList: TaskModel[] = [];
-  singleTask: TaskModel[] =[];
-  taskPrj: TaskModel[] = [];
+  // singleTask: TaskModel[] =[];
+  // taskPrj: TaskModel[] = [];
   prj_id: string = '';
   task_id: string = '';
 
