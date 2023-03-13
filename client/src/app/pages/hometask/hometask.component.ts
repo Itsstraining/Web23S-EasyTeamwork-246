@@ -8,6 +8,7 @@ import { Status, TaskModel } from 'src/models/task.model';
 import { AddTaskComponent } from './components/add-task/add-task.component';
 import { TaskInfoComponent } from './components/task-info/task-info.component';
 import * as TaskActions from '../../../NgRx/Actions/tasks.action';
+import { InvitationComponent } from '../../components/invitation/invitation.component';
 
 @Component({
   selector: 'app-hometask',
@@ -20,18 +21,18 @@ export class HometaskComponent implements OnInit{
     private matDialog: MatDialog, private taskService: TaskService,
     private store: Store<{task: TaskModel}>
 
-  ){ 
+  ){
     this.task$ = this.store.select('task');
     this.taskPrj$ = this.store.select('task');
   }
 
   task$ !: Observable<TaskModel>;
   taskPrj$ !: Observable<any>;
-  
+
 
   todoList: TaskModel[] = [];
   inProgressList: TaskModel[] = [];
-  completeList: TaskModel[] = [];  
+  completeList: TaskModel[] = [];
   dueList: TaskModel[] = [];
   taskList: TaskModel[] = [];
   singleTask: TaskModel[] =[];
@@ -59,7 +60,7 @@ export class HometaskComponent implements OnInit{
     // });
   }
 
-  getAllTasks(){    
+  getAllTasks(){
     this.store.dispatch(TaskActions.getAllTasks());
     this.task$.subscribe( (data: any) => {
       if(data != null){
@@ -114,7 +115,7 @@ export class HometaskComponent implements OnInit{
     let taskInfoDialog = this.matDialog.open(TaskInfoComponent, {enterAnimationDuration, exitAnimationDuration, autoFocus: false});
     let instance = taskInfoDialog.componentInstance;
     this.taskList.filter((task) => {
-      if(task.task_id === tId){ 
+      if(task.task_id === tId){
         instance.task = task;
       }
     });
@@ -198,6 +199,10 @@ export class HometaskComponent implements OnInit{
         this.task_id = tempID;
       }
     }
+  }
+
+  openInvitation(){
+    this.matDialog.open(InvitationComponent, {autoFocus: false});
   }
 }
 

@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { ProjectModel } from 'src/models/projects.model';
 
@@ -18,6 +19,10 @@ export class ProjectService {
 
   getById(id: string){
     return this.httpClient.get(`${this.url}/getProjectById?=${id}`);
+  }
+
+  getProjectsByOwnerId(owner_id: string){
+    return this.httpClient.get(`${this.url}/findProjectByOwnerId/${owner_id}`) as Observable<ProjectModel[]>;
   }
 
   create(project: ProjectModel){

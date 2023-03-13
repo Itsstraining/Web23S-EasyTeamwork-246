@@ -30,7 +30,7 @@
                 <div class="usrIcon2">
                     <i class="fa-sharp fa-solid fa-user fa-xl"></i>
                 </div>
-                <div class="addUsr">
+                <div class="addUsr" (click)="openInvitation()">
                     <i class="fa-sharp fa-solid fa-user-plus fa-lg"></i>
                 </div>
             </div>
@@ -50,7 +50,7 @@
                     [cdkDropListData]="todoList"
                     class="todoLists"
                     (cdkDropListDropped)="drop($event, 'todo')">
-                    
+
                     <div class="taskBox" *ngFor="let item of todoList" cdkDragBoundary=".todoMainDiv" cdkDrag>
                         <mat-card class="todoCard">
                             <mat-card-header class="cardTitle">

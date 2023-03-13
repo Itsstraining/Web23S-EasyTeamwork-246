@@ -71,14 +71,14 @@ export class ViewallprojectComponent implements OnInit {
       }
     })
 
-    // this.projectService
-    //   .getProjectsByOwnerId(this.userService.user.uid)
-    //   .subscribe((projects) => {
-    //     if (projects != null) {
-    //       this.ownedProjects = projects;
-    //       this.projectList = this.ownedProjects;
-    //     }
-    //   });
+    this.projectService
+      .getProjectsByOwnerId(this.userService.userInfo?.uid)
+      .subscribe((projects) => {
+        if (projects != null) {
+          this.ownedProjects = projects;
+          this.projectList = this.ownedProjects;
+        }
+      });
   }
 
   getProjectStatus(status: Status, is_in_progress: boolean, is_completed: boolean, is_overdue: boolean) {
@@ -99,8 +99,8 @@ export class ViewallprojectComponent implements OnInit {
 
   getDate(date: any) {
     let d = date;
-    let arr = d.split("T");
-    date = arr[0];
+    // let arr = d.split("T");
+    // date = arr[0];
   }
 
   deleteProjectEvent(project: any) {

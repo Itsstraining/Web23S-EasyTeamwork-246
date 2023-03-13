@@ -169,8 +169,8 @@
                         <button [matMenuTriggerFor]="menu">
                             <i class="fa-solid fa-ellipsis-vertical fa-sm"></i>
                         </button>
-                        <mat-menu #menu="matMenu" (deleteProjectEvent)="deleteProjectEvent($event)">
-                          <button mat-menu-item>Delete</button>
+                        <mat-menu #menu="matMenu">
+                          <button mat-menu-item (click)="deleteProjectEvent($event)">Delete</button>
                         </mat-menu>
                     </div>
                 </div>

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { InvitationService } from 'src/app/services/invitation/invitation.service';
 import { NotificationService } from 'src/app/services/notification/notification.service';
 
@@ -10,11 +10,11 @@ import { ProjectModel } from 'src/models/projects.model';
 import { UserModel } from 'src/models/user.model';
 
 @Component({
-  selector: 'app-invitation',
-  templateUrl: './invitation.component.html',
-  styleUrls: ['./invitation.component.scss']
+  selector: 'app-invitation-item',
+  templateUrl: './invitation-item.component.html',
+  styleUrls: ['./invitation-item.component.scss']
 })
-export class InvitationComponent implements OnInit {
+export class InvitationItemComponent implements OnInit {
   @Input() invitation!: InvitationModel;
   @Output() repliedInvitationEvent: EventEmitter<InvitationModel> = new EventEmitter<InvitationModel>();
   sender!: UserModel
