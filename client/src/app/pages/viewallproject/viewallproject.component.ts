@@ -38,14 +38,14 @@ export class ViewallprojectComponent implements OnInit {
   overdue_amount: number = 0;
 
   dialogOpen() {
-    this.matDialog.open(AddProjectComponent,{
+    this.matDialog.open(AddProjectComponent, {
       data: {
         owner_id: this.userService.userInfo.uid,
       },
     })
     console.log("Open dialog", this.userService.userInfo.uid);
   }
-  opendialogShare(){
+  opendialogShare() {
     this.matDialog.open(ShareProjectComponent)
   }
   ngOnInit(): void {
@@ -70,6 +70,15 @@ export class ViewallprojectComponent implements OnInit {
         console.log("No data");
       }
     })
+
+    // this.projectService
+    //   .getProjectsByOwnerId(this.userService.user.uid)
+    //   .subscribe((projects) => {
+    //     if (projects != null) {
+    //       this.ownedProjects = projects;
+    //       this.projectList = this.ownedProjects;
+    //     }
+    //   });
   }
 
   getProjectStatus(status: Status, is_in_progress: boolean, is_completed: boolean, is_overdue: boolean) {
@@ -92,5 +101,13 @@ export class ViewallprojectComponent implements OnInit {
     let d = date;
     let arr = d.split("T");
     date = arr[0];
+  }
+
+  deleteProjectEvent(project: any) {
+    this.projectList.forEach((p) => {
+      if (p.project_id === project.project_id) {
+        this.projectList.splice(this.projectList.indexOf(p), 1);
+      }
+    });
   }
 }
