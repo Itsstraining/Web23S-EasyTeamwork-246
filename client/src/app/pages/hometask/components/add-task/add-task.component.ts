@@ -57,6 +57,7 @@ export class AddTaskComponent{
     let formatDate = date.split(' ');
     let create_date = this.getDate();
     let created_date = create_date.split('/');
+    
 
     if(parseInt(created_date[0]) < 10){
       created_date[0] = '0' + created_date[0];
@@ -115,7 +116,6 @@ export class AddTaskComponent{
 
     this.due_date = formatDate[1] + "/" + formatDate[2] + "/"  + formatDate[3];
 
-
     let task: TaskModel = {
       task_id: this.task_id,
       project_id: this.prj_id,
@@ -132,7 +132,7 @@ export class AddTaskComponent{
 
     this.store.dispatch(TaskActions.addTask({task: task}));
 
-    console.log(task)
+    console.log(task.task_id);
 
     if(task){
       this.dialogRef.close();

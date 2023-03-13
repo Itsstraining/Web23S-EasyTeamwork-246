@@ -30,11 +30,11 @@ export class ViewallprojectComponent implements OnInit {
 
   projectList: ProjectModel[] = [];
   ownedProjects: ProjectModel[] = [];
-  sharedProjects: ProjectModel[] = [];
 
   in_progress_list: ProjectModel[] = [];
   completed_list: ProjectModel[] = [];
   overdue_list: ProjectModel[] = [];
+  mark_list: ProjectModel[] = [];
 
   dialogOpen() {
     let addProjectDialog = this.matDialog.open(AddProjectComponent,{
@@ -53,26 +53,34 @@ export class ViewallprojectComponent implements OnInit {
   ngOnInit(): void {
     this.projectList = [];
     this.ownedProjects = [];
+    this.in_progress_list = [];
+    this.completed_list = [];
+    this.overdue_list = [];
+    this.mark_list = [];
 
     this.getAllProject();
   }
 
 
   getAllProject(){
+    this.projectList = [];
+    this.ownedProjects = [];
+    
     this.store.dispatch(ProjectActions.getAllProjects());
     this.project$.subscribe((data) => {
       if (data) {
         // Get all projects
         this.projectList = data.projects;
         // Get owned projects
-        for (let i = 0; i < this.projectList.length; i++) {
-          for(let j = 0; j < this.projectList[i].members.length; j++){
-            if(this.projectList[i].members[j].uid == this.userService.userInfo.uid){
-              this.ownedProjects.push(this.projectList[i]);
+        this.ownedProjects = this.projectList.filter((project) =>
+        {
+          for(let i = 0; i < project.members.length; i++){
+            if(project.members[i].uid == this.userService.userInfo.uid){
+              return true;
             }
           }
-        }
-        // this.ownedProjects = this.projectList.filter((project) => project.owner_id == this.userService.userInfo.uid);
+          return false;
+        });
         console.log("Owned project", this.ownedProjects);
         // Update projects list
         this.projectList = this.ownedProjects;
@@ -80,8 +88,13 @@ export class ViewallprojectComponent implements OnInit {
         this.in_progress_list = this.projectList.filter((project) => project.status == "in-progress");
         this.completed_list = this.projectList.filter((project) => project.status == "completed");
         this.overdue_list = this.projectList.filter((project) => project.status == "overdue");
-
-        //   // this.getProjectStatus(this.projectList[i].status, this.projectList[i].is_in_progress, this.projectList[i].is_completed, this.projectList[i].is_overdue);
+        this.mark_list = this.projectList.filter((project) => project.marked == true);
+        
+        // // Get project status
+        // for(let i = 0; i < this.projectList.length; i++){
+        //   this.getProjectStatus(this.projectList[i], this.projectList[i].status,
+        //     this.projectList[i].is_in_progress, this.projectList[i].is_completed, this.projectList[i].is_overdue);
+        // }
       }
       else {
         console.log("No data");
@@ -89,7 +102,62 @@ export class ViewallprojectComponent implements OnInit {
     })
   }
 
-  // getProjectStatus(status: Status, is_in_progress: boolean, is_completed: boolean, is_overdue: boolean) {
+  getInprogressList() {
+    this.projectList = this.in_progress_list;
+  }
+
+  getCompletedList() {
+    this.projectList = this.completed_list;
+  }
+
+  getOverdueList() {
+    this.projectList = this.overdue_list;
+  }
+
+  getMarkProject() {
+    this.projectList = this.mark_list;
+  }
+
+  markProject(marked: boolean, project : ProjectModel) {
+    if(marked == false){
+      marked = true;
+    }
+    else{
+      marked = false;
+    }
+    let updateProject:ProjectModel = {
+      project_id: project.project_id,
+      marked: marked,
+      name: project.name,
+      owner: project.owner,
+      owner_photo: project.owner_photo,
+      owner_id: project.owner_id,
+      due_date: project.due_date,
+      status: project.status,
+      disable: project.disable,
+      members: project.members,
+
+      is_in_progress: project.is_in_progress,
+      is_completed: project.is_completed,
+      is_overdue: project.is_overdue,
+    };
+
+    this.projectService.update(updateProject, project.project_id).subscribe((data) => {
+      console.log("Mark project", data);
+    });
+  }
+  
+  deleteProject(project_id: string) {
+    this.projectService.delete(project_id).subscribe((data) => {
+      console.log("Delete project", data);
+      this.ngOnInit();
+    });
+  }
+
+
+
+  // getProjectStatus(project: ProjectModel, status: Status, 
+  //   is_in_progress: boolean, is_completed: boolean, is_overdue: boolean) {
   //   if (status == "in-progress") {
   //     is_in_progress = true;
   //     is_completed = false;
@@ -103,12 +171,26 @@ export class ViewallprojectComponent implements OnInit {
   //     is_completed = false;
   //     is_overdue = true;
   //   }
+
+  //   let updateProject:ProjectModel = {
+  //     project_id: project.project_id,
+  //     marked: project.marked,
+  //     name: project.name,
+  //     owner: project.owner,
+  //     owner_photo: project.owner_photo,
+  //     owner_id: project.owner_id,
+  //     due_date: project.due_date,
+  //     status: project.status,
+  //     disable: project.disable,
+  //     members: project.members,
+
+  //     is_in_progress: is_in_progress,
+  //     is_completed: is_completed,
+  //     is_overdue: is_overdue,
+  //   };
+    
+  //   this.projectService.update(updateProject, project.project_id).subscribe((data) => {
+  //     console.log("Update project", data);
+  //   });
   // }
-  
-  deleteProject(project_id: string) {
-    this.projectService.delete(project_id).subscribe((data) => {
-      console.log("Delete project", data);
-      this.ngOnInit();
-    });
-  }
 }

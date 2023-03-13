@@ -1,7 +1,4 @@
 import { SubscribeMessage, WebSocketGateway, WebSocketServer } from '@nestjs/websockets';
-import { TaskModel } from 'src/models/task.modle';
-import { Task } from 'src/schemas/task.schema';
-import { TaskService } from 'src/services/task/task.service';
 
 @WebSocketGateway({cors: true})
 export class TasksGateway {
@@ -9,19 +6,18 @@ export class TasksGateway {
   @WebSocketServer() server;
 
   handleConnection(client: any, ...args: any[]) {
-    console.log(`client ${client.id} connected`);
+    console.log('client connected', client.id);
   }
 
   handleDisconnect(client: any) {
-    console.log(`client ${client.id} disconnected`);
+    console.log('client disconnected', client.id);
   }
 
-  @SubscribeMessage('task')
+  @SubscribeMessage('message')
   handleMessage(client: any, payload: any): string {
-    const prj_id = payload.project_id;
-
-    this.server.emit('task_' + prj_id, payload);
-
+    const prj_id = payload.prj_id;
+    console.log('task', payload);
+    this.server.emit('task-' + prj_id, payload);
     return 'Hello world!';
   }
 }
