@@ -34,10 +34,8 @@ export class AddTaskComponent{
   taskName = '';
   taskDescription = '';
   taskComplexRaw = '';
-  // dateRaw = Date.now();
   dateRaw !: string;
   taskComplex !: Complexity;
-  // dataRaw !: string;
   prj_id !: string;
   task_id !: string;
   due_date !: string;
