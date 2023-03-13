@@ -87,33 +87,18 @@ export class TaskEffects{
         )
     );
 
-    getTasksByProjectId$ = createEffect(
+    getByProjectId$ = createEffect(
         () => this.$action.pipe(
-            ofType(TaskActions.getTasksByProjectId),
+            ofType(TaskActions.getByProjectId),
             switchMap((data) => {
-                return this.taskService.getTasksByProjectId(data.project_id);
+                return this.taskService.getAllTasksByProjectId(data.project_id);
             }),
             map((data) => {
-                return TaskActions.getTasksByProjectIdSuccess({ tasks: <Array<TaskModel>>data });
+                return TaskActions.getByProjectIdSuccess({ tasks: <Array<TaskModel>>data });
             }),
             catchError((error) => {
-                return of(TaskActions.getTasksByProjectIdFailure({error: error}))
+                return of(TaskActions.getByProjectIdFailure({error: error}))
             })
         )
     );
-
-    // sendTask$ = createEffect(
-    //     () => this.$action.pipe(
-    //         ofType(TaskActions.sendTask),
-    //         switchMap((data) => {
-    //             return this.taskService.sendTask(data.task);
-    //         }),
-    //         map((data) => {
-    //             return TaskActions.sendTaskSuccess({ task: <TaskModel>data });
-    //         }),
-    //         catchError((error) => {
-    //             return of(TaskActions.sendTaskFailure({error: error}))
-    //         })
-    //     )
-    // );
 }
