@@ -1,7 +1,7 @@
 <app-navbar></app-navbar>
 
 <button (click)="getTaskSocket()">get tasks</button>
-<!-- <p *ngFor="let item of taskPrj">test</p> -->
+<button (click)="sendTask()">send</button>
 <p *ngFor="let item of taskPrj">test: {{item.name}}</p>
 
 <div class="homeContainer">
@@ -50,13 +50,10 @@
                     <p id="addTask">+  Add New Task</p>
                 </div>
                 <div
-                    [cdkDropListConnectedTo]="[todoDrop, inProgressDrop]"
                     cdkDropList
-                    #todoDrop = "cdkDropList"
                     [cdkDropListData]="todoList"
                     class="todoLists"
                     (cdkDropListDropped)="drop($event, 'todo')">
-                    
                     <div class="taskBox" *ngFor="let item of todoList" cdkDragBoundary=".todoMainDiv" cdkDrag>
                         <mat-card class="todoCard">
                             <mat-card-header class="cardTitle">
@@ -92,8 +89,6 @@
                 </div>
                 <div
                     cdkDropList
-                    #inProgressDrop = "cdkDropList"
-                    [cdkDropListConnectedTo]="[todoDrop, inProgressDrop]"
                     [cdkDropListData]="inProgressList"
                     class="todoLists"
                     (cdkDropListDropped)="drop($event, 'in-progress')">
@@ -132,8 +127,6 @@
                 </div>
                 <div
                     cdkDropList
-                    #completeDrop = "cdkDropList"
-                    [cdkDropListConnectedTo]="[completeDrop]"
                     [cdkDropListData]="completeList"
                     class="todoLists"
                     (cdkDropListDropped)="drop($event, 'completed')">
@@ -172,8 +165,6 @@
                 </div>
                 <div
                     cdkDropList
-                    #dueDrop = "cdkDropList"
-                    [cdkDropListConnectedTo]="[dueDrop]"
                     [cdkDropListData]="dueList"
                     class="todoLists"
                     (cdkDropListDropped)="drop($event, 'due')">

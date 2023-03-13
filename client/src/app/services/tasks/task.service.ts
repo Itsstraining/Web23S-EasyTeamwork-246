@@ -38,7 +38,7 @@ export class TaskService {
   }
 
   getTasksSocket(project_id: string){
-    const channel = 'task_' + project_id;
+    const channel = 'task-' + project_id;
     return this.socket.fromEvent(channel);
   }
 
