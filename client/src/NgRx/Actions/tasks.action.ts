@@ -69,7 +69,7 @@ export const deleteTaskFailure = createAction(
 
 export const getByProjectId = createAction(
     "[Task] Get task by project id",
-    props<{ id: string }>()
+    props<{ project_id: string }>()
 );
 export const getByProjectIdSuccess = createAction(
     "[Task] Get task by project id success",

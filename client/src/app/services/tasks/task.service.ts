@@ -37,12 +37,12 @@ export class TaskService {
     return this.httpClient.delete(`${this.url}/delete?id=${id}`);
   }
 
-  getTasksByProjectId(project_id: string){
+  getTasksSocket(project_id: string){
     const channel = 'task_' + project_id;
     return this.socket.fromEvent(channel);
   }
 
-  sendTask(task: TaskModel){
+  sendTaskSocket(task: TaskModel){
     this.socket.emit('task', task);
   }
 }

@@ -86,4 +86,19 @@ export class TaskEffects{
             )
         )
     );
+
+    getByProjectId$ = createEffect(
+        () => this.$action.pipe(
+            ofType(TaskActions.getByProjectId),
+            switchMap((data) => {
+                return this.taskService.getAllTasksByProjectId(data.project_id);
+            }),
+            map((data) => {
+                return TaskActions.getByProjectIdSuccess({ tasks: <Array<TaskModel>>data });
+            }),
+            catchError((error) => {
+                return of(TaskActions.getByProjectIdFailure({error: error}))
+            })
+        )
+    );
 }
