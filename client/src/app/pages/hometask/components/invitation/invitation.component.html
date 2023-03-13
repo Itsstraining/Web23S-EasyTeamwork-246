@@ -1,0 +1,15 @@
+<!-- <div class="invitation-container" *ngIf="sender != undefined" [matTooltip]="invitation.project.name" nbTooltipPlacement="top"> -->
+  <div class="invitation-content">
+      <div class="invitation-top">
+          <img [src]="sender.photoURL" alt="">
+          <div class="invitation-info">
+              <!-- <h6>{{invitation.project.name}}</h6> -->
+              <!-- <p><span class="owner-name">{{sender.displayName}}</span>'s inviting you to join in <span class="project-name">{{invitation.project.name}}</span>.</p> -->
+          </div>
+      </div>
+      <div class="invitation-ans">
+          <button class="invitation-ans-btn rejectBtn" (click)="replyInvitation(-1)">Reject</button>
+          <button class="invitation-ans-btn agreeBtn" (click)="replyInvitation(1)">Agree</button>
+      </div>
+  </div>
+<!-- </div> -->

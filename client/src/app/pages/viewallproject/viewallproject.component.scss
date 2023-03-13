@@ -172,9 +172,10 @@ hr{
 ////css table
 #table{
     margin: 0 auto;
-    height: 39.06rem;
+    min-height: 39.06rem;
     min-width: 78.13rem;
     width: 100%;
+    height: fit-content;
     border-radius: 0.63rem;
     background-color: #FFFCE0;
     border: 0.06rem solid #F9F6DD;
@@ -407,7 +408,8 @@ hr{
     height: 0.94rem;
 }
 #table-body{
-    height: 33.5rem;
+    min-height: 33.5rem;
+    height: fit-content;
 }
 .item{
     transition: 0.125s;

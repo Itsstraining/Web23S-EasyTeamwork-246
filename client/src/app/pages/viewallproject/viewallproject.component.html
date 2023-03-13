@@ -23,28 +23,28 @@
         <div id="overview-header">Overview</div>
         <div id="overview-body">
             <div class="overview-content" id="total">
-                <div class="amount"><span>{{total_amount}}</span></div>
+                <div class="amount"><span>{{projectList.length}}</span></div>
                 <div class="horizone">
                     <hr>
                 </div>
                 <div class="type"><span>Total</span></div>
             </div>
             <div class="overview-content" id="in-progress">
-                <div class="amount"><span>{{in_progress_amount}}</span></div>
+                <div class="amount"><span>{{in_progress_list.length}}</span></div>
                 <div class="horizone">
                     <hr>
                 </div>
                 <div class="type"><span>In progress</span></div>
             </div>
             <div class="overview-content" id="completed">
-                <div class="amount"><span>{{completed_amount}}</span></div>
+                <div class="amount"><span>{{completed_list.length}}</span></div>
                 <div class="horizone">
                     <hr>
                 </div>
                 <div class="type"><span>Completed</span></div>
             </div>
             <div class="overview-content" id="overdue">
-                <div class="amount"><span>{{overdue_amount}}</span></div>
+                <div class="amount"><span>{{overdue_list.length}}</span></div>
                 <div class="horizone">
                     <hr>
                 </div>
@@ -162,7 +162,7 @@
                         <span>{{item.members.length}}</span>
                     </div>
                     <div class="item-attribute" id="item-host">
-                        <img class="avatar" src="https://cdn-icons-png.flaticon.com/512/3436/3436890.png" alt="avatar">
+                        <img class="avatar" [src]="item.owner_photo" alt="avatar">
                         <span>{{item.owner}}</span>
                     </div>
                     <div class="item-attribute" id="item-options">

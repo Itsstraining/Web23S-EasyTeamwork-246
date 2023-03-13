@@ -32,43 +32,39 @@ export class ViewallprojectComponent implements OnInit {
   ownedProjects: ProjectModel[] = [];
   sharedProjects: ProjectModel[] = [];
 
-  total_amount: number = 0;
-  in_progress_amount: number = 0;
-  completed_amount: number = 0;
-  overdue_amount: number = 0;
+  in_progress_list: ProjectModel[] = [];
+  completed_list: ProjectModel[] = [];
+  overdue_list: ProjectModel[] = [];
 
   dialogOpen() {
-    this.matDialog.open(AddProjectComponent,{
+    let addProjectDialog = this.matDialog.open(AddProjectComponent,{
       data: {
         owner_id: this.userService.userInfo.uid,
       },
     })
     console.log("Open dialog", this.userService.userInfo.uid);
+    addProjectDialog.afterClosed().subscribe(() => {
+      this.ngOnInit();
+  });
   }
   opendialogShare(){
     this.matDialog.open(ShareProjectComponent)
   }
   ngOnInit(): void {
-    this.total_amount = 0;
-    this.in_progress_amount = 0;
-    this.completed_amount = 0;
-    this.overdue_amount = 0;
+    this.getAllProject();
+  }
+
+
+  getAllProject(){
     this.store.dispatch(ProjectActions.getAllProjects());
     this.project$.subscribe((data) => {
       if (data) {
         this.projectList = data.projects;
-        for (let i = 0; i < this.projectList.length; i++) {
-          if (this.projectList[i].status == "in-progress") {
-            this.in_progress_amount++;
-          } else if (this.projectList[i].status == "completed") {
-            this.completed_amount++;
-          } else if (this.projectList[i].status == "overdue") {
-            this.overdue_amount++;
-          }
-          // this.getProjectStatus(this.projectList[i].status, this.projectList[i].is_in_progress, this.projectList[i].is_completed, this.projectList[i].is_overdue);
-          this.getDate(this.projectList[i].due_date);
-        }
-        this.total_amount = this.projectList.length;
+        this.in_progress_list = this.projectList.filter((projects) => projects.status == "in-progress");
+        this.completed_list = this.projectList.filter((project) => project.status == "completed");
+        this.overdue_list = this.projectList.filter((project) => project.status == "overdue");
+
+        //   // this.getProjectStatus(this.projectList[i].status, this.projectList[i].is_in_progress, this.projectList[i].is_completed, this.projectList[i].is_overdue);
       }
       else {
         console.log("No data");
@@ -76,25 +72,19 @@ export class ViewallprojectComponent implements OnInit {
     })
   }
 
-  getProjectStatus(status: Status, is_in_progress: boolean, is_completed: boolean, is_overdue: boolean) {
-    if (status == "in-progress") {
-      is_in_progress = true;
-      is_completed = false;
-      is_overdue = false;
-    } else if (status == "completed") {
-      is_in_progress = false;
-      is_completed = true;
-      is_overdue = false;
-    } else if (status == "overdue") {
-      is_in_progress = false;
-      is_completed = false;
-      is_overdue = true;
-    }
-  }
-
-  getDate(date: any) {
-    let d = date;
-    let arr = d.split("T");
-    date = arr[0];
-  }
+  // getProjectStatus(status: Status, is_in_progress: boolean, is_completed: boolean, is_overdue: boolean) {
+  //   if (status == "in-progress") {
+  //     is_in_progress = true;
+  //     is_completed = false;
+  //     is_overdue = false;
+  //   } else if (status == "completed") {
+  //     is_in_progress = false;
+  //     is_completed = true;
+  //     is_overdue = false;
+  //   } else if (status == "overdue") {
+  //     is_in_progress = false;
+  //     is_completed = false;
+  //     is_overdue = true;
+  //   }
+  // }
 }

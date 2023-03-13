@@ -7,8 +7,9 @@ export interface ProjectModel{
     marked: boolean;
     name: string;
     owner: string;
+    owner_photo: string;
     owner_id: string;
-    due_date: Date;
+    due_date: string;
     status: Status;
     disable: boolean;
     members: UserModel[];
