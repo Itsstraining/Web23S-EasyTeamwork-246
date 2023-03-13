@@ -7,6 +7,7 @@ import { AddProjectComponent } from './components/add-project/add-project.compon
 import * as ProjectActions from '../../../NgRx/Actions/projects.action';
 import { Observable } from 'rxjs';
 import { ShareProjectComponent } from './components/share-project/share-project.component';
+import { ProjectService } from 'src/app/services/projects/project.service';
 
 export type Status = "in-progress" | "completed" | "overdue";
 
@@ -19,6 +20,7 @@ export class ViewallprojectComponent implements OnInit {
   constructor(
     private matDialog: MatDialog,
     private userService: UserService,
+    private projectService: ProjectService,
     private store: Store<{ project: ProjectModel }>
   ) {
     this.project$ = this.store.select('project');
@@ -27,10 +29,8 @@ export class ViewallprojectComponent implements OnInit {
   project$ !: Observable<any>;
 
   projectList: ProjectModel[] = [];
-
-  is_in_progress: boolean = false;
-  is_completed: boolean = false;
-  is_overdue: boolean = false;
+  ownedProjects: ProjectModel[] = [];
+  sharedProjects: ProjectModel[] = [];
 
   total_amount: number = 0;
   in_progress_amount: number = 0;
@@ -38,7 +38,11 @@ export class ViewallprojectComponent implements OnInit {
   overdue_amount: number = 0;
 
   dialogOpen() {
-    this.matDialog.open(AddProjectComponent)
+    this.matDialog.open(AddProjectComponent,{
+      data: {
+        owner_id: this.userService.userInfo.uid,
+      },
+    })
     console.log("Open dialog", this.userService.userInfo.uid);
   }
   opendialogShare(){
@@ -57,8 +61,8 @@ export class ViewallprojectComponent implements OnInit {
           } else if (this.projectList[i].status == "overdue") {
             this.overdue_amount++;
           }
-
-          this.getProjectStatus(this.projectList[i].status);
+          // this.getProjectStatus(this.projectList[i].status, this.projectList[i].is_in_progress, this.projectList[i].is_completed, this.projectList[i].is_overdue);
+          this.getDate(this.projectList[i].due_date);
         }
         this.total_amount = this.projectList.length;
       }
@@ -68,19 +72,25 @@ export class ViewallprojectComponent implements OnInit {
     })
   }
 
-  getProjectStatus(status: Status) {
+  getProjectStatus(status: Status, is_in_progress: boolean, is_completed: boolean, is_overdue: boolean) {
     if (status == "in-progress") {
-      this.is_in_progress = true;
-      this.is_completed = false;
-      this.is_overdue = false;
-    } if (status == "completed") {
-      this.is_in_progress = false;
-      this.is_completed = true;
-      this.is_overdue = false;
-    } if (status == "overdue") {
-      this.is_in_progress = false;
-      this.is_completed = false;
-      this.is_overdue = true;
+      is_in_progress = true;
+      is_completed = false;
+      is_overdue = false;
+    } else if (status == "completed") {
+      is_in_progress = false;
+      is_completed = true;
+      is_overdue = false;
+    } else if (status == "overdue") {
+      is_in_progress = false;
+      is_completed = false;
+      is_overdue = true;
     }
+  }
+
+  getDate(date: any) {
+    let d = date;
+    let arr = d.split("T");
+    date = arr[0];
   }
 }

@@ -8,7 +8,7 @@ const routes: Routes = [
     canActivate: [UserGuard],
     children: [
       {
-        path: 'hometask',
+        path: 'hometask/:id',
         loadChildren: () =>
           import('./pages/hometask/hometask.module').then(
             (m) => m.HometaskModule

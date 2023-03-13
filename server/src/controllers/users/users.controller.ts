@@ -1,10 +1,15 @@
-import { Body, Controller, Post, Get, Query } from '@nestjs/common';
+import { Body, Controller, Post, Get, Query, Param } from '@nestjs/common';
 import { UserModel } from 'src/models/users.model';
 import { UsersService } from 'src/services/users/users.service';
 
 @Controller('users')
 export class UsersController {
     constructor(private userService: UsersService) { }
+
+    @Get('getAllUsers')
+    async getAllUsers() {
+        return await this.userService.getAllUsers();
+    }
 
     @Post('login')
     async signIn(@Body() user: UserModel) {
@@ -17,8 +22,8 @@ export class UsersController {
         }
     }
 
-    @Get('getId')
-    getId(@Query() user: UserModel) {
-        return this.userService.findUserById(user.uid);
+    @Get('getId/:id')
+    async getId(@Param('id') id: string) {
+        return await this.userService.findUserById(id);
     }
 }
