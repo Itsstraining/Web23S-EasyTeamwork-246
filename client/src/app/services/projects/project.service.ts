@@ -17,7 +17,7 @@ export class ProjectService {
   }
 
   getById(id: string){
-    return this.httpClient.get(`${this.url}/getProjectById?=${id}`);
+    return this.httpClient.get(`${this.url}/getProjectById?id=${id}`);
   }
 
   create(project: ProjectModel){
@@ -29,6 +29,6 @@ export class ProjectService {
   }
 
   delete(id: string){
-    return this.httpClient.delete(`${this.url}/deleteProject?=${id}`);
+    return this.httpClient.delete(`${this.url}/deleteProject?id=${id}`);
   }
 }
