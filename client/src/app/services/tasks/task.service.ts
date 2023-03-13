@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Socket } from 'ngx-socket-io';
-import { environment } from 'src/environments/environment';
-import { TaskModel } from 'src/models/task.model';
+import { environment } from '../../../environments/environment';
+import { TaskModel } from '../../../models/task.model';
 
 @Injectable({
   providedIn: 'root'

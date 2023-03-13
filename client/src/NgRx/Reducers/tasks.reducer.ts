@@ -60,6 +60,22 @@ export const TaskReducer = createReducer(
         error: action.error,
     })),
 
+    on(TaskActions.updateTask, (state) => ({...state, loading: false})),
+    on(TaskActions.updateTaskSuccess, (state, action) => ({
+        ...state,
+        tasks: [action.task],
+        loading: false,
+        isSuccess: true,
+        error: "",
+    })),
+    on(TaskActions.updateTaskFailure, (state, action) => ({
+        ...state,
+        tasks: [],
+        loading: false,
+        isSuccess: false,
+        error: action.error,
+    })),
+
     on(TaskActions.getByProjectId, (state) => ({...state, loading: false})),
     on(TaskActions.getByProjectIdSuccess, (state, action) => ({
         ...state,

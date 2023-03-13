@@ -37,7 +37,6 @@ export class HometaskComponent implements OnInit{
   completeList: TaskModel[] = [];  
   dueList: TaskModel[] = [];
   taskList: TaskModel[] = [];
-  singleTask: TaskModel[] =[];
   taskPrj: TaskModel[] = [];
   prj_id!: string;
   task_id: string = '';
@@ -59,7 +58,9 @@ export class HometaskComponent implements OnInit{
     const project = this.router.params.subscribe( (param) => {
       this.prj_id = param['id'];
       this.getAllTasks(param['id']);
+      // this.getTaskSocket(param['id']);
     })
+    
     // console.log(project_id);
     // const project = this.router.snapshot.params.
   }
@@ -88,19 +89,19 @@ export class HometaskComponent implements OnInit{
     console.log(this.taskPrj);
   }
 
-  sendTask(){
+  sendTask(tempList: TaskModel){
     let taskSocket: TaskModel = {
-      task_id: 'task0001',
-      project_id: 'prj0001',
-      name: 'Task 1',
-      assignee: [],
-      description: 'Task 1 description',
-      status: 'todo',
-      complexity: 'easy',
-      comment_count: 0,
-      deadline: '2021-05-01',
-      created_at: '2021-04-01',
-      updated_at: '2021-04-01',
+      task_id: tempList.task_id,
+      project_id: tempList.project_id,
+      name: tempList.name,
+      assignee: tempList.assignee,
+      description: tempList.description,
+      status: tempList.status,
+      complexity: tempList.complexity,
+      comment_count: tempList.comment_count,
+      deadline: tempList.deadline,
+      created_at: tempList.created_at,
+      updated_at: tempList.updated_at,
     }
     // this.store.dispatch(TaskActions.sendTask({task: taskSocket}));
     this.taskService.sendTaskSocket(taskSocket);
@@ -143,16 +144,20 @@ export class HometaskComponent implements OnInit{
 
       if(listName === 'todo'){
         let tempList = this.updateList('todo', event.currentIndex);
+        this.sendTask(tempList);
         this.store.dispatch(TaskActions.updateTask({task: tempList, id: tempList.task_id}));
       }else if(listName === 'in-progress'){
         let tempList = this.updateList('in-progress', event.currentIndex);
         this.store.dispatch(TaskActions.updateTask({task: tempList, id: tempList.task_id}));
+        this.sendTask(tempList);
       }else if(listName === 'completed'){
         let tempList = this.updateList('completed', event.currentIndex);
         this.store.dispatch(TaskActions.updateTask({task: tempList, id: tempList.task_id}));
+        // this.sendTask(tempList);
       }else if(listName === 'due'){
         let tempList = this.updateList('due', event.currentIndex);
         this.store.dispatch(TaskActions.updateTask({task: tempList, id: tempList.task_id}));
+        // this.sendTask(tempList);
       }
     }
   }

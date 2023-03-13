@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
+import { async } from 'rxjs';
 import { ProjectModel } from 'src/models/projects.model';
 import { Project, ProjectDocument } from 'src/schemas/projects.schema';
 
@@ -17,6 +18,8 @@ export class ProjectsService {
             return null;
         }
     }
+
+    async 
 
     async getById(id: string) {
         try{

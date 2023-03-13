@@ -1,18 +1,17 @@
 <app-navbar></app-navbar>
 
-<!--socket test-->
 <button (click)="getTaskSocket()">get tasks</button>
-<button (click)="sendTask()">send task</button>
-<p *ngFor="let item of taskPrj">ads</p>
-<!--socket test-->
+<!-- <p *ngFor="let item of taskPrj">test</p> -->
+<p *ngFor="let item of taskPrj">test: {{item.name}}</p>
 
-<!-- <div class="homeContainer">
-    <mat-button-toggle-group value="tasks" class="menuDiv">
+<div class="homeContainer">
+    <!-- <mat-button-toggle-group value="tasks" class="menuDiv">
         <div id="btnSpaceTop"></div>
         <mat-button-toggle class="menuBtn" value="tasks">Tasks</mat-button-toggle>
         <mat-button-toggle class="menuBtn" id="menuBtnCallendar">Callendar</mat-button-toggle>
         <div id="btnSpaceBottom"></div>
-    </mat-button-toggle-group>
+    </mat-button-toggle-group> -->
+    
     <div class="homeDiv">
         <div class="infoDiv">
             <div class="infoSubDiv">
@@ -201,4 +200,4 @@
             </div>
         </div>
     </div>
-</div> -->
+</div>
