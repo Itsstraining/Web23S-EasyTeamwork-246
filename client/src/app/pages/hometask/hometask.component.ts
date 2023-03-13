@@ -1,5 +1,5 @@
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog, MatDialogState } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { map, Observable } from 'rxjs';
@@ -8,6 +8,7 @@ import { Status, TaskModel } from 'src/models/task.model';
 import { AddTaskComponent } from './components/add-task/add-task.component';
 import { TaskInfoComponent } from './components/task-info/task-info.component';
 import * as TaskActions from '../../../NgRx/Actions/tasks.action';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-hometask',
@@ -18,12 +19,14 @@ export class HometaskComponent implements OnInit{
 
   constructor(
     private matDialog: MatDialog, private taskService: TaskService,
-    private store: Store<{task: TaskModel}>
-
+    private store: Store<{task: TaskModel}>,
+    private router: ActivatedRoute,
   ){ 
     this.task$ = this.store.select('task');
     this.taskPrj$ = this.store.select('task');
   }
+
+  // @Input() prj_id: string = '';
 
   task$ !: Observable<TaskModel>;
   taskPrj$ !: Observable<any>;
@@ -34,12 +37,13 @@ export class HometaskComponent implements OnInit{
   completeList: TaskModel[] = [];  
   dueList: TaskModel[] = [];
   taskList: TaskModel[] = [];
-  singleTask: TaskModel[] =[];
   taskPrj: TaskModel[] = [];
-  prj_id: string = '';
+  prj_id!: string;
   task_id: string = '';
+  project_name: string = '';
 
   temp: Mutable<TaskModel> = this.taskList[0];
+  tempTask: TaskModel[] = [];
 
   todoMenu: boolean = true;
   infoOpened: boolean = false;
@@ -51,16 +55,18 @@ export class HometaskComponent implements OnInit{
     this.completeList = [];
     this.dueList = [];
     this.taskList = [];
-    this.getAllTasks();
-    // this.store.dispatch(TaskActions.getTasksByProjectId({project_id: 'prj01'}));
-    // this.taskPrj$.subscribe((data: any) => {
-    //   console.log(data.tasks);
-    //   this.taskPrj.push(data.tasks);
-    // });
+    const project = this.router.params.subscribe( (param) => {
+      this.prj_id = param['id'];
+      this.getAllTasks(param['id']);
+      // this.getTaskSocket(param['id']);
+    })
+    
+    // console.log(project_id);
+    // const project = this.router.snapshot.params.
   }
 
-  getAllTasks(){    
-    this.store.dispatch(TaskActions.getAllTasks());
+  getAllTasks(project_id: string){    
+    this.store.dispatch(TaskActions.getByProjectId({project_id: project_id}));
     this.task$.subscribe( (data: any) => {
       if(data != null){
         this.taskList = data.tasks;
@@ -74,40 +80,41 @@ export class HometaskComponent implements OnInit{
     });
   }
 
-  // getTaskByPrjId(){
-  //   this.store.dispatch(TaskActions.getTasksByProjectId({project_id: 'prj01', isFirstLoad: false}));
-  //   this.taskPrj$.subscribe((data: any) => {
-  //     console.log(data.tasks);
-  //     this.taskPrj.push(data.tasks);
-  //   });
-  // }
+  getTaskSocket(){
+    this.taskPrj = [];
+    this.taskService.getTasksSocket(this.prj_id);
+    this.taskPrj$.subscribe((data: any) => {
+      this.taskPrj.push(data.tasks);
+    });
+    console.log(this.taskPrj);
+  }
 
-  // sendTask(){
-  //   let taskSocket: TaskModel = {
-  //     task_id: 'task0001',
-  //     project_id: 'prj0001',
-  //     name: 'Task 1',
-  //     assignee: [],
-  //     description: 'Task 1 description',
-  //     status: 'todo',
-  //     complexity: 'easy',
-  //     comment_count: 0,
-  //     deadline: '2021-05-01',
-  //     created_at: '2021-04-01',
-  //     updated_at: '2021-04-01',
-  //   }
-  //   // this.store.dispatch(TaskActions.sendTask({task: taskSocket}));
-  //   this.taskService.sendTask(taskSocket);
-  // }
+  sendTask(tempList: TaskModel){
+    let taskSocket: TaskModel = {
+      task_id: tempList.task_id,
+      project_id: tempList.project_id,
+      name: tempList.name,
+      assignee: tempList.assignee,
+      description: tempList.description,
+      status: tempList.status,
+      complexity: tempList.complexity,
+      comment_count: tempList.comment_count,
+      deadline: tempList.deadline,
+      created_at: tempList.created_at,
+      updated_at: tempList.updated_at,
+    }
+    // this.store.dispatch(TaskActions.sendTask({task: taskSocket}));
+    this.taskService.sendTaskSocket(taskSocket);
+  }
 
   dialogAddTaskOpen(enterAnimationDuration: string, exitAnimationDuration: string) {
     let addTaskDialog = this.matDialog.open(AddTaskComponent, {enterAnimationDuration, exitAnimationDuration, autoFocus: false});
-    this.prj_id = this.taskList[0].project_id;
+    // this.prj_id = this.taskList[0].project_id;
     this.chckId();
     let instance = addTaskDialog.componentInstance;
     instance.prj_id = this.prj_id;
     instance.task_id = this.task_id;
-    console.log(this.isFirstLoad);
+    console.log(this.task_id);
   }
 
   dialogTaskInfoOpen(enterAnimationDuration: string, exitAnimationDuration: string, tId: string){
@@ -137,16 +144,20 @@ export class HometaskComponent implements OnInit{
 
       if(listName === 'todo'){
         let tempList = this.updateList('todo', event.currentIndex);
+        this.sendTask(tempList);
         this.store.dispatch(TaskActions.updateTask({task: tempList, id: tempList.task_id}));
       }else if(listName === 'in-progress'){
         let tempList = this.updateList('in-progress', event.currentIndex);
         this.store.dispatch(TaskActions.updateTask({task: tempList, id: tempList.task_id}));
+        this.sendTask(tempList);
       }else if(listName === 'completed'){
         let tempList = this.updateList('completed', event.currentIndex);
         this.store.dispatch(TaskActions.updateTask({task: tempList, id: tempList.task_id}));
+        // this.sendTask(tempList);
       }else if(listName === 'due'){
         let tempList = this.updateList('due', event.currentIndex);
         this.store.dispatch(TaskActions.updateTask({task: tempList, id: tempList.task_id}));
+        // this.sendTask(tempList);
       }
     }
   }
