@@ -140,15 +140,15 @@
                     <div class="item-attribute" id="item-name">
                         <span>{{item.name}}</span>
                     </div>
-                    <div  class="item-attribute" id="item-state">
+                    <div *ngIf="item.is_in_progress" class="item-attribute" id="item-state">
                         <div style="background-color: #159ACC;" id="state-dot"></div>
                         <span style="color: #199CAE;"> In-progress</span>
                     </div>
-                    <div  class="item-attribute" id="item-state">
+                    <div *ngIf="item.is_completed" class="item-attribute" id="item-state">
                         <div style="background-color: #33FF00;" id="state-dot"></div>
                         <span style="color: #28C700;"> Completed</span>
                     </div>
-                    <div class="item-attribute" id="item-state">
+                    <div *ngIf="item.is_overdue" class="item-attribute" id="item-state">
                         <div style="background-color: #FF0000;" id="state-dot"></div>
                         <span style="color: #E51616;"> Overdue</span>
                     </div>
@@ -163,7 +163,7 @@
                     </div>
                     <div class="item-attribute" id="item-host">
                         <img class="avatar" src="https://cdn-icons-png.flaticon.com/512/3436/3436890.png" alt="avatar">
-                        <span>{{item.owner_id}}</span>
+                        <span>{{item.owner}}</span>
                     </div>
                     <div class="item-attribute" id="item-options">
                         <button>

@@ -49,6 +49,10 @@ export class ViewallprojectComponent implements OnInit {
     this.matDialog.open(ShareProjectComponent)
   }
   ngOnInit(): void {
+    this.total_amount = 0;
+    this.in_progress_amount = 0;
+    this.completed_amount = 0;
+    this.overdue_amount = 0;
     this.store.dispatch(ProjectActions.getAllProjects());
     this.project$.subscribe((data) => {
       if (data) {

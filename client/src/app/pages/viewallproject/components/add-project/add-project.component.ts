@@ -14,6 +14,7 @@ export class AddProjectComponent {
   owner_id!: string;
   projectName!: string;
   currentUser!: UserModel;
+  due_date!: Date;
 
   options: UserModel[] = [];
   members: UserModel[] = [];
@@ -25,35 +26,40 @@ export class AddProjectComponent {
     public userService: UserService,
     public projectService: ProjectService
   ) {
-    this.userService.getAllUser().subscribe((users) => {
-      users.forEach((user) => {
-        if (user.uid !== this.userService.userInfo.uid) {
-          this.options.push(user);
-        }
-      });
-    });
-    this.userService.getUserById(this.userService.userInfo.uid).subscribe((users) => {
-      this.currentUser = users;
-    });
+    // this.userService.getAllUser().subscribe((users) => {
+    //   users.forEach((user) => {
+    //     if (user.uid !== this.userService.userInfo.uid) {
+    //       this.options.push(user);
+    //     }
+    //   });
+    // });
+    // this.userService.getUserById(this.userService.userInfo.uid).subscribe((users) => {
+    //   this.currentUser = users;
+    // });
   }
 
   addProject() {
     let newProject: ProjectModel ={
       project_id: Date.now().toString(),
       name: this.projectName,
+      owner: this.userService.userInfo.displayName,
       owner_id: this.userService.userInfo.uid,
       members: [],
       disable: false,
-      due_date: new Date(),
+      due_date: this.due_date,
       status: 'in-progress',
       marked: false,
+
+      is_in_progress: true,
+      is_completed: false,
+      is_overdue: false,
     };
 
-    // this.projectService.create(newProject).subscribe(
-    //   (res) => {
-    //     window.alert('Project created successfully!!');
-    //   },
-    // );
+    this.projectService.create(newProject).subscribe(
+      (res) => {
+        window.alert('Project created successfully!!');
+      },
+    );
     console.log(newProject);
     this.dialogRef.close(newProject);
   }
