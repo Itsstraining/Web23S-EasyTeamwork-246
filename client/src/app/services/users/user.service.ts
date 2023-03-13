@@ -21,7 +21,8 @@ import { Observable } from 'rxjs';
 export class UserService {
   public baseUrl: string = environment.baseURL + 'users/';
   public userInfo: any;
-  user !: User | null | undefined;
+  user !: User;
+  currentUserInfo!: UserModel;
 
   constructor(
     public auth: Auth,

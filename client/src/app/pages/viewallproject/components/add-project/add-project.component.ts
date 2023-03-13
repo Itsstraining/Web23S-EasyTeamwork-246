@@ -27,12 +27,12 @@ export class AddProjectComponent {
   ) {
     this.userService.getAllUser().subscribe((users) => {
       users.forEach((user) => {
-        if (user.uid !== this.userService.userInfo.uid) {
+        if (user.uid !== this.owner_id) {
           this.options.push(user);
         }
       });
     });
-    this.userService.getUserById(this.userService.userInfo.uid).subscribe((users) => {
+    this.userService.getUserById(this.owner_id).subscribe((users) => {
       this.currentUser = users;
     });
   }
@@ -41,7 +41,7 @@ export class AddProjectComponent {
     let newProject: ProjectModel ={
       project_id: Date.now().toString(),
       name: this.projectName,
-      owner_id: this.userService.userInfo.uid,
+      owner_id: this.owner_id,
       members: [],
       disable: false,
       due_date: new Date(),
