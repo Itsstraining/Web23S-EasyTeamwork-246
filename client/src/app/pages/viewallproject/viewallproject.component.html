@@ -23,7 +23,7 @@
         <div id="overview-header">Overview</div>
         <div id="overview-body">
             <div class="overview-content" id="total">
-                <div class="amount"><span>{{projectList.length}}</span></div>
+                <div class="amount"><span>{{ownedProjects.length}}</span></div>
                 <div class="horizone">
                     <hr>
                 </div>
@@ -65,34 +65,34 @@
                 </div>
                 <div class="view-mode" id="view-all">
                     <button id="view-all-btn">
-                        <span id="view-all-content">
+                        <span id="view-all-content" (click)="getAllProject()">
                             View all
                         </span>
                     </button>
                 </div>
                 <div class="view-mode" id="view-in-progress">
-                    <button id="view-in-progress-btn">
+                    <button id="view-in-progress-btn" (click)="getInprogressList()">
                         <span id="view-in-progress-content">
                             View in progress
                         </span>
                     </button>
                 </div>
                 <div class="view-mode" id="view-completed">
-                    <button id="view-completed-btn">
+                    <button id="view-completed-btn" (click)="getCompletedList()">
                         <span id="view-completed-content">
                             View completed
                         </span>
                     </button>
                 </div>
                 <div class="view-mode" id="view-overdue">
-                    <button id="view-overdue-btn">
+                    <button id="view-overdue-btn" (click)="getOverdueList()">
                         <span id="view-overdue-content">
                             View overdue
                         </span>
                     </button>
                 </div>
                 <div class="view-mode" id="view-marked">
-                    <button id="view-marked-btn">
+                    <button (click)="getMarkProject()" id="view-marked-btn">
                         <span id="view-marked-content">
                             View marked
                             <img class="icon" src="https://cdn-icons-png.flaticon.com/512/2107/2107957.png"
@@ -131,10 +131,16 @@
         <div id="table-body" >
             <div class="item" *ngIf="projectList != null">
                 <div class="table-row" *ngFor="let item of projectList">
-                    <div class="item-attribute" id="item-mark">
-                        <button>
+                    <div *ngIf="item.marked == false" class="item-attribute" id="item-mark">
+                        <button (click)="markProject(item.marked, item)">
                             <img class="icon" src="https://cdn-icons-png.flaticon.com/512/2107/2107992.png"
                                 alt="empty star">
+                        </button>
+                    </div>
+                    <div *ngIf="item.marked == true" class="item-attribute" id="item-mark">
+                        <button (click)="markProject(item.marked, item)">
+                            <img class="icon" src="https://cdn-icons-png.flaticon.com/512/2107/2107957.png"
+                                alt="yellow star">
                         </button>
                     </div>
                     <div class="item-attribute" id="item-name" [routerLink]="['/hometask/',item.project_id]" >

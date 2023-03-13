@@ -73,6 +73,7 @@ export class HometaskComponent implements OnInit{
       }else{
         console.log('No data');
       }
+    console.log(this.taskList);
     });
   }
 

@@ -25,7 +25,7 @@ export class ProjectService {
   }
 
   update(project: ProjectModel, id: string){
-    return this.httpClient.put(`${this.url}/updateProject?=${id}`, project);
+    return this.httpClient.put(`${this.url}/updateProject?id=${id}`, project);
   }
 
   delete(id: string){
