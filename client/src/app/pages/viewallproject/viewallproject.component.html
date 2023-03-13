@@ -92,7 +92,7 @@
                     </button>
                 </div>
                 <div class="view-mode" id="view-marked">
-                    <button id="view-marked-btn">
+                    <button (click)="getMarkProject()" id="view-marked-btn">
                         <span id="view-marked-content">
                             View marked
                             <img class="icon" src="https://cdn-icons-png.flaticon.com/512/2107/2107957.png"
@@ -131,10 +131,16 @@
         <div id="table-body" >
             <div class="item" *ngIf="projectList != null">
                 <div class="table-row" *ngFor="let item of projectList">
-                    <div class="item-attribute" id="item-mark">
-                        <button>
+                    <div *ngIf="item.marked == false" class="item-attribute" id="item-mark">
+                        <button (click)="markProject(item.marked, item)">
                             <img class="icon" src="https://cdn-icons-png.flaticon.com/512/2107/2107992.png"
                                 alt="empty star">
+                        </button>
+                    </div>
+                    <div *ngIf="item.marked == true" class="item-attribute" id="item-mark">
+                        <button (click)="markProject(item.marked, item)">
+                            <img class="icon" src="https://cdn-icons-png.flaticon.com/512/2107/2107957.png"
+                                alt="yellow star">
                         </button>
                     </div>
                     <div class="item-attribute" id="item-name" [routerLink]="['/hometask/',item.project_id]" >
