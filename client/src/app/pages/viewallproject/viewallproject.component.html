@@ -23,7 +23,7 @@
         <div id="overview-header">Overview</div>
         <div id="overview-body">
             <div class="overview-content" id="total">
-                <div class="amount"><span>{{projectList.length}}</span></div>
+                <div class="amount"><span>{{ownedProjects.length}}</span></div>
                 <div class="horizone">
                     <hr>
                 </div>
@@ -65,27 +65,27 @@
                 </div>
                 <div class="view-mode" id="view-all">
                     <button id="view-all-btn">
-                        <span id="view-all-content">
+                        <span id="view-all-content" (click)="getAllProject()">
                             View all
                         </span>
                     </button>
                 </div>
                 <div class="view-mode" id="view-in-progress">
-                    <button id="view-in-progress-btn">
+                    <button id="view-in-progress-btn" (click)="getInprogressList()">
                         <span id="view-in-progress-content">
                             View in progress
                         </span>
                     </button>
                 </div>
                 <div class="view-mode" id="view-completed">
-                    <button id="view-completed-btn">
+                    <button id="view-completed-btn" (click)="getCompletedList()">
                         <span id="view-completed-content">
                             View completed
                         </span>
                     </button>
                 </div>
                 <div class="view-mode" id="view-overdue">
-                    <button id="view-overdue-btn">
+                    <button id="view-overdue-btn" (click)="getOverdueList()">
                         <span id="view-overdue-content">
                             View overdue
                         </span>

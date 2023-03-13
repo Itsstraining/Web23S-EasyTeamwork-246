@@ -65,14 +65,15 @@ export class ViewallprojectComponent implements OnInit {
         // Get all projects
         this.projectList = data.projects;
         // Get owned projects
-        for (let i = 0; i < this.projectList.length; i++) {
-          for(let j = 0; j < this.projectList[i].members.length; j++){
-            if(this.projectList[i].members[j].uid == this.userService.userInfo.uid){
-              this.ownedProjects.push(this.projectList[i]);
+        this.ownedProjects = this.projectList.filter((project) =>
+        {
+          for(let i = 0; i < project.members.length; i++){
+            if(project.members[i].uid == this.userService.userInfo.uid){
+              return true;
             }
           }
-        }
-        // this.ownedProjects = this.projectList.filter((project) => project.owner_id == this.userService.userInfo.uid);
+          return false;
+        });
         console.log("Owned project", this.ownedProjects);
         // Update projects list
         this.projectList = this.ownedProjects;
@@ -89,6 +90,32 @@ export class ViewallprojectComponent implements OnInit {
     })
   }
 
+  getInprogressList() {
+    this.projectList = this.in_progress_list;
+  }
+
+  getCompletedList() {
+    this.projectList = this.completed_list;
+  }
+
+  getOverdueList() {
+    this.projectList = this.overdue_list;
+  }
+
+  getMarkedProject() {
+    this.projectList = this.projectList.filter((project) => project.marked == true);
+  }
+
+  
+  deleteProject(project_id: string) {
+    this.projectService.delete(project_id).subscribe((data) => {
+      console.log("Delete project", data);
+      this.ngOnInit();
+    });
+  }
+
+
+
   // getProjectStatus(status: Status, is_in_progress: boolean, is_completed: boolean, is_overdue: boolean) {
   //   if (status == "in-progress") {
   //     is_in_progress = true;
@@ -104,11 +131,4 @@ export class ViewallprojectComponent implements OnInit {
   //     is_overdue = true;
   //   }
   // }
-  
-  deleteProject(project_id: string) {
-    this.projectService.delete(project_id).subscribe((data) => {
-      console.log("Delete project", data);
-      this.ngOnInit();
-    });
-  }
 }
