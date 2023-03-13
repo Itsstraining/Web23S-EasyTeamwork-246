@@ -391,9 +391,23 @@
     border-radius: 50%;
     font-size: 1.1rem;
     background-color: red;
+    // color: #666666;
     text-align: center;
+    padding: .3rem;
 }
 
 #todoCount{
-    background-color: rgb(13, 236, 13);
+    background-color: #64ff6c;
+}
+
+#inProgressCount{
+    background-color: #fffc64;
+}
+
+#completeCount{
+    background-color: #ffaf64;
+}
+
+#dueCount{
+    background-color: #FF6464;
 }

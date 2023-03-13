@@ -52,11 +52,6 @@ export class HometaskComponent implements OnInit{
     this.dueList = [];
     this.taskList = [];
     this.getAllTasks();
-    // this.store.dispatch(TaskActions.getTasksByProjectId({project_id: 'prj01'}));
-    // this.taskPrj$.subscribe((data: any) => {
-    //   console.log(data.tasks);
-    //   this.taskPrj.push(data.tasks);
-    // });
   }
 
   getAllTasks(){    
