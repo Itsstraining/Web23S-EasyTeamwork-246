@@ -77,35 +77,36 @@ export class HometaskComponent implements OnInit{
       }else{
         console.log('No data');
       }
+    console.log(this.taskList);
     });
   }
 
-  getTaskSocket(){
-    this.taskPrj = [];
-    this.taskService.getTasksSocket(this.prj_id);
-    this.taskPrj$.subscribe((data: any) => {
-      this.taskPrj.push(data.tasks);
-    });
-    console.log(this.taskPrj);
-  }
+  // getTaskSocket(){
+  //   this.taskPrj = [];
+  //   this.taskService.getTasksSocket(this.prj_id);
+  //   this.taskPrj$.subscribe((data: any) => {
+  //     this.taskPrj.push(data.tasks);
+  //   });
+  //   console.log(this.taskPrj);
+  // }
 
-  sendTask(tempList: TaskModel){
-    let taskSocket: TaskModel = {
-      task_id: tempList.task_id,
-      project_id: tempList.project_id,
-      name: tempList.name,
-      assignee: tempList.assignee,
-      description: tempList.description,
-      status: tempList.status,
-      complexity: tempList.complexity,
-      comment_count: tempList.comment_count,
-      deadline: tempList.deadline,
-      created_at: tempList.created_at,
-      updated_at: tempList.updated_at,
-    }
-    // this.store.dispatch(TaskActions.sendTask({task: taskSocket}));
-    this.taskService.sendTaskSocket(taskSocket);
-  }
+  // sendTask(tempList: TaskModel){
+  //   let taskSocket: TaskModel = {
+  //     task_id: tempList.task_id,
+  //     project_id: tempList.project_id,
+  //     name: tempList.name,
+  //     assignee: tempList.assignee,
+  //     description: tempList.description,
+  //     status: tempList.status,
+  //     complexity: tempList.complexity,
+  //     comment_count: tempList.comment_count,
+  //     deadline: tempList.deadline,
+  //     created_at: tempList.created_at,
+  //     updated_at: tempList.updated_at,
+  //   }
+  //   // this.store.dispatch(TaskActions.sendTask({task: taskSocket}));
+  //   this.taskService.sendTaskSocket(taskSocket);
+  // }
 
   dialogAddTaskOpen(enterAnimationDuration: string, exitAnimationDuration: string) {
     let addTaskDialog = this.matDialog.open(AddTaskComponent, {enterAnimationDuration, exitAnimationDuration, autoFocus: false});
@@ -144,12 +145,12 @@ export class HometaskComponent implements OnInit{
 
       if(listName === 'todo'){
         let tempList = this.updateList('todo', event.currentIndex);
-        this.sendTask(tempList);
+        // this.sendTask(tempList);
         this.store.dispatch(TaskActions.updateTask({task: tempList, id: tempList.task_id}));
       }else if(listName === 'in-progress'){
         let tempList = this.updateList('in-progress', event.currentIndex);
         this.store.dispatch(TaskActions.updateTask({task: tempList, id: tempList.task_id}));
-        this.sendTask(tempList);
+        // this.sendTask(tempList);
       }else if(listName === 'completed'){
         let tempList = this.updateList('completed', event.currentIndex);
         this.store.dispatch(TaskActions.updateTask({task: tempList, id: tempList.task_id}));
