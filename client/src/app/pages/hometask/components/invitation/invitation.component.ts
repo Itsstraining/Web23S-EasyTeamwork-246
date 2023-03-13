@@ -44,7 +44,7 @@ export class InvitationComponent implements OnInit {
 
   replyInvitation(isAgree: number) {
     this.invitation.status =  isAgree;
-
+    
     // this.projectService.getAll(this.tempProject.project_id).subscribe((res) => {
     //   if(res.disabled){
     //     window.alert('Project no longer exists!!');
@@ -67,7 +67,7 @@ export class InvitationComponent implements OnInit {
   addMemToProject(isAgree: number) {
     if(isAgree == 1) {
       this.tempProject.members.push(this.currentUser);
-
+      
       // this.projectService.update(this.invitation.project_id, this.tempProject).subscribe(
       //   invitation => {
       //     window.alert('Member has been added to project');
