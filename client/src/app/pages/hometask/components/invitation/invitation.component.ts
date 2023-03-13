@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { InvitationService } from 'src/app/services/invitation/invitation.service';
-import { NotificationService } from 'src/app/services/notification.service';
+import { NotificationService } from 'src/app/services/notifications/notification.service';
 import { ProjectService } from 'src/app/services/projects/project.service';
 import { UserService } from 'src/app/services/users/user.service';
 import { InvitationModel } from 'src/models/invitation.model';
@@ -34,22 +34,22 @@ export class InvitationComponent implements OnInit {
     this.userService.getUserById(this.userService.user.uid).subscribe(user => {  
       this.currentUser = user;
     });
-    this.projectService.getAll(this.invitation.project_id).subscribe(
-      project => {
-        this.tempProject = project;
-      }
-    );
+    // this.projectService.getAll(this.invitation.project_id).subscribe(
+    //   project => {
+    //     this.tempProject = project;
+    //   }
+    // );
   }
 
   replyInvitation(isAgree: number) {
     this.invitation.status =  isAgree;
     
-    this.projectService.getAll(this.tempProject.project_id).subscribe((res) => {
-      if(res.disabled){
-        window.alert('Project no longer exists!!');
-        return;
-      }
-    });
+    // this.projectService.getAll(this.tempProject.project_id).subscribe((res) => {
+    //   if(res.disabled){
+    //     window.alert('Project no longer exists!!');
+    //     return;
+    //   }
+    // });
     this.invitationService.updateInvitationById(this.invitation.id, this.invitation).subscribe(
       invitation => {
         this.invitationService.deleteInvitationById(this.invitation.id).subscribe(
@@ -60,21 +60,21 @@ export class InvitationComponent implements OnInit {
         );
       }
     );
-    this.addMemToProject(isAgree);
+    // this.addMemToProject(isAgree);
   }
 
-  addMemToProject(isAgree: number) {
-    if(isAgree == 1) {
-      this.tempProject.members.push(this.currentUser);
+  // addMemToProject(isAgree: number) {
+  //   if(isAgree == 1) {
+  //     this.tempProject.members.push(this.currentUser);
       
-      this.projectService.update(this.invitation.project_id, this.tempProject).subscribe(
-        invitation => {
-          window.alert('Member has been added to project');
-        }
-      );
-      this.createNotification(isAgree);
-    }
-  }
+  //     this.projectService.update(this.invitation.project_id, this.tempProject).subscribe(
+  //       invitation => {
+  //         window.alert('Member has been added to project');
+  //       }
+  //     );
+  //     this.createNotification(isAgree);
+  //   }
+  // }
 
   createNotification(isAgree: number) {
     let noti: NotificationModel = {
