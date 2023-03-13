@@ -2,70 +2,116 @@
   <div class="header">
     <span>Share Project</span>
     <div id="closeBtn" (click)="closeDialogShare()">
-      <img id="close-icon" src="https://cdn-icons-png.flaticon.com/512/1828/1828778.png" />
+      <img
+        id="close-icon"
+        src="https://cdn-icons-png.flaticon.com/512/1828/1828778.png"
+      />
     </div>
   </div>
 
   <div class="body">
     <div class="row" (click)="showAccountGG()">
-      <input class="input" type="text" placeholder="Thêm người để gửi đường liên kết tới"
-        [matAutocomplete]="autocomplete" fullWidth/>
+      <input
+        class="input"
+        type="text"
+        placeholder="Thêm người để gửi đường liên kết tới"
+        [matAutocomplete]="autocomplete"
+        fullWidth
+      />
     </div>
-    <mat-autocomplete #autocomplete>
-      <mat-option class="option" *ngFor="let option of options" [value]="option">
-        <h6>{{option.email}}</h6>
-        <img [src]="option.photoURL" alt="">
-        <h6>{{option.displayName}}</h6>
+    <mat-autocomplete #autocomplete (selectChange)="onTagAdd($event)">
+      <mat-option
+        class="option"
+        *ngFor="let option of options"
+        [value]="option"
+      >
+        <h6>1</h6>
+        <img
+          src="https://cdn-icons-png.flaticon.com/512/1828/1828778.png"
+          alt=""
+        />
+        <h6>Sonkk</h6>
       </mat-option>
     </mat-autocomplete>
     <div class="row2">
-      <textarea class="input" type="text" placeholder="Lời nhắn" style="resize: vertical"></textarea>
+      <textarea
+        class="input"
+        type="text"
+        placeholder="Lời nhắn"
+        style="resize: vertical"
+      ></textarea>
     </div>
-  </div>
-  <div class="content">
-    <p style="margin: 2% 7%">Quyền truy cập chung</p>
-    <div class="notification" style="
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin: 2% 7%;
-      ">
-      <div class="left" style="
+    <div>
+      <div class="content">
+        <p
+          style="
+            font-family: 'Quicksand', sans-serif;
+            font-size: 1.3rem;
+            font-weight: normal;
+            margin: 0;
+            margin-top: 5%;
+          "
+        >
+          Quyền truy cập chung
+        </p>
+        <div
+          class="notification"
+          style="
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 2% 2%;
+          "
+        >
+          <div
+            class="left"
+            style="
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              margin-bottom: 4%;
+              margin-right: 4%;
+            "
+          >
+            <i class="fa-solid fa-earth-americas"></i>
+          </div>
+          <div class="middle">
+            <span style="font-size: 1.1rem">Bất kỳ ai có đường liên kết</span>
+            <p style="color: grey; font-size: 0.8rem">
+              Bất kỳ ai có kết nối Internet và có đường liên kết này đều có thể
+              xem
+            </p>
+          </div>
+          <div
+            class="right"
+            style="
+              color: grey;
+              margin-left: 13%;
+              margin-bottom: 1.5%;
+              font-size: 1rem;
+            "
+          >
+            <span>Người xem</span>
+          </div>
+        </div>
+      </div>
+      <div
+        class="footer"
+        style="
+          margin-top: 2%;
+          margin-bottom: 2%;
           display: flex;
           align-items: center;
-          justify-content: center;
-          margin-bottom: 4%;
-          margin-right: 4%;
-        ">
-        <i class="fa-solid fa-earth-americas"></i>
-      </div>
-      <div class="middle">
-        <span style="font-size: 1.1rem">Bất kỳ ai có đường liên kết</span>
-        <p style="color: grey; font-size: 0.8rem">
-          Bất kỳ ai có kết nối Internet và có đường liên kết này đều có thể xem
-        </p>
-      </div>
-      <div class="right" style="
-          color: grey;
-          margin-left: 13%;
-          margin-bottom: 1.5%;
-          font-size: 1rem;
-        ">
-        <span>Người xem</span>
+          justify-content: space-between;
+        "
+      >
+        <button style="border: 0.01px solid #000">
+          <i class="fa-solid fa-copy"></i>Sao chép đường liên kết
+        </button>
+        <button>Yều cầu chia sẻ</button>
+        <button (click)="closeDialogShare()">Hủy</button>
+        <button (click)="send()">Gửi</button>
       </div>
     </div>
-  </div>
-  <div class="footer" style="
-      margin: 2% 7%;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    ">
-    <button style="border: 0.01px solid #000">
-      <i class="fa-solid fa-copy"></i>Sao chép đường liên kết
-    </button>
-    <button>Yều cầu chia sẻ</button>
-    <button (click)="closeDialogShare()">Hủy</button>
-    <button (click)="send()">Gửi</button>
   </div>
 </div>

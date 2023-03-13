@@ -23,6 +23,7 @@ export class ShareProjectComponent implements OnInit {
   ) { }
   ngOnInit(): void {
     this.userService.getAllUser().subscribe((users) => {
+      console.log(users);
       users.forEach((user) => {
         if (user.uid !== this.userService.userInfo.uid) {
           if(this.project.members.find((m) => m.uid === user.uid) == undefined) {
@@ -30,6 +31,7 @@ export class ShareProjectComponent implements OnInit {
           }
         }
       });
+      
     });
   }
 

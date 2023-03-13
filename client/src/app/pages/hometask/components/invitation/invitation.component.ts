@@ -21,17 +21,17 @@ export class InvitationComponent implements OnInit {
   tempProject!: ProjectModel;
 
   constructor(
-    private userService: UserService, 
+    private userService: UserService,
     private invitationService: InvitationService,
     private projectService: ProjectService,
     private notificationService: NotificationService,
     ) { }
 
   ngOnInit(): void {
-    this.userService.getUserById(this.invitation.owner_id).subscribe(user => {  
+    this.userService.getUserById(this.invitation.owner_id).subscribe(user => {
       this.sender = user;
     });
-    this.userService.getUserById(this.userService.user.uid).subscribe(user => {  
+    this.userService.getUserById(this.userService.user.uid).subscribe(user => {
       this.currentUser = user;
     });
     // this.projectService.getAll(this.invitation.project_id).subscribe(
@@ -63,18 +63,18 @@ export class InvitationComponent implements OnInit {
     // this.addMemToProject(isAgree);
   }
 
-  // addMemToProject(isAgree: number) {
-  //   if(isAgree == 1) {
-  //     this.tempProject.members.push(this.currentUser);
+  addMemToProject(isAgree: number) {
+    if(isAgree == 1) {
+      this.tempProject.members.push(this.currentUser);
       
-  //     this.projectService.update(this.invitation.project_id, this.tempProject).subscribe(
-  //       invitation => {
-  //         window.alert('Member has been added to project');
-  //       }
-  //     );
-  //     this.createNotification(isAgree);
-  //   }
-  // }
+      // this.projectService.update(this.invitation.project_id, this.tempProject).subscribe(
+      //   invitation => {
+      //     window.alert('Member has been added to project');
+      //   }
+      // );
+      this.createNotification(isAgree);
+    }
+  }
 
   createNotification(isAgree: number) {
     let noti: NotificationModel = {
