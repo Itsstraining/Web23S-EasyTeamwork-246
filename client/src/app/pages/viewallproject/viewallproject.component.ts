@@ -59,6 +59,12 @@ export class ViewallprojectComponent implements OnInit {
     this.overdue_list = [];
     this.mark_list = [];
 
+    this.viewAll = true;
+    this.viewInprogress = false;
+    this.viewCompleted = false;
+    this.viewOverdue = false;
+    this.viewMarked = false;
+
     this.getAllProject();
   }
 
@@ -91,57 +97,35 @@ export class ViewallprojectComponent implements OnInit {
 
         this.projectList = this.ownedProjects;
 
+        if(this.viewAll == true){
+          this.getOwnedProjects();
+        }
+        else if(this.viewInprogress == true){
+          this.getInprogressList();
+        }
+        else if(this.viewCompleted == true){
+          this.getCompletedList();
+        }
+        else if(this.viewOverdue == true){
+          this.getOverdueList();
+        }
+        else if(this.viewMarked == true){
+          this.getMarkProject();
+        }
+
         // Get project status list
         this.in_progress_list = this.ownedProjects.filter((project) => project.status == "in-progress");
         this.completed_list = this.ownedProjects.filter((project) => project.status == "completed");
         this.overdue_list = this.ownedProjects.filter((project) => project.status == "overdue");
         this.mark_list = this.ownedProjects.filter((project) => project.marked == true);
+
+
       }
       else {
         console.log("No data");
       }
     });
   }
-
-  getUpdatedProject(){
-    this.projectList = [];
-    this.ownedProjects = [];
-    this.in_progress_list = [];
-    this.completed_list = [];
-    this.overdue_list = [];
-    this.mark_list = [];
-    
-    this.store.dispatch(ProjectActions.getAllProjects());
-    this.project$.subscribe((data) => {
-      if (data) {
-        // Get all projects
-        this.projectList = data.projects;
-        // Get owned projects
-        this.ownedProjects = this.projectList.filter((project) =>
-        {
-          for(let i = 0; i < project.members.length; i++){
-            if(project.members[i].uid == this.userService.userInfo.uid){
-              return true;
-            }
-          }
-          return false;
-        });
-
-        this.changeStatus(this.ownedProjects);
-
-        // Get project status list
-        this.in_progress_list = this.ownedProjects.filter((project) => project.status == "in-progress");
-        this.completed_list = this.ownedProjects.filter((project) => project.status == "completed");
-        this.overdue_list = this.ownedProjects.filter((project) => project.status == "overdue");
-        this.mark_list = this.ownedProjects.filter((project) => project.marked == true);
-      }
-      else {
-        console.log("No data");
-      }
-    })
-    
-  }
-
 
 
   viewAll: boolean = false;
@@ -157,6 +141,8 @@ export class ViewallprojectComponent implements OnInit {
     this.viewCompleted = false;
     this.viewOverdue = false;
     this.viewMarked = false;
+
+    this.foundList = [];
   }
 
   getInprogressList() {
@@ -166,6 +152,8 @@ export class ViewallprojectComponent implements OnInit {
     this.viewCompleted = false;
     this.viewOverdue = false;
     this.viewMarked = false;
+
+    this.foundList = [];
   }
 
   getCompletedList() {
@@ -175,6 +163,8 @@ export class ViewallprojectComponent implements OnInit {
     this.viewCompleted = true;
     this.viewOverdue = false;
     this.viewMarked = false;
+    
+    this.foundList = [];
   }
 
   getOverdueList() {
@@ -184,6 +174,8 @@ export class ViewallprojectComponent implements OnInit {
     this.viewCompleted = false;
     this.viewOverdue = true;
     this.viewMarked = false;
+
+    this.foundList = [];
   }
 
   getMarkProject() {
@@ -193,6 +185,8 @@ export class ViewallprojectComponent implements OnInit {
     this.viewCompleted = false;
     this.viewOverdue = false;
     this.viewMarked = true;
+
+    this.foundList = [];
   }
 
   markProject(marked: boolean, project : ProjectModel) {
@@ -218,21 +212,6 @@ export class ViewallprojectComponent implements OnInit {
     this.projectService.update(updateProject, project.project_id).subscribe((data) => {
       console.log("Mark project", data);
       this.getAllProject();
-      if(this.viewAll == true){
-        this.getOwnedProjects();
-      }
-      else if(this.viewInprogress == true){
-        this.getInprogressList();
-      }
-      else if(this.viewCompleted == true){
-        this.getCompletedList();
-      }
-      else if(this.viewOverdue == true){
-        this.getOverdueList();
-      }
-      else if(this.viewMarked == true){
-        this.getMarkProject();
-      }
     });
   }
   
@@ -257,10 +236,10 @@ export class ViewallprojectComponent implements OnInit {
 
       let status: Status;
   
-      if(year_of_currentDate > year_of_dueDate){
+      if((year_of_currentDate > year_of_dueDate) && (projectList[i].status != "completed")){
         status = "overdue";
       }
-      else if(year_of_currentDate == year_of_dueDate){
+      else if((year_of_currentDate == year_of_dueDate) && (projectList[i].status != "completed")){
         if(month_of_currentDate > month_of_dueDate){
           status = "overdue";
         }
@@ -305,6 +284,9 @@ export class ViewallprojectComponent implements OnInit {
         this.foundList = [];
         this.foundList.push(this.ownedProjects[i]);
         break;
+      }
+      else{
+        this.foundList = [];
       }
     }
     this.projectList = this.foundList;

@@ -32,6 +32,9 @@ export class AddTaskComponent{
     return time.toLocaleDateString();
   }
 
+  currentDate: any = new Date();
+  deadline = new Date(this.currentDate.getFullYear(), this.currentDate.getMonth(), this.currentDate.getDate() + 1);
+
   backTask!: TaskModel;
   taskName = '';
   taskDescription = '';
