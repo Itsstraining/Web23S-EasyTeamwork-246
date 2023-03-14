@@ -34,8 +34,7 @@ const routes: Routes = [
       import('./pages/create-account/create-account.module').then(
         (m) => m.CreateAccountModule
       ),
-  },
-  {
+  },{
     path: '**',
     loadChildren: () =>
       import('./pages/error/error.module').then((m) => m.ErrorModule),

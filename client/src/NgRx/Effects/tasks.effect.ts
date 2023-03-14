@@ -45,7 +45,6 @@ export class TaskEffects{
                 return this.taskService.create(data.task);
             }),
             map((data) => {
-                console.log(data);
                 return TaskActions.addTaskSuccess({ task: <TaskModel>data });
             }),
             catchError((error) => {

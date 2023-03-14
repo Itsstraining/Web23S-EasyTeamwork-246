@@ -22,11 +22,7 @@ import { TaskEffects } from 'src/NgRx/Effects/tasks.effect';
 import { ProjectEffects } from 'src/NgRx/Effects/projects.effect';
 import { ProjectReducer } from 'src/NgRx/Reducers/projects.reducer';
 import { FormsModule } from '@angular/forms';
-import { SocketIoModule } from 'ngx-socket-io';
-import { SocketIoConfig } from 'ngx-socket-io/src/config/socket-io.config';
 import { NotificationComponent } from './components/notification/notification.component';
-
-const config: SocketIoConfig = { url: 'http://localhost:3000/', options: {} };
 
 @NgModule({
   declarations: [
@@ -56,7 +52,6 @@ const config: SocketIoConfig = { url: 'http://localhost:3000/', options: {} };
     ]),
     HttpClientModule,
     FormsModule,
-    SocketIoModule.forRoot(config),
   ],
   providers: [],
   bootstrap: [AppComponent]
