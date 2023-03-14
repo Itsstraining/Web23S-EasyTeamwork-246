@@ -154,4 +154,50 @@ export class ViewallprojectComponent implements OnInit {
       this.ngOnInit();
     });
   }
+
+  changeStatus(project: ProjectModel) {
+    let currentDate: string = new Date().toLocaleDateString();
+    let date_of_currentDate: number = parseInt(currentDate.split("/")[1]);
+    let month_of_currentDate: number = parseInt(currentDate.split("/")[0]);
+    let year_of_currentDate: number = parseInt(currentDate.split("/")[2]);
+
+    let dueDate:string = project.due_date;
+    let date_of_dueDate: number = parseInt(dueDate.split("/")[1]);
+    let month_of_dueDate: number = parseInt(dueDate.split("/")[0]);
+    let year_of_dueDate: number = parseInt(dueDate.split("/")[2]);
+
+    let status: Status;
+
+    if(year_of_currentDate >= year_of_dueDate){
+      if(month_of_currentDate >= month_of_dueDate){
+        if(date_of_currentDate > date_of_dueDate){
+          status = "overdue";
+        }
+        else{
+          status = "completed";
+        }
+      }
+      else{
+        status = "completed";
+      }
+    }
+
+    let updateProject:ProjectModel = {
+      project_id: project.project_id,
+      marked: project.marked,
+      name: project.name,
+      owner: project.owner,
+      owner_photo: project.owner_photo,
+      owner_id: project.owner_id,
+      due_date: project.due_date,
+      status: project.status,
+      disable: project.disable,
+      members: project.members,
+    };
+
+    this.projectService.update(updateProject, project.project_id).subscribe((data) => {
+      console.log("Change status", data);
+      this.ngOnInit();
+    });
+  }
 }
