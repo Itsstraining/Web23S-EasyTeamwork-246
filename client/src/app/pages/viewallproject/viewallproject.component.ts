@@ -41,7 +41,7 @@ export class ViewallprojectComponent implements OnInit {
     let addProjectDialog = this.matDialog.open(AddProjectComponent,{
       data: {
         owner_id: this.userService.userInfo.uid,
-      },
+      }, autoFocus: false
     })
     console.log("Open dialog", this.userService.userInfo.uid);
     addProjectDialog.afterClosed().subscribe(() => {
@@ -100,8 +100,7 @@ export class ViewallprojectComponent implements OnInit {
       else {
         console.log("No data");
       }
-    })
-    
+    });
   }
 
   getUpdatedProject(){
