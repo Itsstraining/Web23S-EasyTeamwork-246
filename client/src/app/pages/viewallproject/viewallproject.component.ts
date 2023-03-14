@@ -36,6 +36,7 @@ export class ViewallprojectComponent implements OnInit {
   overdue_list: ProjectModel[] = [];
   mark_list: ProjectModel[] = [];
 
+
   dialogOpen() {
     let addProjectDialog = this.matDialog.open(AddProjectComponent,{
       data: {
@@ -65,6 +66,10 @@ export class ViewallprojectComponent implements OnInit {
   getAllProject(){
     this.projectList = [];
     this.ownedProjects = [];
+    this.in_progress_list = [];
+    this.completed_list = [];
+    this.overdue_list = [];
+    this.mark_list = [];
     
     this.store.dispatch(ProjectActions.getAllProjects());
     this.project$.subscribe((data) => {
@@ -81,25 +86,24 @@ export class ViewallprojectComponent implements OnInit {
           }
           return false;
         });
-        console.log("Owned project", this.ownedProjects);
-        // Update projects list
+
         this.projectList = this.ownedProjects;
+
         // Get project status list
-        this.in_progress_list = this.projectList.filter((project) => project.status == "in-progress");
-        this.completed_list = this.projectList.filter((project) => project.status == "completed");
-        this.overdue_list = this.projectList.filter((project) => project.status == "overdue");
-        this.mark_list = this.projectList.filter((project) => project.marked == true);
-        
-        // // Get project status
-        // for(let i = 0; i < this.projectList.length; i++){
-        //   this.getProjectStatus(this.projectList[i], this.projectList[i].status,
-        //     this.projectList[i].is_in_progress, this.projectList[i].is_completed, this.projectList[i].is_overdue);
-        // }
+        this.in_progress_list = this.ownedProjects.filter((project) => project.status == "in-progress");
+        this.completed_list = this.ownedProjects.filter((project) => project.status == "completed");
+        this.overdue_list = this.ownedProjects.filter((project) => project.status == "overdue");
+        this.mark_list = this.ownedProjects.filter((project) => project.marked == true);
       }
       else {
         console.log("No data");
       }
     })
+    
+  }
+
+  getOwnedProjects() {
+    this.projectList = this.ownedProjects;
   }
 
   getInprogressList() {
@@ -136,14 +140,11 @@ export class ViewallprojectComponent implements OnInit {
       status: project.status,
       disable: project.disable,
       members: project.members,
-
-      is_in_progress: project.is_in_progress,
-      is_completed: project.is_completed,
-      is_overdue: project.is_overdue,
     };
 
     this.projectService.update(updateProject, project.project_id).subscribe((data) => {
       console.log("Mark project", data);
+      this.ngOnInit();
     });
   }
   
@@ -153,44 +154,4 @@ export class ViewallprojectComponent implements OnInit {
       this.ngOnInit();
     });
   }
-
-
-
-  // getProjectStatus(project: ProjectModel, status: Status, 
-  //   is_in_progress: boolean, is_completed: boolean, is_overdue: boolean) {
-  //   if (status == "in-progress") {
-  //     is_in_progress = true;
-  //     is_completed = false;
-  //     is_overdue = false;
-  //   } else if (status == "completed") {
-  //     is_in_progress = false;
-  //     is_completed = true;
-  //     is_overdue = false;
-  //   } else if (status == "overdue") {
-  //     is_in_progress = false;
-  //     is_completed = false;
-  //     is_overdue = true;
-  //   }
-
-  //   let updateProject:ProjectModel = {
-  //     project_id: project.project_id,
-  //     marked: project.marked,
-  //     name: project.name,
-  //     owner: project.owner,
-  //     owner_photo: project.owner_photo,
-  //     owner_id: project.owner_id,
-  //     due_date: project.due_date,
-  //     status: project.status,
-  //     disable: project.disable,
-  //     members: project.members,
-
-  //     is_in_progress: is_in_progress,
-  //     is_completed: is_completed,
-  //     is_overdue: is_overdue,
-  //   };
-    
-  //   this.projectService.update(updateProject, project.project_id).subscribe((data) => {
-  //     console.log("Update project", data);
-  //   });
-  // }
 }
