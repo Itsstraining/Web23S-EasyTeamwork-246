@@ -26,12 +26,5 @@ export class Project {
     disable: boolean;
     @Prop()
     members: UserModel[];
-
-    @Prop()
-    is_in_progress: boolean;
-    @Prop()
-    is_completed: boolean;
-    @Prop()
-    is_overdue: boolean;
 }
 export const ProjectSchema = SchemaFactory.createForClass(Project)

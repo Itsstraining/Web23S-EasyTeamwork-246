@@ -12,23 +12,15 @@ import { ProjectsController } from './controllers/projects/projects.controller';
 import { ProjectsService } from './services/projects/projects.service';
 import { ProjectModule } from './module/project.module';
 import { TasksGateway } from './gateways/tasks/tasks.gateway';
+import { InvitationModule } from './module/invitation.module';
 
 @Module({
   imports: [
     TaskModule, 
     MongooseModule.forRoot('mongodb+srv://easyteamwork:easyteamwork@cluster0.za2rizv.mongodb.net/todotask?retryWrites=true&w=majority'),
     UsersModule,
-    ProjectModule
-    // MailerModule.forRoot({
-    //   transport: {
-    //     host:'',
-    //     auth:{
-    //       user:'',
-    //       pass:'',
-    //     }
-    //   }
-
-    // })
+    ProjectModule,
+    InvitationModule
   ],
   controllers: [AppController],
   providers: [AppService, TasksGateway],

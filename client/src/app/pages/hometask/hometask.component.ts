@@ -8,6 +8,7 @@ import { Status, TaskModel } from 'src/models/task.model';
 import { AddTaskComponent } from './components/add-task/add-task.component';
 import { TaskInfoComponent } from './components/task-info/task-info.component';
 import * as TaskActions from '../../../NgRx/Actions/tasks.action';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-hometask',
@@ -17,9 +18,10 @@ import * as TaskActions from '../../../NgRx/Actions/tasks.action';
 export class HometaskComponent implements OnInit{
 
   constructor(
-    private matDialog: MatDialog, private taskService: TaskService,
-    private store: Store<{task: TaskModel}>
-
+    private matDialog: MatDialog,
+    private taskService: TaskService,
+    private store: Store<{task: TaskModel}>,
+    private router: ActivatedRoute,
   ){
     this.task$ = this.store.select('task');
     this.taskPrj$ = this.store.select('task');
@@ -30,14 +32,13 @@ export class HometaskComponent implements OnInit{
   task$ !: Observable<TaskModel>;
   taskPrj$ !: Observable<any>;
 
-
   todoList: TaskModel[] = [];
   inProgressList: TaskModel[] = [];
   completeList: TaskModel[] = [];
   dueList: TaskModel[] = [];
   taskList: TaskModel[] = [];
   taskPrj: TaskModel[] = [];
-  prj_id!: string;
+  prj_id: string = '';
   task_id: string = '';
   project_name: string = '';
 
@@ -57,15 +58,11 @@ export class HometaskComponent implements OnInit{
     const project = this.router.params.subscribe( (param) => {
       this.prj_id = param['id'];
       this.getAllTasks(param['id']);
-      // this.getTaskSocket(param['id']);
-    })
-
-    // console.log(project_id);
-    // const project = this.router.snapshot.params.
+    });
   }
 
-  getAllTasks(){
-    this.store.dispatch(TaskActions.getAllTasks());
+  getAllTasks(project_id: string){
+    this.store.dispatch(TaskActions.getByProjectId({project_id: project_id}));
     this.task$.subscribe( (data: any) => {
       if(data != null){
         this.taskList = data.tasks;
@@ -76,31 +73,45 @@ export class HometaskComponent implements OnInit{
       }else{
         console.log('No data');
       }
+    console.log(this.taskList);
     });
   }
 
   getTaskSocket(){
     this.taskPrj = [];
-    this.taskService.getTasksSocket(this.prj_id);
-    this.taskPrj$.subscribe((data: any) => {
-      this.taskPrj.push(data.tasks);
+    this.taskPrj$ = this.taskService.getTasksSocket(this.prj_id);
+    this.task$.subscribe( (data: any) => {
+      this.taskPrj = data.tasks;
     });
     console.log(this.taskPrj);
   }
 
-  sendTask(tempList: TaskModel){
+  sendTask(){
+    // let taskSocket: TaskModel = {
+    //   task_id: tempList.task_id,
+    //   project_id: tempList.project_id,
+    //   name: tempList.name,
+    //   assignee: tempList.assignee,
+    //   description: tempList.description,
+    //   status: tempList.status,
+    //   complexity: tempList.complexity,
+    //   comment_count: tempList.comment_count,
+    //   deadline: tempList.deadline,
+    //   created_at: tempList.created_at,
+    //   updated_at: tempList.updated_at,
+    // }
     let taskSocket: TaskModel = {
-      task_id: tempList.task_id,
-      project_id: tempList.project_id,
-      name: tempList.name,
-      assignee: tempList.assignee,
-      description: tempList.description,
-      status: tempList.status,
-      complexity: tempList.complexity,
-      comment_count: tempList.comment_count,
-      deadline: tempList.deadline,
-      created_at: tempList.created_at,
-      updated_at: tempList.updated_at,
+      task_id: "dawavsdcq3rgb345",
+      project_id: "prj0132",
+      name: "Task 013",
+      assignee: [],
+      description: "This is task 013_socket",
+      status: 'todo',
+      complexity: 'hard',
+      comment_count: 9,
+      deadline: "2021-08-01T00:00:00.000Z",
+      created_at: "2021-07-31T00:00:00.000Z",
+      updated_at: "2021-07-31T00:00:00.000Z",
     }
     // this.store.dispatch(TaskActions.sendTask({task: taskSocket}));
     this.taskService.sendTaskSocket(taskSocket);
@@ -108,12 +119,11 @@ export class HometaskComponent implements OnInit{
 
   dialogAddTaskOpen(enterAnimationDuration: string, exitAnimationDuration: string) {
     let addTaskDialog = this.matDialog.open(AddTaskComponent, {enterAnimationDuration, exitAnimationDuration, autoFocus: false});
-    // this.prj_id = this.taskList[0].project_id;
-    this.chckId();
+    this.task_id = this.chckId();
     let instance = addTaskDialog.componentInstance;
     instance.prj_id = this.prj_id;
     instance.task_id = this.task_id;
-    console.log(this.task_id);
+    // console.log(this.task_id);
   }
 
   dialogTaskInfoOpen(enterAnimationDuration: string, exitAnimationDuration: string, tId: string){
@@ -143,20 +153,16 @@ export class HometaskComponent implements OnInit{
 
       if(listName === 'todo'){
         let tempList = this.updateList('todo', event.currentIndex);
-        this.sendTask(tempList);
         this.store.dispatch(TaskActions.updateTask({task: tempList, id: tempList.task_id}));
       }else if(listName === 'in-progress'){
         let tempList = this.updateList('in-progress', event.currentIndex);
         this.store.dispatch(TaskActions.updateTask({task: tempList, id: tempList.task_id}));
-        this.sendTask(tempList);
       }else if(listName === 'completed'){
         let tempList = this.updateList('completed', event.currentIndex);
         this.store.dispatch(TaskActions.updateTask({task: tempList, id: tempList.task_id}));
-        // this.sendTask(tempList);
       }else if(listName === 'due'){
         let tempList = this.updateList('due', event.currentIndex);
         this.store.dispatch(TaskActions.updateTask({task: tempList, id: tempList.task_id}));
-        // this.sendTask(tempList);
       }
     }
   }
@@ -204,14 +210,12 @@ export class HometaskComponent implements OnInit{
     for(let i =0; i < this.taskList.length; i++){
       if(this.taskList[i].task_id == tempID){
         console.log("id conflict");
+        return tempID = "null";
       }else{
-        this.task_id = tempID;
+        return tempID;
       }
     }
-  }
-
-  openInvitation(){
-    this.matDialog.open(InvitationComponent, {autoFocus: false});
+    return tempID
   }
 }
 

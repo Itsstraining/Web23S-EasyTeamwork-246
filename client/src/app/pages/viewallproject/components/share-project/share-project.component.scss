@@ -1,9 +1,9 @@
-::ng-deep .cdk-overlay-pane {
+:host ::ng-deep .cdk-overlay-pane {
   width: 35.94rem;
   height: fit-content;
 }
 
-::ng-deep .mat-mdc-dialog-container .mdc-dialog__surface {
+:host ::ng-deep .mat-mdc-dialog-container .mdc-dialog__surface {
   border-radius: 0.94rem;
   border: 0.06rem solid #F9F6DD;
   padding: 0;

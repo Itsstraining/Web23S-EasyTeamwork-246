@@ -7,8 +7,6 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { AddTaskComponent } from './components/add-task/add-task.component';
 import { TaskInfoComponent } from './components/task-info/task-info.component';
 import { FormsModule } from '@angular/forms';
-import { InvitationComponent } from './components/invitation/invitation.component';
-
 
 @NgModule({
   declarations: [

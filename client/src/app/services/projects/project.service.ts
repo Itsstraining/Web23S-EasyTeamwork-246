@@ -1,6 +1,5 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { ProjectModel } from 'src/models/projects.model';
 
@@ -21,16 +20,12 @@ export class ProjectService {
     return this.httpClient.get(`${this.url}/getProjectById?id=${id}`);
   }
 
-  getProjectsByOwnerId(owner_id: string){
-    return this.httpClient.get(`${this.url}/findProjectByOwnerId/${owner_id}`) as Observable<ProjectModel[]>;
-  }
-
   create(project: ProjectModel){
     return this.httpClient.post(`${this.url}/createProject`, project);
   }
 
   update(project: ProjectModel, id: string){
-    return this.httpClient.put(`${this.url}/updateProject?=${id}`, project);
+    return this.httpClient.put(`${this.url}/updateProject?id=${id}`, project);
   }
 
   delete(id: string){

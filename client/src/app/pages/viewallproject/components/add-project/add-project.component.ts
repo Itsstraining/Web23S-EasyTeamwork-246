@@ -60,10 +60,6 @@ export class AddProjectComponent {
       due_date: this.due_date,
       status: 'in-progress',
       marked: false,
-
-      is_in_progress: true,
-      is_completed: false,
-      is_overdue: false,
     };
 
     this.projectService.create(newProject).subscribe(
