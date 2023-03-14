@@ -1,15 +1,15 @@
-:host ::ng-deep mat-mdc-dialog-container {
+::ng-deep mat-mdc-dialog-container {
   width: 100%;
   height: 60%;
   border-radius: 15px;
 }
 
-:host ::ng-deep .cdk-overlay-pane {
+::ng-deep .cdk-overlay-pane {
   width: 36rem;
   height: fit-content;
 }
 
-:host ::ng-deep .mat-mdc-dialog-container .mdc-dialog__surface {
+::ng-deep .mat-mdc-dialog-container .mdc-dialog__surface {
   border-radius: 15px;
   padding: 1%;
   background-color: #FBF8FF;
