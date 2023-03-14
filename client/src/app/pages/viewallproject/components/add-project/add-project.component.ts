@@ -23,6 +23,9 @@ export class AddProjectComponent {
   formatDate!: string[];
   due_date!: string;
 
+  currentDate: any = new Date();
+  deadline = new Date(this.currentDate.getFullYear(), this.currentDate.getMonth(), this.currentDate.getDate() + 1);
+
   constructor(
     public dialogRef: MatDialogRef<AddProjectComponent>,
     public userService: UserService,
