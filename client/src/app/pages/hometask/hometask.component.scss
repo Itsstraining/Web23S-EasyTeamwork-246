@@ -106,7 +106,7 @@
 #funcTitle{
     font-family: 'Ubuntu', sans-serif;
     font-weight: 500;
-    font-size: 2rem;
+    font-size: 1.6rem;
     margin-top: 1%;
 }
 
@@ -212,7 +212,7 @@
     height: 100%;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    // justify-content: space-between;
     align-items: center;
     // background-color: #67dcff;
 }
@@ -383,4 +383,31 @@
 
 #infoBtn:hover{
     cursor: pointer;
+}
+
+.taskCountDiv{
+    width: 6.5%;
+    // height: 2rem;
+    border-radius: 50%;
+    font-size: 1.1rem;
+    background-color: red;
+    // color: #666666;
+    text-align: center;
+    padding: .3rem;
+}
+
+#todoCount{
+    background-color: #64ff6c;
+}
+
+#inProgressCount{
+    background-color: #fffc64;
+}
+
+#completeCount{
+    background-color: #ffaf64;
+}
+
+#dueCount{
+    background-color: #FF6464;
 }

@@ -1,7 +1,7 @@
 <mat-card>
   <mat-card-header>
       NOTIFICATIONS
-      <mat-icon nbTooltip="Close dialog" nbTooltipPlacement="top" (click)="dialogref.close()" icon="close-outline"></mat-icon>
+      <mat-icon matTooltip="Close Notifications" nbTooltipPlacement="top" (click)="dialogref.close()">close</mat-icon>
   </mat-card-header>
   <mat-card-content>
        <div class="noti-list" *ngIf="notis.length !== 0">

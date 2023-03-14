@@ -25,8 +25,6 @@ import { FormsModule } from '@angular/forms';
 import { SocketIoModule } from 'ngx-socket-io';
 import { SocketIoConfig } from 'ngx-socket-io/src/config/socket-io.config';
 
-const config: SocketIoConfig = { url: 'http://localhost:3000/', options: {} };
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -54,7 +52,6 @@ const config: SocketIoConfig = { url: 'http://localhost:3000/', options: {} };
     ]),
     HttpClientModule,
     FormsModule,
-    SocketIoModule.forRoot(config),
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -24,7 +24,7 @@ export class ProjectService {
     return this.httpClient.post(`${this.url}/createProject`, project);
   }
 
-  update(project: ProjectModel, id: string){
+  update(id: string,project: ProjectModel){
     return this.httpClient.put(`${this.url}/updateProject?id=${id}`, project);
   }
 

@@ -38,7 +38,7 @@ export class InvitationComponent implements OnInit {
   }
 
 
-  repliedInvitationEvent(event: any){
+  declinedInvitationEvent(event: any){
     this.invitations.splice(this.invitations.indexOf(event), 1);
   }
 }

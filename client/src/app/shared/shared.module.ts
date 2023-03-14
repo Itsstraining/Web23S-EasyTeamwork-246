@@ -6,6 +6,11 @@ import { InvitationComponent } from '../components/invitation/invitation.compone
 import { InvitationItemComponent } from '../components/invitation/invitation-item/invitation-item.component';
 import { NotificationComponent } from '../components/notification/notification.component';
 import { NotificationItemComponent } from '../components/notification/notification-item/notification-item.component';
+import { FormsModule } from '@angular/forms';
+import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
+
+const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
+
 
 
 @NgModule({
@@ -18,7 +23,8 @@ import { NotificationItemComponent } from '../components/notification/notificati
   ],
   imports: [
     CommonModule,
-    MaterialModule
+    MaterialModule,
+    SocketIoModule.forRoot(config),
   ],
   exports:[
     // components

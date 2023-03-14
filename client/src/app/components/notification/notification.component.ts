@@ -19,7 +19,7 @@ export class NotificationComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.notificationService.getNotisByUserId(this.userService.user.uid).subscribe(notifications => {
+    this.notificationService.getNotificationByUserId(this.userService.user.uid).subscribe(notifications => {
       if(notifications) {
         this.notis = notifications.reverse();
       }else{
