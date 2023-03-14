@@ -29,7 +29,7 @@ import { NotificationItemComponent } from '../components/notification/notificati
     NotificationItemComponent,
 
     // modules
-    MaterialModule
+    MaterialModule,
   ]
 })
 export class SharedModule { }

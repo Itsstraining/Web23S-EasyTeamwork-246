@@ -15,9 +15,11 @@ export class Project {
     @Prop()
     owner: string;
     @Prop()
+    owner_photo: string;
+    @Prop()
     owner_id: string;
     @Prop()
-    due_date: Date;
+    due_date: string;
     @Prop()
     status: Status;
     @Prop()

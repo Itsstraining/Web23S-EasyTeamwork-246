@@ -1,18 +1,17 @@
 <app-navbar></app-navbar>
 
-<!--socket test-->
-<!-- <button (click)="getTaskByPrjId()">get tasks</button> -->
-<!-- <button (click)="sendTask()">send task</button>
-<p *ngFor="let item of taskPrj">{{item.name}}</p> -->
-<!--socket test-->
+<button (click)="getTaskSocket()">get tasks</button>
+<!-- <p *ngFor="let item of taskPrj">test</p> -->
+<p *ngFor="let item of taskPrj">test: {{item.name}}</p>
 
 <div class="homeContainer">
-    <mat-button-toggle-group value="tasks" class="menuDiv">
+    <!-- <mat-button-toggle-group value="tasks" class="menuDiv">
         <div id="btnSpaceTop"></div>
         <mat-button-toggle class="menuBtn" value="tasks">Tasks</mat-button-toggle>
         <mat-button-toggle class="menuBtn" id="menuBtnCallendar">Callendar</mat-button-toggle>
         <div id="btnSpaceBottom"></div>
-    </mat-button-toggle-group>
+    </mat-button-toggle-group> -->
+    
     <div class="homeDiv">
         <div class="infoDiv">
             <div class="infoSubDiv">
@@ -40,13 +39,20 @@
                 <div class="taskTitleDiv">
                     <div class="taskDiv">
                         <p class="taskTitle">Todo</p>
+                        <div *ngIf="todoList.length > 0" class="taskCountDiv" id="todoCount">
+                            <span>
+                                {{todoList.length}}
+                            </span>
+                        </div>
                     </div>
                 </div>
                 <div class="addTaskDiv" (click)="dialogAddTaskOpen('400ms', '100ms')">
                     <p id="addTask">+  Add New Task</p>
                 </div>
                 <div
+                    [cdkDropListConnectedTo]="[todoDrop, inProgressDrop]"
                     cdkDropList
+                    #todoDrop = "cdkDropList"
                     [cdkDropListData]="todoList"
                     class="todoLists"
                     (cdkDropListDropped)="drop($event, 'todo')">
@@ -77,10 +83,17 @@
                 <div class="taskTitleDiv">
                     <div class="taskDiv">
                         <p class="taskTitle">In Progress</p>
+                        <div *ngIf="inProgressList.length > 0" class="taskCountDiv" id="inProgressCount">
+                            <span>
+                                {{inProgressList.length}}
+                            </span>
+                        </div>
                     </div>
                 </div>
                 <div
                     cdkDropList
+                    #inProgressDrop = "cdkDropList"
+                    [cdkDropListConnectedTo]="[todoDrop, inProgressDrop]"
                     [cdkDropListData]="inProgressList"
                     class="todoLists"
                     (cdkDropListDropped)="drop($event, 'in-progress')">
@@ -110,10 +123,17 @@
                 <div class="taskTitleDiv">
                     <div class="taskDiv">
                         <p class="taskTitle">Completed</p>
+                        <div *ngIf="completeList.length > 0" class="taskCountDiv" id="completeCount">
+                            <span>
+                                {{completeList.length}}
+                            </span>
+                        </div>
                     </div>
                 </div>
                 <div
                     cdkDropList
+                    #completeDrop = "cdkDropList"
+                    [cdkDropListConnectedTo]="[completeDrop]"
                     [cdkDropListData]="completeList"
                     class="todoLists"
                     (cdkDropListDropped)="drop($event, 'completed')">
@@ -143,10 +163,17 @@
                 <div class="taskTitleDiv">
                     <div class="taskDiv">
                         <p class="taskTitle">Due</p>
+                        <div *ngIf="dueList.length > 0" class="taskCountDiv" id="dueCount">
+                            <span>
+                                {{dueList.length}}
+                            </span>
+                        </div>
                     </div>
                 </div>
                 <div
                     cdkDropList
+                    #dueDrop = "cdkDropList"
+                    [cdkDropListConnectedTo]="[dueDrop]"
                     [cdkDropListData]="dueList"
                     class="todoLists"
                     (cdkDropListDropped)="drop($event, 'due')">

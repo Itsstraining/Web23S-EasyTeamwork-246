@@ -23,28 +23,28 @@
         <div id="overview-header">Overview</div>
         <div id="overview-body">
             <div class="overview-content" id="total">
-                <div class="amount"><span>{{total_amount}}</span></div>
+                <div class="amount"><span>{{projectList.length}}</span></div>
                 <div class="horizone">
                     <hr>
                 </div>
                 <div class="type"><span>Total</span></div>
             </div>
             <div class="overview-content" id="in-progress">
-                <div class="amount"><span>{{in_progress_amount}}</span></div>
+                <div class="amount"><span>{{in_progress_list.length}}</span></div>
                 <div class="horizone">
                     <hr>
                 </div>
                 <div class="type"><span>In progress</span></div>
             </div>
             <div class="overview-content" id="completed">
-                <div class="amount"><span>{{completed_amount}}</span></div>
+                <div class="amount"><span>{{completed_list.length}}</span></div>
                 <div class="horizone">
                     <hr>
                 </div>
                 <div class="type"><span>Completed</span></div>
             </div>
             <div class="overview-content" id="overdue">
-                <div class="amount"><span>{{overdue_amount}}</span></div>
+                <div class="amount"><span>{{overdue_list.length}}</span></div>
                 <div class="horizone">
                     <hr>
                 </div>
@@ -137,18 +137,18 @@
                                 alt="empty star">
                         </button>
                     </div>
-                    <div class="item-attribute" id="item-name" [routerLink]="['/hometask/',item.project_id]">
+                    <div class="item-attribute" id="item-name" [routerLink]="['/hometask/',item.project_id]" >
                         <span>{{item.name}}</span>
                     </div>
-                    <div  class="item-attribute" id="item-state">
+                    <div *ngIf="item.is_in_progress" class="item-attribute" id="item-state">
                         <div style="background-color: #159ACC;" id="state-dot"></div>
                         <span style="color: #199CAE;"> In-progress</span>
                     </div>
-                    <div  class="item-attribute" id="item-state">
+                    <div *ngIf="item.is_completed" class="item-attribute" id="item-state">
                         <div style="background-color: #33FF00;" id="state-dot"></div>
                         <span style="color: #28C700;"> Completed</span>
                     </div>
-                    <div class="item-attribute" id="item-state">
+                    <div *ngIf="item.is_overdue" class="item-attribute" id="item-state">
                         <div style="background-color: #FF0000;" id="state-dot"></div>
                         <span style="color: #E51616;"> Overdue</span>
                     </div>
@@ -162,15 +162,15 @@
                         <span>{{item.members.length}}</span>
                     </div>
                     <div class="item-attribute" id="item-host">
-                        <img class="avatar" src="https://cdn-icons-png.flaticon.com/512/3436/3436890.png" alt="avatar">
-                        <span>{{item.owner_id}}</span>
+                        <img class="avatar" [src]="item.owner_photo" alt="avatar">
+                        <span>{{item.owner}}</span>
                     </div>
                     <div class="item-attribute" id="item-options">
                         <button [matMenuTriggerFor]="menu">
                             <i class="fa-solid fa-ellipsis-vertical fa-sm"></i>
                         </button>
-                        <mat-menu #menu="matMenu">
-                          <button mat-menu-item (click)="deleteProjectEvent($event)">Delete</button>
+                        <mat-menu #menu="matMenu" (deleteProjectEvent)="deleteProjectEvent($event)">
+                          <button mat-menu-item>Delete</button>
                         </mat-menu>
                     </div>
                 </div>

@@ -44,6 +44,7 @@ export class InvitationItemComponent implements OnInit {
 
   replyInvitation(isAgree: number) {
     this.invitation.status =  isAgree;
+    
 
     // this.projectService.getAll(this.tempProject.project_id).subscribe((res) => {
     //   if(res.disabled){
@@ -67,6 +68,7 @@ export class InvitationItemComponent implements OnInit {
   addMemToProject(isAgree: number) {
     if(isAgree == 1) {
       this.tempProject.members.push(this.currentUser);
+      
 
       // this.projectService.update(this.invitation.project_id, this.tempProject).subscribe(
       //   invitation => {

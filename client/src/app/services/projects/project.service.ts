@@ -18,7 +18,7 @@ export class ProjectService {
   }
 
   getById(id: string){
-    return this.httpClient.get(`${this.url}/getProjectById?=${id}`);
+    return this.httpClient.get(`${this.url}/getProjectById?id=${id}`);
   }
 
   getProjectsByOwnerId(owner_id: string){
@@ -34,6 +34,6 @@ export class ProjectService {
   }
 
   delete(id: string){
-    return this.httpClient.delete(`${this.url}/deleteProject?=${id}`);
+    return this.httpClient.delete(`${this.url}/deleteProject?id=${id}`);
   }
 }
