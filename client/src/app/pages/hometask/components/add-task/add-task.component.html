@@ -23,7 +23,7 @@
             <div class="row">
                 <mat-form-field class="input" appearance="fill" id="datePicker">
                     <mat-label>Due date</mat-label>
-                    <input matInput placeholder="MM/DD/YYYY" [(ngModel)]="dateRaw" [matDatepicker]="picker">
+                    <input min="{{deadline | date: 'yyyy-MM-dd'}}" matInput placeholder="MM/DD/YYYY" [(ngModel)]="dateRaw" [matDatepicker]="picker">
                     <mat-datepicker #picker></mat-datepicker>
                 </mat-form-field>
                 <button id="calendar-btn" mat-raised-button (click)="picker.open()">
