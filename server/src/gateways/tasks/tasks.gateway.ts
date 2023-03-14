@@ -13,18 +13,18 @@ export class TasksGateway {
     console.log(`${client.id} has disconnected`);
   }
 
-  @SubscribeMessage('message')
-  handleMessage(client: any, payload: any): string {
-    const prjId = payload.project_id;
-    console.log("message-", prjId, payload);
-    this.server.emit("message-" + prjId, payload);
-    return 'Hello world!';
-  }
   // @SubscribeMessage('message')
-  // handleMessage(client: any, payload: any): string{
-  //   const test_id = payload.test_id;
-  //   console.log("message-", payload);
-  //   this.server.emit('message-' + test_id, payload);
-  //   return "test socket";
+  // handleMessage(client: any, payload: any): string {
+  //   const prjId = payload.project_id;
+  //   console.log("message-", prjId, payload);
+  //   this.server.emit("message-" + prjId, payload);
+  //   return 'Hello world!';
   // }
+  @SubscribeMessage('message')
+  handleMessage(client: any, payload: any): string{
+    const test_id = payload.project_id;
+    console.log("message-", payload);
+    this.server.emit('message-' + test_id, payload);
+    return "test socket";
+  }
 }

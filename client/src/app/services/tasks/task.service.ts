@@ -52,7 +52,7 @@ export class TaskService {
     return this.socket.fromEvent(channel);
   }
 
-  sendTest(test: TestModel){
+  sendTest(test: TaskModel){
     this.socket.emit('message', test);
   }
 }

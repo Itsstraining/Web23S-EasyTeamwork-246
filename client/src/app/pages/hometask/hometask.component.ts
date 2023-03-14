@@ -9,6 +9,7 @@ import { AddTaskComponent } from './components/add-task/add-task.component';
 import { TaskInfoComponent } from './components/task-info/task-info.component';
 import * as TaskActions from '../../../NgRx/Actions/tasks.action';
 import { ActivatedRoute } from '@angular/router';
+import { TestModel } from 'src/models/test.modle';
 
 @Component({
   selector: 'app-hometask',
@@ -28,8 +29,7 @@ export class HometaskComponent implements OnInit{
 
   // @Input() prj_id: string = '';
 
-  task$ !: Observable<TaskModel>;
-  
+  task$ !: Observable<TaskModel>;  
 
   todoList: TaskModel[] = [];
   inProgressList: TaskModel[] = [];
@@ -38,11 +38,9 @@ export class HometaskComponent implements OnInit{
   taskList: TaskModel[] = [];
   prj_id: string = '';
   task_id: string = '';
-  project_name: string = '';
-  
+  project_name: string = '';  
 
   temp: Mutable<TaskModel> = this.taskList[0];
-  tempTask: TaskModel[] = [];
 
   todoMenu: boolean = true;
   infoOpened: boolean = false;
@@ -54,13 +52,14 @@ export class HometaskComponent implements OnInit{
     this.completeList = [];
     this.dueList = [];
     this.taskList = [];
-    const project = this.router.params.subscribe( (param) => {
+    this.router.params.subscribe( (param) => {
       this.prj_id = param['id'];
       this.getAllTasks(param['id']);
+      this.getSocket();
     });
   }
 
-  getAllTasks(project_id: string){    
+  getAllTasks(project_id: string){
     this.store.dispatch(TaskActions.getByProjectId({project_id: project_id}));
     this.task$.subscribe( (data: any) => {
       if(data != null){
@@ -78,50 +77,35 @@ export class HometaskComponent implements OnInit{
   taskSocket$ !: Observable<any>;
   taskPrj: TaskModel[] = [];
   taskName: string = '';
+  testID: string = 'test_01';
 
-  getTaskSocket(){
-    // this.taskPrj = [];
-    console.log("project: " + this.prj_id);
-    this.taskSocket$ = this.taskService.getTasksSocket(this.prj_id);
-    this.taskSocket$.subscribe( (data: any) => {
-      this.taskPrj.push(data);
-    });
-    console.log(this.taskPrj);
+  test$!: Observable<any>;
+  test_id: string = 'test_01';
+  test_content !: string;
+
+  getSocket(){
+    this.taskList.forEach( (task) => this.taskPrj.push(Object.assign({}, task)));
+    this.test$ = this.taskService.getTest(this.prj_id);
+    this.test$.subscribe( (data: any) => {
+      // this.cloneList(data);
+      console.log(data);
+    })
   }
 
-  sendTask(){
-    
-    let taskSocket: TaskModel = {
-      task_id: "d1dsd",
-      project_id: "prj0132",
-      name: this.taskName,
-      assignee: [],
-      description: `This is ${this.taskName}_socket`,
-      status: 'todo',
-      complexity: 'hard',
-      comment_count: 9,
-      deadline: "2021-08-01T00:00:00.000Z",
-      created_at: "2021-07-31T00:00:00.000Z",
-      updated_at: "2021-07-31T00:00:00.000Z",
-    }
-    // this.taskPrj.push(taskSocket);
-    this.taskService.sendTask(taskSocket);
+  sendTest(newTest: TaskModel){
+    this.taskService.sendTest(newTest);
+    this.cloneList(newTest);
+    this.store.dispatch(TaskActions.updateTask({task: newTest, id: newTest.task_id}));
+    this.ngOnInit();
   }
 
-  //   // let taskSocket: TaskModel = {
-  //   //   task_id: tempList.task_id,
-  //   //   project_id: tempList.project_id,
-  //   //   name: tempList.name,
-  //   //   assignee: tempList.assignee,
-  //   //   description: tempList.description,
-  //   //   status: tempList.status,
-  //   //   complexity: tempList.complexity,
-  //   //   comment_count: tempList.comment_count,
-  //   //   deadline: tempList.deadline,
-  //   //   created_at: tempList.created_at,
-  //   //   updated_at: tempList.updated_at,
-  //   // }
-  // }
+  cloneList(newTest: TaskModel){
+    let tempTask: TaskModel[] = [];
+    this.taskList.forEach( (task) => tempTask.push(Object.assign({}, task)));
+    let tempIndex = tempTask.findIndex((index) => index.task_id === newTest.task_id); 
+    tempTask[tempIndex] = newTest;
+    this.taskList = tempTask;
+  }
 
   dialogAddTaskOpen(enterAnimationDuration: string, exitAnimationDuration: string) {
     let addTaskDialog = this.matDialog.open(AddTaskComponent, {enterAnimationDuration, exitAnimationDuration, autoFocus: false});
@@ -130,6 +114,9 @@ export class HometaskComponent implements OnInit{
     instance.prj_id = this.prj_id;
     instance.task_id = this.task_id;
     // console.log(this.task_id);
+    addTaskDialog.afterClosed().subscribe(() => {
+      this.ngOnInit();
+    });
   }
 
   dialogTaskInfoOpen(enterAnimationDuration: string, exitAnimationDuration: string, tId: string){
@@ -159,16 +146,16 @@ export class HometaskComponent implements OnInit{
 
       if(listName === 'todo'){
         let tempList = this.updateList('todo', event.currentIndex);
-        this.store.dispatch(TaskActions.updateTask({task: tempList, id: tempList.task_id}));
+        this.sendTest(tempList);
       }else if(listName === 'in-progress'){
         let tempList = this.updateList('in-progress', event.currentIndex);
-        this.store.dispatch(TaskActions.updateTask({task: tempList, id: tempList.task_id}));
+        this.sendTest(tempList);
       }else if(listName === 'completed'){
         let tempList = this.updateList('completed', event.currentIndex);
-        this.store.dispatch(TaskActions.updateTask({task: tempList, id: tempList.task_id}));
+        this.sendTest(tempList);
       }else if(listName === 'due'){
         let tempList = this.updateList('due', event.currentIndex);
-        this.store.dispatch(TaskActions.updateTask({task: tempList, id: tempList.task_id}));
+        this.sendTest(tempList);
       }
     }
   }

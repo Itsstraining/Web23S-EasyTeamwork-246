@@ -32,7 +32,7 @@ export class SocketTestComponent {
       test_id: this.test_id,
       test_content: content,
     };
-    this.taskService.sendTest(newTest);
+    // this.taskService.sendTest(newTest);
     // this.iterate++;
   }
 }
