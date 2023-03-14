@@ -8,7 +8,6 @@ import { AddTaskComponent } from './components/add-task/add-task.component';
 import { TaskInfoComponent } from './components/task-info/task-info.component';
 import { InvitationComponent } from './components/invitation/invitation.component';
 
-
 @NgModule({
   declarations: [
     HometaskComponent,

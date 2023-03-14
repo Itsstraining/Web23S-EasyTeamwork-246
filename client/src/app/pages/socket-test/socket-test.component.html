@@ -1,0 +1,4 @@
+<button (click)="getTests()">join test</button>
+<input  [(ngModel)]="test_content" placeholder="Enter content">
+<button (click)="sendTest(test_content)">send</button>
+<p *ngFor="let item of tests">{{item.test_content}}</p>
