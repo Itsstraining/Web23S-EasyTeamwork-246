@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Auth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/users/user.service';
+import { Store } from '@ngrx/store';
+import { UserState } from 'src/NgRx/States/user.state';
 
 @Component({
   selector: 'app-navbar',
@@ -9,17 +10,20 @@ import { UserService } from 'src/app/services/users/user.service';
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent implements OnInit {
-  constructor(public userService: UserService, private auth: Auth,private router: Router){}
-    ngOnInit(): void {
-    }
+  constructor(
+    public userService: UserService,
+    private router: Router,
+    private store: Store<{ user: UserState}>,
+  ) { }
 
-    hometask(){
-      this.router.navigate(['hometask']);
-    }
+  auth$ = this.store.select('user');
 
-    viewallproject(){
-      this.router.navigate(['viewallproject']);
-    }
+  ngOnInit(): void {
+  }
+
+  viewallproject() {
+    this.router.navigate(['viewallproject']);
+  }
 
 
 }

@@ -3,25 +3,22 @@ import { RouterModule, Routes } from '@angular/router';
 import { UserGuard } from './guards/user.guard';
 
 const routes: Routes = [
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
   {
-    path: '',
+    path: 'hometask/:id',
     canActivate: [UserGuard],
-    children: [
-      {
-        path: 'hometask/:id',
-        loadChildren: () =>
-          import('./pages/hometask/hometask.module').then(
-            (m) => m.HometaskModule
-          ),
-      },
-      {
-        path: 'viewallproject',
-        loadChildren: () =>
-          import('./pages/viewallproject/viewallproject.module').then(
-            (m) => m.ViewallprojectModule
-          ),
-      },
-    ],
+    loadChildren: () =>
+      import('./pages/hometask/hometask.module').then(
+        (m) => m.HometaskModule
+      ),
+  },
+  {
+    path: 'viewallproject',
+    canActivate: [UserGuard],
+    loadChildren: () =>
+      import('./pages/viewallproject/viewallproject.module').then(
+        (m) => m.ViewallprojectModule
+      ),
   },
   {
     path: 'login',

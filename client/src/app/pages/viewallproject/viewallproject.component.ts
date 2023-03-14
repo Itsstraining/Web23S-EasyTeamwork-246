@@ -31,6 +31,9 @@ export class ViewallprojectComponent implements OnInit {
   projectList: ProjectModel[] = [];
   ownedProjects: ProjectModel[] = [];
 
+  sharedProjects: ProjectModel[] = [];
+  mySharedProjects: string = '0';
+
   in_progress_list: ProjectModel[] = [];
   completed_list: ProjectModel[] = [];
   overdue_list: ProjectModel[] = [];
@@ -38,15 +41,24 @@ export class ViewallprojectComponent implements OnInit {
 
 
   dialogOpen() {
-    let addProjectDialog = this.matDialog.open(AddProjectComponent,{
+    let addProjectDialog = this.matDialog.open(AddProjectComponent, {
       data: {
         owner_id: this.userService.userInfo.uid,
       }, autoFocus: false
     })
+
+    // làm tiếp khúc cho
+    // .close.subscribe((addProject) => {
+    //     this.ownedProjects.push(addProject);
+    //     if (this.mySharedProjects == '0') {
+    //       this.projectList = this.ownedProjects;
+    //     }
+    //   });
+
     console.log("Open dialog", this.userService.userInfo.uid);
     addProjectDialog.afterClosed().subscribe(() => {
       this.ngOnInit();
-  });
+    });
   }
   opendialogShare() {
     this.matDialog.open(ShareProjectComponent)
@@ -69,24 +81,23 @@ export class ViewallprojectComponent implements OnInit {
   }
 
 
-  getAllProject(){
+  getAllProject() {
     this.projectList = [];
     this.ownedProjects = [];
     this.in_progress_list = [];
     this.completed_list = [];
     this.overdue_list = [];
     this.mark_list = [];
-    
+
     this.store.dispatch(ProjectActions.getAllProjects());
     this.project$.subscribe((data) => {
       if (data) {
         // Get all projects
         this.projectList = data.projects;
         // Get owned projects
-        this.ownedProjects = this.projectList.filter((project) =>
-        {
-          for(let i = 0; i < project.members.length; i++){
-            if(project.members[i].uid == this.userService.userInfo.uid){
+        this.ownedProjects = this.projectList.filter((project) => {
+          for (let i = 0; i < project.members.length; i++) {
+            if (project.members[i].uid == this.userService.userInfo.uid) {
               return true;
             }
           }
@@ -189,14 +200,14 @@ export class ViewallprojectComponent implements OnInit {
     this.foundList = [];
   }
 
-  markProject(marked: boolean, project : ProjectModel) {
-    if(marked == false){
+  markProject(marked: boolean, project: ProjectModel) {
+    if (marked == false) {
       marked = true;
     }
-    else{
+    else {
       marked = false;
     }
-    let updateProject:ProjectModel = {
+    let updateProject: ProjectModel = {
       project_id: project.project_id,
       marked: marked,
       name: project.name,
@@ -214,7 +225,7 @@ export class ViewallprojectComponent implements OnInit {
       this.getAllProject();
     });
   }
-  
+
   deleteProject(project_id: string) {
     this.projectService.delete(project_id).subscribe((data) => {
       console.log("Delete project", data);

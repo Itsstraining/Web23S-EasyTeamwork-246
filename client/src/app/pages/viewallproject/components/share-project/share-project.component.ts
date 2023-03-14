@@ -45,11 +45,7 @@ export class ShareProjectComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  showAccountGG() {
-
-  }
-
-  onTagAdd(mem: UserModel): void {
+  onTagAddMember(mem: UserModel): void {
     if (mem) {
       this.tagsMembers.add(mem.displayName);
       console.log(this.tagsMembers);
@@ -70,23 +66,12 @@ export class ShareProjectComponent implements OnInit {
         owner_id: this.userService.user.uid,
         receiver_id: mem.uid,
         status: 0,
-        // project: {
-        //   project_id: this.project.project_id,
-        //   marked: this.project.marked,
-        //   name: this.project.name,
-        //   due_date: this.project.due_date,
-        //   status: this.project.status,
-        //   disable: this.project.disable,
-        //   owner_id: this.project.owner_id,
-        //   members: this.project.members
-        // },
         project_id: this.project.project_id,
         unread: true
       }
 
       this.invitationService.createInvitation(invitation).subscribe(
         (res) => {
-          console.log(res);
           window.alert('Invitation sent!!');
         }
       );

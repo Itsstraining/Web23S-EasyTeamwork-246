@@ -1,0 +1,14 @@
+<mat-card>
+  <mat-card-header>
+      INVITATIONS
+      <mat-icon matTooltip="Close Invitations" matTooltipPlacement="top" (click)="dialogref.close()">close</mat-icon>
+  </mat-card-header>
+  <mat-card-content>
+      <div class="invite-list" *ngIf="invitations.length !== 0">
+          <app-invitation-item *ngFor="let invitation of invitations" [invitation]="invitation" (declinedInvitationEvent)="declinedInvitationEvent($event)"></app-invitation-item>
+      </div>
+       <div>
+          <p *ngIf="invitations.length === 0">You have no invitations.</p>
+       </div>
+  </mat-card-content>
+</mat-card>

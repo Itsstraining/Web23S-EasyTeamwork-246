@@ -1,0 +1,12 @@
+<div class="noti-container" *ngIf="noti.status !== 0">
+  <div class="noti-content">
+      <img src="../../../../assets/images/user-ava.jpg" alt="">
+      <p>
+        <span class="mem-name">EasyTeamwork</span>
+        <span [class]="noti.status  == 1 ? 'accept' : 'reject'" class="accept">
+          {{noti.status == 1 ? "accepted" : "rejected"}}
+        </span> your invitation to join
+        <!-- <span class="project-name">{{noti.name}}</span> -->
+      </p>
+  </div>
+</div>

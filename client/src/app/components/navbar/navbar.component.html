@@ -13,34 +13,24 @@
     </div>
 
     <div class="btn-page">
-      <button
-        class="btn-homeTask"
-        mat-raised-button
-        style="background-color: #FFF6A6"
-        (click)="viewallproject()"
-      >
+      <button class="btn-homeTask" mat-raised-button style="background-color: #FFF6A6" (click)="viewallproject()">
         ViewAllProject
-
       </button>
     </div>
 
     <div class="userName">
       <div class="image-user">
-        <img [src]="userService.userInfo.photoURL" alt="" class="img" />
-        <p>{{userService.userInfo.displayName}}</p>
+        <img [src]="(this.auth$ | async)?.user?.photoURL" alt="" class="img" />
+        <p>{{ (this.auth$ | async)?.user?.displayName }}</p>
         <i class="fa-solid fa-caret-down" [matMenuTriggerFor]="menu"></i>
       </div>
       <mat-menu #menu="matMenu">
-        <button
-          mat-menu-item
-        (click)="userService.logoutWithGoogle()"
-          style="
+        <button mat-menu-item (click)="userService.logoutWithGoogle()" style="
             display: flex;
             align-items: center;
             justify-content: space-between;
 
-          "
-        >
+          ">
           <i class="fa-solid fa-right-from-bracket"></i>
           Logout
         </button>

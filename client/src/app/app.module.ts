@@ -22,12 +22,12 @@ import { TaskEffects } from 'src/NgRx/Effects/tasks.effect';
 import { ProjectEffects } from 'src/NgRx/Effects/projects.effect';
 import { ProjectReducer } from 'src/NgRx/Reducers/projects.reducer';
 import { FormsModule } from '@angular/forms';
-import { NotificationComponent } from './components/notification/notification.component';
+import { SocketIoModule } from 'ngx-socket-io';
+import { SocketIoConfig } from 'ngx-socket-io/src/config/socket-io.config';
 
 @NgModule({
   declarations: [
     AppComponent,
-    NotificationComponent,
   ],
   imports: [
     BrowserModule,
