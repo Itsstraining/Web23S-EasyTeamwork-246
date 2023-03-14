@@ -71,7 +71,7 @@ export class InvitationItemComponent implements OnInit {
       this.tempProject.members.push(this.currentUser);
 
 
-      this.projectService.update(this.invitation.project_id, this.tempProject).subscribe(
+      this.projectService.update(this.tempProject,this.invitation.project_id).subscribe(
         invitation => {
           window.alert('Member has been added to project');
         }

@@ -1,9 +1,11 @@
 <app-navbar></app-navbar>
 
-<!-- <button (click)="getSocket()">join test</button>
-<input  [(ngModel)]="test_content" placeholder="Enter content">
-<button (click)="sendTest(test_content)">send</button> -->
-<!-- <p *ngFor="let item of taskPrj">{{item.name}}</p> -->
+<!-- <mat-button-toggle-group value="tasks" class="menuDiv">
+    <div id="btnSpaceTop"></div>
+    <mat-button-toggle class="menuBtn" value="tasks">Tasks</mat-button-toggle>
+    <mat-button-toggle class="menuBtn" id="menuBtnCallendar">Callendar</mat-button-toggle>
+    <div id="btnSpaceBottom"></div>
+</mat-button-toggle-group> -->
 
 <div class="homeContainer">
     <!-- <mat-button-toggle-group value="tasks" class="menuDiv">
@@ -16,9 +18,8 @@
     <div class="homeDiv">
         <div class="infoDiv">
             <div class="infoSubDiv">
-                <h1 id="funcTitle">Project Name</h1>
-                <p class="projInfo">Priority: <span id="priorContent">HIGH</span></p>
-                <p class="projInfo">Due date: <span id="dateContent">17 March 2023</span></p>
+                <h1 id="funcTitle">{{projectName}}</h1>
+                <p class="projInfo">Due date: <span id="dateContent">{{projectDeadline}}</span></p>
             </div>
             <div class="userDiv">
                 <div class="usrIcon">

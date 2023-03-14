@@ -31,9 +31,7 @@ const routes: Routes = [
       import('./pages/create-account/create-account.module').then(
         (m) => m.CreateAccountModule
       ),
-  },
-  { path: 'test', loadChildren: () => import('./pages/socket-test/socket-test.module').then(m => m.SocketTestModule) },
-  {
+  },{
     path: '**',
     loadChildren: () =>
       import('./pages/error/error.module').then((m) => m.ErrorModule),

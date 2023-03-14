@@ -44,7 +44,7 @@ export class ViewallprojectComponent implements OnInit {
     let addProjectDialog = this.matDialog.open(AddProjectComponent, {
       data: {
         owner_id: this.userService.userInfo.uid,
-      },
+      }, autoFocus: false
     })
 
     // làm tiếp khúc cho
@@ -109,8 +109,7 @@ export class ViewallprojectComponent implements OnInit {
       else {
         console.log("No data");
       }
-    })
-
+    });
   }
 
   getOwnedProjects() {

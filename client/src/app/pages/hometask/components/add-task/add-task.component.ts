@@ -16,6 +16,7 @@ import * as TaskActions from '../../../../../NgRx/Actions/tasks.action';
 export class AddTaskComponent{
 
   task$ !: Observable<any>;
+  public test: string = 'test';
 
   constructor(
     public dialogRef: MatDialogRef<AddTaskComponent>,
@@ -31,6 +32,7 @@ export class AddTaskComponent{
     return time.toLocaleDateString();
   }
 
+  backTask!: TaskModel;
   taskName = '';
   taskDescription = '';
   taskComplexRaw = '';
@@ -130,18 +132,17 @@ export class AddTaskComponent{
       updated_at: ''
     };
 
-    this.store.dispatch(TaskActions.addTask({task: task}));
-
-    console.log(task.task_id);
+    this.backTask = task;
 
     if(task){
-      this.dialogRef.close();
+      this.store.dispatch(TaskActions.addTask({task: task}));
+      this.dialogRef.close({data: this.backTask});
     }else{
       console.log('Error');
     }
   }
 
   closeDialog(){
-    this.dialogRef.close();
+    this.dialogRef.close({data: this.backTask});
   }
 }
