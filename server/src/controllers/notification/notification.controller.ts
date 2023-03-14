@@ -11,12 +11,12 @@ export class NotificationController {
         return await this.notificationService.getAllNotification();
     }
 
-    @Get('invitationsById/:id')
+    @Get('notificationById/:id')
     async getInvitationsById(@Param('id') id: string) {
         return await this.notificationService.getNotificationById(id);
     }
 
-    @Post('createInvitation')
+    @Post('createNotification')
     async createInvitation(@Body() notificaton: NotificationModel) {
         return await this.notificationService.createNotification(notificaton);
     }

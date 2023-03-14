@@ -19,7 +19,7 @@ export class NotificationService {
   }
 
   getNotificationById(notification_id: string | null){
-    return this.http.get(`${this.apiURL}invitationsById/${notification_id}`) as Observable<NotificationModel[]>;
+    return this.http.get(`${this.apiURL}notificationById/${notification_id}`) as Observable<NotificationModel[]>;
   }
 
   getNotificationByUserId(uid: string){
@@ -27,7 +27,7 @@ export class NotificationService {
   }
 
   createNotification(newNotification: any) {
-    return this.http.post(`${this.apiURL}createInvitation`, newNotification) as Observable<NotificationModel>;
+    return this.http.post(`${this.apiURL}createNotification`, newNotification) as Observable<NotificationModel>;
   }
 
   updateNotificationById(notification_id: string, updatedNoti: any) {

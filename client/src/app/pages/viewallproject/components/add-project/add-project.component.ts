@@ -62,11 +62,11 @@ export class AddProjectComponent {
       marked: false,
     };
 
-    this.projectService.create(newProject).subscribe(
-      (res) => {
-        window.alert('Project created successfully!!');
-      },
-    );
+    // this.projectService.create(newProject).subscribe(
+    //   (res) => {
+    //     window.alert('Project created successfully!!');
+    //   },
+    // );
     console.log(newProject);
     this.dialogRef.close(newProject);
   }

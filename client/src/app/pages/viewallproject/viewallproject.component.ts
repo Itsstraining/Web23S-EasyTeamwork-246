@@ -47,13 +47,12 @@ export class ViewallprojectComponent implements OnInit {
       }, autoFocus: false
     })
 
-    // làm tiếp khúc cho
-    // .close.subscribe((addProject) => {
-    //     this.ownedProjects.push(addProject);
-    //     if (this.mySharedProjects == '0') {
-    //       this.projectList = this.ownedProjects;
-    //     }
-    //   });
+    addProjectDialog.afterClosed().subscribe((addProject) => {
+      this.ownedProjects.push(addProject);
+      if (this.mySharedProjects == '0') {
+        this.projectList = this.ownedProjects;
+      }
+    });
 
     console.log("Open dialog", this.userService.userInfo.uid);
     addProjectDialog.afterClosed().subscribe(() => {
