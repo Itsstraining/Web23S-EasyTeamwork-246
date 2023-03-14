@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Socket } from 'ngx-socket-io';
+import { TestModel } from 'src/models/test.modle';
 import { environment } from '../../../environments/environment';
 import { TaskModel } from '../../../models/task.model';
 
@@ -38,11 +39,20 @@ export class TaskService {
   }
 
   getTasksSocket(project_id: string){
-    const channel = 'task-' + project_id;
+    const channel = 'message-' + project_id;
     return this.socket.fromEvent(channel);
   }
 
-  sendTaskSocket(task: TaskModel){
-    this.socket.emit('task', task);
+  sendTask(task: TaskModel){
+    this.socket.emit('message', task);
+  }
+
+  getTest(test: string){
+    const channel = 'message-' + test;
+    return this.socket.fromEvent(channel);
+  }
+
+  sendTest(test: TestModel){
+    this.socket.emit('message', test);
   }
 }

@@ -2,15 +2,18 @@
 
 <button (click)="getTaskSocket()">get tasks</button>
 <button (click)="sendTask()">send</button>
+<input type="text" [(ngModel)]="taskName"/>
 <p *ngFor="let item of taskPrj">test: {{item.name}}</p>
 
+<!-- <mat-button-toggle-group value="tasks" class="menuDiv">
+    <div id="btnSpaceTop"></div>
+    <mat-button-toggle class="menuBtn" value="tasks">Tasks</mat-button-toggle>
+    <mat-button-toggle class="menuBtn" id="menuBtnCallendar">Callendar</mat-button-toggle>
+    <div id="btnSpaceBottom"></div>
+</mat-button-toggle-group> -->
+
 <div class="homeContainer">
-    <!-- <mat-button-toggle-group value="tasks" class="menuDiv">
-        <div id="btnSpaceTop"></div>
-        <mat-button-toggle class="menuBtn" value="tasks">Tasks</mat-button-toggle>
-        <mat-button-toggle class="menuBtn" id="menuBtnCallendar">Callendar</mat-button-toggle>
-        <div id="btnSpaceBottom"></div>
-    </mat-button-toggle-group> -->
+    
     
     <div class="homeDiv">
         <div class="infoDiv">

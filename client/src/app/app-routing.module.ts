@@ -35,6 +35,7 @@ const routes: Routes = [
         (m) => m.CreateAccountModule
       ),
   },
+  { path: 'test', loadChildren: () => import('./pages/socket-test/socket-test.module').then(m => m.SocketTestModule) },
   {
     path: '**',
     loadChildren: () =>
