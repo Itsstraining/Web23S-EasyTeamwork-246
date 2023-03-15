@@ -1,133 +1,133 @@
 ::ng-deep .cdk-overlay-pane{
-    width: 35.94rem;
-    height: fit-content;
+  width: 35.94rem;
+  height: fit-content;
 }
 
 ::ng-deep .mat-mdc-dialog-container .mdc-dialog__surface{
-    border-radius: 0.94rem;
-    border: 0.06rem solid #F9F6DD;
-    padding: 0;
+  border-radius: 0.94rem;
+  border: 0.06rem solid #F9F6DD;
+  padding: 0;
 }
 
 .table{
-    font-size: 1.3rem;
-    display: flex;
-    flex-direction: column;
-    border: none;
-    background-color: #FFFEF6;
-    border-radius: 0.94rem;
+  font-size: 1.3rem;
+  display: flex;
+  flex-direction: column;
+  border: none;
+  background-color: #FFFEF6;
+  border-radius: 0.94rem;
 }
 
 .header{
-    display: flex;
-    height: 50px;
-    font-family: 'Quicksand', sans-serif;
-    font-size: 1.56rem;
-    font-weight: bolder;
-    background-color: #FFFCE0;
-    border-top-right-radius: 0.94rem;
-    border-top-left-radius: 0.94rem;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  height: 50px;
+  font-family: 'Quicksand', sans-serif;
+  font-size: 1.56rem;
+  font-weight: bolder;
+  background-color: #FFFCE0;
+  border-top-right-radius: 0.94rem;
+  border-top-left-radius: 0.94rem;
+  justify-content: center;
+  align-items: center;
 }
 
 #closeBtn{
-    width: 1rem;
-    height: 1rem;
-    position: absolute;
-    top: 4%;
-    right: 3%;
-    font-size: 1.2rem;
-    border: none;
-    background-color: transparent;
+  width: 1rem;
+  height: 1rem;
+  position: absolute;
+  top: 4%;
+  right: 3%;
+  font-size: 1.2rem;
+  border: none;
+  background-color: transparent;
 }
 #closeBtn:hover{
-    cursor: pointer;
+  cursor: pointer;
 }
 #closeBtn:focus{
-    outline: none;
-    outline-style: none;
+  outline: none;
+  outline-style: none;
 }
 #close-icon{
-    width: 0.94rem;
-    height: 0.94rem;
+  width: 0.94rem;
+  height: 0.94rem;
 }
 
 .body{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 85%;
-    margin: 0 auto;
-    margin-top: 4%;
-    padding: 1%;
-    border-radius: 0.94rem;
-    font-size: 1rem;
-    font-family: 'Quicksand', sans-serif;
-    font-weight: normal;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 85%;
+  margin: 0 auto;
+  margin-top: 4%;
+  padding: 1%;
+  border-radius: 0.94rem;
+  font-size: 1rem;
+  font-family: 'Quicksand', sans-serif;
+  font-weight: normal;
 }
 
 .row{
-    width: 100%;
-    display: flex;
-    margin: 1.5% 0;
-    align-items: center;
+  width: 100%;
+  display: flex;
+  margin: 1.5% 0;
+  align-items: center;
 }
 
-.input{    
-    font-family: 'Quicksand', sans-serif;
-    font-size: 1rem;
-    font-weight: normal;
-    width: 100%;
+.input{
+  font-family: 'Quicksand', sans-serif;
+  font-size: 1rem;
+  font-weight: normal;
+  width: 100%;
 }
 
 
 
 #add-project{
-    margin: 20px 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: 100%;
+  margin: 20px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
 }
 #add-btn{
-    display: inline-flex;
-    width: 4.38rem;
-    height: 2.5rem;
-    font-family: 'Quicksand', sans-serif;
-    font-size: 1rem;
-    font-weight: bold;
-    border: none;
-    border-radius: 0.44rem;
-    background-color: #FFF6A6;
-    border: 0.06rem solid #F9F6DD;
-    justify-content: center;
-    align-items: center;
-    color: #666666;
+  display: inline-flex;
+  width: 4.38rem;
+  height: 2.5rem;
+  font-family: 'Quicksand', sans-serif;
+  font-size: 1rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 0.44rem;
+  background-color: #FFF6A6;
+  border: 0.06rem solid #F9F6DD;
+  justify-content: center;
+  align-items: center;
+  color: #666666;
 }
 #add-btn:hover{
-    cursor: pointer;
-    background-color: #c9c17e;
+  cursor: pointer;
+  background-color: #c9c17e;
 }
 
 :host ::ng-deep .mdc-text-field--filled:not(.mdc-text-field--disabled){
-    background-color: #fffcd5;
-    border-radius: 0;
+  background-color: #fffcd5;
+  border-radius: 0;
 }
 
 :host ::ng-deep .mat-mdc-form-field-subscript-wrapper{
-    height: 0;
+  height: 0;
 }
 
 :host ::ng-deep .mat-mdc-raised-button>.mat-icon{
-    margin: 0;
+  margin: 0;
 }
 #calendat-btn{
-    height: 3.5rem;
-    background-color: #FFF6A6;
-    border: none;
-    border-radius: 0;
-    box-shadow: none;
+  height: 3.5rem;
+  background-color: #FFF6A6;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
 }

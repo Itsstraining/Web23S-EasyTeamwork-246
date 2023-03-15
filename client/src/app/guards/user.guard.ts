@@ -15,18 +15,17 @@ export class UserGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
       return new Promise((resolve) => {
-        onAuthStateChanged(this.auth, (userInfo) => {
-          if (userInfo) {
-            resolve(true);
-            if(userInfo.isAnonymous){
+        authState(this.auth).subscribe((state) => {
+          if (state) {
+            resolve(!state.isAnonymous);
+            if(state.isAnonymous){
               this.router.navigate(['/login']);
             }
           } else {
             resolve(false);
             this.router.navigate(['/login']);
           }
-      })
-    }
-    );
+        });
+      });
   }
 }

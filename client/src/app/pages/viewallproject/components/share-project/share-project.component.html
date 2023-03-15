@@ -10,17 +10,17 @@
   </div>
 
   <div class="body">
-    <div class="row" (click)="showAccountGG()">
-      <input
-        class="input"
-        type="text"
-        placeholder="Thêm người để gửi đường liên kết tới"
+    <div class="row">
+      <mat-chip-grid #userGrid aria-label="Enter user" >
+        <mat-chip-row *ngFor="let tag of tagsMembers" [value]="tag" removable></mat-chip-row>
+        <input class="input" type="text" placeholder="Thêm người để gửi đường liên kết tới"
         [matAutocomplete]="autocomplete"
-        fullWidth
-      />
+        [matChipInputFor]="userGrid"
+        [matChipInputAddOnBlur]="addOnBlur"
+        [matChipInputSeparatorKeyCodes]="separatorKeysCodes"/>
+    </mat-chip-grid>
     </div>
-     <mat-autocomplete #autocomplete >
-      <!-- (selectedChange)="onTagAdd($event)" -->
+    <mat-autocomplete #autocomplete >
       <mat-option class="option" *ngFor="let option of options" [value]="option">
         <h6>{{option.email}}</h6>
         <img [src]="option.photoURL" alt="">
@@ -80,6 +80,6 @@
     </button>
     <button>Yều cầu chia sẻ</button>
     <button (click)="closeDialogShare()">Hủy</button>
-    <button (click)="send()">Gửi</button>
+    <button (click)="send()" matTooltip="Send" matTooltipPlacement="top">Gửi</button>
   </div>
 </div>

@@ -23,21 +23,24 @@ export class AddProjectComponent {
   formatDate!: string[];
   due_date!: string;
 
+  currentDate: any = new Date();
+  deadline = new Date(this.currentDate.getFullYear(), this.currentDate.getMonth(), this.currentDate.getDate() + 1);
+
   constructor(
     public dialogRef: MatDialogRef<AddProjectComponent>,
     public userService: UserService,
     public projectService: ProjectService
   ) {
-    // this.userService.getAllUser().subscribe((users) => {
-    //   users.forEach((user) => {
-    //     if (user.uid !== this.userService.userInfo.uid) {
-    //       this.options.push(user);
-    //     }
-    //   });
-    // });
-    // this.userService.getUserById(this.userService.userInfo.uid).subscribe((users) => {
-    //   this.currentUser = users;
-    // });
+    this.userService.getAllUser().subscribe((users) => {
+      users.forEach((user) => {
+        if (user.uid !== this.userService.userInfo.uid) {
+          this.options.push(user);
+        }
+      });
+    });
+    this.userService.getUserById(this.userService.userInfo.uid).subscribe((users) => {
+      this.currentUser = users;
+    });
   }
 
   addProject() {
@@ -67,6 +70,7 @@ export class AddProjectComponent {
         window.alert('Project created successfully!!');
       },
     );
+
     console.log(newProject);
     this.dialogRef.close(newProject);
   }
@@ -74,7 +78,6 @@ export class AddProjectComponent {
   closeDialog() {
     this.dialogRef.close();
   }
-
 
   formatDateFunc(date: Date) {
     this.formatDate = date.toString().split(' ');
@@ -117,6 +120,5 @@ export class AddProjectComponent {
         break;
     }
     this.due_date = this.formatDate[1] + '/' + this.formatDate[2] + '/' + this.formatDate[3];
-    console.log(this.due_date);
   }
 }

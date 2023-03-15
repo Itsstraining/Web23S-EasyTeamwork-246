@@ -8,6 +8,8 @@ import { InvitationModel } from 'src/models/invitation.model';
 import { ProjectModel } from 'src/models/projects.model';
 
 import { UserModel } from 'src/models/user.model';
+import {MatChipInput, MatChipInputEvent} from '@angular/material/chips';
+import {COMMA, ENTER} from '@angular/cdk/keycodes';
 
 @Component({
   selector: 'app-share-project',
@@ -35,23 +37,23 @@ export class ShareProjectComponent implements OnInit {
     });
   }
 
+  readonly separatorKeysCodes = [ENTER, COMMA] as const;
+  addOnBlur = true;
+
   project!: ProjectModel;
 
   options: UserModel[] = [];
   tagsMembers: Set<string> = new Set<string>();
   members: UserModel[] = [];
 
+  @ViewChild(MatChipInput, { read: ElementRef })
   tagInput!: ElementRef<HTMLInputElement>;
 
   closeDialogShare() {
     this.dialogRef.close();
   }
 
-  showAccountGG() {
-
-  }
-
-  onTagAdd(mem: UserModel): void {
+  onTagAddMember(mem: UserModel): void {
     if (mem) {
       this.tagsMembers.add(mem.displayName);
       console.log(this.tagsMembers);
@@ -61,9 +63,13 @@ export class ShareProjectComponent implements OnInit {
     this.tagInput.nativeElement.value = '';
   }
 
+  onTagDelete(onTagDelete: MatChipInputEvent){
+    this.tagsMembers.delete(onTagDelete.value);
+  }
+
   send() {
     if(this.members.length === 0) {
-      window.alert('No member to invite!!');
+      window.alert('No member to invitation!!');
       return;
     }
     this.members.forEach((mem) => {
@@ -72,24 +78,13 @@ export class ShareProjectComponent implements OnInit {
         owner_id: this.userService.user.uid,
         receiver_id: mem.uid,
         status: 0,
-        // project: {
-        //   project_id: this.project.project_id,
-        //   marked: this.project.marked,
-        //   name: this.project.name,
-        //   due_date: this.project.due_date,
-        //   status: this.project.status,
-        //   disable: this.project.disable,
-        //   owner_id: this.project.owner_id,
-        //   members: this.project.members
-        // },
         project_id: this.project.project_id,
         unread: true
       }
 
       this.invitationService.createInvitation(invitation).subscribe(
         (res) => {
-          console.log(res);
-          window.alert('Invitation sent!!');
+          window.alert('Invitation send!!');
         }
       );
       if(this.userService.currentUserInfo.uid !== mem.uid) {

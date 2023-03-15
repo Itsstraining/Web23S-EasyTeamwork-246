@@ -1,22 +1,22 @@
 <app-navbar></app-navbar>
 
-<!-- <mat-button-toggle-group value="tasks" class="menuDiv">
-    <div id="btnSpaceTop"></div>
-    <mat-button-toggle class="menuBtn" value="tasks">Tasks</mat-button-toggle>
-    <mat-button-toggle class="menuBtn" id="menuBtnCallendar">Callendar</mat-button-toggle>
-    <div id="btnSpaceBottom"></div>
-</mat-button-toggle-group> -->
-
 <div class="homeContainer">
-    <div class="homeDiv">
+    <!-- <mat-button-toggle-group value="tasks" class="menuDiv">
+        <div id="btnSpaceTop"></div>
+        <mat-button-toggle class="menuBtn" value="tasks">Tasks</mat-button-toggle>
+        <mat-button-toggle class="menuBtn" id="menuBtnCallendar">Callendar</mat-button-toggle>
+        <div id="btnSpaceBottom"></div>
+    </mat-button-toggle-group> -->
+
+    <div class="homeDiv">        
         <div class="infoDiv">
-            <div class="infoSubDiv">
-                <h1 id="funcTitle">{{projectName}}</h1>
-                <p class="projInfo">Due date: <span id="dateContent">{{projectDeadline}}</span></p>
-            </div>
-            <div class="userDiv">
+            <h1 id="funcTitle">{{project_info.name}}</h1>
+            <div class="usrImgDiv">
+                <div class="addUsr">
+                    <i class="fa-sharp fa-solid fa-user-plus fa-lg"></i>
+                </div>
                 <div class="usrIcon">
-                    <i id="icon1" class="fa-sharp fa-solid fa-user fa-xl" id="icon"></i>
+                    <img id="owner_img" src="{{owner_img}}" alt="img">
                 </div>
                 <div class="usrIcon1">
                     <i class="fa-sharp fa-solid fa-user fa-xl"></i>
@@ -24,8 +24,8 @@
                 <div class="usrIcon2">
                     <i class="fa-sharp fa-solid fa-user fa-xl"></i>
                 </div>
-                <div class="addUsr">
-                    <i class="fa-sharp fa-solid fa-user-plus fa-lg"></i>
+                <div class="user_remain_div">
+                    <p id="user_remain">and <span id="user_remain_count">{{usr_count}} other people</span></p>
                 </div>
             </div>
         </div>
@@ -48,19 +48,20 @@
                     cdkDropList
                     [cdkDropListData]="todoList"
                     class="todoLists"
+                    id="todoDiv"
                     (cdkDropListDropped)="drop($event, 'todo')">
                     <div class="taskBox" *ngFor="let item of todoList" cdkDragBoundary=".todoMainDiv" cdkDrag>
-                        <mat-card class="todoCard">
+                        <mat-card class="todoCard" (click)="getTaskInfo(item.task_id)">
                             <mat-card-header class="cardTitle">
-                                {{item.name}}
+                                <p>{{item.name}}</p>
                                 <div class="taskInfo">
-                                    <img src="../../../assets/menu-burger.png" alt="moteInfo" id="infoBtn" (click)="dialogTaskInfoOpen('400ms', '100ms', item.task_id)">
+                                    <img src="../../../assets/main-menu.png" alt="moteInfo" id="infoBtn" (click)="dialogTaskInfoOpen('400ms', '100ms', item.task_id)">
                                 </div>
                             </mat-card-header>
                             <mat-card-content class="cardInfo">Description: {{item.description}}</mat-card-content>
                             <mat-card-content class="cardInfo">Due date: {{item.deadline}}</mat-card-content>
                             <mat-card-actions class="cardAct">
-                                <img src="https://www.pngkit.com/png/detail/301-3012694_account-user-profile-avatar-comments-fa-user-circle.png" class="userImg" alt="usrImg">
+                                <img src="{{owner_img}}" class="userImg" alt="usrImg">
                                 <div class="commentDiv">
                                     <span>{{item.comment_count}}</span>
                                     <i class="fa-sharp fa-solid fa-comment fa-xl" id="commentSpace"></i>
@@ -88,17 +89,17 @@
                     class="todoLists"
                     (cdkDropListDropped)="drop($event, 'in-progress')">
                     <div class="taskBox" *ngFor="let item of inProgressList" cdkDragBoundary=".todoMainDiv" cdkDrag>
-                        <mat-card class="todoCard">
+                        <mat-card class="todoCard" (click)="getTaskInfo(item.task_id)">
                             <mat-card-header class="cardTitle">
                                 {{item.name}}
                                 <div class="taskInfo">
-                                    <img src="../../../assets/menu-burger.png" alt="moteInfo" id="infoBtn" (click)="dialogTaskInfoOpen('400ms', '100ms', item.task_id)">
+                                    <img src="../../../assets/main-menu.png" alt="moteInfo" id="infoBtn" (click)="dialogTaskInfoOpen('400ms', '100ms', item.task_id)">
                                 </div>
                             </mat-card-header>
                             <mat-card-content class="cardInfo">Description: {{item.description}}</mat-card-content>
                             <mat-card-content class="cardInfo">Due date: {{item.deadline}}</mat-card-content>
                             <mat-card-actions class="cardAct">
-                                <img src="https://www.pngkit.com/png/detail/301-3012694_account-user-profile-avatar-comments-fa-user-circle.png" class="userImg" alt="usrImg">
+                                <img src="{{owner_img}}" class="userImg" alt="usrImg">
                                 <div class="commentDiv">
                                     <span>{{item.comment_count}}</span>
                                     <i class="fa-sharp fa-solid fa-comment fa-xl" id="commentSpace"></i>
@@ -126,17 +127,17 @@
                     class="todoLists"
                     (cdkDropListDropped)="drop($event, 'completed')">
                     <div class="taskBox" *ngFor="let item of completeList" cdkDragBoundary=".todoMainDiv" cdkDrag>
-                        <mat-card class="todoCard">
+                        <mat-card class="todoCard" (click)="getTaskInfo(item.task_id)">
                             <mat-card-header class="cardTitle">
                                 {{item.name}}
                                 <div class="taskInfo">
-                                    <img src="../../../assets/menu-burger.png" alt="moteInfo" id="infoBtn" (click)="dialogTaskInfoOpen('400ms', '100ms', item.task_id)">
+                                    <img src="../../../assets/main-menu.png" alt="moteInfo" id="infoBtn" (click)="dialogTaskInfoOpen('400ms', '100ms', item.task_id)">
                                 </div>
                             </mat-card-header>
                             <mat-card-content class="cardInfo">Description: {{item.description}}</mat-card-content>
                             <mat-card-content class="cardInfo">Due date: {{item.deadline}}</mat-card-content>
                             <mat-card-actions class="cardAct">
-                                <img src="https://www.pngkit.com/png/detail/301-3012694_account-user-profile-avatar-comments-fa-user-circle.png" class="userImg" alt="usrImg">
+                                <img src="{{owner_img}}" class="userImg" alt="usrImg">
                                 <div class="commentDiv">
                                     <span>{{item.comment_count}}</span>
                                     <i class="fa-sharp fa-solid fa-comment fa-xl" id="commentSpace"></i>
@@ -164,17 +165,17 @@
                     class="todoLists"
                     (cdkDropListDropped)="drop($event, 'due')">
                     <div class="taskBox" *ngFor="let item of dueList" cdkDragBoundary=".todoMainDiv" cdkDrag>
-                        <mat-card class="todoCard">
+                        <mat-card class="todoCard" (click)="getTaskInfo(item.task_id)">
                             <mat-card-header class="cardTitle">
                                 {{item.name}}
                                 <div class="taskInfo">
-                                    <img src="../../../assets/menu-burger.png" alt="moteInfo" id="infoBtn" (click)="dialogTaskInfoOpen('400ms', '100ms', item.task_id)">
+                                    <img src="../../../assets/main-menu.png" alt="moteInfo" id="infoBtn" (click)="dialogTaskInfoOpen('400ms', '100ms', item.task_id)">
                                 </div>
                             </mat-card-header>
                             <mat-card-content class="cardInfo">Description: {{item.description}}</mat-card-content>
                             <mat-card-content class="cardInfo">Due date: {{item.deadline}}</mat-card-content>
                             <mat-card-actions class="cardAct">
-                                <img src="https://www.pngkit.com/png/detail/301-3012694_account-user-profile-avatar-comments-fa-user-circle.png" class="userImg" alt="usrImg">
+                                <img src="{{owner_img}}" class="userImg" alt="usrImg">
                                 <div class="commentDiv">
                                     <span>{{item.comment_count}}</span>
                                     <i class="fa-sharp fa-solid fa-comment fa-xl" id="commentSpace"></i>
@@ -184,6 +185,23 @@
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+    <div class="project_task_infoDiv">
+        <div class="sidebar_info">
+            <p id="sidebar_project_title">Project: <span id="sidebar_project_name">{{project_info.name}}</span></p>
+            <p>Due date: {{project_info.due_date}}</p>
+            <p>Project state: {{project_info.status}}</p>
+            <p>Project creator: {{project_info.owner}}</p>
+            <p>Members: {{project_info.members.length}}</p>
+        </div>
+        <div *ngIf="singleTask != null" class="sidebar_info_task">
+            <p id="sidebar_project_title">Task: <span id="sidebar_project_name">{{singleTask.name}}</span></p>
+            <p>Task Description: {{singleTask.description}}</p>
+            <p>Task complexity: {{singleTask.complexity}}</p>
+            <p>Task state: {{singleTask.status}}</p>
+            <p>Due date: {{singleTask.deadline}}</p>
+            <p>Created at: {{singleTask.created_at}}</p>
         </div>
     </div>
 </div>

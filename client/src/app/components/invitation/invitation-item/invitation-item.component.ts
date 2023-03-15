@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { InvitationService } from 'src/app/services/invitation/invitation.service';
 import { NotificationService } from 'src/app/services/notification/notification.service';
 import { ProjectService } from 'src/app/services/projects/project.service';
@@ -9,13 +9,13 @@ import { ProjectModel } from 'src/models/projects.model';
 import { UserModel } from 'src/models/user.model';
 
 @Component({
-  selector: 'app-invitation',
-  templateUrl: './invitation.component.html',
-  styleUrls: ['./invitation.component.scss']
+  selector: 'app-invitation-item',
+  templateUrl: './invitation-item.component.html',
+  styleUrls: ['./invitation-item.component.scss']
 })
-export class InvitationComponent implements OnInit {
+export class InvitationItemComponent implements OnInit {
   @Input() invitation!: InvitationModel;
-  @Output() repliedInvitationEvent: EventEmitter<InvitationModel> = new EventEmitter<InvitationModel>();
+  @Output() declinedInvitationEvent: EventEmitter<InvitationModel> = new EventEmitter<InvitationModel>();
   sender!: UserModel
   currentUser!: UserModel;
   tempProject!: ProjectModel;
@@ -34,29 +34,30 @@ export class InvitationComponent implements OnInit {
     this.userService.getUserById(this.userService.user.uid).subscribe(user => {
       this.currentUser = user;
     });
-    // this.projectService.getAll(this.invitation.project_id).subscribe(
-    //   project => {
-    //     this.tempProject = project;
-    //   }
-    // );
+    this.projectService.getById(this.invitation.project_id).subscribe(
+      project => {
+        // this.tempProject = project;
+        console.log(project);
+      }
+    );
   }
 
-  replyInvitation(isAgree: number) {
+  acceptedInvitation(isAgree: number) {
     this.invitation.status =  isAgree;
-    
 
-    // this.projectService.getAll(this.tempProject.project_id).subscribe((res) => {
-    //   if(res.disabled){
-    //     window.alert('Project no longer exists!!');
-    //     return;
-    //   }
-    // });
+
+    this.projectService.getById(this.tempProject.project_id).subscribe((res) => {
+      if(res == null){
+        window.alert('Project no longer exists!!');
+        return;
+      }
+    });
     this.invitationService.updateInvitationById(this.invitation.id, this.invitation).subscribe(
       invitation => {
         this.invitationService.deleteInvitationById(this.invitation.id).subscribe(
           invitation => {
             window.alert('Invitation has been replied');
-            this.repliedInvitationEvent.emit(this.invitation);
+            this.declinedInvitationEvent.emit(this.invitation);
           }
         );
       }
@@ -67,13 +68,13 @@ export class InvitationComponent implements OnInit {
   addMemToProject(isAgree: number) {
     if(isAgree == 1) {
       this.tempProject.members.push(this.currentUser);
-      
 
-      // this.projectService.update(this.invitation.project_id, this.tempProject).subscribe(
-      //   invitation => {
-      //     window.alert('Member has been added to project');
-      //   }
-      // );
+
+      this.projectService.update(this.tempProject,this.invitation.project_id).subscribe(
+        invitation => {
+          window.alert('Member has been added to project');
+        }
+      );
       this.createNotification(isAgree);
     }
   }
@@ -90,7 +91,7 @@ export class InvitationComponent implements OnInit {
     if(isAgree == 1) {
        noti.status = 1;
     }
-    this.notificationService.createNoti(noti).subscribe(
+    this.notificationService.createNotification(noti).subscribe(
       notification => {
         window.alert('Notification has been created');
       });

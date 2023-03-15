@@ -11,6 +11,7 @@ import * as TaskActions from '../../../NgRx/Actions/tasks.action';
 import { ActivatedRoute } from '@angular/router';
 import { ProjectService } from 'src/app/services/projects/project.service';
 import { ProjectModel } from 'src/models/projects.model';
+import { UserService } from 'src/app/services/users/user.service';
 
 @Component({
   selector: 'app-hometask',
@@ -19,29 +20,37 @@ import { ProjectModel } from 'src/models/projects.model';
 })
 export class HometaskComponent implements OnInit{
   constructor(
-    private matDialog: MatDialog, 
+    private matDialog: MatDialog,
     private taskService: TaskService,
     private store: Store<{task: TaskModel}>,
     private router: ActivatedRoute,
     private projectService: ProjectService,
-  ){ 
+    private userService: UserService,
+  ){
     this.task$ = this.store.select('task');
   }
 
-  task$ !: Observable<TaskModel>;
   test$!: Observable<any>;
+  task$ !: Observable<TaskModel>;
 
   todoList: TaskModel[] = [];
   inProgressList: TaskModel[] = [];
-  completeList: TaskModel[] = [];  
+  completeList: TaskModel[] = [];
   dueList: TaskModel[] = [];
   taskList: TaskModel[] = [];
   taskPrj: TaskModel[] = [];
-  project!: ProjectModel;
-  projectName!: string;
-  projectDeadline!: string;
-  prj_id: string = '';
+  singleTask!: TaskModel;
   task_id: string = '';
+
+  project_name!: string;
+  project_deadline!: string;
+  project_info!: ProjectModel;
+  prj_id: string = '';
+
+  owner_id: string = '';
+  owner_img: string = '';
+
+  usr_count: number = 0;
 
   ngOnInit(){
     this.todoList = [];
@@ -51,15 +60,18 @@ export class HometaskComponent implements OnInit{
     this.taskList = [];
     this.router.params.subscribe( (param) => {
       this.prj_id = param['id'];
-      this.getProject();
       this.getAllTasks(param['id']);
+      this.getProject();
+      this.getSocket();
     });
   }
 
   getProject(){
     this.projectService.getById(this.prj_id).subscribe( (data: any) => {
-      this.projectName = data[0].name;
-      this.projectDeadline = data[0].due_date;
+      this.project_info = data[0];
+      this.project_name = data[0].name;
+      this.project_deadline = data[0].due_date;
+      this.getOwnerInfo();
     });
   }
 
@@ -87,27 +99,17 @@ export class HometaskComponent implements OnInit{
     })
   }
 
-  sendTest(newTest: TaskModel, event: string){
+  sendTest(newTest: TaskModel){
     this.taskService.sendTest(newTest);
-    
-    switch(event){
-      case 'add':
-        break;
-      case 'update':
-        break;
-      case 'delete':
-        break;
-      case 'drag':
-        this.cloneList(newTest);
-        this.store.dispatch(TaskActions.updateTask({task: newTest, id: newTest.task_id}));
-        break;
-    }
+    this.cloneList(newTest);
+    this.store.dispatch(TaskActions.updateTask({task: newTest, id: newTest.task_id}));
+    // this.ngOnInit();
   }
 
   cloneList(newTest: TaskModel){
     let tempTask: TaskModel[] = [];
     this.taskList.forEach( (task) => tempTask.push(Object.assign({}, task)));
-    let tempIndex = tempTask.findIndex((index) => index.task_id === newTest.task_id); 
+    let tempIndex = tempTask.findIndex((index) => index.task_id === newTest.task_id);
     tempTask[tempIndex] = newTest;
     this.taskList = tempTask;
 
@@ -125,16 +127,18 @@ export class HometaskComponent implements OnInit{
     instance.task_id = this.task_id;
     // console.log(this.task_id);
     addTaskDialog.afterClosed().subscribe(result => {
+      // this.sendTest(result.data);
       this.ngOnInit();
-      this.sendTest(result.data, 'add');
     });
   }
 
   dialogTaskInfoOpen(enterAnimationDuration: string, exitAnimationDuration: string, tId: string){
     let taskInfoDialog = this.matDialog.open(TaskInfoComponent, {enterAnimationDuration, exitAnimationDuration, autoFocus: false});
     let instance = taskInfoDialog.componentInstance;
+    console.log(this.project_info);
+    // instance.project = this.project_info;
     this.taskList.filter((task) => {
-      if(task.task_id === tId){ 
+      if(task.task_id === tId){
         instance.task = task;
       }
     });
@@ -147,7 +151,6 @@ export class HometaskComponent implements OnInit{
   drop(event: CdkDragDrop<TaskModel[]>, listName: string){
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
-      // this.sendTest(event.container.data[event.currentIndex], 'drag');
     } else {
       transferArrayItem(
         event.previousContainer.data,
@@ -158,16 +161,16 @@ export class HometaskComponent implements OnInit{
 
       if(listName === 'todo'){
         let tempList = this.updateList('todo', event.currentIndex);
-        this.sendTest(tempList, 'drag');
+        this.sendTest(tempList);
       }else if(listName === 'in-progress'){
         let tempList = this.updateList('in-progress', event.currentIndex);
-        this.sendTest(tempList, 'drag');
+        this.sendTest(tempList);
       }else if(listName === 'completed'){
         let tempList = this.updateList('completed', event.currentIndex);
-        this.sendTest(tempList, 'drag');
+        this.sendTest(tempList);
       }else if(listName === 'due'){
         let tempList = this.updateList('due', event.currentIndex);
-        this.sendTest(tempList, 'drag');
+        this.sendTest(tempList);
       }
     }
   }
@@ -221,6 +224,18 @@ export class HometaskComponent implements OnInit{
       }
     }
     return tempID
+  }
+
+  getTaskInfo(task_id: string){
+    this.singleTask = this.taskList.filter( (task) => task.task_id === task_id)[0];
+  }
+
+  getOwnerInfo(){
+    this.owner_img = this.userService.userInfo.photoURL;
+  }
+
+  addUser(){
+
   }
 }
 

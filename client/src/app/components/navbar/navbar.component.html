@@ -13,47 +13,30 @@
     </div>
 
     <div class="btn-page">
-      <button
-        class="btn-homeTask"
-        mat-raised-button
-        style="background-color: #FFF6A6"
-        (click)="viewallproject()"
-      >
+      <button class="btn-homeTask" mat-raised-button style="background-color: #FFF6A6" (click)="viewallproject()">
         ViewAllProject
-
       </button>
     </div>
 
     <div class="userName">
       <div class="image-user">
-        <img [src]="userService.userInfo.photoURL" alt="" class="img" />
-        <p>{{userService.userInfo.displayName}}</p>
+        <img [src]="(this.auth$ | async)?.user?.photoURL" alt="" class="img" />
+        <p>{{ (this.auth$ | async)?.user?.displayName }}</p>
         <i class="fa-solid fa-caret-down" [matMenuTriggerFor]="menu"></i>
       </div>
       <mat-menu #menu="matMenu">
-        <button
-          mat-menu-item
-        (click)="userService.logoutWithGoogle()"
-          style="
+        <button mat-menu-item (click)="userService.logoutWithGoogle()" style="
             display: flex;
             align-items: center;
             justify-content: space-between;
 
-          "
-        >
+          ">
           <i class="fa-solid fa-right-from-bracket"></i>
           Logout
         </button>
       </mat-menu>
     </div>
 
-    <!-- <div class="nav_bars_btn">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
-        <path
-          d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"
-        />
-      </svg>
-    </div> -->
   </mat-toolbar>
 
 </div>
