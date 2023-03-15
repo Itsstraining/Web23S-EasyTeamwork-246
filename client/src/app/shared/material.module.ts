@@ -21,7 +21,7 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import { FormsModule } from '@angular/forms';
 import {MatListModule} from '@angular/material/list';
 import {MatChipsModule} from '@angular/material/chips';
-
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [],
@@ -48,7 +48,8 @@ import {MatChipsModule} from '@angular/material/chips';
     MatAutocompleteModule,
     FormsModule,
     MatListModule,
-    MatChipsModule
+    MatChipsModule,
+    ReactiveFormsModule
   ],
   exports:[
     MatToolbarModule,
@@ -72,7 +73,8 @@ import {MatChipsModule} from '@angular/material/chips';
     MatAutocompleteModule,
     FormsModule,
     MatListModule,
-    MatChipsModule
+    MatChipsModule,
+    ReactiveFormsModule
   ]
 })
 export class MaterialModule { }
