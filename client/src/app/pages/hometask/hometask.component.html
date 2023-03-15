@@ -12,6 +12,10 @@
         <div class="infoDiv">
             <h1 id="funcTitle">{{project_info.name}}</h1>
             <div class="usrImgDiv">
+                <button (click)="dialogShareProject('400ms', '100ms')" id="share" mat-raised-button matTooltip="Share project">
+                    <i class="addUsr" class="fa-solid fa-share-nodes fa-sm"></i>
+                    Share
+                </button>
                 <div class="addUsr">
                     <i class="fa-sharp fa-solid fa-user-plus fa-lg"></i>
                 </div>
@@ -19,7 +23,7 @@
                     <img id="owner_img" src="{{owner_img}}" alt="img">
                 </div>
                 <div class="usrIcon1">
-                    <i class="fa-sharp fa-solid fa-user fa-xl"></i>
+                    <img id="owner_img" src="{{owner_img}}" alt="img">
                 </div>
                 <div class="usrIcon2">
                     <i class="fa-sharp fa-solid fa-user fa-xl"></i>

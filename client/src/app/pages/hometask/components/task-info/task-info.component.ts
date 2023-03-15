@@ -91,7 +91,7 @@ export class TaskInfoComponent implements OnInit{
 
   @ViewChild(MatChipInput, { read: ElementRef })
   tags: Set<string> = new Set<string>();
-  selectedAssignee: UserModel[] = [];
+  selectedAssignee: UserModel[] = []; 
   tagInput!: ElementRef<HTMLInputElement>;
   project!: ProjectModel;
   // member_list: UserModel[] = this.project.members;
