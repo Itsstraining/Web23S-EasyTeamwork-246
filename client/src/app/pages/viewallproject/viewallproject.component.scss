@@ -237,7 +237,6 @@ hr{
   font-family: 'Quicksand', sans-serif;
   font-size: 1rem;
   font-weight: bolder;
-  // padding: 1.25rem 0 0 1.88rem;
   padding: 1.25rem 0 0 2%;
   button{
       color: #666666;
@@ -259,7 +258,6 @@ hr{
   }
 }
 #view-all{
-  // margin-left: 1.25rem;
   margin-left: 2%;
   width: 7%;
 }
@@ -273,7 +271,6 @@ hr{
   width: 10%;
 }
 #view-marked{
-  // margin-left: 1.25rem;
   margin-left: 1%;
   width: 12%;
 }
@@ -284,7 +281,6 @@ hr{
   font-family: 'Quicksand', sans-serif;
   font-size: 1rem;
   font-weight: bolder;
-  // padding: 1.25rem 0 0 1.88rem;
   padding: 1.25rem 0 0 2.5%;
   button{
       font-size: 1rem;
@@ -301,17 +297,13 @@ hr{
   }
 }
 #name{
-  // width: 10.94rem;
   width: 15%;
 }
 #state{
-  // width: 7.81rem;
   width: 11%;
-  // margin-left: 1.25rem;
   margin-left: 1%;
 }
 #date{
-  // width: 10.31rem;
   width: 12%;
   margin-left: 2%;
 }
@@ -350,17 +342,13 @@ hr{
   }
 }
 #item-name{
-  // width: 10.94rem;
   width: 15%;
 }
 #item-state{
-  // width: 7.81rem;
   width: 11%;
-  // margin-left: 1.25rem;
   margin-left: 1%;
 }
 #item-date{
-  // width: 10.31rem;
   width: 12%;
   margin-left: 2%;
 }
@@ -381,7 +369,6 @@ hr{
   margin-left: 1%;
 }
 #item-host{
-  // width: 20.63rem;
   width: 21%;
   margin-left: 6%;
 }
@@ -423,7 +410,7 @@ hr{
   height: 2.5rem;
   display: flex;
   align-items: center;
-  border-bottom: 0.06rem solid #666666;
+  border-bottom: 0.06rem solid #999999;
 }
 #state-dot{
   display: inline-block;
@@ -442,9 +429,14 @@ hr{
 
 .non-project{
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100%;
+  height: 33.5rem;
   width: 100%;
+}
+.no-project-announce{
+  font-family: 'Quicksand', sans-serif;
+  font-size: 1.5rem;
+  font-weight: bolder;
+  color: #666666;
 }
