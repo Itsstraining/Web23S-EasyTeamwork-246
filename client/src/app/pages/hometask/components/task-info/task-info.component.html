@@ -1,45 +1,99 @@
 <div class="container">
-    <div class="taskNameDiv">
-        <input id="nameInput" type="text"  [(ngModel)]="temp.name" />
-        <div id="closeBtn" (click)="closeDialog()">
-            <img id="closeImg" src="https://cdn-icons-png.flaticon.com/512/1828/1828778.png">
-        </div>
+  <div class="taskNameDiv">
+    <input id="nameInput" type="text" [(ngModel)]="temp.name" />
+    <div id="closeBtn" (click)="closeDialog()">
+      <img id="closeImg" src="https://cdn-icons-png.flaticon.com/512/1828/1828778.png">
     </div>
-    <div class="taskInfoDiv">
-        <div class="desDiv">
-            <p>Description: </p>
-            <textarea class="infoInput" [(ngModel)]="temp.description" style="resize: none;" rows="3" cols="55" placeholder="Description..."></textarea>
-        </div>
-        <div class="restDiv">
-            <div class="statDiv">
-                <p>Status:</p>
-                <mat-form-field appearance="fill">
-                    <mat-select [(value)]="temp.status">
-                        <mat-option value="todo">Todo</mat-option>
-                        <mat-option value="in-progress">In Progress</mat-option>
-                        <mat-option value="completed">Completed</mat-option>
-                        <mat-option value="due">Due</mat-option>
-                    </mat-select>
-                </mat-form-field>
-            </div>
-            <div class="statDiv">
-                <p>complexity:</p>
-                <mat-form-field appearance="fill">
-                    <mat-select [(value)]="temp.complexity">
-                        <mat-option value="easy">Easy</mat-option>
-                        <mat-option value="medium">Medium</mat-option>
-                        <mat-option value="hard">Hard</mat-option>
-                    </mat-select>
-                </mat-form-field>
-            </div>
-            <div class="dateDiv">
-                <p>Due date: <span id="dueDate">{{task.deadline}}</span></p>
-                <p>Created date: <span id="createDate">{{task.created_at}}</span></p>
-            </div>
-        </div>
+  </div>
+  <div class="taskInfoDiv">
+    <div class="desDiv">
+      <p>Description: </p>
+      <textarea class="infoInput" [(ngModel)]="temp.description" rows="3" cols="56" placeholder="Description..."></textarea>
     </div>
-    <div class="btnDiv">
-        <button class="button" id="upButton" (click)="updateTask()">Update</button>
-        <button class="button" id="delButton" (click)="deleteTask()">Delete</button>
+    <div class="restDiv">
+      <div class="statDiv">
+        <p>Status:</p>
+        <mat-form-field appearance="fill">
+          <mat-select [(value)]="temp.status">
+            <mat-option value="todo">Todo</mat-option>
+            <mat-option value="in-progress">In Progress</mat-option>
+            <mat-option value="completed">Completed</mat-option>
+            <mat-option value="due">Due</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="statDiv">
+        <p>Complexity:</p>
+        <mat-form-field appearance="fill">
+          <mat-select [(value)]="temp.complexity">
+            <mat-option value="easy">Easy</mat-option>
+            <mat-option value="medium">Medium</mat-option>
+            <mat-option value="hard">Hard</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="dateDiv">
+        <p>Due date: <span id="dueDate">{{task.deadline}}</span></p>
+        <p>Created date: <span id="createDate">{{task.created_at}}</span></p>
+      </div>
     </div>
+  </div>
+  <div class="select-assignee">
+    <!-- <mat-form-field>
+      <mat-label>Choose members</mat-label>
+      <mat-chip-grid #userGrid aria-label="Enter User">
+        <mat-chip-row *ngFor="let member of project.members"
+                      (removed)="remove(member)">
+                      [editable]="true"
+                      (edited)="edit($event, member)">
+                      [aria-description]="'Enter to edit.' + member.displayName">
+          {{member.displayName}}
+          <button matChipRemove [attr.aria-label]="'remove' + member.displayName">
+            <mat-icon>cancel</mat-icon>
+          </button>
+        </mat-chip-row>
+        <input placeholder="Enter new member..."
+              [matChipInputFor]="userGrid"
+              [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+              [matChipInputAddOnBlur]="addOnBlur"
+              (matChipInputTokenEnd)="add($event)">
+      </mat-chip-grid>
+    </mat-form-field> -->
+    <p class="label-input">Assign to</p>
+    <!-- <mat-chip-grid #assigneeGrid>
+      <mat-chip-row  *ngFor="let tag of tags" [value]="tag" >
+      </mat-chip-row>
+      <input type="text" class="infoInput"   placeholder="Assignee to..." 
+      matInput
+           formControl="myControl"
+           [matAutocomplete]="auto">
+    </mat-chip-grid> -->
+    <!-- <mat-autocomplete #auto="matAutocomplete">
+      <mat-option class="option" *ngFor="let mem of project.members" [value]="mem">
+        <img [src]="mem.photoURL" alt="">
+        <h6>{{mem.displayName}}</h6>
+      </mat-option>
+    </mat-autocomplete> -->
+    <form class="example-form">
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Number</mat-label>
+        <input type="text"
+               placeholder="Pick one"
+               aria-label="Number"
+               matInput
+               [formControl]="myControl"
+               [matAutocomplete]="auto">
+        <mat-autocomplete #auto="matAutocomplete">
+          <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+            {{option}}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+    </form>
+    
+  </div>
+  <div class="btnDiv">
+    <button class="button" id="upButton" (click)="updateTask()">Update</button>
+    <button class="button" id="delButton" (click)="deleteTask()">Delete</button>
+  </div>
 </div>

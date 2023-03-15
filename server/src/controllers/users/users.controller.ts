@@ -14,7 +14,7 @@ export class UsersController {
     @Post('login')
     async signIn(@Body() user: UserModel) {
         let temp = await this.userService.findUserById(user.uid);
-        console.log(temp);
+
         if (temp != null) {
             return 'User already exists';
         } else {

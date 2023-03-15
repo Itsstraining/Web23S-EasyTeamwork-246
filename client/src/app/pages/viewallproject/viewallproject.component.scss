@@ -439,3 +439,12 @@ hr{
   margin-right: 5%;
   background-color: #44AEB7;
 }
+
+.non-project{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}

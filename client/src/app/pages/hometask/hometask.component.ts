@@ -135,6 +135,8 @@ export class HometaskComponent implements OnInit{
   dialogTaskInfoOpen(enterAnimationDuration: string, exitAnimationDuration: string, tId: string){
     let taskInfoDialog = this.matDialog.open(TaskInfoComponent, {enterAnimationDuration, exitAnimationDuration, autoFocus: false});
     let instance = taskInfoDialog.componentInstance;
+    console.log(this.project_info);
+    // instance.project = this.project_info;
     this.taskList.filter((task) => {
       if(task.task_id === tId){
         instance.task = task;
@@ -230,7 +232,6 @@ export class HometaskComponent implements OnInit{
 
   getOwnerInfo(){
     this.owner_img = this.userService.userInfo.photoURL;
-    console.log(this.owner_img);
   }
 
   addUser(){

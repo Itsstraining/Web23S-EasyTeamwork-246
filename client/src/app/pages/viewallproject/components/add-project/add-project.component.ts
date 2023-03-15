@@ -31,16 +31,16 @@ export class AddProjectComponent {
     public userService: UserService,
     public projectService: ProjectService
   ) {
-    // this.userService.getAllUser().subscribe((users) => {
-    //   users.forEach((user) => {
-    //     if (user.uid !== this.userService.userInfo.uid) {
-    //       this.options.push(user);
-    //     }
-    //   });
-    // });
-    // this.userService.getUserById(this.userService.userInfo.uid).subscribe((users) => {
-    //   this.currentUser = users;
-    // });
+    this.userService.getAllUser().subscribe((users) => {
+      users.forEach((user) => {
+        if (user.uid !== this.userService.userInfo.uid) {
+          this.options.push(user);
+        }
+      });
+    });
+    this.userService.getUserById(this.userService.userInfo.uid).subscribe((users) => {
+      this.currentUser = users;
+    });
   }
 
   addProject() {
@@ -65,11 +65,12 @@ export class AddProjectComponent {
       marked: false,
     };
 
-    this.projectService.create(newProject).subscribe(
-      (res) => {
-        window.alert('Project created successfully!!');
-      },
-    );
+    // this.projectService.create(newProject).subscribe(
+    //   (res) => {
+    //     window.alert('Project created successfully!!');
+    //   },
+    // );
+
     console.log(newProject);
     this.dialogRef.close(newProject);
   }
@@ -77,7 +78,6 @@ export class AddProjectComponent {
   closeDialog() {
     this.dialogRef.close();
   }
-
 
   formatDateFunc(date: Date) {
     this.formatDate = date.toString().split(' ');
@@ -120,6 +120,5 @@ export class AddProjectComponent {
         break;
     }
     this.due_date = this.formatDate[1] + '/' + this.formatDate[2] + '/' + this.formatDate[3];
-    console.log(this.due_date);
   }
 }
