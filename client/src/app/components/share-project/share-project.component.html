@@ -22,7 +22,6 @@
     </div>
     <mat-autocomplete #autocomplete >
       <mat-option class="option" *ngFor="let option of options" [value]="option">
-        <h6>{{option.email}}</h6>
         <img [src]="option.photoURL" alt="">
         <h6>{{option.displayName}}</h6>
       </mat-option>
