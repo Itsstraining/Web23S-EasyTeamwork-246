@@ -17,7 +17,7 @@
     position: relative;
     overflow: hidden;
     padding: 1rem;
-    color: white;    
+    color: white;
     border-left: 2px solid rgba(255, 255, 255, .2);
 }
 
@@ -40,11 +40,16 @@
     border-bottom: 2px solid rgba(255, 255, 255, .2);
 }
 
-.sidebar_info > h2{
+#sidebar_project_name{
     font-size: 1.6rem;
     font-weight: bolder;
     text-align: center;
     // margin-top: 5%;
+}
+
+#sidebar_project_title{
+    font-size: .8rem;
+    margin-left: 20%;
 }
 
 .sidebar_info_task{
@@ -361,9 +366,10 @@
 .addTaskDiv{
     width: 98%;
     height: 2rem;
-    border: 3px dashed #FE6F7A;
     border-radius: 15px;
     background-color: #FE6F7A;
+    display: flex;
+    justify-content: center;
     margin: 3% 0% 3% 2%;
     box-shadow: 0px 1px 19px 0px rgba(254,111,122,0.75);
 }
@@ -377,8 +383,10 @@
     font-weight: 500;
     font-size: 1.3rem;
     text-align: center;
+    vertical-align: middle;
+    align-items: center;
     color: white;
-    margin-top: 2%;
+    margin-top: 1.5%;
 }
 
 #todoMenu:hover{

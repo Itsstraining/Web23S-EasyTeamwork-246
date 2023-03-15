@@ -40,7 +40,6 @@ export class HometaskComponent implements OnInit{
   taskList: TaskModel[] = [];
   taskPrj: TaskModel[] = [];
   singleTask!: TaskModel;
-  taskInfoClicked: boolean = false;
   task_id: string = '';
 
   project_name!: string;
@@ -226,9 +225,7 @@ export class HometaskComponent implements OnInit{
   }
 
   getTaskInfo(task_id: string){
-    this.taskInfoClicked = true;
     this.singleTask = this.taskList.filter( (task) => task.task_id === task_id)[0];
-    this.taskInfoClicked = false;
   }
 
   getOwnerInfo(){

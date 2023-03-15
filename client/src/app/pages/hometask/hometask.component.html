@@ -189,15 +189,16 @@
     </div>
     <div class="project_task_infoDiv">
         <div class="sidebar_info">
-            <h2>{{project_info.name}}</h2>
+            <p id="sidebar_project_title">Project: <span id="sidebar_project_name">{{project_info.name}}</span></p>
             <p>Due date: {{project_info.due_date}}</p>
             <p>Project state: {{project_info.status}}</p>
             <p>Project creator: {{project_info.owner}}</p>
             <p>Members: {{project_info.members.length}}</p>
         </div>
         <div *ngIf="singleTask != null" class="sidebar_info_task">
-            <h2>{{singleTask.name}}</h2>
+            <p id="sidebar_project_title">Task: <span id="sidebar_project_name">{{singleTask.name}}</span></p>
             <p>Task Description: {{singleTask.description}}</p>
+            <p>Task complexity: {{singleTask.complexity}}</p>
             <p>Task state: {{singleTask.status}}</p>
             <p>Due date: {{singleTask.deadline}}</p>
             <p>Created at: {{singleTask.created_at}}</p>
