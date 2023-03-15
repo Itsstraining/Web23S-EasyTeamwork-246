@@ -22,6 +22,7 @@ import { FormsModule } from '@angular/forms';
 import {MatListModule} from '@angular/material/list';
 import {MatChipsModule} from '@angular/material/chips';
 import { ReactiveFormsModule } from '@angular/forms';
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [],
@@ -49,7 +50,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     FormsModule,
     MatListModule,
     MatChipsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatTooltipModule
   ],
   exports:[
     MatToolbarModule,
@@ -74,7 +76,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     FormsModule,
     MatListModule,
     MatChipsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatTooltipModule
   ]
 })
 export class MaterialModule { }

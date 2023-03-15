@@ -33,6 +33,7 @@ export class ShareProjectComponent implements OnInit {
         }
       });
     });
+    console.log(this.options);
   }
 
   readonly separatorKeysCodes = [ENTER, COMMA] as const;
