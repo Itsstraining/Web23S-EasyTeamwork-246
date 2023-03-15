@@ -78,7 +78,7 @@ export class HometaskComponent implements OnInit{
   getAllTasks(project_id: string){
     this.store.dispatch(TaskActions.getByProjectId({project_id: project_id}));
     this.task$.subscribe( (data: any) => {
-      if(data != null){
+      if(data != null){ 
         this.taskList = data.tasks;
         this.todoList = this.taskList.filter((task) => task.status === 'todo');
         this.inProgressList = this.taskList.filter((task) => task.status === 'in-progress');
@@ -135,8 +135,8 @@ export class HometaskComponent implements OnInit{
   dialogTaskInfoOpen(enterAnimationDuration: string, exitAnimationDuration: string, tId: string){
     let taskInfoDialog = this.matDialog.open(TaskInfoComponent, {enterAnimationDuration, exitAnimationDuration, autoFocus: false});
     let instance = taskInfoDialog.componentInstance;
-    console.log(this.project_info);
-    // instance.project = this.project_info;
+    // console.log(this.project_info);
+    instance.project = this.project_info;
     this.taskList.filter((task) => {
       if(task.task_id === tId){
         instance.task = task;
