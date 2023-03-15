@@ -2,185 +2,184 @@
   <app-navbar></app-navbar>
 </div>
 <div id="body">
-    <div id="title">
-        <p>Projects</p>
+  <div id="title">
+    <p>Projects</p>
+  </div>
+  <div id="create-project">
+    <button (click)="dialogOpen()" id="create-btn">
+      <span id="create-content">
+        <i class="fa-solid fa-square-plus"></i>
+        Create project
+      </span>
+    </button>
+    <!-- <mat-select placeholder="Select Show Shared"
+    (selectedChange)="sortProjects($event)" [(selected)]="mySharedProjects">
+      <mat-option value="0">My projects</mat-option>
+    </mat-select> -->
+  </div>
+  <div id="overview">
+    <div id="overview-header">Overview</div>
+    <div id="overview-body">
+      <div class="overview-content" id="total">
+        <div class="amount"><span>{{ownedProjects.length}}</span></div>
+        <div class="horizone">
+          <hr>
+        </div>
+        <div class="type"><span>Total</span></div>
+      </div>
+      <div class="overview-content" id="in-progress">
+        <div class="amount"><span>{{in_progress_list.length}}</span></div>
+        <div class="horizone">
+          <hr>
+        </div>
+        <div class="type"><span>In progress</span></div>
+      </div>
+      <div class="overview-content" id="completed">
+        <div class="amount"><span>{{completed_list.length}}</span></div>
+        <div class="horizone">
+          <hr>
+        </div>
+        <div class="type"><span>Completed</span></div>
+      </div>
+      <div class="overview-content" id="overdue">
+        <div class="amount"><span>{{overdue_list.length}}</span></div>
+        <div class="horizone">
+          <hr>
+        </div>
+        <div class="type"><span>Overdue</span></div>
+      </div>
     </div>
-    <div id="create-project">
-        <button (click)="dialogOpen()" id="create-btn">
-            <span id="create-content">
-                <i class="fa-solid fa-square-plus"></i>
-                Create project
+  </div>
+  <div id="table">
+    <div id="table-header">
+      <div class="view-mode-container">
+        <div class="view-mode" id="search">
+          <input type="text" placeholder="Search project name...">
+          <div id="search-btn-container">
+            <button>
+              <i class="fa-solid fa-search"></i>
+            </button>
+          </div>
+        </div>
+        <div class="view-mode" id="view-all">
+          <button id="view-all-btn">
+            <span id="view-all-content" (click)="getOwnedProjects()">
+              View all
             </span>
-        </button>
-        <button id="share-btn" (click)="opendialogShare()">
-            <span id="btn-share">
-                <i class="fa-solid fa-share-nodes"></i>
-                Share project
+          </button>
+        </div>
+        <div class="view-mode" id="view-in-progress">
+          <button id="view-in-progress-btn" (click)="getInprogressList()">
+            <span id="view-in-progress-content">
+              View in progress
             </span>
-        </button>
-    </div>
-    <div id="overview">
-        <div id="overview-header">Overview</div>
-        <div id="overview-body">
-            <div class="overview-content" id="total">
-                <div class="amount"><span>{{ownedProjects.length}}</span></div>
-                <div class="horizone">
-                    <hr>
-                </div>
-                <div class="type"><span>Total</span></div>
-            </div>
-            <div class="overview-content" id="in-progress">
-                <div class="amount"><span>{{in_progress_list.length}}</span></div>
-                <div class="horizone">
-                    <hr>
-                </div>
-                <div class="type"><span>In progress</span></div>
-            </div>
-            <div class="overview-content" id="completed">
-                <div class="amount"><span>{{completed_list.length}}</span></div>
-                <div class="horizone">
-                    <hr>
-                </div>
-                <div class="type"><span>Completed</span></div>
-            </div>
-            <div class="overview-content" id="overdue">
-                <div class="amount"><span>{{overdue_list.length}}</span></div>
-                <div class="horizone">
-                    <hr>
-                </div>
-                <div class="type"><span>Overdue</span></div>
-            </div>
+          </button>
         </div>
-    </div>
-    <div id="table">
-        <div id="table-header">
-            <div class="view-mode-container">
-                <div class="view-mode" id="search">
-                    <input type="text" placeholder="Search project name...">
-                    <div id="search-btn-container">
-                        <button>
-                            <i class="fa-solid fa-search"></i>
-                        </button>
-                    </div>
-                </div>
-                <div class="view-mode" id="view-all">
-                    <button id="view-all-btn">
-                        <span id="view-all-content" (click)="getOwnedProjects()">
-                            View all
-                        </span>
-                    </button>
-                </div>
-                <div class="view-mode" id="view-in-progress">
-                    <button id="view-in-progress-btn" (click)="getInprogressList()">
-                        <span id="view-in-progress-content">
-                            View in progress
-                        </span>
-                    </button>
-                </div>
-                <div class="view-mode" id="view-completed">
-                    <button id="view-completed-btn" (click)="getCompletedList()">
-                        <span id="view-completed-content">
-                            View completed
-                        </span>
-                    </button>
-                </div>
-                <div class="view-mode" id="view-overdue">
-                    <button id="view-overdue-btn" (click)="getOverdueList()">
-                        <span id="view-overdue-content">
-                            View overdue
-                        </span>
-                    </button>
-                </div>
-                <div class="view-mode" id="view-marked">
-                    <button (click)="getMarkProject()" id="view-marked-btn">
-                        <span id="view-marked-content">
-                            View marked
-                            <img class="icon" src="https://cdn-icons-png.flaticon.com/512/2107/2107957.png"
-                                alt="yellow star">
-                        </span>
-                    </button>
-                </div>
-            </div>
-            <div id="table-attribute">
-                <div class="attribute" id="mark">
-                    <img class="icon" src="https://cdn-icons-png.flaticon.com/512/2107/2107992.png" alt="empty star">
-                </div>
-                <div class="attribute" id="name">
-                    <button>
-                        <span>Name</span>
-                    </button>
-                </div>
-                <div class="attribute" id="state">
-                    <span>State</span>
-                </div>
-                <div class="attribute" id="date">
-                    <button>
-                        <span>Due date</span>
-                    </button>
-                </div>
-                <div class="attribute" id="mems">
-                    <button>
-                        <span>Members</span>
-                    </button>
-                </div>
-                <div class="attribute" id="host">
-                    <span>Host</span>
-                </div>
-            </div>
+        <div class="view-mode" id="view-completed">
+          <button id="view-completed-btn" (click)="getCompletedList()">
+            <span id="view-completed-content">
+              View completed
+            </span>
+          </button>
         </div>
-        <div id="table-body" >
-            <div class="item" *ngIf="projectList != null">
-                <div class="table-row" *ngFor="let item of projectList">
-                    <div *ngIf="item.marked == false" class="item-attribute" id="item-mark">
-                        <button (click)="markProject(item.marked, item)">
-                            <img class="icon" src="https://cdn-icons-png.flaticon.com/512/2107/2107992.png"
-                                alt="empty star">
-                        </button>
-                    </div>
-                    <div *ngIf="item.marked == true" class="item-attribute" id="item-mark">
-                        <button (click)="markProject(item.marked, item)">
-                            <img class="icon" src="https://cdn-icons-png.flaticon.com/512/2107/2107957.png"
-                                alt="yellow star">
-                        </button>
-                    </div>
-                    <div class="item-attribute" id="item-name" [routerLink]="['/hometask/',item.project_id]" >
-                        <span>{{item.name}}</span>
-                    </div>
-                    <div *ngIf="item.status == 'in-progress'" class="item-attribute" id="item-state">
-                        <div style="background-color: #159ACC;" id="state-dot"></div>
-                        <span style="color: #199CAE;"> In-progress</span>
-                    </div>
-                    <div *ngIf="item.status == 'completed'" class="item-attribute" id="item-state">
-                        <div style="background-color: #33FF00;" id="state-dot"></div>
-                        <span style="color: #28C700;"> Completed</span>
-                    </div>
-                    <div *ngIf="item.status == 'overdue'" class="item-attribute" id="item-state">
-                        <div style="background-color: #FF0000;" id="state-dot"></div>
-                        <span style="color: #E51616;"> Overdue</span>
-                    </div>
-                    <div class="item-attribute" id="item-date">
-                        <div id="date-content">
-                            <span>{{item.due_date}}</span>
-                            <!-- <span style="color: #666666;">00:00</span> -->
-                        </div>
-                    </div>
-                    <div class="item-attribute" id="item-mems">
-                        <span>{{item.members.length}}</span>
-                    </div>
-                    <div class="item-attribute" id="item-host">
-                        <img class="avatar" [src]="item.owner_photo" alt="avatar">
-                        <span>{{item.owner}}</span>
-                    </div>
-                    <div class="item-attribute" id="item-options">
-                        <button [matMenuTriggerFor]="menu">
-                            <i class="fa-solid fa-ellipsis-vertical fa-sm"></i>
-                        </button>
-                        <mat-menu #menu="matMenu" >
-                          <button mat-menu-item (click)="deleteProject(item.project_id)">Delete</button>
-                        </mat-menu>
-                    </div>
-                </div>
-            </div>
+        <div class="view-mode" id="view-overdue">
+          <button id="view-overdue-btn" (click)="getOverdueList()">
+            <span id="view-overdue-content">
+              View overdue
+            </span>
+          </button>
         </div>
+        <div class="view-mode" id="view-marked">
+          <button (click)="getMarkProject()" id="view-marked-btn">
+            <span id="view-marked-content">
+              View marked
+              <img class="icon" src="https://cdn-icons-png.flaticon.com/512/2107/2107957.png" alt="yellow star">
+            </span>
+          </button>
+        </div>
+      </div>
+      <div id="table-attribute">
+        <div class="attribute" id="mark">
+          <img class="icon" src="https://cdn-icons-png.flaticon.com/512/2107/2107992.png" alt="empty star">
+        </div>
+        <div class="attribute" id="name">
+          <button>
+            <span>Name</span>
+          </button>
+        </div>
+        <div class="attribute" id="state">
+          <span>State</span>
+        </div>
+        <div class="attribute" id="date">
+          <button>
+            <span>Due date</span>
+          </button>
+        </div>
+        <div class="attribute" id="mems">
+          <button>
+            <span>Members</span>
+          </button>
+        </div>
+        <div class="attribute" id="host">
+          <span>Host</span>
+        </div>
+      </div>
     </div>
+    <div id="table-body">
+      <div class="item" *ngIf="projectList != null">
+        <div class="table-row" *ngFor="let item of projectList">
+          <div *ngIf="item.marked == false" class="item-attribute" id="item-mark">
+            <button (click)="markProject(item.marked, item)">
+              <img class="icon" src="https://cdn-icons-png.flaticon.com/512/2107/2107992.png" alt="empty star">
+            </button>
+          </div>
+          <div *ngIf="item.marked == true" class="item-attribute" id="item-mark">
+            <button (click)="markProject(item.marked, item)">
+              <img class="icon" src="https://cdn-icons-png.flaticon.com/512/2107/2107957.png" alt="yellow star">
+            </button>
+          </div>
+          <div class="item-attribute" id="item-name" [routerLink]="['/hometask/',item.project_id]">
+            <span>{{item.name}}</span>
+          </div>
+          <div *ngIf="item.status == 'in-progress'" class="item-attribute" id="item-state">
+            <div style="background-color: #159ACC;" id="state-dot"></div>
+            <span style="color: #199CAE;"> In-progress</span>
+          </div>
+          <div *ngIf="item.status == 'completed'" class="item-attribute" id="item-state">
+            <div style="background-color: #33FF00;" id="state-dot"></div>
+            <span style="color: #28C700;"> Completed</span>
+          </div>
+          <div *ngIf="item.status == 'overdue'" class="item-attribute" id="item-state">
+            <div style="background-color: #FF0000;" id="state-dot"></div>
+            <span style="color: #E51616;"> Overdue</span>
+          </div>
+          <div class="item-attribute" id="item-date">
+            <div id="date-content">
+              <span>{{item.due_date}}</span>
+              <!-- <span style="color: #666666;">00:00</span> -->
+            </div>
+          </div>
+          <div class="item-attribute" id="item-mems">
+            <span>{{item.members.length}}</span>
+          </div>
+          <div class="item-attribute" id="item-host">
+            <img class="avatar" [src]="item.owner_photo" alt="avatar">
+            <span>{{item.owner}}</span>
+          </div>
+          <div class="item-attribute" id="item-options">
+            <button [matMenuTriggerFor]="menu">
+              <i class="fa-solid fa-ellipsis-vertical fa-sm"></i>
+            </button>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item (click)="deleteProject(item.project_id)">Delete</button>
+            </mat-menu>
+          </div>
+        </div>
+      </div>
+      <div class="non-project" *ngIf="projectList.length == 0">
+        <h4 *ngIf="mySharedProjects == '0'">You haven't had any projects.</h4>
+        <h4 *ngIf="mySharedProjects == '1'">You haven't joined any projects.</h4>
+      </div>
+    </div>
+  </div>
 </div>

@@ -54,7 +54,6 @@ export class ViewallprojectComponent implements OnInit {
       }
     });
 
-    console.log("Open dialog", this.userService.userInfo.uid);
     addProjectDialog.afterClosed().subscribe(() => {
       this.ngOnInit();
     });
@@ -77,6 +76,23 @@ export class ViewallprojectComponent implements OnInit {
     this.viewMarked = false;
 
     this.getAllProject();
+
+    // this.projectService
+    //   .getProjectsByUserId(this.userService.user.uid)
+    //   .subscribe((projects) => {
+    //     if (projects != null) {
+    //       this.ownedProjects = projects;
+    //       this.projectRendered = this.ownedProjects;
+    //     }
+    //   });
+
+    // this.projectService
+    //   .getProjectsByJoinedUserId(this.userService.user.uid)
+    //   .subscribe((projects) => {
+    //     if (projects != null) {
+    //       this.sharedProjects = projects;
+    //     }
+    //   });
   }
 
 
@@ -107,19 +123,19 @@ export class ViewallprojectComponent implements OnInit {
 
         this.projectList = this.ownedProjects;
 
-        if(this.viewAll == true){
+        if (this.viewAll == true) {
           this.getOwnedProjects();
         }
-        else if(this.viewInprogress == true){
+        else if (this.viewInprogress == true) {
           this.getInprogressList();
         }
-        else if(this.viewCompleted == true){
+        else if (this.viewCompleted == true) {
           this.getCompletedList();
         }
-        else if(this.viewOverdue == true){
+        else if (this.viewOverdue == true) {
           this.getOverdueList();
         }
-        else if(this.viewMarked == true){
+        else if (this.viewMarked == true) {
           this.getMarkProject();
         }
 
@@ -136,7 +152,6 @@ export class ViewallprojectComponent implements OnInit {
       }
     });
   }
-
 
   viewAll: boolean = false;
   viewInprogress: boolean = false;
@@ -173,7 +188,7 @@ export class ViewallprojectComponent implements OnInit {
     this.viewCompleted = true;
     this.viewOverdue = false;
     this.viewMarked = false;
-    
+
     this.foundList = [];
   }
 
@@ -233,43 +248,43 @@ export class ViewallprojectComponent implements OnInit {
   }
 
   changeStatus(projectList: ProjectModel[]) {
-    for(let i = 0; i < projectList.length; i++){
+    for (let i = 0; i < projectList.length; i++) {
       let currentDate: string = new Date().toLocaleDateString();
       let date_of_currentDate: number = parseInt(currentDate.split("/")[0]);
       let month_of_currentDate: number = parseInt(currentDate.split("/")[1]);
       let year_of_currentDate: number = parseInt(currentDate.split("/")[2]);
-  
-      let dueDate:string = projectList[i].due_date;
+
+      let dueDate: string = projectList[i].due_date;
       let date_of_dueDate: number = parseInt(dueDate.split("/")[1]);
       let month_of_dueDate: number = parseInt(dueDate.split("/")[0]);
       let year_of_dueDate: number = parseInt(dueDate.split("/")[2]);
 
       let status: Status;
-  
-      if((year_of_currentDate > year_of_dueDate) && (projectList[i].status != "completed")){
+
+      if ((year_of_currentDate > year_of_dueDate) && (projectList[i].status != "completed")) {
         status = "overdue";
       }
-      else if((year_of_currentDate == year_of_dueDate) && (projectList[i].status != "completed")){
-        if(month_of_currentDate > month_of_dueDate){
+      else if ((year_of_currentDate == year_of_dueDate) && (projectList[i].status != "completed")) {
+        if (month_of_currentDate > month_of_dueDate) {
           status = "overdue";
         }
-        else if(month_of_currentDate == month_of_dueDate){
-          if(date_of_currentDate >= date_of_dueDate){
+        else if (month_of_currentDate == month_of_dueDate) {
+          if (date_of_currentDate >= date_of_dueDate) {
             status = "overdue";
           }
-          else{
+          else {
             status = projectList[i].status;
           }
         }
-        else{
+        else {
           status = projectList[i].status;
         }
       }
-      else{
+      else {
         status = projectList[i].status;
       }
-  
-      let updateProject:ProjectModel = {
+
+      let updateProject: ProjectModel = {
         project_id: projectList[i].project_id,
         marked: projectList[i].marked,
         name: projectList[i].name,
@@ -281,7 +296,7 @@ export class ViewallprojectComponent implements OnInit {
         disable: projectList[i].disable,
         members: projectList[i].members,
       };
-  
+
       this.projectService.update(updateProject, projectList[i].project_id)
     }
   }
@@ -289,17 +304,33 @@ export class ViewallprojectComponent implements OnInit {
   projectName!: string;
   foundList: ProjectModel[] = [];
   findProject() {
-    for(let i = 0; i < this.ownedProjects.length; i++){
-      if(this.ownedProjects[i].name == this.projectName){
+    for (let i = 0; i < this.ownedProjects.length; i++) {
+      if (this.ownedProjects[i].name == this.projectName) {
         this.foundList = [];
         this.foundList.push(this.ownedProjects[i]);
         break;
       }
-      else{
+      else {
         this.foundList = [];
       }
     }
     this.projectList = this.foundList;
+  }
+
+  sortProjects(event: string) {
+    if (event === '0') {
+      if(this.ownedProjects != null){
+        this.projectList = this.ownedProjects;
+      }else{
+        this.projectList = [];
+      }
+    } else {
+      if(this.sharedProjects != null){
+        this.projectList = this.sharedProjects;
+      }else{
+        this.projectList = [];
+      }
+    }
   }
 
 }

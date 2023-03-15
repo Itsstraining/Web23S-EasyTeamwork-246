@@ -19,6 +19,9 @@ import {MatSliderModule} from '@angular/material/slider';
 import {MatSelectModule} from '@angular/material/select';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import { FormsModule } from '@angular/forms';
+import {MatListModule} from '@angular/material/list';
+import {MatChipsModule} from '@angular/material/chips';
+
 
 @NgModule({
   declarations: [],
@@ -44,6 +47,8 @@ import { FormsModule } from '@angular/forms';
     MatSelectModule,
     MatAutocompleteModule,
     FormsModule,
+    MatListModule,
+    MatChipsModule
   ],
   exports:[
     MatToolbarModule,
@@ -66,6 +71,8 @@ import { FormsModule } from '@angular/forms';
     MatSelectModule,
     MatAutocompleteModule,
     FormsModule,
+    MatListModule,
+    MatChipsModule
   ]
 })
 export class MaterialModule { }

@@ -1,21 +1,22 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
+import { ProjectModel } from 'src/models/projects.model';
 import { Complexity, Status, TaskModel } from 'src/models/task.model';
+import { UserModel } from 'src/models/user.model';
 import * as TaskActions from '../../../../../NgRx/Actions/tasks.action';
 import { AddTaskComponent } from '../add-task/add-task.component';
+import {MatChipEditedEvent, MatChipEditInput, MatChipInput, MatChipInputEvent, MatChipRemove} from '@angular/material/chips';
+
 
 @Component({
   selector: 'app-task-info',
   templateUrl: './task-info.component.html',
   styleUrls: ['./task-info.component.scss']
 })
-// export type Mutable<T> = { -readonly [P in keyof T]: T[P] }
 
 export class TaskInfoComponent implements OnInit{
-  
-
   taskById$ !: Observable<any>;
   task: TaskModel = {
     task_id: '',
@@ -41,7 +42,7 @@ export class TaskInfoComponent implements OnInit{
   constructor(
     private store: Store<{task: TaskModel}>,
     public dialogRef: MatDialogRef<AddTaskComponent>,
-  ) { 
+  ) {
     this.taskById$ = this.store.select('task');
    }
 
@@ -78,6 +79,28 @@ export class TaskInfoComponent implements OnInit{
 
   closeDialog(){
     this.dialogRef.close();
+  }
+
+  @ViewChild(MatChipInput, { read: ElementRef })
+  tags: Set<string> = new Set<string>();
+  selectedAssignee: UserModel[] = [];
+  tagInput!: ElementRef<HTMLInputElement>;
+  project!: ProjectModel;
+
+  onTagAddAssignee(value: UserModel): void {
+    if (value) {
+      this.tags.add(value.displayName);
+      this.selectedAssignee.push(value);
+    }
+    this.tagInput.nativeElement.value = '';
+  }
+
+  onRemoveAssignee(tagToRemove: UserModel): void {
+    const index = this.selectedAssignee.indexOf(tagToRemove);
+
+    if (index >= 0) {
+      this.selectedAssignee.splice(index, 1);
+    }
   }
 }
 

@@ -209,3 +209,14 @@
 #createDate {
   margin-left: 4rem;
 }
+
+.select-assignee {
+  display: flex;
+  flex-direction: column;
+  margin: 15px 0;
+
+  .label-input {
+    font-weight: bold;
+    margin: 5px 0;
+  }
+}
