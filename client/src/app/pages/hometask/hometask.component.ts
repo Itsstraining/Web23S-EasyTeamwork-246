@@ -83,7 +83,7 @@ export class HometaskComponent implements OnInit{
   getAllTasks(project_id: string){
     this.store.dispatch(TaskActions.getByProjectId({project_id: project_id}));
     this.task$.subscribe( (data: any) => {
-      if(data != null){
+      if(data != null){ 
         this.taskList = data.tasks;
         // this.getStatus(); //Leon here
         
@@ -142,8 +142,8 @@ export class HometaskComponent implements OnInit{
   dialogTaskInfoOpen(enterAnimationDuration: string, exitAnimationDuration: string, tId: string){
     let taskInfoDialog = this.matDialog.open(TaskInfoComponent, {enterAnimationDuration, exitAnimationDuration, autoFocus: false});
     let instance = taskInfoDialog.componentInstance;
-    console.log(this.project_info);
-    // instance.project = this.project_info;
+    // console.log(this.project_info);
+    instance.project = this.project_info;
     this.taskList.filter((task) => {
       if(task.task_id === tId){
         instance.task = task;

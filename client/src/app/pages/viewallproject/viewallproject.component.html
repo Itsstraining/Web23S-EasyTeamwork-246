@@ -52,8 +52,8 @@
         <div class="view-mode" id="search">
           <input [(ngModel)]="projectName" type="text" placeholder="Search project name...">
           <div id="search-btn-container">
-            <button (click)="findProject()">
-              <i class="fa-solid fa-search"></i>
+            <button id="search-btn">
+              <i class="fa-solid fa-search" id="search-icon"></i>
             </button>
           </div>
         </div>
@@ -122,7 +122,7 @@
       </div>
     </div>
     <div id="table-body">
-      <div class="item" *ngIf="projectList != null">
+      <div class="item" id="table-row-div" *ngIf="projectList != null">
         <div class="table-row" *ngFor="let item of projectList">
           <div *ngIf="item.marked == false" class="item-attribute" id="item-mark">
             <button (click)="markProject(item.marked, item)">
@@ -139,15 +139,15 @@
           </div>
           <div *ngIf="item.status == 'in-progress'" class="item-attribute" id="item-state">
             <div style="background-color: #159ACC;" id="state-dot"></div>
-            <span style="color: #199CAE;"> In-progress</span>
+            <span style="color: #00E0FF;"> In-progress</span>
           </div>
           <div *ngIf="item.status == 'completed'" class="item-attribute" id="item-state">
             <div style="background-color: #33FF00;" id="state-dot"></div>
-            <span style="color: #28C700;"> Completed</span>
+            <span style="color: #33ff00;"> Completed</span>
           </div>
           <div *ngIf="item.status == 'overdue'" class="item-attribute" id="item-state">
             <div style="background-color: #FF0000;" id="state-dot"></div>
-            <span style="color: #E51616;"> Overdue</span>
+            <span style="color: #ff3a3a;"> Overdue</span>
           </div>
           <div class="item-attribute" id="item-date">
             <div id="date-content">
