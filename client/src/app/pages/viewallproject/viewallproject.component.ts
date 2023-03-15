@@ -6,7 +6,7 @@ import { ProjectModel } from 'src/models/projects.model';
 import { AddProjectComponent } from './components/add-project/add-project.component';
 import * as ProjectActions from '../../../NgRx/Actions/projects.action';
 import { Observable } from 'rxjs';
-import { ShareProjectComponent } from './components/share-project/share-project.component';
+import { ShareProjectComponent } from '../../components/share-project/share-project.component';
 import { ProjectService } from 'src/app/services/projects/project.service';
 
 export type Status = "in-progress" | "completed" | "overdue";
@@ -31,9 +31,6 @@ export class ViewallprojectComponent implements OnInit {
   projectList: ProjectModel[] = [];
   ownedProjects: ProjectModel[] = [];
 
-  sharedProjects: ProjectModel[] = [];
-  mySharedProjects: string = '0';
-
   in_progress_list: ProjectModel[] = [];
   completed_list: ProjectModel[] = [];
   overdue_list: ProjectModel[] = [];
@@ -47,17 +44,11 @@ export class ViewallprojectComponent implements OnInit {
       }, autoFocus: false
     })
 
-    addProjectDialog.afterClosed().subscribe((addProject) => {
-      this.ownedProjects.push(addProject);
-      if (this.mySharedProjects == '0') {
-        this.projectList = this.ownedProjects;
-      }
-    });
-
     addProjectDialog.afterClosed().subscribe(() => {
-      this.ngOnInit();
-    });
+      this.getAllProject();
+    })
   }
+  
   opendialogShare() {
     this.matDialog.open(ShareProjectComponent)
   }
@@ -120,6 +111,7 @@ export class ViewallprojectComponent implements OnInit {
         });
 
         this.changeStatus(this.ownedProjects);
+        this.ownedProjects.reverse();
 
         this.projectList = this.ownedProjects;
 
@@ -316,21 +308,4 @@ export class ViewallprojectComponent implements OnInit {
     }
     this.projectList = this.foundList;
   }
-
-  sortProjects(event: string) {
-    if (event === '0') {
-      if(this.ownedProjects != null){
-        this.projectList = this.ownedProjects;
-      }else{
-        this.projectList = [];
-      }
-    } else {
-      if(this.sharedProjects != null){
-        this.projectList = this.sharedProjects;
-      }else{
-        this.projectList = [];
-      }
-    }
-  }
-
 }

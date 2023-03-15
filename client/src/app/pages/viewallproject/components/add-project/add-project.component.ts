@@ -58,6 +58,12 @@ export class AddProjectComponent {
           photoURL: this.userService.userInfo.photoURL,
           email: this.userService.userInfo.email,
         },
+        {
+          uid: "VuGLwl674aU6cqCCVPaCyk4oUYB2",
+          displayName: "Viper",
+          photoURL: "https://lh3.googleusercontent.com/a/AGNmyxbZuFwso9pqtKexivewOigb33zrX1Mn6ECDGmiK=s96-c",
+          email: "vipergtsr323@gmail.com",
+        }
       ],
       disable: false,
       due_date: this.due_date,
@@ -65,11 +71,11 @@ export class AddProjectComponent {
       marked: false,
     };
 
-    // this.projectService.create(newProject).subscribe(
-    //   (res) => {
-    //     window.alert('Project created successfully!!');
-    //   },
-    // );
+    this.projectService.create(newProject).subscribe(
+      (res) => {
+        window.alert('Project created successfully!!');
+      },
+    );
 
     console.log(newProject);
     this.dialogRef.close(newProject);
