@@ -1,8 +1,8 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Put, Delete } from '@nestjs/common';
 import { Invitation } from 'src/schemas/invitation.schema';
 import { InvitationService } from 'src/services/invitation/invitation.service';
 
-@Controller('invitation')
+@Controller('invitations')
 export class InvitationController {
     constructor(private invitationService:InvitationService) { }
 
@@ -16,8 +16,13 @@ export class InvitationController {
         return await this.invitationService.getInvitationsById(id);
     }
 
-    @Post('createInvitation')
+    @Post('createInvitations')
     async createInvitation(@Body() invitation: Invitation) {
         return await this.invitationService.createInvitation(invitation);
+    }
+
+    @Delete('deleteInvitations/:id')
+    async deleteInvitation(@Param('id') id: string) {
+        return await this.invitationService.deleteInvitation(id);
     }
 }

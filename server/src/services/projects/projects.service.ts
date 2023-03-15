@@ -19,8 +19,6 @@ export class ProjectsService {
         }
     }
 
-    async 
-
     async getById(id: string) {
         try{
             let data = await this.projectModel.find({project_id: id}).exec();

@@ -11,6 +11,7 @@ import {MatChipEditedEvent, MatChipEditInput, MatChipInput, MatChipInputEvent, M
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
 import {FormControl} from '@angular/forms';
 import {map, startWith} from 'rxjs/operators';
+import {MatAutocompleteSelectedEvent} from '@angular/material/autocomplete';
 @Component({
   selector: 'app-task-info',
   templateUrl: './task-info.component.html',
@@ -45,7 +46,13 @@ export class TaskInfoComponent implements OnInit{
     public dialogRef: MatDialogRef<AddTaskComponent>,
   ) {
     this.taskById$ = this.store.select('task');
+
+    this.filteredFruits = this.fruitCtrl.valueChanges.pipe(
+      startWith(null),
+      map((fruit: string | null) => (fruit ? this._filter(fruit) : this.allFruits.slice())),
+    );
    }
+
 
   ngOnInit(): void {
     // this.temp = this.task;
@@ -61,10 +68,10 @@ export class TaskInfoComponent implements OnInit{
     this.temp.task_id = this.task.task_id;
     this.temp.updated_at = this.getDate();
 
-    this.filteredOptions = this.myControl.valueChanges.pipe(
-      startWith(''),
-      map(value => this._filter(value || '')),
-    );
+    // this.filteredOptions = this.myControl.valueChanges.pipe(
+    //   startWith(''),
+    //   map(value => this._filter(value || '')),
+    // );
   }
 
   getDate(){
@@ -92,13 +99,15 @@ export class TaskInfoComponent implements OnInit{
   selectedAssignee: UserModel[] = [];
   tagInput!: ElementRef<HTMLInputElement>;
   project!: ProjectModel;
-  readonly separatorKeysCodes = [ENTER, COMMA] as const;
+  // member_list: UserModel[] = this.project.members;
 
-  onTagAddAssignee(value: UserModel): void {
-    if (value) {
-      this.tags.add(value.displayName);
-      this.selectedAssignee.push(value);
-    }
+
+  onTagAddAssignee(value: any): void {
+    console.log("value:   ",value);
+    // if (value) {
+    //   this.tags.add(value.displayName);
+    //   this.selectedAssignee.push(value);
+    // }
     this.tagInput.nativeElement.value = '';
   }
 
@@ -110,14 +119,89 @@ export class TaskInfoComponent implements OnInit{
     }
   }
 
+  // add(event: MatChipInputEvent){
+  //   const value = event.value.trim();
+
+  //   if(value){
+  //     this.member_list.push({displayName: value, email: '', photoURL: '', uid: ''});
+  //   }
+  //   event.chipInput!.clear();
+  // }
+
+  // remove(member: UserModel){
+  //   const index = this.member_list.indexOf(member);
+
+  //   if(index >= 0){
+  //     this.member_list.splice(index, 1);
+  //   }
+  // }
+
+  // edit(event: MatChipEditedEvent ,member: UserModel){
+  //   const value = event.value.trim();
+
+  //   if(!value){
+  //     this.remove(member);
+  //   }
+
+  //   const index = this.member_list.indexOf(member);
+  //   if(index >= 0){
+  //     this.member_list[index].displayName = value;
+  //   }
+  // }
+
+  addOnBlur = true;
+  readonly separatorKeysCodes = [ENTER, COMMA] as const;
+
   myControl = new FormControl('');
-  options: string[] = ['One', 'Two', 'Three'];
-  filteredOptions: Observable<string[]> | undefined;
+  // options: string[] = ['One', 'Two', 'Three'];
+  options: UserModel[] = [];
+  filteredOptions: Observable<UserModel[]> | undefined;
+
+  // private _filter(value: string): UserModel[] {
+  //   const filterValue = value.toLowerCase();
+
+  //   return this.options;
+  // }
+
+  fruitCtrl = new FormControl('');
+  filteredFruits: Observable<string[]>;
+  fruits: string[] = ['Lemon'];
+  allFruits: string[] = ['Apple', 'Lemon', 'Lime', 'Orange', 'Strawberry'];
+
+  @ViewChild('fruitInput') fruitInput!: ElementRef<HTMLInputElement>;
+
+  add(event: MatChipInputEvent): void {
+    const value = (event.value || '').trim();
+
+    // Add our fruit
+    if (value) {
+      this.fruits.push(value);
+    }
+
+    // Clear the input value
+    event.chipInput!.clear();
+
+    this.fruitCtrl.setValue(null);
+  }
+
+  remove(fruit: string): void {
+    const index = this.fruits.indexOf(fruit);
+
+    if (index >= 0) {
+      this.fruits.splice(index, 1);
+    }
+  }
+
+  selected(event: MatAutocompleteSelectedEvent): void {
+    this.fruits.push(event.option.viewValue);
+    this.fruitInput.nativeElement.value = '';
+    this.fruitCtrl.setValue(null);
+  }
 
   private _filter(value: string): string[] {
     const filterValue = value.toLowerCase();
 
-    return this.options.filter(option => option.toLowerCase().includes(filterValue));
+    return this.allFruits.filter(fruit => fruit.toLowerCase().includes(filterValue));
   }
 }
 
