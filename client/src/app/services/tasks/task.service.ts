@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Socket } from 'ngx-socket-io';
-import { TestModel } from 'src/models/test.modle';
 import { environment } from '../../../environments/environment';
 import { TaskModel } from '../../../models/task.model';
 
@@ -36,15 +35,6 @@ export class TaskService {
 
   delete(id: string){
     return this.httpClient.delete(`${this.url}/delete?id=${id}`);
-  }
-
-  getTasksSocket(project_id: string){
-    const channel = 'message-' + project_id;
-    return this.socket.fromEvent(channel);
-  }
-
-  sendTask(task: TaskModel){
-    this.socket.emit('message', task);
   }
 
   getTest(test: string){

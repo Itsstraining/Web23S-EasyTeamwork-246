@@ -8,7 +8,9 @@ import { UserModel } from 'src/models/user.model';
 import * as TaskActions from '../../../../../NgRx/Actions/tasks.action';
 import { AddTaskComponent } from '../add-task/add-task.component';
 import {MatChipEditedEvent, MatChipEditInput, MatChipInput, MatChipInputEvent, MatChipRemove} from '@angular/material/chips';
-
+import {COMMA, ENTER} from '@angular/cdk/keycodes';
+import {FormControl} from '@angular/forms';
+import {map, startWith} from 'rxjs/operators';
 
 @Component({
   selector: 'app-task-info',
@@ -45,6 +47,7 @@ export class TaskInfoComponent implements OnInit{
   ) {
     this.taskById$ = this.store.select('task');
    }
+  
 
   ngOnInit(): void {
     // this.temp = this.task;
@@ -59,6 +62,11 @@ export class TaskInfoComponent implements OnInit{
     this.temp.status = this.task.status;
     this.temp.task_id = this.task.task_id;
     this.temp.updated_at = this.getDate();
+
+    this.filteredOptions = this.myControl.valueChanges.pipe(
+      startWith(''),
+      map(value => this._filter(value || '')),
+    );
   }
 
   getDate(){
@@ -86,12 +94,15 @@ export class TaskInfoComponent implements OnInit{
   selectedAssignee: UserModel[] = [];
   tagInput!: ElementRef<HTMLInputElement>;
   project!: ProjectModel;
+  // member_list: UserModel[] = this.project.members;
+  
 
-  onTagAddAssignee(value: UserModel): void {
-    if (value) {
-      this.tags.add(value.displayName);
-      this.selectedAssignee.push(value);
-    }
+  onTagAddAssignee(value: any): void {
+    console.log("value:   ",value);
+    // if (value) {
+    //   this.tags.add(value.displayName);
+    //   this.selectedAssignee.push(value);
+    // }
     this.tagInput.nativeElement.value = '';
   }
 
@@ -101,6 +112,50 @@ export class TaskInfoComponent implements OnInit{
     if (index >= 0) {
       this.selectedAssignee.splice(index, 1);
     }
+  }
+
+  // add(event: MatChipInputEvent){
+  //   const value = event.value.trim();
+
+  //   if(value){
+  //     this.member_list.push({displayName: value, email: '', photoURL: '', uid: ''});
+  //   }
+  //   event.chipInput!.clear();
+  // }
+
+  // remove(member: UserModel){
+  //   const index = this.member_list.indexOf(member);
+
+  //   if(index >= 0){
+  //     this.member_list.splice(index, 1);
+  //   }
+  // }
+
+  // edit(event: MatChipEditedEvent ,member: UserModel){
+  //   const value = event.value.trim();
+
+  //   if(!value){
+  //     this.remove(member);
+  //   }
+
+  //   const index = this.member_list.indexOf(member);
+  //   if(index >= 0){
+  //     this.member_list[index].displayName = value;
+  //   }
+  // }
+  
+  addOnBlur = true;
+  readonly separatorKeysCodes = [ENTER, COMMA] as const;
+
+  myControl = new FormControl('');
+  // options: string[] = ['One', 'Two', 'Three'];
+  options: UserModel[] = [];
+  filteredOptions: Observable<UserModel[]> | undefined;
+
+  private _filter(value: string): UserModel[] {
+    const filterValue = value.toLowerCase();
+
+    return this.options;
   }
 }
 

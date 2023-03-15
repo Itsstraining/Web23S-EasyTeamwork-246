@@ -14,8 +14,7 @@
 ::ng-deep .mat-mdc-dialog-container .mdc-dialog__surface{
     border-radius: 15px;
     padding: .2rem;
-    background-color: #FBF8FF;
-    border: 1px solid #ffe600;
+    background-color: rgba(98, 24, 93, .9);
 }
 
 .container{
@@ -25,19 +24,21 @@
     display: flex;
     flex-direction: column;
     border: none;
-    background-color: #FBF8FF;
+    color: white;
+    // background-color: ;
     border-radius: 15px;
     padding-bottom: 1rem; 
 }
 
 .addTitle{
     // display: flex;
-    background-color: #F1E9FF;
     text-align: center;
     padding-top: 2%;
     border-top-right-radius: 15px;
     border-top-left-radius: 15px;
     // justify-content: center;
+    background-color: #FE6F7A;
+    box-shadow: 0px 1px 19px 0px rgba(254,111,122,0.75);
 }
 
 .addTitle > h1{
@@ -53,30 +54,32 @@
     font-family: 'Quicksand', sans-serif;
     font-weight: 500;
     text-align: center;
+    color: white;
 }
 
 .inputDiv{
     display: flex;
     flex-direction: column;
     justify-content: center;
+    color: white;
     // text-align: left;
 }
 
 #addBTn{
     width: 20%;
+    color: white;
     font-family: 'Quicksand', sans-serif;
     font-size: 1.2rem;
     border: none;
     border-radius: 7px;
-    background-color: #DFCCFF;
+    background-color: #FE6F7A;
+    box-shadow: 0px 1px 19px 0px rgba(254,111,122,0.75);
     padding: .5rem;
-    box-shadow: 0px 0px 4px 0px rgba(0,0,0,0.75);
-    border: 1px solid #ffe600;
 }
 
 #addBTn:hover{
     cursor: pointer;
-    background-color: #eadeff;
+    background-color: #ff8c96;
 }
 
 #closeBtn{
@@ -122,18 +125,18 @@ mat-slider{
 }
 
 :host ::ng-deep .mat-mdc-slider.mat-primary{
-    --mdc-slider-handle-color: #dfccff;
-    --mdc-slider-focus-handle-color: #dac6fc;
-    --mdc-slider-inactive-track-color: #cbadff;
-    --mdc-slider-active-track-color: #d1b7ff;
+    --mdc-slider-handle-color: #f77e88;
+    --mdc-slider-focus-handle-color: #f7727d;
+    --mdc-slider-inactive-track-color: #f7727d;
+    --mdc-slider-active-track-color: #f8606c;
     --mat-mdc-slider-hover-ripple-color: transparent;
-    --mat-mdc-slider-focus-ripple-color: rgba(209, 183, 255, 0.1);
+    --mat-mdc-slider-focus-ripple-color: rgba(248, 96, 108, 0.3);
 }
 
 :host ::ng-deep .mat-mdc-slider{
     --mdc-slider-label-label-text-font: 'Quicksand', sans-serif;
     --mdc-slider-label-label-text-font-size: 14rem;
-    --mdc-slider-label-container-color: #9a5fff;
+    --mdc-slider-label-container-color: #f5515f;
     --mdc-slider-label-label-text-color: #ffffff;
 }
 
@@ -142,6 +145,7 @@ mat-slider{
     display: flex;
     margin: 1.5% 0;
     justify-content: center;
+    color: white;
 }
 
 .input{    
@@ -150,39 +154,54 @@ mat-slider{
     font-weight: normal;
     width: 100%;
     padding-left: 1.2rem;
+    color: white;
+}
+
+:host ::ng-deep .mdc-text-field:not(.mdc-text-field--disabled) .mdc-floating-label{
+  color: white;
+}
+
+:host ::ng-deep .mat-mdc-form-field:not(.mat-form-field-no-animations) .mdc-text-field__input{
+    color: white;
 }
 
 :host ::ng-deep .mat-mdc-form-field-subscript-wrapper{
+    color: white;
     height: 0;
 }
 
 :host ::ng-deep .mdc-text-field--filled:not(.mdc-text-field--disabled){
-    background-color: #f6f0ff;
+    background-color: #f77e88;
+    box-shadow: 0px 0px 10px 0px rgba(255, 148, 157,0.75);
+    color: white;
     border-radius: 10px;
     margin: 0 auto;
 }
 
 :host ::ng-deep .mat-mdc-raised-button>.mat-icon{
+    color: white;
     margin: 0;
 }
 
 #calendar-btn{
     height: 56px;
-    background-color: #f6f0ff;
+    color: white;
+    background-color: #f77e88;
     border: none;
-    border-top-right-radius: 10px;
-    border-bottom-right-radius: 10px;
+    border-radius: 10px;
     box-shadow: none;
+    margin-left: 1rem;
+    box-shadow: 0px 0px 10px 0px rgba(255, 148, 157,0.75);
 }
 
 :host ::ng-deep .mat-calendar-body-selected{
     background-color: #b183ff;
-    color: #666666;
+    color: white;
 }
 
 :host ::ng-deep .mat-calendar-body-cell:not(.mat-calendar-body-disabled):hover > .mat-calendar-body-cell-content:not(.mat-calendar-body-selected):not(.mat-calendar-body-comparison-identical){
     background-color: #d5bdff;
-    color: #666666;
+    color: white;
 }
 
 #datePicker{
