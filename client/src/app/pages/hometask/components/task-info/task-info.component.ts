@@ -8,8 +8,9 @@ import { UserModel } from 'src/models/user.model';
 import * as TaskActions from '../../../../../NgRx/Actions/tasks.action';
 import { AddTaskComponent } from '../add-task/add-task.component';
 import {MatChipEditedEvent, MatChipEditInput, MatChipInput, MatChipInputEvent, MatChipRemove} from '@angular/material/chips';
-
-
+import {COMMA, ENTER} from '@angular/cdk/keycodes';
+import {FormControl} from '@angular/forms';
+import {map, startWith} from 'rxjs/operators';
 @Component({
   selector: 'app-task-info',
   templateUrl: './task-info.component.html',
@@ -59,6 +60,11 @@ export class TaskInfoComponent implements OnInit{
     this.temp.status = this.task.status;
     this.temp.task_id = this.task.task_id;
     this.temp.updated_at = this.getDate();
+
+    this.filteredOptions = this.myControl.valueChanges.pipe(
+      startWith(''),
+      map(value => this._filter(value || '')),
+    );
   }
 
   getDate(){
@@ -86,6 +92,7 @@ export class TaskInfoComponent implements OnInit{
   selectedAssignee: UserModel[] = [];
   tagInput!: ElementRef<HTMLInputElement>;
   project!: ProjectModel;
+  readonly separatorKeysCodes = [ENTER, COMMA] as const;
 
   onTagAddAssignee(value: UserModel): void {
     if (value) {
@@ -101,6 +108,16 @@ export class TaskInfoComponent implements OnInit{
     if (index >= 0) {
       this.selectedAssignee.splice(index, 1);
     }
+  }
+
+  myControl = new FormControl('');
+  options: string[] = ['One', 'Two', 'Three'];
+  filteredOptions: Observable<string[]> | undefined;
+
+  private _filter(value: string): string[] {
+    const filterValue = value.toLowerCase();
+
+    return this.options.filter(option => option.toLowerCase().includes(filterValue));
   }
 }
 

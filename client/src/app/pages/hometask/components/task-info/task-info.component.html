@@ -39,12 +39,13 @@
       </div>
     </div>
   </div>
-  <div class="select-assignee">
+  <!-- <div class="select-assignee">
     <p class="label-input">Assign to</p>
     <mat-chip-grid>
       <mat-chip-row #assigneeGrid *ngFor="let tag of tags" [value]="tag" >
       </mat-chip-row>
-      <input type="text" class="infoInput" placeholder="Assignee to..." [matAutocomplete]="autocomplete">
+      <input type="text" class="infoInput" placeholder="Assignee to..."
+      [matAutocomplete]="autocomplete">
     </mat-chip-grid>
     <mat-autocomplete #autocomplete >
       <mat-option class="option" *ngFor="let mem of project.members" [value]="mem">
@@ -52,7 +53,23 @@
         <h6>{{mem.displayName}}</h6>
       </mat-option>
     </mat-autocomplete>
-  </div>
+  </div> -->
+  <form class="example-form" >
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Number</mat-label>
+      <input type="text"
+             placeholder="Pick one"
+             aria-label="Number"
+             matInput
+             [formControl]="myControl"
+             [matAutocomplete]="auto">
+      <mat-autocomplete #auto="matAutocomplete">
+        <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+          {{option}}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+  </form>
   <div class="btnDiv">
     <button class="button" id="upButton" (click)="updateTask()">Update</button>
     <button class="button" id="delButton" (click)="deleteTask()">Delete</button>
