@@ -42,8 +42,8 @@ export class TaskInfoComponent implements OnInit{
   taskComplex!: Complexity;
   taskStatus!: Status;
   project!: ProjectModel;
-  
-  addOnBlur = true;  
+
+  addOnBlur = true;
   separatorKeysCodes: number[] = [ENTER, COMMA];
 
   fruitCtrl = new FormControl('');
@@ -61,8 +61,13 @@ export class TaskInfoComponent implements OnInit{
     public dialogRef: MatDialogRef<AddTaskComponent>,
   ) {
     this.taskById$ = this.store.select('task');
+
+    this.filteredFruits = this.fruitCtrl.valueChanges.pipe(
+      startWith(null),
+      map((fruit: string | null) => (fruit ? this._filter(fruit) : this.allFruits.slice())),
+    );
    }
-  
+
 
   ngOnInit(): void {
     // this.temp = this.task;
@@ -114,7 +119,7 @@ export class TaskInfoComponent implements OnInit{
 
   add(event: MatChipInputEvent): void {
     const value = (event.value || '').trim();
-    
+
     if (value) {
       this.fruits.push(value);
     }

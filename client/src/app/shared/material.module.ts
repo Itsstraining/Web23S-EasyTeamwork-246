@@ -23,6 +23,7 @@ import {MatListModule} from '@angular/material/list';
 import {MatChipsModule} from '@angular/material/chips';
 import { ReactiveFormsModule } from '@angular/forms';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import {MatBadgeModule} from '@angular/material/badge';
 
 @NgModule({
   declarations: [],
@@ -51,7 +52,8 @@ import {MatTooltipModule} from '@angular/material/tooltip';
     MatListModule,
     MatChipsModule,
     ReactiveFormsModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatBadgeModule
   ],
   exports:[
     MatToolbarModule,
@@ -77,7 +79,8 @@ import {MatTooltipModule} from '@angular/material/tooltip';
     MatListModule,
     MatChipsModule,
     ReactiveFormsModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatBadgeModule
   ]
 })
 export class MaterialModule { }

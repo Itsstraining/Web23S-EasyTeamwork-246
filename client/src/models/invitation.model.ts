@@ -1,8 +1,9 @@
 export interface InvitationModel {
-  id: string;
-  owner_id: string;
-  receiver_id: string;
-  status: number;
+  _id: string;
   project_id: string;
+  email: string;
+  createdAt: number;
+  updatedAt: number;
+  status: number;
   unread: boolean;
 }

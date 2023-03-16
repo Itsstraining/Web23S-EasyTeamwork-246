@@ -8,6 +8,8 @@ import { NotificationComponent } from '../components/notification/notification.c
 import { NotificationItemComponent } from '../components/notification/notification-item/notification-item.component';
 import { FormsModule } from '@angular/forms';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
+import { MemberComponent } from '../components/member/member.component';
+
 
 const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
 
@@ -19,7 +21,8 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
     InvitationComponent,
     InvitationItemComponent,
     NotificationComponent,
-    NotificationItemComponent
+    NotificationItemComponent,
+    MemberComponent,
   ],
   imports: [
     CommonModule,
@@ -33,6 +36,7 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
     InvitationItemComponent,
     NotificationComponent,
     NotificationItemComponent,
+    MemberComponent,
 
     // modules
     MaterialModule,
