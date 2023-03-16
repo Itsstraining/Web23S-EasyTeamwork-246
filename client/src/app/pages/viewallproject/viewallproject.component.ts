@@ -93,7 +93,7 @@ export class ViewallprojectComponent implements OnInit {
       if (state.loading == false) {
         if (state.user?.uid) {
           this.user = state.user;
-          console.log(this.user);
+          // console.log(this.user);
           this.store.dispatch(
             InvitationActions.getAllForUser({ _id: state.user?.uid })
           );
@@ -119,11 +119,11 @@ export class ViewallprojectComponent implements OnInit {
         this.projectList = data.projects;
         // Get owned projects
         this.ownedProjects = this.projectList.filter((project) => {
-          // for (let i = 0; i < project.members.length; i++) {
-          //   if (project.members[i].uid == this.userService.userInfo.uid) {
-          //     return true;
-          //   }
-          // }
+          for (let i = 0; i < project.members.length; i++) {
+            if (project.members[i].uid == this.userService.userInfo.uid) {
+              return true;
+            }
+          }
           return false;
         });
 

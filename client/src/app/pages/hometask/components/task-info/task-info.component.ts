@@ -92,7 +92,7 @@ export class TaskInfoComponent implements OnInit{
     return date.toLocaleDateString();
   }
 
-  yeet(){
+  updateMember(){
     for(let i = 0; i <= this.member.length; i++){
       this.memberID.forEach((member) => {
         if(this.member[i] == member.displayName){
@@ -105,9 +105,7 @@ export class TaskInfoComponent implements OnInit{
   }
 
   updateTask(){
-    this.yeet();
-    
-    
+    this.updateMember();
     this.store.dispatch(TaskActions.updateTask({task: this.temp, id: this.temp.task_id}));
     this.closeDialog();
   }
@@ -118,6 +116,8 @@ export class TaskInfoComponent implements OnInit{
   }
 
   closeDialog(){
+    this.updateMember();
+    this.store.dispatch(TaskActions.updateTask({task: this.temp, id: this.temp.task_id}));
     this.dialogRef.close();
   }
 

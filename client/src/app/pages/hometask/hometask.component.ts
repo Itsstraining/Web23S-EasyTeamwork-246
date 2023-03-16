@@ -13,6 +13,7 @@ import { ProjectService } from 'src/app/services/projects/project.service';
 import { ProjectModel } from 'src/models/projects.model';
 import { UserService } from 'src/app/services/users/user.service';
 import { ShareProjectComponent } from 'src/app/components/share-project/share-project.component';
+import { UserModel } from 'src/models/user.model';
 
 @Component({
   selector: 'app-hometask',
@@ -52,7 +53,8 @@ export class HometaskComponent implements OnInit{
   owner_name: string = '';
   owner_img: string = '';
 
-  usr_count: number = 0;
+  all_members: UserModel[] = [];
+  usr_count!: number;
 
   ngOnInit(){
     this.todoList = [];
@@ -62,10 +64,9 @@ export class HometaskComponent implements OnInit{
     this.taskList = [];
     this.router.params.subscribe( (param) => {
       this.prj_id = param['id'];
-      this.getProject();
       this.getSocket();
-      // this.getAllTasks(param['id']); //Leon here
-      //this.getStatus(); //Leon here
+      this.getAllTasks(param['id']);
+      this.getProject();
     });
   }
 
@@ -75,9 +76,20 @@ export class HometaskComponent implements OnInit{
       this.project_name = data[0].name;
       this.project_deadline = data[0].due_date;
       this.getOwnerInfo();
-      this.getAllTasks(this.prj_id); //Leon here
-      this.getStatus(); //Leon here
-      this.getAllTasks(this.prj_id); //Leon here
+      this.addUser();
+
+      if(this.project_info.status === 'overdue'){
+        let temp: TaskModel[] = [];
+        this.taskList.forEach( (task) => temp.push(Object.assign({}, task)));
+
+        for(let i = 0; i < temp.length; i++){
+          console.log("for running");
+          if(temp[i].status != 'completed'){
+            temp[i].status = 'due';
+            this.sendTest(temp[i]);
+          }
+        }
+      }
     });
   }
 
@@ -242,7 +254,12 @@ export class HometaskComponent implements OnInit{
   }
 
   addUser(){
-
+    if(this.all_members.length > 3){
+      for(let i = 3; i < this.all_members.length; i++){
+        this.usr_count = this.usr_count + 1;
+      }
+    }
+    this.all_members = this.project_info.members;
   }
 
   ///THIS IS LEON THE MIGHTY LION KING CODE //Leon here
@@ -257,43 +274,6 @@ export class HometaskComponent implements OnInit{
       // this.sendTest(result.data);
       this.ngOnInit();
     });
-  }
-
-  getStatus(){
-    // this.getProject();
-    console.log(this.project_info.status);
-    if(this.project_info.status === "overdue"){
-      console.log("this is overdue");
-      for(let i = 0; i < this.taskList.length; i++){
-        if(this.taskList[i].status != "completed" && this.taskList[i].status != "due"){
-          let temp : TaskModel = {
-            task_id: this.taskList[i].task_id,
-            project_id: this.taskList[i].project_id,
-            name: this.taskList[i].name,
-            description: this.taskList[i].description,
-            assignee: this.taskList[i].assignee,
-            status: 'due',
-            complexity: this.taskList[i].complexity,
-            comment_count: this.taskList[i].comment_count,
-            deadline: this.taskList[i].deadline,
-            created_at: this.taskList[i].created_at,
-            updated_at: this.taskList[i].updated_at
-          }
-          // let index = this.taskList.findIndex((task) => task.task_id === this.taskList[i].task_id);
-          // let temp = this.updateList('due', index);
-          // this.sendTest(temp);
-          
-          this.store.dispatch(TaskActions.updateTask({task: temp, id : this.taskList[i].task_id}));
-          console.log("task status changed");
-        }
-        else{
-          console.log("task status stay");
-        }
-      }
-    }
-    else{
-      console.log("project isnt overdue");
-    }
   }
 }
 
