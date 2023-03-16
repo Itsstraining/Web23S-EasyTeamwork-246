@@ -8,7 +8,7 @@
   <div class="taskInfoDiv">
     <div class="desDiv">
       <p>Description: </p>
-      <textarea class="infoInput" [(ngModel)]="temp.description" rows="3" cols="56" placeholder="Description..."></textarea>
+      <textarea class="infoInput" style="resize:none;" [(ngModel)]="temp.description" rows="3" cols="61" placeholder="Description..."></textarea>
     </div>
     <div class="restDiv">
       <div class="statDiv">
@@ -42,16 +42,16 @@
     <p class="label-input">Assign to</p>
     <form>
       <mat-form-field class="example-chip-list" appearance="fill">
-        <mat-label>Favorite Fruits</mat-label>
+        <mat-label>Assign members:</mat-label>
         <mat-chip-grid #chipGrid aria-label="Fruit selection">
-          <mat-chip-row *ngFor="let fruit of fruits" (removed)="remove(fruit)">
-            {{fruit}}
-            <button matChipRemove [attr.aria-label]="'remove ' + fruit">
+          <mat-chip-row *ngFor="let member of member" (removed)="remove(member)">
+            {{member}}
+            <button matChipRemove [attr.aria-label]="'remove ' + member">
               <mat-icon>cancel</mat-icon>
             </button>
           </mat-chip-row>
         </mat-chip-grid>
-        <input placeholder="New Fruit..." #fruitInput [formControl]="fruitCtrl"
+        <input placeholder="Choose member..." #fruitInput [formControl]="fruitCtrl"
           [matChipInputFor]="chipGrid" [matAutocomplete]="auto"
           [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
           (matChipInputTokenEnd)="add($event)"/>
@@ -62,44 +62,6 @@
         </mat-autocomplete>
       </mat-form-field>
     </form>
-    
-    
-    <!-- <form class="example-form">
-      <mat-form-field class="example-full-width" appearance="fill">
-        <mat-label id="member_label">Member</mat-label>
-        <input type="text"
-               placeholder="Choose members"
-               aria-label="Member"
-               matInput
-               [formControl]="myControl"
-               [matAutocomplete]="auto">
-        <mat-autocomplete #auto="matAutocomplete">
-          <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-            {{option}}
-          </mat-option>
-        </mat-autocomplete>
-      </mat-form-field>
-    </form> -->
-    <!-- <mat-form-field>
-      <mat-label>Choose members</mat-label>
-      <mat-chip-grid #userGrid aria-label="Enter User">
-        <mat-chip-row *ngFor="let member of project.members"
-                      (removed)="remove(member)">
-                      [editable]="true"
-                      (edited)="edit($event, member)">
-                      [aria-description]="'Enter to edit.' + member.displayName">
-          {{member.displayName}}
-          <button matChipRemove [attr.aria-label]="'remove' + member.displayName">
-            <mat-icon>cancel</mat-icon>
-          </button>
-        </mat-chip-row>
-        <input placeholder="Enter new member..."
-              [matChipInputFor]="userGrid"
-              [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-              [matChipInputAddOnBlur]="addOnBlur"
-              (matChipInputTokenEnd)="add($event)">
-      </mat-chip-grid>
-    </mat-form-field> -->
   </div>
   <div class="btnDiv">
     <button class="button" id="upButton" (click)="updateTask()">Update</button>

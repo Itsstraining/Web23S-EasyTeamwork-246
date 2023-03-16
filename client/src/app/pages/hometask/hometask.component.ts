@@ -132,9 +132,7 @@ export class HometaskComponent implements OnInit{
     let instance = addTaskDialog.componentInstance;
     instance.prj_id = this.prj_id;
     instance.task_id = this.task_id;
-    console.log(this.project_info);
     addTaskDialog.afterClosed().subscribe(result => {
-      // this.sendTest(result.data);
       this.ngOnInit();
     });
   }
@@ -142,7 +140,6 @@ export class HometaskComponent implements OnInit{
   dialogTaskInfoOpen(enterAnimationDuration: string, exitAnimationDuration: string, tId: string){
     let taskInfoDialog = this.matDialog.open(TaskInfoComponent, {enterAnimationDuration, exitAnimationDuration, autoFocus: false});
     let instance = taskInfoDialog.componentInstance;
-    // console.log(this.project_info);
     instance.project = this.project_info;
     this.taskList.filter((task) => {
       if(task.task_id === tId){
@@ -150,12 +147,13 @@ export class HometaskComponent implements OnInit{
       }
     });
 
-    taskInfoDialog.afterClosed().subscribe(() => {
+    taskInfoDialog.afterClosed().subscribe((result) => {      
       this.ngOnInit();
     });
   }
 
   drop(event: CdkDragDrop<TaskModel[]>, listName: string){
+    console.log(this.taskList.find((task) => task.name === 'd1wa'));
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {

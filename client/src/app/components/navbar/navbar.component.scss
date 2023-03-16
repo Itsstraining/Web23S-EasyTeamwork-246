@@ -59,7 +59,17 @@
   .btn-homeTask {
     width: auto;
     margin-left: 25%;
+    background-color: #FF7078; 
+    color: white; 
+    box-shadow: 0px 0px 19px 0px rgba(255, 112, 120, 0.7);
+    transition: .5s;
   }
+  .btn-homeTask:hover{
+    background-color: #FF7078; 
+    box-shadow: 0px 0px 19px 0px rgba(255, 174, 178, 0.7);
+    transition: .5s;
+  }
+  
 
   .btn-ViewAllProject {
     width: auto;
