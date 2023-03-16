@@ -57,12 +57,6 @@ export class AddProjectComponent {
           displayName: this.userService.userInfo.displayName,
           photoURL: this.userService.userInfo.photoURL,
           email: this.userService.userInfo.email,
-        },
-        {
-          uid: "VuGLwl674aU6cqCCVPaCyk4oUYB2",
-          displayName: "Viper",
-          photoURL: "https://lh3.googleusercontent.com/a/AGNmyxbZuFwso9pqtKexivewOigb33zrX1Mn6ECDGmiK=s96-c",
-          email: "vipergtsr323@gmail.com",
         }
       ],
       disable: false,
