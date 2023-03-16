@@ -112,7 +112,7 @@ export class TaskInfoComponent implements OnInit{
 
   getMemberName(){
     for(let i = 0; i < this.project.members.length; i++){
-      this.allFruits.push(this.project.members[i].displayName);
+      // this.allFruits.push(this.project.members[i].displayName);
     }
     console.log(this.allFruits);
   }

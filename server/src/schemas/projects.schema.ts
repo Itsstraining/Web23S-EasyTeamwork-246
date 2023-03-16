@@ -1,8 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import mongoose, { HydratedDocument } from 'mongoose';
+import { HydratedDocument } from 'mongoose';
 import { Status } from 'src/models/projects.model';
-import { UserDocument } from './users.schema';
-import { IsNotEmpty } from 'class-validator';
 
 export type ProjectDocument = HydratedDocument<Project>;
 @Schema({ timestamps: true })
@@ -14,7 +12,7 @@ export class Project {
     @Prop()
     name: string;
     @Prop()
-    owner_name: string;
+    owner: string;
     @Prop()
     owner_photo: string;
     @Prop()
@@ -25,12 +23,7 @@ export class Project {
     status: Status;
     @Prop()
     disable: boolean;
-    @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'users' }] })
-    members: UserDocument[];
-    @IsNotEmpty()
-    // @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'users' })
-    // owner: UserDocument;
-    @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'users' }] })
-    invitedMembers: UserDocument[];
+    @Prop()
+    members: string[];
 }
 export const ProjectSchema = SchemaFactory.createForClass(Project)

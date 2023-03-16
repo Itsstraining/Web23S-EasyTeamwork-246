@@ -5,7 +5,6 @@ import { UserService } from 'src/app/services/users/user.service';
 import { ProjectModel } from 'src/models/projects.model';
 import { AddProjectComponent } from './components/add-project/add-project.component';
 import * as ProjectActions from '../../../NgRx/Actions/projects.action';
-import { ShareProjectComponent } from '../../components/share-project/share-project.component';
 import { ProjectService } from 'src/app/services/projects/project.service';
 import { InvitationActions } from 'src/NgRx/Actions/invitations.action';
 import { MemberComponent } from 'src/app/components/member/member.component';
@@ -14,6 +13,7 @@ import { UserState } from 'src/NgRx/States/user.state';
 import { ProjectState } from 'src/NgRx/States/projects.state';
 import { UserModel } from 'src/models/user.model';
 import { InvitationComponent } from 'src/app/components/invitation/invitation.component';
+import { InvitationState } from 'src/NgRx/States/invitations.state';
 
 export type Status = "in-progress" | "completed" | "overdue";
 
@@ -27,9 +27,30 @@ export class ViewallprojectComponent implements OnInit {
     private matDialog: MatDialog,
     private userService: UserService,
     private projectService: ProjectService,
-    private store: Store<{ project: ProjectState;user: UserState }>
+    private store: Store<{ project: ProjectState,user: UserState; invite: InvitationState}>
   ) {
     this.project$ = this.store.select('project');
+
+
+    this.auth$.subscribe((auth) => {
+      if(auth.loading == false){
+        this.userUid = auth.user?.uid !;
+      }
+    });
+
+    this.invites$ = this.store.select('invite');
+    this.store.dispatch(
+      InvitationActions.getInvitations({ idReceiver: this.userUid })
+    );
+    this.invites$.subscribe((invites) => {
+      let count = 0;
+      invites.invitations.forEach((invite) => {
+        if (invite.status == 'pending') {
+          count++;
+        }
+      });
+      this.invitesCount = count;
+    });
   }
 
   project$ !: Observable<any>;
@@ -45,6 +66,12 @@ export class ViewallprojectComponent implements OnInit {
   mark_list: ProjectModel[] = [];
 
 
+  user: UserModel = <UserModel>{};
+  userUid!: string;
+  auth$ = this.store.select('user');
+  invites$!: Observable<InvitationState>;
+  invitesCount = 0;
+
   dialogOpen() {
     let addProjectDialog = this.matDialog.open(AddProjectComponent, {
       data: {
@@ -57,13 +84,7 @@ export class ViewallprojectComponent implements OnInit {
     })
   }
 
-  opendialogShare() {
-    this.matDialog.open(ShareProjectComponent)
-  }
-
   ngOnDestroy(): void {
-    this.userSubscription.unsubscribe();
-    this.isRequestSubscription.unsubscribe();
   }
 
   ngOnInit(): void {
@@ -81,26 +102,10 @@ export class ViewallprojectComponent implements OnInit {
     this.viewMarked = false;
 
     this.getAllProject();
+  }
 
-
-    this.isRequestSubscription = this.isRequest$.subscribe((state) => {
-      if (state) {
-        console.log('requested');
-      }
-    });
-
-    this.userSubscription = this.userState$.subscribe((state) => {
-      if (state.loading == false) {
-        if (state.user?.uid) {
-          this.user = state.user;
-          console.log(this.user);
-          this.store.dispatch(
-            InvitationActions.getAllForUser({ _id: state.user?.uid })
-          );
-        }
-      }
-    });
-
+  openInvitation() {
+    this.matDialog.open(InvitationComponent);
   }
 
 
@@ -119,11 +124,11 @@ export class ViewallprojectComponent implements OnInit {
         this.projectList = data.projects;
         // Get owned projects
         this.ownedProjects = this.projectList.filter((project) => {
-          // for (let i = 0; i < project.members.length; i++) {
-          //   if (project.members[i].uid == this.userService.userInfo.uid) {
-          //     return true;
-          //   }
-          // }
+          for (let i = 0; i < project.members.length; i++) {
+            if (project.members[i].uid == this.userService.userInfo.uid) {
+              return true;
+            }
+          }
           return false;
         });
 
@@ -324,32 +329,5 @@ export class ViewallprojectComponent implements OnInit {
       }
     }
     this.projectList = this.foundList;
-  }
-
-
-  userState$ = this.store.select('user');
-  user: UserModel = <UserModel>{};
-  userSubscription!: Subscription;
-  isRequestSubscription!: Subscription;
-  isRequest$ = this.store.select('project', 'isRequested');
-  requestProject$ = this.store.select('project', 'requestProject');
-
-  addMember(project: ProjectModel): void {
-    let dialogRef = this.matDialog.open(MemberComponent, {
-      data: project,
-    });
-    dialogRef.afterClosed().subscribe((result: string) => {
-      if (result == '') return;
-      else {
-        console.log(result);
-        this.store.dispatch(
-          InvitationActions.inviteProject({ project: project, email: result })
-        );
-      }
-    });
-  }
-
-  invitation(){
-    this.matDialog.open(InvitationComponent)
   }
 }

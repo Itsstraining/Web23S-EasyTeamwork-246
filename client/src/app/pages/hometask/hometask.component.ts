@@ -84,10 +84,10 @@ export class HometaskComponent implements OnInit{
   getAllTasks(project_id: string){
     this.store.dispatch(TaskActions.getByProjectId({project_id: project_id}));
     this.task$.subscribe( (data: any) => {
-      if(data != null){ 
+      if(data != null){
         this.taskList = data.tasks;
         // this.getStatus(); //Leon here
-        
+
         this.todoList = this.taskList.filter((task) => task.status === 'todo');
         this.inProgressList = this.taskList.filter((task) => task.status === 'in-progress');
         this.completeList = this.taskList.filter((task) => task.status === 'completed');
@@ -248,17 +248,8 @@ export class HometaskComponent implements OnInit{
   }
 
   ///THIS IS LEON THE MIGHTY LION KING CODE //Leon here
-  dialogShareProject(enterAnimationDuration: string, exitAnimationDuration: string) {
-    let shareProjectDialog =this.matDialog.open(ShareProjectComponent, {
-      data: {
-        project: this.project_info
-      }, autoFocus: false
-    })
-    // console.log(this.task_id);
-    shareProjectDialog.afterClosed().subscribe(() =>{
-      // this.sendTest(result.data);
-      this.ngOnInit();
-    });
+  dialogShareProject() {
+    this.matDialog.open(ShareProjectComponent)
   }
 
   getStatus(){
@@ -284,7 +275,7 @@ export class HometaskComponent implements OnInit{
           // let index = this.taskList.findIndex((task) => task.task_id === this.taskList[i].task_id);
           // let temp = this.updateList('due', index);
           // this.sendTest(temp);
-          
+
           this.store.dispatch(TaskActions.updateTask({task: temp, id : this.taskList[i].task_id}));
           console.log("task status changed");
         }

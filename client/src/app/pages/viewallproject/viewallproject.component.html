@@ -6,9 +6,10 @@
     <p>Projects</p>
   </div>
   <div id="create-project">
-    <button style="margin-left:50%" matBadge="{{ (this.requestProject$ | async)?.length }}" matBadgeColor="accent"
-      matBadgePosition="after" matBadgeColor="accent" (click)="invitation()">
-      <mat-icon class="icon">mail</mat-icon>
+    <button style="margin-left:50%">
+      <mat-icon [matBadge]="this.invitesCount" matBadgeColor="accent" (click)="openInvitation()"
+        >notifications</mat-icon
+      >
     </button>
     <button (click)="dialogOpen()" id="create-btn" style="margin-top: 8%">
       <span id="create-content">
@@ -164,7 +165,7 @@
             </div>
           </div>
           <div class="item-attribute" id="item-mems">
-            <!-- <span>{{item.members.length}}</span> -->
+            <span>{{item.members.length}}</span>
           </div>
           <div class="item-attribute" id="item-host">
             <img class="avatar" [src]="item.owner_photo" alt="avatar">
@@ -175,8 +176,8 @@
               <i class="fa-solid fa-ellipsis-vertical fa-sm"></i>
             </button>
             <mat-menu #menu="matMenu">
-              <button mat-menu-item (click)="deleteProject(item.project_id)">Delete</button>
-              <button mat-menu-item (click)="addMember(item)" [disabled]="item.owner_id != this.user.uid">Add
+              <button mat-menu-item (click)="deleteProject(item.project_id)" [disabled]="item.owner_id != this.user.uid">Delete</button>
+              <button mat-menu-item [disabled]="item.owner_id != this.user.uid">Add
                 Member</button>
             </mat-menu>
           </div>
