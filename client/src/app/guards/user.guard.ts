@@ -13,19 +13,23 @@ export class UserGuard implements CanActivate {
   constructor(private auth: Auth, private userService: UserService, private router: Router) { }
   canActivate(
     route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-      return new Promise((resolve) => {
-        authState(this.auth).subscribe((state) => {
-          if (state) {
-            resolve(!state.isAnonymous);
-            if(state.isAnonymous){
-              this.router.navigate(['/login']);
-            }
-          } else {
-            resolve(false);
-            this.router.navigate(['/login']);
-          }
-        });
+    state: RouterStateSnapshot
+  ):
+    | Observable<boolean | UrlTree>
+    | Promise<boolean | UrlTree>
+    | boolean
+    | UrlTree {
+    return new Promise((resolve, reject) => {
+      onAuthStateChanged(this.auth, (userInfo) => {
+        if (userInfo) {
+          this.userService.userInfo = userInfo;
+          resolve(true);
+        } else {
+          this.userService.userInfo = null;
+          resolve(false);
+          this.router.navigate(['/login']);
+        }
       });
+    });
   }
 }

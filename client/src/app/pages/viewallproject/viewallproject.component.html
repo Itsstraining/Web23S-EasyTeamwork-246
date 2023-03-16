@@ -6,12 +6,20 @@
     <p>Projects</p>
   </div>
   <div id="create-project">
-    <button (click)="dialogOpen()" id="create-btn">
+    <button style="margin-left:50%" matBadge="{{ (this.requestProject$ | async)?.length }}" matBadgeColor="accent"
+      matBadgePosition="after" matBadgeColor="accent" (click)="invitation()">
+      <mat-icon class="icon">mail</mat-icon>
+    </button>
+    <button (click)="dialogOpen()" id="create-btn" style="margin-top: 8%">
       <span id="create-content">
         <i class="fa-solid fa-square-plus"></i>
         Create project
       </span>
     </button>
+    <mat-select placeholder="Select project" style="margin-top: 8%;color: rgb(255 255 255);">
+      <mat-option value="0">My projects</mat-option>
+      <mat-option value="1">Shared with me</mat-option>
+    </mat-select>
   </div>
   <div id="overview">
     <div id="overview-header">Overview</div>
@@ -168,12 +176,15 @@
             </button>
             <mat-menu #menu="matMenu">
               <button mat-menu-item (click)="deleteProject(item.project_id)">Delete</button>
+              <button mat-menu-item (click)="addMember(item)" [disabled]="item.owner_id != this.user.uid">Add
+                Member</button>
             </mat-menu>
           </div>
         </div>
       </div>
       <div class="non-project" *ngIf="projectList.length == 0">
-        <span class="no-project-announce">Sorry there is no projects</span>
+        <span class="no-project-announce" *ngIf="isSharedProjects == '0'">Sorry there is no projects</span>
+        <span class="no-project-announce" *ngIf="isSharedProjects == '1'">You haven't joined any projects.</span>
       </div>
     </div>
   </div>

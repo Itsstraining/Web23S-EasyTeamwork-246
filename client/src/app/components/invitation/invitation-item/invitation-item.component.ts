@@ -28,9 +28,9 @@ export class InvitationItemComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
-    this.userService.getUserById(this.invitation.owner_id).subscribe(user => {
-      this.sender = user;
-    });
+    // this.userService.getUserById(this.invitation.owner_id).subscribe(user => {
+    //   this.sender = user;
+    // });
     this.userService.getUserById(this.userService.user.uid).subscribe(user => {
       this.currentUser = user;
     });
@@ -62,7 +62,7 @@ export class InvitationItemComponent implements OnInit {
         );
       }
     );
-    // this.addMemToProject(isAgree);
+    this.addMemToProject(isAgree);
   }
 
   addMemToProject(isAgree: number) {

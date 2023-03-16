@@ -8,28 +8,37 @@
         <div id="btnSpaceBottom"></div>
     </mat-button-toggle-group> -->
 
-    <div class="homeDiv">        
+    <div class="homeDiv">
         <div class="infoDiv">
             <h1 id="funcTitle">{{project_info.name}}</h1>
             <div class="usrImgDiv">
                 <button (click)="dialogShareProject('400ms', '100ms')" id="share" mat-raised-button matTooltip="Share project">
-                    <i class="addUsr" class="fa-solid fa-share-nodes fa-sm"></i>
+                    <i class="addUsr" class="fa-solid fa-share-nodes fa-sm" style="color: black"></i>
                     Share
                 </button>
                 <div class="addUsr">
                     <i class="fa-sharp fa-solid fa-user-plus fa-lg"></i>
                 </div>
                 <div class="usrIcon">
-                    <img id="owner_img" src="{{owner_img}}" alt="img">
+                    <img id="owner_img" src="{{all_members[0].photoURL}}" alt="img">
                 </div>
-                <div class="usrIcon1">
-                    <img id="owner_img" src="{{owner_img}}" alt="img">
+
+                <div class="usrIcon1" *ngIf="all_members[1] != null">
+                    <img id="owner_img" src="{{all_members[1].photoURL}}" alt="img">
                 </div>
-                <div class="usrIcon2">
+                <div class="usrIcon1" *ngIf="all_members[1] == null">
                     <i class="fa-sharp fa-solid fa-user fa-xl"></i>
                 </div>
-                <div class="user_remain_div">
-                    <p id="user_remain">and <span id="user_remain_count">{{usr_count}} other people</span></p>
+
+                <div class="usrIcon2" *ngIf="all_members[2] != null">                    
+                    <img id="owner_img" src="{{all_members[2].photoURL}}" alt="img">
+                </div>
+                <div class="usrIcon2" *ngIf="all_members[2] == null">
+                    <i class="fa-sharp fa-solid fa-user fa-xl"></i>
+                </div>
+
+                <div class="user_remain_div" *ngIf="usr_count > 3">
+                    <p id="user_remain">and <span id="user_remain_count">{{usr_count}} </span>other people</p>
                 </div>
             </div>
         </div>
@@ -193,14 +202,20 @@
     </div>
     <div class="project_task_infoDiv">
         <div class="sidebar_info">
-            <p id="sidebar_project_title">Project: <span id="sidebar_project_name">{{project_info.name}}</span></p>
+            <div class="sidebar_info_div">
+                <p id="sidebar_project_title">Project: </p>
+                <p id="sidebar_project_name">{{project_info.name}}</p>
+            </div>
             <p>Due date: {{project_info.due_date}}</p>
             <p>Project state: {{project_info.status}}</p>
             <p>Project creator: {{project_info.owner}}</p>
             <p>Members: {{project_info.members.length}}</p>
         </div>
         <div *ngIf="singleTask != null" class="sidebar_info_task">
-            <p id="sidebar_project_title">Task: <span id="sidebar_project_name">{{singleTask.name}}</span></p>
+            <div class="sidebar_info_div">
+                <p id="sidebar_project_title">Task: </p>
+                <p id="sidebar_project_name">{{singleTask.name}}</p>
+            </div>
             <p>Task Description: {{singleTask.description}}</p>
             <p>Task complexity: {{singleTask.complexity}}</p>
             <p>Task state: {{singleTask.status}}</p>

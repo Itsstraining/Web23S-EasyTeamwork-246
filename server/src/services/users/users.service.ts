@@ -9,15 +9,30 @@ export class UsersService {
     constructor(@InjectModel(User.name) private userModel: Model<UserDocument>) { }
 
     async getAllUsers() {
-        return await this.userModel.find();
+        try {
+            return await this.userModel.find();
+        } catch (e) {
+            console.log(e);
+            return null;
+        }
     }
 
     async signIn(user: UserModel) {
-        let createdUser = new this.userModel(user);
-        await createdUser.save();
+        try {
+            let createdUser = new this.userModel(user);
+            await createdUser.save();
+        } catch (e) {
+            console.log(e);
+            return null;
+        }
     }
 
     async findUserById(id: string) {
-        return await this.userModel.findOne({ uid: id });
+        try {
+            return await this.userModel.findOne({ uid: id });
+        } catch (e) {
+            console.log(e);
+            return null;
+        }
     }
 }

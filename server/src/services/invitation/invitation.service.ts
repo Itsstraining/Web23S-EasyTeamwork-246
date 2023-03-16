@@ -10,16 +10,39 @@ export class InvitationService {
     ) { }
 
     async getAllInvitations() {
-        return await this.invitationModel.find().exec();
+        try {
+            return await this.invitationModel.find().exec();
+        } catch (e) {
+            console.log(e);
+            return null;
+        }
     }
 
     async getInvitationsById(id: string) {
-        return await this.invitationModel.find({ to: id });
+        try {
+            return await this.invitationModel.find({ to: id });
+        } catch (e) {
+            console.log(e);
+            return null;
+        }
     }
 
     async createInvitation(invitation: Invitation) {
-        let createInvitation = new this.invitationModel(invitation);
-        console.log(createInvitation);
-        return await createInvitation.save();
+        try {
+            let createInvitation = new this.invitationModel(invitation);
+            return await createInvitation.save();
+        } catch (e) {
+            console.log(e);
+            return null;
+        }
+    }
+
+    async deleteInvitation(id: string) {
+        try {
+            this.invitationModel.deleteOne({ invi_id: id }).exec();
+        } catch (e) {
+            console.log(e);
+            return null;
+        }
     }
 }
