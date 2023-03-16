@@ -7,13 +7,17 @@ export class Invitation {
     @Prop()
     id: string;
     @Prop()
-    owner_id: string;
+    from: string;
     @Prop()
-    receiver_id: string;
+    to: string;
     @Prop()
-    status: number;
+    name: string;
+    @Prop()
+    status: string;
     @Prop()
     project_id: string;
+    @Prop()
+    project_name: string;
     @Prop()
     unread: boolean;
 }

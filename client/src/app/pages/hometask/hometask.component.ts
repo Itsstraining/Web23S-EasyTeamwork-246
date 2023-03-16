@@ -49,6 +49,7 @@ export class HometaskComponent implements OnInit{
   prj_id: string = '';
 
   owner_id: string = '';
+  owner_name: string = '';
   owner_img: string = '';
 
   usr_count: number = 0;
@@ -237,6 +238,7 @@ export class HometaskComponent implements OnInit{
 
   getOwnerInfo(){
     this.owner_img = this.userService.userInfo.photoURL;
+    this.owner_name = this.userService.userInfo.displayName;
   }
 
   addUser(){

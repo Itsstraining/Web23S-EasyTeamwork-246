@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { MatDialogRef } from '@angular/material/dialog';
+import { Component, Inject } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ProjectService } from 'src/app/services/projects/project.service';
 import { UserService } from 'src/app/services/users/user.service';
 import { ProjectModel } from 'src/models/projects.model';
@@ -29,7 +29,8 @@ export class AddProjectComponent {
   constructor(
     public dialogRef: MatDialogRef<AddProjectComponent>,
     public userService: UserService,
-    public projectService: ProjectService
+    public projectService: ProjectService,
+    @Inject(MAT_DIALOG_DATA) public data: UserModel,
   ) {
     this.userService.getAllUser().subscribe((users) => {
       users.forEach((user) => {
@@ -45,30 +46,17 @@ export class AddProjectComponent {
 
   addProject() {
     this.formatDateFunc(this.date);
-    let newProject: ProjectModel ={
+    let newProject: ProjectModel = {
       project_id: Date.now().toString(),
       name: this.projectName,
       owner: this.userService.userInfo.displayName,
       owner_photo: this.userService.userInfo.photoURL,
       owner_id: this.userService.userInfo.uid,
-      members: [
-        {
-          uid: this.userService.userInfo.uid,
-          displayName: this.userService.userInfo.displayName,
-          photoURL: this.userService.userInfo.photoURL,
-          email: this.userService.userInfo.email,
-        },
-        {
-          uid: "VuGLwl674aU6cqCCVPaCyk4oUYB2",
-          displayName: "Viper",
-          photoURL: "https://lh3.googleusercontent.com/a/AGNmyxbZuFwso9pqtKexivewOigb33zrX1Mn6ECDGmiK=s96-c",
-          email: "vipergtsr323@gmail.com",
-        }
-      ],
       disable: false,
       due_date: this.due_date,
       status: 'in-progress',
       marked: false,
+      members: [this.currentUser],
     };
 
     this.projectService.create(newProject).subscribe(

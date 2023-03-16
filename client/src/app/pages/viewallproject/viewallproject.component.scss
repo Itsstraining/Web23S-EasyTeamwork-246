@@ -221,7 +221,7 @@ hr{
 #search-btn-container{
   display: inline-flex;
   width: fit-content;
-  height: fit-content;  
+  height: fit-content;
   color: #666666;
 }
 #search-icon{
@@ -455,4 +455,8 @@ hr{
 
 ::ng-deep .fa-solid{
   color: white;
+}
+
+.mat-mdc-select-placeholder mat-mdc-select-min-line ng-tns-c170-0 ng-star-inserted {
+  color: #fff;
 }

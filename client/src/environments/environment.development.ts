@@ -7,6 +7,6 @@ export const environment = {
     authDomain: 'easyteamwork-943e6.firebaseapp.com',
     messagingSenderId: '82095840945',
   },
-  production: false,
+  production: true,
   baseURL: 'http://localhost:3000/api/',
 };
