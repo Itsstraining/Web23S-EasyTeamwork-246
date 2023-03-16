@@ -101,14 +101,13 @@ export class ViewallprojectComponent implements OnInit {
     this.viewOverdue = false;
     this.viewMarked = false;
 
+    this.changeStatus();
     this.getAllProject();
   }
 
-  openInvitation() {
+  openInvitation(){
     this.matDialog.open(InvitationComponent);
   }
-
-
   getAllProject() {
     this.projectList = [];
     this.ownedProjects = [];
@@ -122,6 +121,7 @@ export class ViewallprojectComponent implements OnInit {
       if (data) {
         // Get all projects
         this.projectList = data.projects;
+        console.log("Project List: ", this.projectList);
         // Get owned projects
         this.ownedProjects = this.projectList.filter((project) => {
           for (let i = 0; i < project.members.length; i++) {
@@ -132,10 +132,7 @@ export class ViewallprojectComponent implements OnInit {
           return false;
         });
 
-        this.changeStatus(this.ownedProjects);
         this.ownedProjects.reverse();
-
-        this.projectList = this.ownedProjects;
 
         if (this.viewAll == true) {
           this.getOwnedProjects();
@@ -248,8 +245,7 @@ export class ViewallprojectComponent implements OnInit {
       members: project.members,
     };
 
-    this.projectService.update(updateProject, project.project_id).subscribe((data) => {
-      console.log("Mark project", data);
+    this.projectService.update(updateProject, project.project_id).subscribe(() => {
       this.getAllProject();
     });
   }
@@ -261,30 +257,54 @@ export class ViewallprojectComponent implements OnInit {
     });
   }
 
-  changeStatus(projectList: ProjectModel[]) {
-    for (let i = 0; i < projectList.length; i++) {
-      let currentDate: string = new Date().toLocaleDateString();
-      let date_of_currentDate: number = parseInt(currentDate.split("/")[0]);
-      let month_of_currentDate: number = parseInt(currentDate.split("/")[1]);
-      let year_of_currentDate: number = parseInt(currentDate.split("/")[2]);
+  changeStatus() {
+    this.store.dispatch(ProjectActions.getAllProjects());
+    this.project$.subscribe((data) => {
+      let List: ProjectModel[] = data.projects;
+      let projectList: ProjectModel[] = List.filter((project) => {
+        for (let i = 0; i < project.members.length; i++) {
+          if (project.members[i].uid == this.userService.userInfo.uid) {
+            return true;
+          }
+        }
+        return false;
+      });
 
-      let dueDate: string = projectList[i].due_date;
-      let date_of_dueDate: number = parseInt(dueDate.split("/")[1]);
-      let month_of_dueDate: number = parseInt(dueDate.split("/")[0]);
-      let year_of_dueDate: number = parseInt(dueDate.split("/")[2]);
+      for (let i = 0; i < projectList.length; i++) {
+        let currentDate: string = new Date().toLocaleDateString();
+        let date_of_currentDate: number = parseInt(currentDate.split("/")[0]);
+        // console.log("Date of current date", date_of_currentDate);
+        let month_of_currentDate: number = parseInt(currentDate.split("/")[1]);
+        // console.log("Month of current date", month_of_currentDate);
+        let year_of_currentDate: number = parseInt(currentDate.split("/")[2]);
+        // console.log("Year of current date", year_of_currentDate);
 
-      let status: Status;
+        let dueDate: string = projectList[i].due_date;
+        let date_of_dueDate: number = parseInt(dueDate.split("/")[1]);
+        // console.log("Date of due date", date_of_dueDate);
+        let month_of_dueDate: number = parseInt(dueDate.split("/")[0]);
+        // console.log("Month of due date", month_of_dueDate);
+        let year_of_dueDate: number = parseInt(dueDate.split("/")[2]);
+        // console.log("Year of due date", year_of_dueDate);
 
-      if ((year_of_currentDate > year_of_dueDate) && (projectList[i].status != "completed")) {
-        status = "overdue";
-      }
-      else if ((year_of_currentDate == year_of_dueDate) && (projectList[i].status != "completed")) {
-        if (month_of_currentDate > month_of_dueDate) {
+        let status: Status;
+
+        if ((year_of_currentDate > year_of_dueDate) && (projectList[i].status != "completed")) {
           status = "overdue";
         }
-        else if (month_of_currentDate == month_of_dueDate) {
-          if (date_of_currentDate >= date_of_dueDate) {
+        else if ((year_of_currentDate == year_of_dueDate) && (projectList[i].status != "completed")) {
+          if (month_of_currentDate > month_of_dueDate) {
             status = "overdue";
+          }
+          else if (month_of_currentDate == month_of_dueDate) {
+            if (date_of_currentDate >= date_of_dueDate) {
+              console.log("Change to Overdue");
+              status = "overdue";
+            }
+            else {
+              console.log("Status stay");
+              status = projectList[i].status;
+            }
           }
           else {
             status = projectList[i].status;
@@ -293,26 +313,23 @@ export class ViewallprojectComponent implements OnInit {
         else {
           status = projectList[i].status;
         }
-      }
-      else {
-        status = projectList[i].status;
-      }
 
-      let updateProject: ProjectModel = {
-        project_id: projectList[i].project_id,
-        marked: projectList[i].marked,
-        name: projectList[i].name,
-        owner: projectList[i].owner,
-        owner_photo: projectList[i].owner_photo,
-        owner_id: projectList[i].owner_id,
-        due_date: projectList[i].due_date,
-        status: status,
-        disable: projectList[i].disable,
-        members: projectList[i].members,
-      };
+        let updateProject: ProjectModel = {
+          project_id: projectList[i].project_id,
+          marked: projectList[i].marked,
+          name: projectList[i].name,
+          owner: projectList[i].owner,
+          owner_photo: projectList[i].owner_photo,
+          owner_id: projectList[i].owner_id,
+          due_date: projectList[i].due_date,
+          status: status,
+          disable: projectList[i].disable,
+          members: projectList[i].members,
+        };
 
-      this.projectService.update(updateProject, projectList[i].project_id)
-    }
+        this.projectService.update(updateProject, projectList[i].project_id).subscribe();
+      }
+    });
   }
 
   projectName!: string;

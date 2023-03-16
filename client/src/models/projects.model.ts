@@ -6,7 +6,7 @@ export interface ProjectModel {
   project_id: string;
   marked: boolean;
   name: string;
-  owner: UserModel;
+  owner: string;
   owner_photo: string;
   owner_id: string;
   due_date: string;
