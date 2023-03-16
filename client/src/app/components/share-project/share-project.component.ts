@@ -33,6 +33,7 @@ export class ShareProjectComponent implements OnInit {
         }
       });
     });
+    console.log(this.options);
   }
 
   readonly separatorKeysCodes = [ENTER, COMMA] as const;
@@ -70,26 +71,26 @@ export class ShareProjectComponent implements OnInit {
       window.alert('No member to invitation!!');
       return;
     }
-    this.members.forEach((mem) => {
-      let invitation: InvitationModel = {
-        id: '',
-        owner_id: this.userService.user.uid,
-        receiver_id: mem.uid,
-        status: 0,
-        project_id: this.project.project_id,
-        unread: true
-      }
+    // this.members.forEach((mem) => {
+    //   let invitation: InvitationModel = {
+    //     id: '',
+    //     owner_id: this.userService.user.uid,
+    //     receiver_id: mem.uid,
+    //     status: 0,
+    //     project_id: this.project.project_id,
+    //     unread: true
+    //   }
 
-      this.invitationService.createInvitation(invitation).subscribe(
-        (res) => {
-          window.alert('Invitation send!!');
-        }
-      );
-      if(this.userService.currentUserInfo.uid !== mem.uid) {
-        this.notificationService.notificationsCount++;
-        console.log(this.notificationService.notificationsCount);
-      }
-    });
+    //   this.invitationService.createInvitation(invitation).subscribe(
+    //     (res) => {
+    //       window.alert('Invitation send!!');
+    //     }
+    //   );
+    //   if(this.userService.currentUserInfo.uid !== mem.uid) {
+    //     this.notificationService.notificationsCount++;
+    //     console.log(this.notificationService.notificationsCount);
+    //   }
+    // });
 
     this.dialogRef.close();
   }

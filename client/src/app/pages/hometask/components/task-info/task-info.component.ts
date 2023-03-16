@@ -11,7 +11,8 @@ import {MatChipEditedEvent, MatChipEditInput, MatChipInput, MatChipInputEvent, M
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
 import {FormControl} from '@angular/forms';
 import {map, startWith} from 'rxjs/operators';
-import {MatAutocompleteSelectedEvent} from '@angular/material/autocomplete';
+import { MatAutocomplete, MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
+
 @Component({
   selector: 'app-task-info',
   templateUrl: './task-info.component.html',
@@ -40,6 +41,20 @@ export class TaskInfoComponent implements OnInit{
   taskDescription!: string;
   taskComplex!: Complexity;
   taskStatus!: Status;
+  project!: ProjectModel;
+
+  addOnBlur = true;
+  separatorKeysCodes: number[] = [ENTER, COMMA];
+
+  fruitCtrl = new FormControl('');
+  allFruits: string[] = [];
+  fruits: string[] = [];
+  filteredFruits!: Observable<string[]>;
+
+  @ViewChild('fruitInput') fruitInput!: ElementRef<HTMLInputElement>;
+
+  // @ViewChild('memberInput', {read: ElementRef})
+  // memberInput!: ElementRef<HTMLInputElement>;
 
   constructor(
     private store: Store<{task: TaskModel}>,
@@ -68,13 +83,14 @@ export class TaskInfoComponent implements OnInit{
     this.temp.task_id = this.task.task_id;
     this.temp.updated_at = this.getDate();
 
-    // this.filteredOptions = this.myControl.valueChanges.pipe(
-    //   startWith(''),
-    //   map(value => this._filter(value || '')),
-    // );
+    this.filteredFruits = this.fruitCtrl.valueChanges.pipe(
+      startWith(null),
+      map((fruit: string | null) => (fruit ? this._filter(fruit) : this.allFruits.slice())),
+    );
   }
 
   getDate(){
+    this.getMemberName();
     const date = new Date();
 
     return date.toLocaleDateString();
@@ -94,91 +110,19 @@ export class TaskInfoComponent implements OnInit{
     this.dialogRef.close();
   }
 
-  @ViewChild(MatChipInput, { read: ElementRef })
-  tags: Set<string> = new Set<string>();
-  selectedAssignee: UserModel[] = [];
-  tagInput!: ElementRef<HTMLInputElement>;
-  project!: ProjectModel;
-  // member_list: UserModel[] = this.project.members;
-
-
-  onTagAddAssignee(value: any): void {
-    console.log("value:   ",value);
-    // if (value) {
-    //   this.tags.add(value.displayName);
-    //   this.selectedAssignee.push(value);
-    // }
-    this.tagInput.nativeElement.value = '';
-  }
-
-  onRemoveAssignee(tagToRemove: UserModel): void {
-    const index = this.selectedAssignee.indexOf(tagToRemove);
-
-    if (index >= 0) {
-      this.selectedAssignee.splice(index, 1);
+  getMemberName(){
+    for(let i = 0; i < this.project.members.length; i++){
+      this.allFruits.push(this.project.members[i].displayName);
     }
+    console.log(this.allFruits);
   }
-
-  // add(event: MatChipInputEvent){
-  //   const value = event.value.trim();
-
-  //   if(value){
-  //     this.member_list.push({displayName: value, email: '', photoURL: '', uid: ''});
-  //   }
-  //   event.chipInput!.clear();
-  // }
-
-  // remove(member: UserModel){
-  //   const index = this.member_list.indexOf(member);
-
-  //   if(index >= 0){
-  //     this.member_list.splice(index, 1);
-  //   }
-  // }
-
-  // edit(event: MatChipEditedEvent ,member: UserModel){
-  //   const value = event.value.trim();
-
-  //   if(!value){
-  //     this.remove(member);
-  //   }
-
-  //   const index = this.member_list.indexOf(member);
-  //   if(index >= 0){
-  //     this.member_list[index].displayName = value;
-  //   }
-  // }
-
-  addOnBlur = true;
-  readonly separatorKeysCodes = [ENTER, COMMA] as const;
-
-  myControl = new FormControl('');
-  // options: string[] = ['One', 'Two', 'Three'];
-  options: UserModel[] = [];
-  filteredOptions: Observable<UserModel[]> | undefined;
-
-  // private _filter(value: string): UserModel[] {
-  //   const filterValue = value.toLowerCase();
-
-  //   return this.options;
-  // }
-
-  fruitCtrl = new FormControl('');
-  filteredFruits: Observable<string[]>;
-  fruits: string[] = ['Lemon'];
-  allFruits: string[] = ['Apple', 'Lemon', 'Lime', 'Orange', 'Strawberry'];
-
-  @ViewChild('fruitInput') fruitInput!: ElementRef<HTMLInputElement>;
 
   add(event: MatChipInputEvent): void {
     const value = (event.value || '').trim();
 
-    // Add our fruit
     if (value) {
       this.fruits.push(value);
     }
-
-    // Clear the input value
     event.chipInput!.clear();
 
     this.fruitCtrl.setValue(null);

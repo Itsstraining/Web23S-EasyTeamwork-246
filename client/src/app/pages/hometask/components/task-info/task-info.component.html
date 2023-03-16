@@ -39,6 +39,47 @@
     </div>
   </div>
   <div class="select-assignee">
+    <p class="label-input">Assign to</p>
+    <form>
+      <mat-form-field class="example-chip-list" appearance="fill">
+        <mat-label>Favorite Fruits</mat-label>
+        <mat-chip-grid #chipGrid aria-label="Fruit selection">
+          <mat-chip-row *ngFor="let fruit of fruits" (removed)="remove(fruit)">
+            {{fruit}}
+            <button matChipRemove [attr.aria-label]="'remove ' + fruit">
+              <mat-icon>cancel</mat-icon>
+            </button>
+          </mat-chip-row>
+        </mat-chip-grid>
+        <input placeholder="New Fruit..." #fruitInput [formControl]="fruitCtrl"
+          [matChipInputFor]="chipGrid" [matAutocomplete]="auto"
+          [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+          (matChipInputTokenEnd)="add($event)"/>
+        <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+          <mat-option *ngFor="let fruit of filteredFruits | async" [value]="fruit">
+            {{fruit}}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+    </form>
+
+
+    <!-- <form class="example-form">
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label id="member_label">Member</mat-label>
+        <input type="text"
+               placeholder="Choose members"
+               aria-label="Member"
+               matInput
+               [formControl]="myControl"
+               [matAutocomplete]="auto">
+        <mat-autocomplete #auto="matAutocomplete">
+          <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+            {{option}}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+    </form> -->
     <!-- <mat-form-field>
       <mat-label>Choose members</mat-label>
       <mat-chip-grid #userGrid aria-label="Enter User">
@@ -59,38 +100,6 @@
               (matChipInputTokenEnd)="add($event)">
       </mat-chip-grid>
     </mat-form-field> -->
-    <p class="label-input">Assign to</p>
-    <!-- <mat-chip-grid #assigneeGrid>
-      <mat-chip-row  *ngFor="let tag of tags" [value]="tag" >
-      </mat-chip-row>
-      <input type="text" class="infoInput"   placeholder="Assignee to..."
-      matInput
-           formControl="myControl"
-           [matAutocomplete]="auto">
-    </mat-chip-grid> -->
-    <!-- <mat-autocomplete #auto="matAutocomplete">
-      <mat-option class="option" *ngFor="let mem of project.members" [value]="mem">
-        <img [src]="mem.photoURL" alt="">
-        <h6>{{mem.displayName}}</h6>
-      </mat-option>
-    </mat-autocomplete> -->
-    <form class="example-form">
-      <mat-form-field class="example-full-width" appearance="fill">
-        <mat-label>Number</mat-label>
-        <input type="text"
-               placeholder="Pick one"
-               aria-label="Number"
-               matInput
-               [formControl]="myControl"
-               [matAutocomplete]="auto">
-        <mat-autocomplete #auto="matAutocomplete">
-          <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-            {{option}}
-          </mat-option>
-        </mat-autocomplete>
-      </mat-form-field>
-    </form>
-
   </div>
   <div class="btnDiv">
     <button class="button" id="upButton" (click)="updateTask()">Update</button>

@@ -9,7 +9,7 @@ p{
 hr{
   margin: 0;
   border: none;
-  background-color: #e4e4e4;
+  background-color: transparent;
 }
 
 
@@ -17,7 +17,8 @@ hr{
 #body{
     height: fit-content;
     padding:  2.3771790808%;
-    background-color: #FFFEF6;
+    background-color: transparent;
+    color: white;
 }
 
 //// css title
@@ -37,7 +38,7 @@ hr{
   font-family: 'Quicksand', sans-serif;
   margin: 1.25rem 0;
   border-radius: 0.63rem;
-  border: 0.06rem solid #F9F6DD;
+  border: 1px solid rgba(255, 255, 255, .8);
 }
 #overview-header{
   height: 1.88rem;
@@ -45,7 +46,7 @@ hr{
   font-weight: bolder;
   padding: 1.25rem 0 0 1.88rem;
   border-radius: 0.63rem 0.63rem 0 0;
-  background-color: white;
+  background-color: rgba(255, 255, 255, 0.5);
   border-bottom: none;
 }
 #overview-body{
@@ -54,7 +55,7 @@ hr{
     font-weight: bold;
     padding: 0.94rem 0 0 0.94rem;
     border-radius: 0 0 0.63rem 0.63rem;
-    background-color: #FFFCE0;
+    background-color: rgba(255, 255, 255, .3);
 }
 .overview-content{
   height: fit-content;
@@ -79,27 +80,31 @@ hr{
   margin: 0 auto;
 }
 #total{
-  color: #666666;
+  color: white;
+  text-shadow: 0px 0px 6px rgba(255, 255, 255, 0.6);
   .horizone{
-      background-color: #666666;
+      background-color: white;
   }
 }
 #in-progress{
-  color: #44AEB7;
+  color: #58dbe7;
+  text-shadow: 0px 0px 6px rgba(88, 219, 231, .6);
   .horizone{
-      background-color: #159ACC;
+      background-color: #58dbe7;
   }
 }
 #completed{
-  color: #28C700;
+  color: #2feb00;
+  text-shadow: 0px 0px 20px rgba(47, 235, 0, .6);
   .horizone{
-      background-color: #28C700;
+      background-color: #2feb00;
   }
 }
 #overdue{
-  color: #E51616;
+  color: #ff2121;
+  text-shadow: 0px 0px 20px rgba(255, 33, 33, .6);
   .horizone{
-      background-color: #E51616;
+      background-color: #ff2121;
   }
 }
 
@@ -113,7 +118,7 @@ hr{
   transition: 0.25s;
   :hover{
       cursor: pointer;
-      background-color: #c9c17e;
+      background-color: rgb(254, 111, 122);
       transition: 0.25s;
   }
 }
@@ -121,8 +126,9 @@ hr{
   height: 2.5rem;
   width: 10rem;
   border-radius: 0.63rem;
-  background-color: #FFF6A6;
-  border: 0.06rem solid #F9F6DD;
+  border: none;
+  background-color: rgba(254, 111, 122, .7);
+  box-shadow: 0px 1px 19px 0px rgba(254,111,122,0.75);
   margin: auto;
   padding: 0;
   display: flex;
@@ -131,13 +137,13 @@ hr{
   transition: 0.25s;
   :hover{
       cursor: pointer;
-      background-color: #c9c17e;
-      color: black;
+      background-color: rgb(254, 111, 122);
+      box-shadow: 0px 1px 19px 0px rgba(255, 137, 147, 0.75);
       transition: 0.25s;
   }
 }
 #create-content{
-  color: #666666;
+  color: white;
   font-family: 'Quicksand', sans-serif;
   font-size: 1rem;
   height: fit-content;
@@ -177,14 +183,15 @@ hr{
     width: 100%;
     height: fit-content;
     border-radius: 0.63rem;
-    background-color: #FFFCE0;
-    border: 0.06rem solid #F9F6DD;
+    background-color: rgba(255, 255, 255, .2);
+    border: 1px solid rgba(255, 255, 255, .8);
 }
 #table-header{
   height: 5.50rem;
-  background-color: white;
+  color: white;
   border-radius: 0.63rem 0.63rem 0 0;
-  border-bottom: none;
+  background-color: rgba(255, 255, 255, .3);
+  border: 1px solid rgba(255, 255, 255, .8);
 }
 #search{
   width: 30%;
@@ -194,39 +201,44 @@ hr{
       height: 1.25rem;
       font-size: 1rem;
       font-family: 'Quicksand', sans-serif;
-      border: 0.06rem solid #F9F6DD;
+      border: 0.06rem solid rgba(255, 255, 255, .8);
+      background-color: rgba(255, 255, 255, .3);
       border-right: none;
       transition: 0.25s;
   }
-  :hover{
-      cursor: pointer;
-      background-color: initial;
-  }
-  :focus{
-      outline: none;
-      outline-style: none;
-      color: #666666;
-      background-color: #fffcd5;
-      transition: 0.25s;
-  }
+}
+#search > input:hover{
+  cursor: pointer;
+  background-color: rgba(255, 255, 255, .7);
+}
+#search > input:focus{
+  outline: none;
+  outline-style: none;
+  color: rgb(70, 70, 70);
+  background-color: rgba(255, 255, 255, .5);
+  transition: 0.25s;
 }
 #search-btn-container{
   display: inline-flex;
   width: fit-content;
   height: fit-content;
-  button{
-      height: 1.5rem;
-      width: 1.5rem;
-      border: 0.06rem solid #F9F6DD;
-      background-color: #FFF6A6;
-      color: #666666;
-      padding: 0;
-      border-radius: 0;
-  }
+  color: #666666;
+}
+#search-icon{
+  color: #666666;
+}
+#search-btn{
+  height: 1.5rem;
+  width: 1.5rem;
+  background-color: rgba(255, 255, 255, .8);
+  color: #666666;
+  padding: 0;
+  border-radius: 0;
   :hover{
-      cursor: pointer;
-      background-color: #c9c17e;
-      color: black;
+    cursor: pointer;
+    background-color: rgba(255, 255, 255, .7);
+    box-shadow: none;
+    color: black;
   }
 }
 .view-mode{
@@ -237,29 +249,29 @@ hr{
   font-family: 'Quicksand', sans-serif;
   font-size: 1rem;
   font-weight: bolder;
-  // padding: 1.25rem 0 0 1.88rem;
   padding: 1.25rem 0 0 2%;
   button{
       color: #666666;
-      border: 0.06rem solid #F9F6DD;
-      background-color: #FFF6A6;
+      // border: 0.06rem solid #F9F6DD;
+      border: none;
+      color: white;
+      background-color: rgb(254, 111, 122);
+      box-shadow: 0px 1px 19px 0px rgba(254,111,122,0.75);
       font-size: 1rem;
       font-weight: bolder;
       font-family: 'Quicksand', sans-serif;
-      padding: 0 0.63rem;
+      padding: 0.2rem 0.63rem;
       margin: 0;
       border-radius: 0.63rem;
       transition: 0.5s;
   }
   :hover{
       cursor: pointer;
-      background-color: #c9c17e;
-      color: black;
+      box-shadow: 0px 1px 19px 0px rgba(255, 137, 147, 0.75);
       transition: 0.5s;
   }
 }
 #view-all{
-  // margin-left: 1.25rem;
   margin-left: 2%;
   width: 7%;
 }
@@ -273,7 +285,6 @@ hr{
   width: 10%;
 }
 #view-marked{
-  // margin-left: 1.25rem;
   margin-left: 1%;
   width: 12%;
 }
@@ -284,34 +295,33 @@ hr{
   font-family: 'Quicksand', sans-serif;
   font-size: 1rem;
   font-weight: bolder;
-  // padding: 1.25rem 0 0 1.88rem;
   padding: 1.25rem 0 0 2.5%;
   button{
       font-size: 1rem;
       font-weight: bolder;
       font-family: 'Quicksand', sans-serif;
       padding: 0;
+      color: white;
       margin: 0;
       border: none;
       background-color: transparent;
       :hover{
-          color: #f0e588;
+          color: rgb(228, 228, 228);
           cursor: pointer;
       }
   }
 }
+.name-span{
+  color: white;
+}
 #name{
-  // width: 10.94rem;
   width: 15%;
 }
 #state{
-  // width: 7.81rem;
   width: 11%;
-  // margin-left: 1.25rem;
   margin-left: 1%;
 }
 #date{
-  // width: 10.31rem;
   width: 12%;
   margin-left: 2%;
 }
@@ -344,23 +354,22 @@ hr{
       border-radius: 0;
       :hover{
           cursor: pointer;
-          background-color: #fff382;
+          // background-color: #fff382;
+          box-shadow: 0px 0px 19px 2px rgba(255, 243, 130, .6);
           border-radius: 25%;
       }
   }
 }
 #item-name{
   // width: 10.94rem;
+  color: white;
   width: 15%;
 }
 #item-state{
-  // width: 7.81rem;
   width: 11%;
-  // margin-left: 1.25rem;
   margin-left: 1%;
 }
 #item-date{
-  // width: 10.31rem;
   width: 12%;
   margin-left: 2%;
 }
@@ -381,7 +390,6 @@ hr{
   margin-left: 1%;
 }
 #item-host{
-  // width: 20.63rem;
   width: 21%;
   margin-left: 6%;
 }
@@ -399,7 +407,7 @@ hr{
   }
   :hover{
       cursor: pointer;
-      background-color: #fff382;
+      background-color: rgba(255, 255, 255, .4);
       border-radius: 25%;
   }
 }
@@ -411,19 +419,16 @@ hr{
   min-height: 33.5rem;
   height: fit-content;
 }
-.item{
-  transition: 0.125s;
-  :hover{
-      background-color: #fff9c7;
-      cursor: pointer;
-      transition: 0.125s;
-  }
-}
 .table-row{
   height: 2.5rem;
   display: flex;
   align-items: center;
-  border-bottom: 0.06rem solid #666666;
+  border-bottom: 0.06rem solid rgba(255, 255, 255, .5);
+}
+.table-row:hover{
+  background-color: rgba(255, 255, 255, 0.2);
+  cursor: pointer;
+  transition: 0.125s;
 }
 #state-dot{
   display: inline-block;
@@ -442,9 +447,16 @@ hr{
 
 .non-project{
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100%;
+  height: 33.5rem;
   width: 100%;
+}
+
+::ng-deep .fa-solid{
+  color: white;
+}
+
+.mat-mdc-select-placeholder mat-mdc-select-min-line ng-tns-c170-0 ng-star-inserted {
+  color: #fff;
 }

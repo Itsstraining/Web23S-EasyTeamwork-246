@@ -29,9 +29,9 @@ export class InvitationItemComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
-    this.userService.getUserById(this.invitation.owner_id).subscribe(user => {
-      this.sender = user;
-    });
+    // this.userService.getUserById(this.invitation.owner_id).subscribe(user => {
+    //   this.sender = user;
+    // });
     this.userService.getUserById(this.userService.user.uid).subscribe(user => {
       this.currentUser = user;
     });
@@ -53,16 +53,16 @@ export class InvitationItemComponent implements OnInit {
         return;
       }
     });
-    this.invitationService.updateInvitationById(this.invitation.id, this.invitation).subscribe(
-      invitation => {
-        this.invitationService.deleteInvitationById(this.invitation.id).subscribe(
-          invitation => {
-            window.alert('Invitation has been replied');
-            this.declinedInvitationEvent.emit(this.invitation);
-          }
-        );
-      }
-    );
+    // this.invitationService.updateInvitationById(this.invitation.id, this.invitation).subscribe(
+    //   invitation => {
+    //     this.invitationService.deleteInvitationById(this.invitation.id).subscribe(
+    //       invitation => {
+    //         window.alert('Invitation has been replied');
+    //         this.declinedInvitationEvent.emit(this.invitation);
+    //       }
+    //     );
+    //   }
+    // );
     this.addMemToProject(isAgree);
   }
 

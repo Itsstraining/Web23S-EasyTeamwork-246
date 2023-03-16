@@ -1,14 +1,28 @@
-<mat-card>
+<div class="container">
   <mat-card-header>
-      INVITATIONS
-      <mat-icon matTooltip="Close Invitations" matTooltipPlacement="top" (click)="dialogref.close()">close</mat-icon>
+    INVITATIONS
+    <mat-icon matTooltip="Close Invitations" matTooltipPlacement="top" (click)="dialogref.close()">close</mat-icon>
   </mat-card-header>
-  <mat-card-content>
-      <div class="invite-list" *ngIf="invitations.length !== 0">
-          <app-invitation-item *ngFor="let invitation of invitations" [invitation]="invitation" (declinedInvitationEvent)="declinedInvitationEvent($event)"></app-invitation-item>
+  <br />
+  <div class="mdc-card mini-card mdc-elevation--z4" *ngFor="let request of requestProject$ | async">
+    <div class="mdc-card__primary-action">
+      <div class="media-image mdc-card__media mdc-card__media--square">
+        <div class="mdc-card__media-content">
+          <div class="card-info">
+            <h1>Project Name: {{ request.name }}</h1>
+            <h2>Inivite by: {{ request.owner }}</h2>
+            <div style="display: flex; margin: 0 15px">
+              <button mat-raised-button color="primary" (click)="acceptInvitation(request)">
+                Accept
+              </button>
+              <hr style="margin: 0 5px; background-color: #dbdbdb" />
+              <button mat-raised-button color="warn">Decline</button>
+            </div>
+            <h3>Easy Teamwork</h3>
+          </div>
+        </div>
       </div>
-       <div>
-          <p *ngIf="invitations.length === 0">You have no invitations.</p>
-       </div>
-  </mat-card-content>
-</mat-card>
+    </div>
+  </div>
+  <br />
+</div>

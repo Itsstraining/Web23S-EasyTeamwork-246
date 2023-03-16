@@ -6,16 +6,20 @@
     <p>Projects</p>
   </div>
   <div id="create-project">
-    <button (click)="dialogOpen()" id="create-btn">
+    <button style="margin-left:50%" matBadge="{{ (this.requestProject$ | async)?.length }}" matBadgeColor="accent"
+      matBadgePosition="after" matBadgeColor="accent" (click)="invitation()">
+      <mat-icon class="icon">mail</mat-icon>
+    </button>
+    <button (click)="dialogOpen()" id="create-btn" style="margin-top: 8%">
       <span id="create-content">
         <i class="fa-solid fa-square-plus"></i>
         Create project
       </span>
     </button>
-    <!-- <mat-select placeholder="Select Show Shared"
-    (selectedChange)="sortProjects($event)" [(selected)]="mySharedProjects">
+    <mat-select placeholder="Select project" style="margin-top: 8%;color: rgb(255 255 255);">
       <mat-option value="0">My projects</mat-option>
-    </mat-select> -->
+      <mat-option value="1">Shared with me</mat-option>
+    </mat-select>
   </div>
   <div id="overview">
     <div id="overview-header">Overview</div>
@@ -54,10 +58,10 @@
     <div id="table-header">
       <div class="view-mode-container">
         <div class="view-mode" id="search">
-          <input type="text" placeholder="Search project name...">
+          <input [(ngModel)]="projectName" type="text" placeholder="Search project name...">
           <div id="search-btn-container">
-            <button>
-              <i class="fa-solid fa-search"></i>
+            <button id="search-btn">
+              <i class="fa-solid fa-search" id="search-icon"></i>
             </button>
           </div>
         </div>
@@ -126,7 +130,7 @@
       </div>
     </div>
     <div id="table-body">
-      <div class="item" *ngIf="projectList != null">
+      <div class="item" id="table-row-div" *ngIf="projectList != null">
         <div class="table-row" *ngFor="let item of projectList">
           <div *ngIf="item.marked == false" class="item-attribute" id="item-mark">
             <button (click)="markProject(item.marked, item)">
@@ -143,15 +147,15 @@
           </div>
           <div *ngIf="item.status == 'in-progress'" class="item-attribute" id="item-state">
             <div style="background-color: #159ACC;" id="state-dot"></div>
-            <span style="color: #199CAE;"> In-progress</span>
+            <span style="color: #00E0FF;"> In-progress</span>
           </div>
           <div *ngIf="item.status == 'completed'" class="item-attribute" id="item-state">
             <div style="background-color: #33FF00;" id="state-dot"></div>
-            <span style="color: #28C700;"> Completed</span>
+            <span style="color: #33ff00;"> Completed</span>
           </div>
           <div *ngIf="item.status == 'overdue'" class="item-attribute" id="item-state">
             <div style="background-color: #FF0000;" id="state-dot"></div>
-            <span style="color: #E51616;"> Overdue</span>
+            <span style="color: #ff3a3a;"> Overdue</span>
           </div>
           <div class="item-attribute" id="item-date">
             <div id="date-content">
@@ -160,7 +164,7 @@
             </div>
           </div>
           <div class="item-attribute" id="item-mems">
-            <span>{{item.members.length}}</span>
+            <!-- <span>{{item.members.length}}</span> -->
           </div>
           <div class="item-attribute" id="item-host">
             <img class="avatar" [src]="item.owner_photo" alt="avatar">
@@ -172,13 +176,15 @@
             </button>
             <mat-menu #menu="matMenu">
               <button mat-menu-item (click)="deleteProject(item.project_id)">Delete</button>
+              <button mat-menu-item (click)="addMember(item)" [disabled]="item.owner_id != this.user.uid">Add
+                Member</button>
             </mat-menu>
           </div>
         </div>
       </div>
       <div class="non-project" *ngIf="projectList.length == 0">
-        <h4 *ngIf="mySharedProjects == '0'">You haven't had any projects.</h4>
-        <h4 *ngIf="mySharedProjects == '1'">You haven't joined any projects.</h4>
+        <span class="no-project-announce" *ngIf="isSharedProjects == '0'">Sorry there is no projects</span>
+        <span class="no-project-announce" *ngIf="isSharedProjects == '1'">You haven't joined any projects.</span>
       </div>
     </div>
   </div>
