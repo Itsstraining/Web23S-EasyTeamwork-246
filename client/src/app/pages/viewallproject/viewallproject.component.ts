@@ -94,7 +94,7 @@ export class ViewallprojectComponent implements OnInit {
       if (state.loading == false) {
         if (state.user?.uid) {
           this.user = state.user;
-          console.log(this.user);
+          // console.log(this.user);
           this.store.dispatch(
             InvitationActions.getAllForUser({ _id: state.user?.uid })
           );

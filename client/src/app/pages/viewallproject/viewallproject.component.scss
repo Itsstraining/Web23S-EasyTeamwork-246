@@ -1,5 +1,11 @@
 body{
   margin: 0;
+  scrollbar-width: none;
+  overflow: hidden;
+}
+
+.body::-webkit-scrollbar{
+  width: 0;
 }
 
 p{
@@ -134,12 +140,12 @@ hr{
   display: flex;
   justify-content: center;
   align-items: center;
-  transition: 0.25s;
+  transition: 0.5s;
   :hover{
       cursor: pointer;
       background-color: rgb(254, 111, 122);
       box-shadow: 0px 1px 19px 0px rgba(255, 137, 147, 0.75);
-      transition: 0.25s;
+      transition: 0.5s;
   }
 }
 #create-content{
@@ -178,13 +184,19 @@ hr{
 ////css table
 #table{
     margin: 0 auto;
-    min-height: 39.06rem;
+    height: 39.06rem;
     min-width: 78.13rem;
     width: 100%;
     height: fit-content;
     border-radius: 0.63rem;
     background-color: rgba(255, 255, 255, .2);
     border: 1px solid rgba(255, 255, 255, .8);
+    overflow: hidden;
+    overflow-y: scroll;
+    scrollbar-width: none;
+}
+#table::-webkit-scrollbar{
+  width: 0;
 }
 #table-header{
   height: 5.50rem;
@@ -464,6 +476,10 @@ hr{
   color: white;
 }
 
-.mat-mdc-select-placeholder mat-mdc-select-min-line ng-tns-c170-0 ng-star-inserted {
+::ng-deep .mat-mdc-select-placeholder mat-mdc-select-min-line ng-tns-c170-0 ng-star-inserted {
   color: #fff;
+}
+
+::ng-deep .mdc-text-field:not(.mdc-text-field--disabled) .mdc-text-field__input{
+  color: white;
 }

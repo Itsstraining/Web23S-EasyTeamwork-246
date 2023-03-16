@@ -47,14 +47,13 @@ export class TaskInfoComponent implements OnInit{
   separatorKeysCodes: number[] = [ENTER, COMMA];
 
   fruitCtrl = new FormControl('');
-  allFruits: string[] = [];
-  fruits: string[] = [];
+  assigneeTask: UserModel[] = [];
+  memberID: UserModel[] = [];
+  allMembers: string[] = [];
+  member: string[] = [];
   filteredFruits!: Observable<string[]>;
 
   @ViewChild('fruitInput') fruitInput!: ElementRef<HTMLInputElement>;
-
-  // @ViewChild('memberInput', {read: ElementRef})
-  // memberInput!: ElementRef<HTMLInputElement>;
 
   constructor(
     private store: Store<{task: TaskModel}>,
@@ -62,16 +61,13 @@ export class TaskInfoComponent implements OnInit{
   ) {
     this.taskById$ = this.store.select('task');
 
-    this.filteredFruits = this.fruitCtrl.valueChanges.pipe(
-      startWith(null),
-      map((fruit: string | null) => (fruit ? this._filter(fruit) : this.allFruits.slice())),
-    );
+    
    }
 
 
   ngOnInit(): void {
     // this.temp = this.task;
-    this.temp.assignee = this.task.assignee;
+    this.temp.assignee = this.assigneeTask;
     this.temp.comment_count = this.task.comment_count;
     this.temp.complexity = this.task.complexity;
     this.temp.created_at = this.task.created_at;
@@ -85,7 +81,7 @@ export class TaskInfoComponent implements OnInit{
 
     this.filteredFruits = this.fruitCtrl.valueChanges.pipe(
       startWith(null),
-      map((fruit: string | null) => (fruit ? this._filter(fruit) : this.allFruits.slice())),
+      map((fruit: string | null) => (fruit ? this._filter(fruit) : this.allMembers.slice())),
     );
   }
 
@@ -96,7 +92,20 @@ export class TaskInfoComponent implements OnInit{
     return date.toLocaleDateString();
   }
 
+  updateMember(){
+    for(let i = 0; i <= this.member.length; i++){
+      this.memberID.forEach((member) => {
+        if(this.member[i] == member.displayName){
+          this.assigneeTask.push(member);
+        }
+      });
+    }  
+    this.temp.assignee = this.assigneeTask;
+    console.log(this.temp);
+  }
+
   updateTask(){
+    this.updateMember();
     this.store.dispatch(TaskActions.updateTask({task: this.temp, id: this.temp.task_id}));
     this.closeDialog();
   }
@@ -107,21 +116,29 @@ export class TaskInfoComponent implements OnInit{
   }
 
   closeDialog(){
+    this.updateMember();
+    this.store.dispatch(TaskActions.updateTask({task: this.temp, id: this.temp.task_id}));
     this.dialogRef.close();
   }
 
   getMemberName(){
+    this.member.push(this.project.owner);
+    this.project.members.forEach((member) => {
+      this.memberID.push(member);
+    });
     for(let i = 0; i < this.project.members.length; i++){
-      this.allFruits.push(this.project.members[i].displayName);
+      this.allMembers.push(this.project.members[i].displayName);
     }
-    console.log(this.allFruits);
   }
 
   add(event: MatChipInputEvent): void {
     const value = (event.value || '').trim();
-
     if (value) {
-      this.fruits.push(value);
+      this.memberID.forEach((member) => {
+        if(value == member.displayName){
+          this.member.push(value);
+        }
+      });
     }
     event.chipInput!.clear();
 
@@ -129,15 +146,24 @@ export class TaskInfoComponent implements OnInit{
   }
 
   remove(fruit: string): void {
-    const index = this.fruits.indexOf(fruit);
+    const index = this.member.indexOf(fruit);
 
     if (index >= 0) {
-      this.fruits.splice(index, 1);
+      this.member.splice(index, 1);
     }
   }
 
   selected(event: MatAutocompleteSelectedEvent): void {
-    this.fruits.push(event.option.viewValue);
+    this.memberID.forEach((member) => {
+      if(event.option.viewValue == member.displayName){
+        if(this.member.includes(event.option.viewValue) == false){
+          this.member.push(event.option.viewValue);
+        }else{
+          window.alert(`User ${event.option.viewValue} has already joined this task`);
+        }
+      }
+    });
+    
     this.fruitInput.nativeElement.value = '';
     this.fruitCtrl.setValue(null);
   }
@@ -145,7 +171,7 @@ export class TaskInfoComponent implements OnInit{
   private _filter(value: string): string[] {
     const filterValue = value.toLowerCase();
 
-    return this.allFruits.filter(fruit => fruit.toLowerCase().includes(filterValue));
+    return this.allMembers.filter(fruit => fruit.toLowerCase().includes(filterValue));
   }
 }
 
