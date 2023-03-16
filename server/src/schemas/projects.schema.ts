@@ -25,18 +25,14 @@ export class Project {
     status: Status;
     @Prop()
     disable: boolean;
+    // @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'users' }] })
     @Prop()
     members: UserDocument[];
-    // @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'users' }] })
-    // members: UserDocument[];
-    @Prop()
-    invitedMembers: UserDocument[];
+    @IsNotEmpty()
     @Prop()
     owner: string;
-    // @IsNotEmpty()
-    // @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'users' })
-    // owner: UserDocument;
     // @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'users' }] })
-    // invitedMembers: UserDocument[];
+    @Prop()
+    invitedMembers: UserDocument[];
 }
 export const ProjectSchema = SchemaFactory.createForClass(Project)

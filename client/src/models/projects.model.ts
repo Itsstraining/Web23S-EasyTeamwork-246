@@ -14,4 +14,5 @@ export interface ProjectModel {
   disable: boolean;
 //   owner: UserModel;
   members: UserModel[];
+  invitedMembers: UserModel[];
 }
