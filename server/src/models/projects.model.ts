@@ -1,3 +1,5 @@
+import { UserModel } from "./users.model";
+
 export type Status = "in-progress" | "completed" | "overdue";
 
 export interface ProjectModel {
@@ -10,5 +12,5 @@ export interface ProjectModel {
     due_date: string;
     status: Status;
     disable: boolean;
-    members: string[];
+    members: UserModel[];
 }
