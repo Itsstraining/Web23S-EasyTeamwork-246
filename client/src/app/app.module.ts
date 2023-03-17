@@ -24,6 +24,8 @@ import { ProjectReducer } from 'src/NgRx/Reducers/projects.reducer';
 import { FormsModule } from '@angular/forms';
 import { SocketIoModule } from 'ngx-socket-io';
 import { SocketIoConfig } from 'ngx-socket-io/src/config/socket-io.config';
+import { InvitationReducer } from 'src/NgRx/Reducers/invitations.reducer';
+import { InvitationEffect } from 'src/NgRx/Effects/invitations.effect';
 
 @NgModule({
   declarations: [
@@ -43,12 +45,14 @@ import { SocketIoConfig } from 'ngx-socket-io/src/config/socket-io.config';
     StoreModule.forRoot({
       user : userReducer,
       task: TaskReducer,
-      project: ProjectReducer
+      project: ProjectReducer,
+      invitation:InvitationReducer
     }, {}),
     EffectsModule.forRoot([
       UserEffect,
       TaskEffects,
-      ProjectEffects
+      ProjectEffects,
+      InvitationEffect
     ]),
     HttpClientModule,
     FormsModule,

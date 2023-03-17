@@ -79,7 +79,7 @@ export const InvitationReducer = createReducer(
       let newInvitations = [...state.invitations]
       let index = newInvitations.findIndex((invitation:any) => invitation.id == idInvitation);
       newInvitations[index] = {...invitation};
-      [newInvitations[index], newInvitations[newInvitations.length]] = [newInvitations[newInvitations.length], newInvitations[index]]
+      newInvitations = [...newInvitations]
       return {
           ...state,
           invitations: newInvitations,

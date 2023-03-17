@@ -37,7 +37,7 @@
     span{
       color: rgb(221, 221, 221); 
     }
-  }
+  } 
 
   .logo {
     width: auto;
@@ -79,9 +79,14 @@
         height: 3rem;
         border: none;
         outline: none;
+        color: white;
         border-radius: 5px;
-        background-color: rgba(255, 255, 255, .95);
-        border-bottom: 1.5px solid #00C2EE;
+        background-color: rgba(255, 255, 255, .2);
+        border: 1px solid rgba(255, 255, 255, .8);
+        transition: .5s;
+      }:focus{
+        border-bottom: 2px solid #00C2EE;
+        transition: .5s;
       }
     }
 
@@ -95,9 +100,14 @@
         height: 3rem;
         border: none;
         outline: none;
+        color: white;
         border-radius: 5px;
-        background-color: rgba(255, 255, 255, .95);
-        border-bottom: 1.5px solid #00C2EE;
+        background-color: rgba(255, 255, 255, .2);
+        border: 1px solid rgba(255, 255, 255, .8);
+        transition: .5s;
+      }:focus{
+        border-bottom: 2px solid #00C2EE;
+        transition: .5s;
       }
     }
 
@@ -145,13 +155,13 @@
     margin: 0 auto;
     
     #or{
-      color: gray;
+      color: white;
       vertical-align: middle;
       text-align: center;
       
     }
     #hr{
-      border-bottom: 2px solid gray;
+      border-bottom: 2px solid white;
       width: 1rem;
     }
     
