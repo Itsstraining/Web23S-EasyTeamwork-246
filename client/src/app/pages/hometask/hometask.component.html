@@ -43,7 +43,7 @@
         <div class="addTaskDiv" (click)="dialogAddTaskOpen('400ms', '100ms')">
           <p id="addTask">+ Add New Task</p>
         </div>
-        <div cdkDropList [cdkDropListData]="todoList" [cdkDropListConnectedTo]="[doingList]" class="todoLists"
+        <div cdkDropList [cdkDropListData]="todoList" class="todoLists"
           id="todoDiv" (cdkDropListDropped)="drop($event, 'todo')">
           <div class="taskBox" *ngFor="let item of todoList" cdkDragBoundary=".todoMainDiv" cdkDrag>
             <mat-card class="todoCard" (click)="getTaskInfo(item.task_id)">

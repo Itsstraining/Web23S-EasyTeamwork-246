@@ -32,17 +32,6 @@ export class AddProjectComponent {
     public projectService: ProjectService,
     @Inject(MAT_DIALOG_DATA) public data: UserModel,
   ) {
-      // this.userService.getAllUser().subscribe((users) => {
-      //   users.forEach((user) => {
-      //     if (user.uid !== this.userService.userInfo.uid) {
-      //       this.options.push(user);
-      //     }
-      //   });
-      // });
-      // this.userService.getUserById(this.userService.userInfo.uid).subscribe((users) => {
-      //   console.log(users);
-      //   this.currentUser = users;
-      // });
     }
 
   addProject() {
@@ -67,11 +56,9 @@ export class AddProjectComponent {
       marked: false,
     };
 
-    this.projectService.createProject(newProject).subscribe(
-      (res) => {
-        window.alert('Project created successfully!!');
-      },
-    );
+    this.projectService.createProject(newProject).subscribe((res) => {
+      window.alert('Create project successfully!');
+    });
 
     this.dialogRef.close(newProject);
   }

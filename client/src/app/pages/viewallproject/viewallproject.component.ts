@@ -82,11 +82,17 @@ export class ViewallprojectComponent implements OnInit {
       }, autoFocus: false
     })
 
-    this.subscriptions.push(
-      addProjectDialog.afterClosed().subscribe(() => {
-        this.getAllProject();
-      })
-    );
+    // this.subscriptions.push(
+    //   addProjectDialog.afterClosed().subscribe(() => {
+    //     this.getAllProject();
+    //   })
+    // );
+
+    addProjectDialog.afterClosed().subscribe(() => {
+      for(let i = 0; i < 40; i++){
+        this.ngOnInit();
+      }
+    });
   }
 
   ngOnInit(): void {
@@ -257,7 +263,7 @@ export class ViewallprojectComponent implements OnInit {
   deleteProject(project_id: string) {
     this.subscriptions.push(
       this.projectService.deleteProject(project_id).subscribe((data) => {
-        console.log("Delete project", data);
+        // console.log("Delete project", data);
         this.ngOnInit();
       })
     );
@@ -305,11 +311,11 @@ export class ViewallprojectComponent implements OnInit {
             }
             else if (month_of_currentDate == month_of_dueDate) {
               if (date_of_currentDate >= date_of_dueDate) {
-                console.log("Change to Overdue");
+                // console.log("Change to Overdue");
                 status = "overdue";
               }
               else {
-                console.log("Status stay");
+                // console.log("Status stay");
                 status = projectList[i].status;
               }
             }
