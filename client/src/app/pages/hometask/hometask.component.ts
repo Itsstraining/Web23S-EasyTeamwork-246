@@ -110,7 +110,7 @@ export class HometaskComponent implements OnInit {
         for (let i = 0; i < temp.length; i++) {
           if (temp[i].status != 'completed') {
             temp[i].status = 'due';
-            this.sendTest(temp[i], 'update');
+            this.sendTest(temp[i]);
           }
         }
       }
@@ -120,17 +120,14 @@ export class HometaskComponent implements OnInit {
   getAllTasks(project_id: string) {
     this.store.dispatch(TaskActions.getByProjectId({ project_id: project_id }));
     this.task$.subscribe((data: any) => {
-      if (data != null && data.tasks.length != 0) {
-
+      if (data != null) {
         this.taskList = data.tasks;
-        // this.getStatus(); //Leon here
-
         this.todoList = this.taskList.filter((task) => task.status === 'todo');
         this.inProgressList = this.taskList.filter((task) => task.status === 'in-progress');
         this.completeList = this.taskList.filter((task) => task.status === 'completed');
         this.dueList = this.taskList.filter((task) => task.status === 'due');
       } else {
-        console.log('No data');
+        // console.log('No data');
       }
     });
   }
@@ -143,14 +140,10 @@ export class HometaskComponent implements OnInit {
     });
   }
 
-  sendTest(newTest: TaskModel, action: string) {
+  sendTest(newTest: TaskModel) {
     this.taskService.sendTest(newTest);
     this.cloneList(newTest);
-    if (action === 'update') {
-      this.store.dispatch(TaskActions.updateTask({ task: newTest, id: newTest.task_id }));
-    } else if (action === 'add') {
-      this.ngOnInit();
-    }
+    this.store.dispatch(TaskActions.updateTask({ task: newTest, id: newTest.task_id }));
   }
 
   cloneList(newTest: TaskModel) {
@@ -177,10 +170,10 @@ export class HometaskComponent implements OnInit {
     instance.prj_id = this.prj_id;
     instance.task_id = this.task_id;
     instance.members.push(this.project_info.members[0]);
-    addTaskDialog.afterClosed().subscribe(result => {
+    addTaskDialog.afterClosed().subscribe(result =>{
       this.taskService.sendTest(result);
-      delay(2000);
-      console.log("delay works");
+      this.getSocket();
+      this.ngOnInit();
     });
   }
 
@@ -195,9 +188,10 @@ export class HometaskComponent implements OnInit {
     });
 
     taskInfoDialog.afterClosed().subscribe((result) => {
-      this.sendTest(result, 'update');
-      this.store.dispatch(TaskActions.updateTask({ task: result, id: result.task_id }));
-      this.ngOnInit();
+      for(let i = 0; i < 10; i++){
+        // console.log('oninit running: ', i);
+        this.ngOnInit();
+      }      
     });
   }
 
@@ -214,16 +208,16 @@ export class HometaskComponent implements OnInit {
 
       if (listName === 'todo') {
         let tempList = this.updateList('todo', event.currentIndex);
-        this.sendTest(tempList, 'update');
+        this.sendTest(tempList);
       } else if (listName === 'in-progress') {
         let tempList = this.updateList('in-progress', event.currentIndex);
-        this.sendTest(tempList, 'update');
+        this.sendTest(tempList);
       } else if (listName === 'completed') {
         let tempList = this.updateList('completed', event.currentIndex);
-        this.sendTest(tempList, 'update');
+        this.sendTest(tempList);
       } else if (listName === 'due') {
         let tempList = this.updateList('due', event.currentIndex);
-        this.sendTest(tempList, 'update');
+        this.sendTest(tempList);
       }
     }
   }
@@ -270,7 +264,7 @@ export class HometaskComponent implements OnInit {
     let tempID = this.taskIdGen();
     for (let i = 0; i < this.taskList.length; i++) {
       if (this.taskList[i].task_id == tempID) {
-        console.log("id conflict");
+        // console.log("id conflict");
         return tempID = "null";
       } else {
         return tempID;
