@@ -20,25 +20,10 @@
           <i class="fa-sharp fa-solid fa-user-plus fa-lg"></i>
         </div>
         <div class="usrIcon" *ngFor="let mem of all_members">
-          <img id="owner_img" src="{{mem.photoURL}}" alt="img"
+          <img id="owner_img" src="{{mem.photoURL}}" [matTooltip]="'mem.displayName'" [matTooltipShowDelay]="500" alt="img"
             (error)="updateUrl($event)">
         </div>
-
-        <!-- <div class="usrIcon1" *ngIf="all_members[1] != null">
-          <img id="owner_img" src="{{all_members[1].photoURL}}" alt="img" (error)="updateUrl($event)">
-        </div>
-        <div class="usrIcon1" *ngIf="all_members[1] == null">
-          <i class="fa-sharp fa-solid fa-user fa-xl"></i>
-        </div>
-
-        <div class="usrIcon2" *ngIf="all_members[2] != null">
-          <img id="owner_img" src="{{all_members[2].photoURL}}" alt="img">
-        </div>
-        <div class="usrIcon2" *ngIf="all_members[2] == null">
-          <i class="fa-sharp fa-solid fa-user fa-xl"></i>
-        </div> -->
-
-        <div class="user_remain_div" *ngIf="usr_count > 3">
+        <div class="user_remain_div">
           <p id="user_remain">and <span id="user_remain_count">{{usr_count}} </span>other people</p>
         </div>
       </div>

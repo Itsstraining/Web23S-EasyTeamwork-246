@@ -52,8 +52,7 @@ export class ViewallprojectComponent implements OnInit {
           count++;
         }
       });
-      this.invitesCount = count;
-      console.log('Invites count: ', this.invitesCount);
+       this.invitesCount = count;
     });
   }
 

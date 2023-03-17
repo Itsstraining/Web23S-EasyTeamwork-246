@@ -74,7 +74,7 @@ export class HometaskComponent implements OnInit {
   owner_img: string = '';
 
   all_members: UserModel[] = [];
-  usr_count!: number;
+  usr_count: number = 0;
 
   ngOnInit() {
     this.todoList = [];
@@ -89,6 +89,8 @@ export class HometaskComponent implements OnInit {
       this.getProject();
       this.getAllTasks(param['id']);
     });
+
+    this.countusermembers();
   }
 
   getProject() {
@@ -117,6 +119,20 @@ export class HometaskComponent implements OnInit {
     });
   }
 
+  countusermembers() {
+    if (this.usr_count > 3) {
+      return
+    }
+    else if (this.usr_count == 0) {
+      this.usr_count = this.project_info.members.length;
+      this.usr_count--;
+    }
+    else {
+      this.usr_count = this.project_info.members.length;
+      this.usr_count++;
+    }
+  }
+
   getAllTasks(project_id: string) {
     this.store.dispatch(TaskActions.getByProjectId({ project_id: project_id }));
     this.task$.subscribe((data: any) => {
@@ -136,7 +152,7 @@ export class HometaskComponent implements OnInit {
   }
 
   getSocket() {
-    // this.taskList.forEach((task) => this.taskPrj.push(Object.assign({}, task)));
+    this.taskList.forEach((task) => this.taskPrj.push(Object.assign({}, task)));
     this.test$ = this.taskService.getTest(this.prj_id);
     this.test$.subscribe((data: any) => {
       this.cloneList(data);
@@ -148,7 +164,10 @@ export class HometaskComponent implements OnInit {
     this.cloneList(newTest);
     if (action === 'update') {
       this.store.dispatch(TaskActions.updateTask({ task: newTest, id: newTest.task_id }));
+      this.ngOnInit();
     } else if (action === 'add') {
+      this.ngOnInit();
+    } else if (action === 'delete') {
       this.ngOnInit();
     }
   }
@@ -175,6 +194,7 @@ export class HometaskComponent implements OnInit {
     instance.members.push(this.project_info.members[0]);
     addTaskDialog.afterClosed().subscribe(result => {
       this.sendTest(result, 'add');
+      this.store.dispatch(TaskActions.addTask({ task: result }));
       this.ngOnInit();
     });
   }
@@ -193,6 +213,7 @@ export class HometaskComponent implements OnInit {
       this.sendTest(result, 'update');
       this.store.dispatch(TaskActions.updateTask({ task: result, id: result.task_id }));
       this.ngOnInit();
+      this.getAllTasks(this.prj_id);
     });
   }
 

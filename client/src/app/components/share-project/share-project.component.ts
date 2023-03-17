@@ -70,7 +70,6 @@ export class ShareProjectComponent implements OnInit {
     let index = this.currentProject.members.findIndex((member) => member.uid == receiver.uid);
 
     if (index == -1) {
-      console.log(this.projectService.idParam);
       if (this.projectService.idParam != null) {
         let invitation: InvitationModel = {
           id: Timestamp.now().toMillis().toString(),
@@ -81,7 +80,6 @@ export class ShareProjectComponent implements OnInit {
           project_id: this.projectService.idParam,
           project_name: this.projectName,
         }
-        console.log(invitation);
         this.store.dispatch(InvitationActions.createInvitation({ invitation: invitation, idReceiver: receiver.uid! }));
       }
     } else {

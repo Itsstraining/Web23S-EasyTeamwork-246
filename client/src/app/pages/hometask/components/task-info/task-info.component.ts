@@ -60,8 +60,6 @@ export class TaskInfoComponent implements OnInit{
     public dialogRef: MatDialogRef<AddTaskComponent>,
   ) {
     this.taskById$ = this.store.select('task');
-
-
    }
 
 
