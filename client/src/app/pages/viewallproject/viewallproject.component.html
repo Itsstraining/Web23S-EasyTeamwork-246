@@ -17,10 +17,11 @@
         Create project
       </span>
     </button>
-    <mat-select placeholder="Select project" style="margin-top: 8%;color: rgb(255 255 255);">
-      <mat-option value="0">My projects</mat-option>
-      <mat-option value="1">Shared with me</mat-option>
-    </mat-select>
+    <!-- <mat-select (change)="onChange($event)" placeholder="Select project" style="margin-top: 8%;color: rgb(255 255 255);">
+      <mat-option *ngFor="let choice of optionChoices" [value]="choice.value">
+        <p>{{ choice.name }}</p>
+      </mat-option>
+    </mat-select> -->
   </div>
   <div id="overview">
     <div id="overview-header">Overview</div>
@@ -183,8 +184,8 @@
         </div>
       </div>
       <div class="non-project" *ngIf="projectList.length == 0">
-        <span class="no-project-announce" *ngIf="isSharedProjects == '0'">Sorry there is no projects</span>
-        <span class="no-project-announce" *ngIf="isSharedProjects == '1'">You haven't joined any projects.</span>
+        <span class="no-project-announce" *ngIf="isSharedProjects  == '0'">Sorry there is no projects</span>
+        <span class="no-project-announce" *ngIf="isSharedProjects  == '1'">You haven't joined any projects.</span>
       </div>
     </div>
   </div>

@@ -16,7 +16,7 @@
           <i class="addUsr" class="fa-solid fa-share-nodes fa-sm" style="color: black"></i>
           Share
         </button>
-        <div class="addUsr">
+        <div class="addUsr" (click)="openMember()">
           <i class="fa-sharp fa-solid fa-user-plus fa-lg"></i>
         </div>
         <div class="usrIcon" *ngFor="let mem of all_members">

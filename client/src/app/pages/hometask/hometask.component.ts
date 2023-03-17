@@ -17,6 +17,7 @@ import { UserModel } from 'src/models/user.model';
 import { UserState } from 'src/NgRx/States/user.state';
 import * as ProjectAction from '../../../NgRx/Actions/projects.action';
 import { ProjectState } from 'src/NgRx/States/projects.state';
+import { MemberComponent } from 'src/app/components/member/member.component';
 
 @Component({
   selector: 'app-hometask',
@@ -148,6 +149,9 @@ export class HometaskComponent implements OnInit {
     });
   }
 
+  openMember(){
+    this.matDialog.open(MemberComponent)
+  }
   getSocket() {
     this.taskList.forEach((task) => this.taskPrj.push(Object.assign({}, task)));
     this.test$ = this.taskService.getTest(this.prj_id);

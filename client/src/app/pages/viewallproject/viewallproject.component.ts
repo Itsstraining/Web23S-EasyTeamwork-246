@@ -22,6 +22,10 @@ export type Status = "in-progress" | "completed" | "overdue";
   styleUrls: ['./viewallproject.component.scss']
 })
 export class ViewallprojectComponent implements OnInit {
+
+  id!: string | undefined;
+  userId!: string | null;
+
   constructor(
     private matDialog: MatDialog,
     private userService: UserService,
@@ -45,15 +49,15 @@ export class ViewallprojectComponent implements OnInit {
     this.store.dispatch(
       InvitationActions.getInvitations({ idReceiver: this.userUid })
     );
-    this.invites$.subscribe((invites) => {
-      let count = 0;
-      invites.invitations.forEach((invite) => {
-        if (invite.status == 'pending') {
-          count++;
-        }
-      });
-       this.invitesCount = count;
-    });
+    // this.invites$.subscribe((invites) => {
+    //   let count = 0;
+    //   invites.invitations.forEach((invite) => {
+    //     if (invite.status == 'pending') {
+    //       count++;
+    //     }
+    //   });
+    //    this.invitesCount = count;
+    // });
   }
 
   project$ !: Observable<any>;
@@ -75,6 +79,28 @@ export class ViewallprojectComponent implements OnInit {
   invites$!: Observable<InvitationState>;
   invitesCount = 0;
 
+
+  onChange(event: any) {
+    if (event?.target.value == 0) {
+      this.store.dispatch(
+        ProjectActions.getProjectById({ project_id: this.userId! })
+      );
+    }
+  }
+
+  optionChoices = [
+    {
+      name: 'My projects',
+      value: 0,
+    },
+    {
+      name: 'Shared with me',
+      value: 1,
+    }
+  ]
+
+
+
   dialogOpen() {
     let addProjectDialog = this.matDialog.open(AddProjectComponent, {
       data: {
@@ -90,6 +116,7 @@ export class ViewallprojectComponent implements OnInit {
 
     addProjectDialog.afterClosed().subscribe(() => {
       for(let i = 0; i < 40; i++){
+        this.store.dispatch(ProjectActions.getProjectById({ project_id: this.userId! }));
         this.ngOnInit();
       }
     });

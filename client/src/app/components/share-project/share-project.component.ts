@@ -49,7 +49,6 @@ export class ShareProjectComponent implements OnInit {
 
   }
   ngOnInit(): void {
-    console.log(this.users$);
     this.store.dispatch(ProjectActions.getProjectById({ project_id: this.projectService.idParam! }));
     this.projects$.subscribe((dataproject) => {
       this.currentProject = dataproject.project!;
