@@ -60,7 +60,6 @@
 
 
   .input-email {
-    // background-color: aqua;
     width: auto;
     height: auto;
     margin-left: 8%;
@@ -77,6 +76,9 @@
         border: none;
         outline: none;
         border-bottom: 1.5px solid #00c2ee;
+        border-radius: 5px;
+        background-color: rgba(255, 255, 255, .2);
+        border: 1px solid rgba(255, 255, 255, .8);
       }
     }
 
@@ -91,6 +93,9 @@
         border: none;
         outline: none;
         border-bottom: 1.5px solid #00c2ee;
+        border-radius: 5px;
+        background-color: rgba(255, 255, 255, .2);
+        border: 1px solid rgba(255, 255, 255, .8);
       }
     }
   }
@@ -105,10 +110,11 @@
       width: 91.3%;
       height: 45%;
       border-radius: 1rem;
-      background-color: #fff;
-      color: black;
+      color: white;
       margin-top: 5.5%;
       box-shadow: 10%;
+      background-color: #FE6F7A;
+      box-shadow: 0px 1px 19px 0px rgba(254,111,122,0.75);
     }
 
     a {
@@ -117,6 +123,7 @@
       padding-right: 8.5%;
       text-decoration: none;
       cursor: pointer;
+      color: #00C2EE;
     }
 
     a:hover{
