@@ -20,7 +20,7 @@
                     <i class="fa-sharp fa-solid fa-user-plus fa-lg"></i>
                 </div>
                 <div class="usrIcon">
-                    <img id="owner_img" src="{{all_members[0].photoURL}}" alt="img" (error)="updateUrl($event)">
+                    <img id="owner_img" src="{{all_members[0].photoURL}}" [matTooltip]="all_members[0].displayName!" alt="img" (error)="updateUrl($event)">
                 </div>
 
                 <div class="usrIcon1" *ngIf="all_members[1] != null">

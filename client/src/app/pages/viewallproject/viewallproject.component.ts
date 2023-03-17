@@ -6,14 +6,13 @@ import { ProjectModel } from 'src/models/projects.model';
 import { AddProjectComponent } from './components/add-project/add-project.component';
 import * as ProjectActions from '../../../NgRx/Actions/projects.action';
 import { ProjectService } from 'src/app/services/projects/project.service';
-import { InvitationActions } from 'src/NgRx/Actions/invitations.action';
-import { MemberComponent } from 'src/app/components/member/member.component';
 import { map, Observable, Subject, Subscription } from 'rxjs';
 import { UserState } from 'src/NgRx/States/user.state';
 import { ProjectState } from 'src/NgRx/States/projects.state';
 import { UserModel } from 'src/models/user.model';
 import { InvitationComponent } from 'src/app/components/invitation/invitation.component';
 import { InvitationState } from 'src/NgRx/States/invitations.state';
+import { InvitationActions } from 'src/NgRx/Actions/invitations.action';
 
 export type Status = "in-progress" | "completed" | "overdue";
 
@@ -31,12 +30,17 @@ export class ViewallprojectComponent implements OnInit {
   ) {
     this.project$ = this.store.select('project');
 
+    this.auth$ = this.store.select('user');
 
-    this.auth$.subscribe((auth) => {
-      if(auth.loading == false){
-        this.userUid = auth.user?.uid !;
-      }
-    });
+    this.subscriptions.push(
+      this.auth$.subscribe((auth) => {
+        if(auth.loading == false){
+          this.userUid = auth.user?.uid !;
+          this.user = auth.user!;
+          console.log("User", this.user);
+        }
+      })
+    );
 
     this.invites$ = this.store.select('invite');
     this.store.dispatch(
@@ -54,6 +58,7 @@ export class ViewallprojectComponent implements OnInit {
   }
 
   project$ !: Observable<any>;
+  auth$ !: Observable<any>;
 
   projectList: ProjectModel[] = [];
   ownedProjects: ProjectModel[] = [];
@@ -68,7 +73,6 @@ export class ViewallprojectComponent implements OnInit {
 
   user: UserModel = <UserModel>{};
   userUid!: string;
-  auth$ = this.store.select('user');
   invites$!: Observable<InvitationState>;
   invitesCount = 0;
 
@@ -79,12 +83,11 @@ export class ViewallprojectComponent implements OnInit {
       }, autoFocus: false
     })
 
-    addProjectDialog.afterClosed().subscribe(() => {
-      this.ngOnInit();
-    })
-  }
-
-  ngOnDestroy(): void {
+    this.subscriptions.push(
+      addProjectDialog.afterClosed().subscribe(() => {
+        this.getAllProject();
+      })
+    );
   }
 
   ngOnInit(): void {
@@ -116,49 +119,53 @@ export class ViewallprojectComponent implements OnInit {
     this.mark_list = [];
 
     this.store.dispatch(ProjectActions.getAllProjects());
-    this.project$.subscribe((data) => {
-      if (data) {
-        // Get all projects
-        this.projectList = data.projects;
-        console.log("Project List: ", this.projectList);
-        // Get owned projects
-        this.ownedProjects = this.projectList.filter((project) => {
-          for (let i = 0; i < project.members.length; i++) {
-            if (project.members[i].uid == this.userService.userInfo.uid) {
-              return true;
+    this.subscriptions.push(
+      this.project$.subscribe((data) => {
+        if (data) {
+          // Get all projects
+          this.projectList = data.projects;
+          console.log("Project List: ", this.projectList);
+          // Get owned projects
+          this.ownedProjects = this.projectList.filter((project) => {
+            for (let i = 0; i < project.members.length; i++) {
+              if (project.members[i].uid == this.userService.userInfo.uid) {
+                return true;
+              }
             }
+            return false;
+          });
+
+          this.ownedProjects.reverse();
+
+          if (this.viewAll == true) {
+            this.getOwnedProjects();
           }
-          return false;
-        });
+          else if (this.viewInprogress == true) {
+            this.getInprogressList();
+          }
+          else if (this.viewCompleted == true) {
+            this.getCompletedList();
+          }
+          else if (this.viewOverdue == true) {
+            this.getOverdueList();
+          }
+          else if (this.viewMarked == true) {
+            this.getMarkProject();
+          }
 
-        this.ownedProjects.reverse();
+          // Get project status list
+          this.in_progress_list = this.ownedProjects.filter((project) => project.status == "in-progress");
+          this.completed_list = this.ownedProjects.filter((project) => project.status == "completed");
+          this.overdue_list = this.ownedProjects.filter((project) => project.status == "overdue");
+          this.mark_list = this.ownedProjects.filter((project) => project.marked == true);
 
-        if (this.viewAll == true) {
-          this.getOwnedProjects();
-        }
-        else if (this.viewInprogress == true) {
-          this.getInprogressList();
-        }
-        else if (this.viewCompleted == true) {
-          this.getCompletedList();
-        }
-        else if (this.viewOverdue == true) {
-          this.getOverdueList();
-        }
-        else if (this.viewMarked == true) {
-          this.getMarkProject();
-        }
 
-        // Get project status list
-        this.in_progress_list = this.ownedProjects.filter((project) => project.status == "in-progress");
-        this.completed_list = this.ownedProjects.filter((project) => project.status == "completed");
-        this.overdue_list = this.ownedProjects.filter((project) => project.status == "overdue");
-        this.mark_list = this.ownedProjects.filter((project) => project.marked == true);
-      }
-      else {
-        console.log("No data");
-      }
-    });
+        }
+        else {
+          console.log("No data");
+        }
+      })
+    );
   }
 
   viewAll: boolean = false;
@@ -242,90 +249,97 @@ export class ViewallprojectComponent implements OnInit {
       members: project.members,
     };
 
-    this.projectService.updateProject(updateProject, project.project_id).subscribe(() => {
-      this.getAllProject();
-    });
+    this.subscriptions.push(
+      this.projectService.updateProject(updateProject, project.project_id).subscribe(() => {
+        this.getAllProject();
+      })
+    );
   }
 
   deleteProject(project_id: string) {
-    this.projectService.deleteProject(project_id).subscribe((data) => {
-      console.log("Delete project", data);
-      this.ngOnInit();
-    });
+    this.subscriptions.push(
+      this.projectService.deleteProject(project_id).subscribe((data) => {
+        console.log("Delete project", data);
+        this.ngOnInit();
+      })
+    );
   }
 
   changeStatus() {
     this.store.dispatch(ProjectActions.getAllProjects());
-    this.project$.subscribe((data) => {
-      let List: ProjectModel[] = data.projects;
-      let projectList: ProjectModel[] = List.filter((project) => {
-        for (let i = 0; i < project.members.length; i++) {
-          if (project.members[i].uid == this.userService.userInfo.uid) {
-            return true;
+    this.subscriptions.push(
+      this.project$.subscribe((data) => {
+        let List: ProjectModel[] = data.projects;
+        let projectList: ProjectModel[] = List.filter((project) => {
+          for (let i = 0; i < project.members.length; i++) {
+            if (project.members[i].uid == this.userService.userInfo.uid) {
+              return true;
+            }
           }
-        }
-        return false;
-      });
+          return false;
+        });
 
-      for (let i = 0; i < projectList.length; i++) {
-        let currentDate: string = new Date().toLocaleDateString();
-        let date_of_currentDate: number = parseInt(currentDate.split("/")[0]);
+        for (let i = 0; i < projectList.length; i++) {
+          let currentDate: string = new Date().toLocaleDateString();
+          let date_of_currentDate: number = parseInt(currentDate.split("/")[0]);
+          // console.log("Date of current date", date_of_currentDate);
+          let month_of_currentDate: number = parseInt(currentDate.split("/")[1]);
+          // console.log("Month of current date", month_of_currentDate);
+          let year_of_currentDate: number = parseInt(currentDate.split("/")[2]);
+          // console.log("Year of current date", year_of_currentDate);
 
-        let month_of_currentDate: number = parseInt(currentDate.split("/")[1]);
+          let dueDate: string = projectList[i].due_date;
+          let date_of_dueDate: number = parseInt(dueDate.split("/")[1]);
+          // console.log("Date of due date", date_of_dueDate);
+          let month_of_dueDate: number = parseInt(dueDate.split("/")[0]);
+          // console.log("Month of due date", month_of_dueDate);
+          let year_of_dueDate: number = parseInt(dueDate.split("/")[2]);
+          // console.log("Year of due date", year_of_dueDate);
 
-        let year_of_currentDate: number = parseInt(currentDate.split("/")[2]);
+          let status: Status;
 
-
-        let dueDate: string = projectList[i].due_date;
-        let date_of_dueDate: number = parseInt(dueDate.split("/")[1]);
-
-        let month_of_dueDate: number = parseInt(dueDate.split("/")[0]);
-
-        let year_of_dueDate: number = parseInt(dueDate.split("/")[2]);
-
-        let status: Status;
-
-        if ((year_of_currentDate > year_of_dueDate) && (projectList[i].status != "completed")) {
-          status = "overdue";
-        }
-        else if ((year_of_currentDate == year_of_dueDate) && (projectList[i].status != "completed")) {
-          if (month_of_currentDate > month_of_dueDate) {
+          if ((year_of_currentDate > year_of_dueDate) && (projectList[i].status != "completed")) {
             status = "overdue";
           }
-          else if (month_of_currentDate == month_of_dueDate) {
-            if (date_of_currentDate >= date_of_dueDate) {
-              console.log("Change to Overdue");
+          else if ((year_of_currentDate == year_of_dueDate) && (projectList[i].status != "completed")) {
+            if (month_of_currentDate > month_of_dueDate) {
               status = "overdue";
             }
+            else if (month_of_currentDate == month_of_dueDate) {
+              if (date_of_currentDate >= date_of_dueDate) {
+                console.log("Change to Overdue");
+                status = "overdue";
+              }
+              else {
+                console.log("Status stay");
+                status = projectList[i].status;
+              }
+            }
             else {
-              console.log("Status stay");
               status = projectList[i].status;
             }
           }
           else {
             status = projectList[i].status;
           }
-        }
-        else {
-          status = projectList[i].status;
-        }
 
-        let upProject: ProjectModel = {
-          project_id: projectList[i].project_id,
-          marked: projectList[i].marked,
-          name: projectList[i].name,
-          owner: projectList[i].owner,
-          owner_photo: projectList[i].owner_photo,
-          owner_id: projectList[i].owner_id,
-          due_date: projectList[i].due_date,
-          status: status,
-          disable: projectList[i].disable,
-          members: projectList[i].members,
-        };
+          let updateProject: ProjectModel = {
+            project_id: projectList[i].project_id,
+            marked: projectList[i].marked,
+            name: projectList[i].name,
+            owner: projectList[i].owner,
+            owner_photo: projectList[i].owner_photo,
+            owner_id: projectList[i].owner_id,
+            due_date: projectList[i].due_date,
+            status: status,
+            disable: projectList[i].disable,
+            members: projectList[i].members,
+          };
 
-        this.projectService.updateProject(upProject, projectList[i].project_id).subscribe();
-      }
-    });
+          this.projectService.updateProject(updateProject, projectList[i].project_id).subscribe();
+        }
+      })
+    );
   }
 
   projectName!: string;
@@ -342,5 +356,11 @@ export class ViewallprojectComponent implements OnInit {
       }
     }
     this.projectList = this.foundList;
+  }
+
+
+  subscriptions: Subscription[] = [];
+  ngOnDestroy() {
+    this.subscriptions.forEach((subscription) => subscription.unsubscribe());
   }
 }

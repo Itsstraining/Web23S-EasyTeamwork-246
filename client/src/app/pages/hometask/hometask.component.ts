@@ -27,7 +27,9 @@ export class HometaskComponent implements OnInit {
   projects$: Observable<ProjectState>;
   auth$!: Observable<UserState>;
   user!: UserModel;
+  users: Array<any> = [];
   idParam!: string;
+
   constructor(
     private matDialog: MatDialog,
     private taskService: TaskService,
