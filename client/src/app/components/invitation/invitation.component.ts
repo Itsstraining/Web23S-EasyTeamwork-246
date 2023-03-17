@@ -1,17 +1,12 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Subscription } from 'rxjs';
 import { MatDialogRef } from '@angular/material/dialog';
 import { UserService } from 'src/app/services/users/user.service';
 import { InvitationModel } from 'src/models/invitation.model';
-import { UserModel } from 'src/models/user.model';
-import { ProjectState } from 'src/NgRx/States/projects.state';
 import { UserState } from 'src/NgRx/States/user.state';
 import { InvitationActions } from 'src/NgRx/Actions/invitations.action';
-import { ProjectModel } from 'src/models/projects.model';
 import { InvitationState } from 'src/NgRx/States/invitations.state';
 import { Observable } from 'rxjs';
-import * as UserActions from '../../../NgRx/Actions/user.action'
 
 @Component({
   selector: 'app-invitation',
@@ -32,7 +27,6 @@ export class InvitationComponent implements OnInit {
   ) {
     this.auth$.subscribe((auth) => {
       this.userUid = auth.user?.uid ?? '';
-      console.log(auth.user);
     })
     this.invites$ = this.store.select('invitation');
     this.store.dispatch(InvitationActions.getInvitations({ idReceiver: this.userUid }));
@@ -42,8 +36,6 @@ export class InvitationComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // this.store.dispatch(UserActions.getAllUsers());
-
   }
   ngOnDestroy(): void {
   }

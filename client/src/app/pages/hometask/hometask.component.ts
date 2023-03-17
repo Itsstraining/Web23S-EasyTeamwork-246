@@ -17,7 +17,6 @@ import { UserModel } from 'src/models/user.model';
 import { UserState } from 'src/NgRx/States/user.state';
 import * as ProjectAction from '../../../NgRx/Actions/projects.action';
 import { ProjectState } from 'src/NgRx/States/projects.state';
-import * as UserActions from '../../../NgRx/Actions/user.action'
 
 @Component({
   selector: 'app-hometask',
@@ -81,7 +80,7 @@ export class HometaskComponent implements OnInit {
       this.prj_id = param['id'];
       this.projectService.idParam = param['id'];
       this.getSocket();
-      this.getProject();  
+      this.getProject();
       this.getAllTasks(param['id']);
     });
   }
@@ -98,8 +97,8 @@ export class HometaskComponent implements OnInit {
         let temp: TaskModel[] = [];
         this.taskList.forEach((task) => temp.push(Object.assign({}, task)));
 
-        for(let i = 0; i < temp.length; i++){
-          if(temp[i].status != 'completed'){
+        for (let i = 0; i < temp.length; i++) {
+          if (temp[i].status != 'completed') {
             temp[i].status = 'due';
             this.sendTest(temp[i], 'update');
           }
@@ -109,10 +108,10 @@ export class HometaskComponent implements OnInit {
   }
 
   getAllTasks(project_id: string) {
-    this.store.dispatch(TaskActions.getByProjectId({ project_id: project_id}));
+    this.store.dispatch(TaskActions.getByProjectId({ project_id: project_id }));
     this.task$.subscribe((data: any) => {
-      if (data != null && data.tasks.length!=0) {
-        // console.log("dât",data.tasks);
+      if (data != null && data.tasks.length != 0) {
+
         this.taskList = data.tasks;
         // this.getStatus(); //Leon here
 
@@ -137,9 +136,9 @@ export class HometaskComponent implements OnInit {
   sendTest(newTest: TaskModel, action: string) {
     this.taskService.sendTest(newTest);
     this.cloneList(newTest);
-    if(action === 'update'){
+    if (action === 'update') {
       this.store.dispatch(TaskActions.updateTask({ task: newTest, id: newTest.task_id }));
-    }else if(action === 'add'){
+    } else if (action === 'add') {
       this.ngOnInit();
     }
   }
@@ -286,10 +285,10 @@ export class HometaskComponent implements OnInit {
   ///THIS IS LEON THE MIGHTY LION KING CODE //Leon here
   dialogShareProject() {
     this.matDialog.open(ShareProjectComponent)
-    // console.log(this.prj_id);
+
     this.store.dispatch(ProjectAction.getProjectById({ project_id: this.prj_id }));
     this.projects$.subscribe((project) => {
-      // console.log(project.project);
+
     })
   }
 

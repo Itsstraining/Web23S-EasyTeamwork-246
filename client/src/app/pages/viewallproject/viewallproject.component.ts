@@ -80,19 +80,10 @@ export class ViewallprojectComponent implements OnInit {
     })
 
     addProjectDialog.afterClosed().subscribe(() => {
-      // this.getAllProject();
       this.ngOnInit();
     })
   }
 
-  opendialogShare() {
-    // this.matDialog.open(ShareProjectComponent);
-  }
-
-  // ngOnDestroy(): void {
-  //   this.userSubscription.unsubscribe();
-  //   this.isRequestSubscription.unsubscribe();
-  // }
   ngOnDestroy(): void {
   }
 
@@ -110,7 +101,6 @@ export class ViewallprojectComponent implements OnInit {
     this.viewOverdue = false;
     this.viewMarked = false;
 
-    // this.changeStatus();
     this.getAllProject();
   }
 
@@ -164,8 +154,6 @@ export class ViewallprojectComponent implements OnInit {
         this.completed_list = this.ownedProjects.filter((project) => project.status == "completed");
         this.overdue_list = this.ownedProjects.filter((project) => project.status == "overdue");
         this.mark_list = this.ownedProjects.filter((project) => project.marked == true);
-
-
       }
       else {
         console.log("No data");
@@ -282,19 +270,18 @@ export class ViewallprojectComponent implements OnInit {
       for (let i = 0; i < projectList.length; i++) {
         let currentDate: string = new Date().toLocaleDateString();
         let date_of_currentDate: number = parseInt(currentDate.split("/")[0]);
-        // console.log("Date of current date", date_of_currentDate);
+
         let month_of_currentDate: number = parseInt(currentDate.split("/")[1]);
-        // console.log("Month of current date", month_of_currentDate);
+
         let year_of_currentDate: number = parseInt(currentDate.split("/")[2]);
-        // console.log("Year of current date", year_of_currentDate);
+
 
         let dueDate: string = projectList[i].due_date;
         let date_of_dueDate: number = parseInt(dueDate.split("/")[1]);
-        // console.log("Date of due date", date_of_dueDate);
+
         let month_of_dueDate: number = parseInt(dueDate.split("/")[0]);
-        // console.log("Month of due date", month_of_dueDate);
+
         let year_of_dueDate: number = parseInt(dueDate.split("/")[2]);
-        // console.log("Year of due date", year_of_dueDate);
 
         let status: Status;
 

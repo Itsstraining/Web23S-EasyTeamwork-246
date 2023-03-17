@@ -72,7 +72,6 @@ export class AddProjectComponent {
       },
     );
 
-    console.log(newProject);
     this.dialogRef.close(newProject);
   }
 
