@@ -45,9 +45,6 @@ export class HometaskComponent implements OnInit {
       this.user = res.user!;
     })
     this.store.dispatch(ProjectAction.getProjectById({ project_id: this.idParam }));
-
-    // this.store.dispatch(UserActions.getAllUsers());
-    console.log(this.projectService.idParam!)
   }
 
   test$!: Observable<any>;
@@ -83,16 +80,14 @@ export class HometaskComponent implements OnInit {
     this.router.params.subscribe((param) => {
       this.prj_id = param['id'];
       this.projectService.idParam = param['id'];
-      console.log(this.prj_id)
       this.getSocket();
+      this.getProject();  
       this.getAllTasks(param['id']);
-      this.getProject();
     });
   }
 
   getProject() {
     this.projectService.getProjectById(this.prj_id).subscribe((data: any) => {
-      console.log(data);
       this.project_info = data;
       this.project_name = data.name;
       this.project_deadline = data.due_date;
@@ -106,7 +101,7 @@ export class HometaskComponent implements OnInit {
         for(let i = 0; i < temp.length; i++){
           if(temp[i].status != 'completed'){
             temp[i].status = 'due';
-            this.sendTest(temp[i]);
+            this.sendTest(temp[i], 'update');
           }
         }
       }
@@ -114,10 +109,10 @@ export class HometaskComponent implements OnInit {
   }
 
   getAllTasks(project_id: string) {
-    this.store.dispatch(TaskActions.getByProjectId({ project_id: project_id }));
+    this.store.dispatch(TaskActions.getByProjectId({ project_id: project_id}));
     this.task$.subscribe((data: any) => {
       if (data != null && data.tasks.length!=0) {
-        console.log("dât",data.tasks);
+        // console.log("dât",data.tasks);
         this.taskList = data.tasks;
         // this.getStatus(); //Leon here
 
@@ -132,19 +127,21 @@ export class HometaskComponent implements OnInit {
   }
 
   getSocket() {
-    this.taskList.forEach((task) => this.taskPrj.push(Object.assign({}, task)));
+    // this.taskList.forEach((task) => this.taskPrj.push(Object.assign({}, task)));
     this.test$ = this.taskService.getTest(this.prj_id);
     this.test$.subscribe((data: any) => {
       this.cloneList(data);
-      // console.log("TaskList: ", this.taskList);
-    })
+    });
   }
 
-  sendTest(newTest: TaskModel) {
+  sendTest(newTest: TaskModel, action: string) {
     this.taskService.sendTest(newTest);
     this.cloneList(newTest);
-    this.store.dispatch(TaskActions.updateTask({ task: newTest, id: newTest.task_id }));
-    // this.ngOnInit();
+    if(action === 'update'){
+      this.store.dispatch(TaskActions.updateTask({ task: newTest, id: newTest.task_id }));
+    }else if(action === 'add'){
+      this.ngOnInit();
+    }
   }
 
   cloneList(newTest: TaskModel) {
@@ -168,6 +165,7 @@ export class HometaskComponent implements OnInit {
     instance.task_id = this.task_id;
     instance.members.push(this.project_info.members[0]);
     addTaskDialog.afterClosed().subscribe(result => {
+      this.sendTest(result, 'add');
       this.ngOnInit();
     });
   }
@@ -183,12 +181,13 @@ export class HometaskComponent implements OnInit {
     });
 
     taskInfoDialog.afterClosed().subscribe((result) => {
+      this.sendTest(result, 'update');
+      this.store.dispatch(TaskActions.updateTask({ task: result, id: result.task_id }));
       this.ngOnInit();
     });
   }
 
   drop(event: CdkDragDrop<TaskModel[]>, listName: string) {
-    console.log(this.taskList.find((task) => task.name === 'd1wa'));
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
@@ -201,16 +200,16 @@ export class HometaskComponent implements OnInit {
 
       if (listName === 'todo') {
         let tempList = this.updateList('todo', event.currentIndex);
-        this.sendTest(tempList);
+        this.sendTest(tempList, 'update');
       } else if (listName === 'in-progress') {
         let tempList = this.updateList('in-progress', event.currentIndex);
-        this.sendTest(tempList);
+        this.sendTest(tempList, 'update');
       } else if (listName === 'completed') {
         let tempList = this.updateList('completed', event.currentIndex);
-        this.sendTest(tempList);
+        this.sendTest(tempList, 'update');
       } else if (listName === 'due') {
         let tempList = this.updateList('due', event.currentIndex);
-        this.sendTest(tempList);
+        this.sendTest(tempList, 'update');
       }
     }
   }
@@ -287,10 +286,10 @@ export class HometaskComponent implements OnInit {
   ///THIS IS LEON THE MIGHTY LION KING CODE //Leon here
   dialogShareProject() {
     this.matDialog.open(ShareProjectComponent)
-    console.log(this.prj_id);
+    // console.log(this.prj_id);
     this.store.dispatch(ProjectAction.getProjectById({ project_id: this.prj_id }));
     this.projects$.subscribe((project) => {
-      console.log(project.project);
+      // console.log(project.project);
     })
   }
 }

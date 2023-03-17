@@ -8,5 +8,6 @@ export const environment = {
     messagingSenderId: '82095840945',
   },
   production: true,
-  baseURL: 'http://localhost:3000/api/',
+  // baseURL: 'http://localhost:3000/api/',
+  baseURL: 'https://web23stodotask246-tzczztlxyq-as.a.run.app/api'
 };

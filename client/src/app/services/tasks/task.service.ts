@@ -11,7 +11,7 @@ export class TaskService {
 
   constructor(private httpClient: HttpClient, private socket: Socket) { }
 
-  url = `${environment.baseURL}task`;
+  url = `${environment.baseURL}/task`;
 
   getAllTasks(){
     return  this.httpClient.get(`${this.url}`);

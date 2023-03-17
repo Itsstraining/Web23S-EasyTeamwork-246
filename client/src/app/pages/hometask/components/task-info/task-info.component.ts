@@ -115,18 +115,17 @@ export class TaskInfoComponent implements OnInit{
       });
     }
     this.temp.assignee = temp_assignee;
-    console.log(this.temp.assignee);
     this.store.dispatch(TaskActions.updateTask({task: this.temp, id: this.temp.task_id}));
-    this.closeDialog();
+    this.closeDialog(this.temp);
   }
 
   deleteTask(){
     this.store.dispatch(TaskActions.deleteTask({task_id: this.temp.task_id}));
-    this.closeDialog();
+    this.closeDialog(this.temp);
   }
 
-  closeDialog(){
-    this.dialogRef.close();
+  closeDialog(data: TaskModel){
+    this.dialogRef.close({data: data});
   }
 
   getMemberName(){
