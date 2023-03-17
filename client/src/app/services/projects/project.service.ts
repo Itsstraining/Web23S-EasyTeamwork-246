@@ -26,7 +26,7 @@ export class ProjectService {
     return projects;
   }
 
-  getByProjectId(id: string){
+  getProjectById(id: string){
     return this.httpClient.get(`${this.url}/getProjectById/${id}`) as Observable<ProjectModel>;
   }
 

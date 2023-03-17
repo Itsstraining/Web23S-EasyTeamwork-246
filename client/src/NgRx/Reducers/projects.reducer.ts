@@ -5,7 +5,7 @@ import { ProjectModel } from "src/models/projects.model";
 
 
 const initialState: ProjectState = {
-  project: {} as ProjectModel,
+  project: null,
   projects: [],
   loading: false,
   isSuccess: true,
@@ -29,7 +29,7 @@ export const ProjectReducer = createReducer(
     isSuccess: false,
     error: action.error,
   })),
-  on(ProjectActions.getByProjectId, (state, { project_id }) => {
+  on(ProjectActions.getProjectById, (state, { project_id }) => {
     return {
       ...state,
       inProcess: true,
@@ -37,7 +37,7 @@ export const ProjectReducer = createReducer(
       error: '',
     };
   }),
-  on(ProjectActions.getByProjectIdSuccess, (state, { project }) => {
+  on(ProjectActions.getProjectByIdSuccess, (state, { project }) => {
     return {
       ...state,
       project: project,
@@ -46,7 +46,7 @@ export const ProjectReducer = createReducer(
       error: '',
     };
   }),
-  on(ProjectActions.getByProjectIdFailure, (state, { error }) => {
+  on(ProjectActions.getProjectByIdFailure, (state, { error }) => {
     return {
       ...state,
       inProcess: false,

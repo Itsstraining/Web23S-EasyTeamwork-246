@@ -42,7 +42,7 @@ export class InvitationComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.store.dispatch(UserActions.getAllUsers());
+    // this.store.dispatch(UserActions.getAllUsers());
 
   }
   ngOnDestroy(): void {

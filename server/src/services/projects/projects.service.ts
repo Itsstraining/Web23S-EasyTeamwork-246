@@ -19,9 +19,9 @@ export class ProjectsService {
     }
   }
 
-  async getProjectById(id: string) {
+  async getProjectById(id: string):Promise<Project|null>{
     try {
-      return await this.projectModel.findOne({ project_id: id }).exec();
+      return await this.projectModel.findOne({ project_id: id }).exec() as Project;
     } catch (e) {
       console.log(e);
       return null;
