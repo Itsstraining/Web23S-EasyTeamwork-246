@@ -2,7 +2,7 @@ import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/dr
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog, MatDialogState } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
-import { map, Observable } from 'rxjs';
+import { delay, map, Observable } from 'rxjs';
 import { TaskService } from 'src/app/services/tasks/task.service';
 import { Status, TaskModel } from 'src/models/task.model';
 import { AddTaskComponent } from './components/add-task/add-task.component';
@@ -157,6 +157,10 @@ export class HometaskComponent implements OnInit {
     this.dueList = this.taskList.filter((task) => task.status === 'due');
   }
 
+  delay(ms: number) {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+  }
+
   dialogAddTaskOpen(enterAnimationDuration: string, exitAnimationDuration: string) {
     let addTaskDialog = this.matDialog.open(AddTaskComponent, { enterAnimationDuration, exitAnimationDuration, autoFocus: false });
     this.task_id = this.chckId();
@@ -165,8 +169,9 @@ export class HometaskComponent implements OnInit {
     instance.task_id = this.task_id;
     instance.members.push(this.project_info.members[0]);
     addTaskDialog.afterClosed().subscribe(result => {
-      this.sendTest(result, 'add');
-      this.ngOnInit();
+      this.taskService.sendTest(result);
+      delay(2000);
+      console.log("delay works");
     });
   }
 

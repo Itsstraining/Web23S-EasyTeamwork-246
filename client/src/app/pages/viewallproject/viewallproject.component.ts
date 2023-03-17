@@ -82,11 +82,15 @@ export class ViewallprojectComponent implements OnInit {
       }, autoFocus: false
     })
 
-    this.subscriptions.push(
-      addProjectDialog.afterClosed().subscribe(() => {
-        this.getAllProject();
-      })
-    );
+    // this.subscriptions.push(
+    //   addProjectDialog.afterClosed().subscribe(() => {
+    //     this.getAllProject();
+    //   })
+    // );
+
+    addProjectDialog.afterClosed().subscribe(() => {
+      this.getAllProject();
+    });
   }
 
   ngOnInit(): void {
