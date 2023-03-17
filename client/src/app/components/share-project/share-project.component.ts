@@ -42,16 +42,7 @@ export class ShareProjectComponent implements OnInit {
     private route: ActivatedRoute,
     private projectService: ProjectService
   ) {
-    // this.route.params.subscribe(param => {
-      // console.log(param['id']);
-      // this.idParam = param['id'];
-      // console.log(this.idParam)
-      // this.projectService.idParam = param['id'];
-      console.log(this.projectService.idParam);
-    // });
-
     this.projects$ = this.store.select('project');
-    // this.users$ = this.store.select('auth');
     this.invites$ = this.store.select('invitation');
 
     this.users$ = this.store.select('user');
@@ -61,12 +52,8 @@ export class ShareProjectComponent implements OnInit {
     console.log(this.users$);
     this.store.dispatch(ProjectActions.getProjectById({ project_id: this.projectService.idParam! }));
     this.projects$.subscribe((dataproject) => {
-      console.log(dataproject.project)
-      console.log(dataproject);
-      console.log(dataproject.project);
       this.currentProject = dataproject.project!;
       this.projectName = this.currentProject.name;
-      console.log(this.projectName);
     })
     this.store.dispatch(UserActions.getAllUsers());
     this.users$.subscribe((data) => {
@@ -77,12 +64,9 @@ export class ShareProjectComponent implements OnInit {
         this.filterItem = data.users;
       }
     })
-    console.log(this.currentProject);
-
   }
 
   sendInvite(receiver: UserModel) {
-    console.log(this.currentProject)
     let index = this.currentProject.members.findIndex((member) => member.uid == receiver.uid);
 
     if (index == -1) {
