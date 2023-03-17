@@ -1,5 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { HydratedDocument } from 'mongoose';
+import { UserModel } from 'src/models/users.model';
 
 export type ProjectDocument = HydratedDocument<Project>;
 
@@ -25,6 +26,6 @@ export class Project {
     @Prop()
     disable: boolean;
     @Prop()
-    members: string[];
+    members: UserModel[];
 }
 export const ProjectSchema = SchemaFactory.createForClass(Project)
