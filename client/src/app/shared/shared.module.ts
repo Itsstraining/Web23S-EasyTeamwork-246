@@ -6,6 +6,7 @@ import { InvitationComponent } from '../components/invitation/invitation.compone
 import { FormsModule } from '@angular/forms';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 import { MemberComponent } from '../components/member/member.component';
+import { ShareProjectComponent } from '../components/share-project/share-project.component';
 
 
 const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
@@ -17,6 +18,7 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
     NavbarComponent,
     InvitationComponent,
     MemberComponent,
+    ShareProjectComponent
   ],
   imports: [
     CommonModule,
@@ -28,6 +30,7 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
     NavbarComponent,
     InvitationComponent,
     MemberComponent,
+    ShareProjectComponent,
 
     // modules
     MaterialModule,

@@ -5,15 +5,11 @@ import { ProjectModel } from "src/models/projects.model";
 
 
 const initialState: ProjectState = {
-  project: {} as ProjectModel,
+  project: null,
   projects: [],
   loading: false,
   isSuccess: true,
   error: '',
-  isAccepted: false,
-  isInvited: false,
-  isRequested: false,
-  requestProject: [],
 }
 
 export const ProjectReducer = createReducer(
@@ -33,6 +29,29 @@ export const ProjectReducer = createReducer(
     isSuccess: false,
     error: action.error,
   })),
-
-
+  on(ProjectActions.getProjectById, (state, { project_id }) => {
+    return {
+      ...state,
+      inProcess: true,
+      loading: true,
+      error: '',
+    };
+  }),
+  on(ProjectActions.getProjectByIdSuccess, (state, { project }) => {
+    return {
+      ...state,
+      project: project,
+      inProcess: false,
+      loading: false,
+      error: '',
+    };
+  }),
+  on(ProjectActions.getProjectByIdFailure, (state, { error }) => {
+    return {
+      ...state,
+      inProcess: false,
+      loading: false,
+      error: error,
+    };
+  }),
 );

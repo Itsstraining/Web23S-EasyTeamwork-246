@@ -253,13 +253,13 @@ export class ViewallprojectComponent implements OnInit {
       members: project.members,
     };
 
-    this.projectService.update(updateProject, project.project_id).subscribe(() => {
+    this.projectService.updateProject(updateProject, project.project_id).subscribe(() => {
       this.getAllProject();
     });
   }
 
   deleteProject(project_id: string) {
-    this.projectService.delete(project_id).subscribe((data) => {
+    this.projectService.deleteProject(project_id).subscribe((data) => {
       console.log("Delete project", data);
       this.ngOnInit();
     });
@@ -322,7 +322,7 @@ export class ViewallprojectComponent implements OnInit {
           status = projectList[i].status;
         }
 
-        let updateProject: ProjectModel = {
+        let upProject: ProjectModel = {
           project_id: projectList[i].project_id,
           marked: projectList[i].marked,
           name: projectList[i].name,
@@ -335,7 +335,7 @@ export class ViewallprojectComponent implements OnInit {
           members: projectList[i].members,
         };
 
-        this.projectService.update(updateProject, projectList[i].project_id).subscribe();
+        this.projectService.updateProject(upProject, projectList[i].project_id).subscribe();
       }
     });
   }

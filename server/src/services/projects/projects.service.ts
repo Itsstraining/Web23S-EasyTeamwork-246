@@ -9,7 +9,7 @@ export class ProjectsService {
     @InjectModel(Project.name) private projectModel: Model<ProjectDocument>,
   ) { }
 
-  async getAll(): Promise<Project[]> {
+  async getAllProject(): Promise<Project[]> {
     try {
       let data = await this.projectModel.find().exec();
       return data;
@@ -19,17 +19,16 @@ export class ProjectsService {
     }
   }
 
-  async getById(id: string) {
+  async getProjectById(id: string):Promise<Project|null>{
     try {
-      let data = await this.projectModel.find({ project_id: id }).exec();
-      return data;
+      return await this.projectModel.findOne({ project_id: id }).exec() as Project;
     } catch (e) {
       console.log(e);
       return null;
     }
   }
 
-  async create(project: Project) {
+  async createProject(project: Project) {
     try {
       const createdProject = new this.projectModel(project);
       return createdProject.save();
@@ -38,9 +37,8 @@ export class ProjectsService {
     }
   }
 
-  async update(project: Project, id: string) {
+  async updateProject(project: Project, id: string) {
     try {
-      console.log(project);
       return await this.projectModel.findOneAndUpdate({ project_id: id }, project);
     } catch (e) {
       console.log("error: " + e);
@@ -48,7 +46,7 @@ export class ProjectsService {
     }
   }
 
-  async delete(id: string) {
+  async deleteProject(id: string) {
     try {
       this.projectModel.deleteOne({ project_id: id }).exec();
     } catch (e) {
