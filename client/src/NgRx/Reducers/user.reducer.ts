@@ -1,10 +1,12 @@
 import { createReducer, on } from '@ngrx/store';
+import { UserModel } from 'src/models/user.model';
 import * as UserActions from '../../NgRx/Actions/user.action';
 import { UserState } from '../../NgRx/States/user.state';
 
 const initialState: UserState = {
   users: [],
   user:null,
+  isAuthenticated: false,
   loading: false,
   error: '',
 };
@@ -12,9 +14,9 @@ const initialState: UserState = {
 export const userReducer = createReducer(
   initialState,
   on(UserActions.login, (state) => {
-    return { 
-      ...state, 
-      loading: true, 
+    return {
+      ...state,
+      loading: true,
       error: '',
     };
   }),
@@ -22,6 +24,7 @@ export const userReducer = createReducer(
     return {
       ...state,
       user: user,
+      isAuthenticated: true,
       loading: false,
       error: '',
     };
@@ -30,6 +33,7 @@ export const userReducer = createReducer(
     return {
       ...state,
       user: null,
+      isAuthenticated: false,
       loading: false,
       error: '',
     };
@@ -53,6 +57,31 @@ export const userReducer = createReducer(
       ...state,
       loading: false,
       error: '',
+    };
+  }),
+  on(UserActions.getAllUsers, (state) => {
+    return {
+      ...state,
+      inProcess: true,
+      loading: true,
+      error: '',
+    };
+  }),
+  on(UserActions.getAllUsersSuccess, (state, { users }) => {
+    return {
+      ...state,
+      users: users,
+      inProcess: false,
+      loading: false,
+      error: '',
+    };
+  }),
+  on(UserActions.getAllUsersFailure, (state, { error }) => {
+    return {
+      ...state,
+      inProcess: false,
+      loading: false,
+      error,
     };
   })
 );

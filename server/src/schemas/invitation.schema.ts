@@ -18,7 +18,5 @@ export class Invitation {
     project_id: string;
     @Prop()
     project_name: string;
-    @Prop()
-    unread: boolean;
 }
 export const InvitationSchema = SchemaFactory.createForClass(Invitation)

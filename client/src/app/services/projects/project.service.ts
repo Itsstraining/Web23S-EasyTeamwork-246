@@ -11,6 +11,7 @@ export class ProjectService {
   constructor(private httpClient: HttpClient) { }
 
   url = `${environment.baseURL}projects`;
+  public idParam!: string;
 
   getAll(){
     return  this.httpClient.get(`${this.url}/getAllProjects`);

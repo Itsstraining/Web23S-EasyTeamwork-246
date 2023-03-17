@@ -2,29 +2,22 @@
   <div class="header">Add member</div>
   <div class="footer">
     <div id="host">Host's project:</div>
-    <mat-card class="example-card">
+    <!-- <mat-card class="example-card">
       <mat-card-header class="example-card-header">
         <img
           mat-card-avatar
           class="example-header-image"
-          [src]="this.data.owner_photo"
+          [src]="this.data.owner.photoURL"
         />
-        <mat-card-title>{{ this.data.owner }}</mat-card-title>
+        <mat-card-title>{{ this.data.owner.displayName }}</mat-card-title>
+        <mat-card-subtitle>{{ this.data.owner.email }}</mat-card-subtitle>
       </mat-card-header>
-    </mat-card>
+    </mat-card> -->
 
     <div class="input">
       <form class="example-form">
         <mat-form-field class="add_member">
           <mat-label>Member's email</mat-label>
-          <!-- <mat-chip-grid #chipGrid aria-label="Fruit selection">
-            <mat-chip-row *ngFor="let fruit of fruits" (removed)="remove(fruit)">
-              {{fruit}}
-              <button matChipRemove [attr.aria-label]="'remove ' + fruit">
-                <mat-icon>cancel</mat-icon>
-              </button>
-            </mat-chip-row>
-          </mat-chip-grid> -->
           <input
             matInput
             placeholder=""

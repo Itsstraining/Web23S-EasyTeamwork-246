@@ -12,7 +12,5 @@ export interface ProjectModel {
   due_date: string;
   status: Status;
   disable: boolean;
-//   owner: UserModel;
   members: UserModel[];
-  invitedMembers: UserModel[];
 }

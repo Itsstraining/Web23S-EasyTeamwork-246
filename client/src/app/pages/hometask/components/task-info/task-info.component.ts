@@ -61,7 +61,7 @@ export class TaskInfoComponent implements OnInit{
   ) {
     this.taskById$ = this.store.select('task');
 
-    
+
    }
 
 
@@ -99,7 +99,7 @@ export class TaskInfoComponent implements OnInit{
           this.assigneeTask.push(member);
         }
       });
-    }  
+    }
     this.temp.assignee = this.assigneeTask;
     console.log(this.temp);
   }
@@ -163,7 +163,7 @@ export class TaskInfoComponent implements OnInit{
         }
       }
     });
-    
+
     this.fruitInput.nativeElement.value = '';
     this.fruitCtrl.setValue(null);
   }

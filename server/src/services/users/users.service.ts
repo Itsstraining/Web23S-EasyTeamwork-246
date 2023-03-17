@@ -19,7 +19,18 @@ export class UsersService {
 
     async signIn(user: UserModel) {
         try {
-            let createdUser = new this.userModel(user);
+            let tempUser = await this.findUserByUid(user.uid);
+            if (tempUser) {
+                console.log('User already exists');
+                return null;
+            }
+            let newUser: User = {
+                uid: user.uid,
+                email: user.email,
+                displayName: user.displayName,
+                photoURL: user.photoURL,
+              };
+            let createdUser = new this.userModel(newUser);
             await createdUser.save();
         } catch (e) {
             console.log(e);
@@ -27,11 +38,21 @@ export class UsersService {
         }
     }
 
-    async findUserById(id: string) {
+    async findUserByUid(uid: string) {
         try {
-            return await this.userModel.findOne({ uid: id });
+            return await this.userModel.findOne({ uid: uid }).exec();
         } catch (e) {
             console.log(e);
+            return null;
+        }
+    }
+
+    async findByEmail(email: string): Promise<UserDocument> {
+        try {
+            let user = await this.userModel.findOne({ email: email }).exec();
+            return user;
+        } catch (error) {
+            console.log(error);
             return null;
         }
     }
