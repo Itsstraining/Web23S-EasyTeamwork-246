@@ -20,11 +20,11 @@
                     <i class="fa-sharp fa-solid fa-user-plus fa-lg"></i>
                 </div>
                 <div class="usrIcon">
-                    <img id="owner_img" src="{{all_members[0].photoURL}}" alt="img">
+                    <img id="owner_img" src="{{all_members[0].photoURL}}" alt="img" (error)="updateUrl($event)">
                 </div>
 
                 <div class="usrIcon1" *ngIf="all_members[1] != null">
-                    <img id="owner_img" src="{{all_members[1].photoURL}}" alt="img">
+                    <img id="owner_img" src="{{all_members[1].photoURL}}" alt="img" (error)="updateUrl($event)">
                 </div>
                 <div class="usrIcon1" *ngIf="all_members[1] == null">
                     <i class="fa-sharp fa-solid fa-user fa-xl"></i>

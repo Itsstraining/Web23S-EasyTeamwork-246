@@ -20,7 +20,7 @@
 
     <div class="userName">
       <div class="image-user">
-        <img [src]="(this.auth$ | async)?.user?.photoURL" alt="" class="img" />
+        <img [src]="(this.auth$ | async)?.user?.photoURL" alt="" class="img" (error)="updateUrl($event)"/>
         <p>{{ (this.auth$ | async)?.user?.displayName }}</p>
         <i class="fa-solid fa-caret-down" [matMenuTriggerFor]="menu"></i>
       </div>
