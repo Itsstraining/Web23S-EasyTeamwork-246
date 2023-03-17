@@ -19,7 +19,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class UserService {
-  public baseUrl: string = environment.baseURL + 'users/';
+  public baseUrl: string = environment.baseURL + '/users/';
   public userInfo: any;
 
   currentUserId!: string | null;

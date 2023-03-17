@@ -10,7 +10,7 @@ export class InvitationService {
 
   constructor(private http: HttpClient) {}
 
-  url = `${environment.baseURL}invitations/`;
+  url = `${environment.baseURL}/invitations/`;
 
   send(invitation: InvitationModel, idReceiver: string){
     return this.http.post(`${this.url}createInvitations/${idReceiver}`, invitation);

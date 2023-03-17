@@ -7,9 +7,10 @@ import { FormsModule } from '@angular/forms';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 import { MemberComponent } from '../components/member/member.component';
 import { ShareProjectComponent } from '../components/share-project/share-project.component';
+import { environment } from 'src/environments/environment';
 
 
-const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
+const config: SocketIoConfig = { url:   `https://web23stodotask246-tzczztlxyq-as.a.run.app/`, options: {} };
 
 
 

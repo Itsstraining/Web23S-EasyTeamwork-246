@@ -80,7 +80,8 @@ export class ViewallprojectComponent implements OnInit {
     })
 
     addProjectDialog.afterClosed().subscribe(() => {
-      this.getAllProject();
+      // this.getAllProject();
+      this.ngOnInit();
     })
   }
 
