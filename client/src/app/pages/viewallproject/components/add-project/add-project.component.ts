@@ -67,11 +67,9 @@ export class AddProjectComponent {
       marked: false,
     };
 
-    this.projectService.createProject(newProject).subscribe(
-      (res) => {
-        window.alert('Project created successfully!!');
-      },
-    );
+    this.projectService.createProject(newProject).subscribe((res) => {
+      window.alert('Create project successfully!');
+    });
 
     this.dialogRef.close(newProject);
   }

@@ -38,6 +38,7 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    color: white;
 
     p{
         width: 100%;
@@ -51,20 +52,24 @@
     button{
         margin-left: 15%;
         outline: none;
-        border: 2% solid grey;
+        border: none;
+        background-color: #FF7078;
+        color: white; 
+        box-shadow: 0px 0px 15px 0px rgba(255, 112, 120, 0.7);
+        // border: 1px solid grey;
         border-radius: 2rem;
         font-size: 100%;
-        background-color: #FFD764;
         padding: 2.3%;
         cursor: pointer;
-        opacity: 0.5;
-
+        transition: .5s;
     }
 
     button:hover{
-        border: 12% gainsboro solid;
+        background-color: #FF7078; 
+        color: white; 
+        box-shadow: 0px 0px 25px 0px rgba(252, 141, 146, 0.7);
         opacity:1;
         text-decoration: underline;
-
+        transition: .5s;
     }
 }
