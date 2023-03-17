@@ -7,6 +7,7 @@ import { TaskModel } from 'src/models/task.model';
 import { Complexity } from 'src/models/task.model';
 import { HometaskComponent } from '../../hometask.component';
 import * as TaskActions from '../../../../../NgRx/Actions/tasks.action';
+import { UserModel } from 'src/models/user.model';
 
 @Component({
   selector: 'app-add-task',
@@ -21,12 +22,13 @@ export class AddTaskComponent{
   constructor(
     public dialogRef: MatDialogRef<AddTaskComponent>,
     private taskService: TaskService,
-    private store: Store<{task: TaskModel}>
+    private store: Store<{task: TaskModel}>,
   ) { 
     this.task$ = this.store.select('task');
   }
 
   getDate(){
+
     const time = new Date();
 
     return time.toLocaleDateString();
@@ -44,7 +46,7 @@ export class AddTaskComponent{
   prj_id !: string;
   task_id !: string;
   due_date !: string;
-
+  members: UserModel[] = [];
   
 
   displayComplex(value: number): string{

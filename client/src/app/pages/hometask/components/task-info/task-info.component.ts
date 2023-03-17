@@ -67,7 +67,7 @@ export class TaskInfoComponent implements OnInit{
 
   ngOnInit(): void {
     // this.temp = this.task;
-    this.temp.assignee = this.assigneeTask;
+    // this.temp.assignee = [];
     this.temp.comment_count = this.task.comment_count;
     this.temp.complexity = this.task.complexity;
     this.temp.created_at = this.task.created_at;
@@ -93,19 +93,29 @@ export class TaskInfoComponent implements OnInit{
   }
 
   updateMember(){
+    let temp_assignee: Mutable<UserModel>[] = [];
     for(let i = 0; i <= this.member.length; i++){
       this.memberID.forEach((member) => {
         if(this.member[i] == member.displayName){
-          this.assigneeTask.push(member);
+          temp_assignee.push(member);
         }
       });
     }
-    this.temp.assignee = this.assigneeTask;
-    console.log(this.temp);
+    this.temp.assignee = temp_assignee;
+    this.store.dispatch(TaskActions.updateTask({task: this.temp, id: this.temp.task_id}));
   }
 
   updateTask(){
-    this.updateMember();
+    let temp_assignee: Mutable<UserModel>[] = [];
+    for(let i = 0; i <= this.member.length; i++){
+      this.memberID.forEach((member) => {
+        if(this.member[i] == member.displayName){
+          temp_assignee.push(member);
+        }
+      });
+    }
+    this.temp.assignee = temp_assignee;
+    console.log(this.temp.assignee);
     this.store.dispatch(TaskActions.updateTask({task: this.temp, id: this.temp.task_id}));
     this.closeDialog();
   }
@@ -116,8 +126,6 @@ export class TaskInfoComponent implements OnInit{
   }
 
   closeDialog(){
-    this.updateMember();
-    this.store.dispatch(TaskActions.updateTask({task: this.temp, id: this.temp.task_id}));
     this.dialogRef.close();
   }
 
