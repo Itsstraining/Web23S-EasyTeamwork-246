@@ -84,6 +84,14 @@ export class ViewallprojectComponent implements OnInit {
     })
   }
 
+  opendialogShare() {
+    // this.matDialog.open(ShareProjectComponent);
+  }
+
+  // ngOnDestroy(): void {
+  //   this.userSubscription.unsubscribe();
+  //   this.isRequestSubscription.unsubscribe();
+  // }
   ngOnDestroy(): void {
   }
 
@@ -101,7 +109,7 @@ export class ViewallprojectComponent implements OnInit {
     this.viewOverdue = false;
     this.viewMarked = false;
 
-    this.changeStatus();
+    // this.changeStatus();
     this.getAllProject();
   }
 
