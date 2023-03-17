@@ -1,15 +1,19 @@
 import { Component, OnInit, ElementRef,ViewChild, InputDecorator } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
-import { InvitationService } from 'src/app/services/invitation/invitation.service';
-import { NotificationService } from 'src/app/services/notification/notification.service';
 import { ProjectService } from 'src/app/services/projects/project.service';
 import { UserService } from 'src/app/services/users/user.service';
 import { InvitationModel } from 'src/models/invitation.model';
 import { ProjectModel } from 'src/models/projects.model';
-
+import { Timestamp } from 'firebase/firestore';
 import { UserModel } from 'src/models/user.model';
-import {MatChipInput, MatChipInputEvent} from '@angular/material/chips';
-import {COMMA, ENTER} from '@angular/cdk/keycodes';
+import { Store } from '@ngrx/store';
+import { UserState } from 'src/NgRx/States/user.state';
+import { InvitationState } from 'src/NgRx/States/invitations.state';
+import { ProjectState } from 'src/NgRx/States/projects.state';
+import { Observable } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
+import * as UserActions from '../../../NgRx/Actions/user.action'
+import { InvitationActions } from 'src/NgRx/Actions/invitations.action';
 
 @Component({
   selector: 'app-share-project',
@@ -17,81 +21,59 @@ import {COMMA, ENTER} from '@angular/cdk/keycodes';
   styleUrls: ['./share-project.component.scss']
 })
 export class ShareProjectComponent implements OnInit {
+
+  id!:string;
+  idParam!:string | null;
+  projectName!:string;
+  users$!: Observable<UserState>;
+  user!:UserModel;
+  invites$!: Observable<InvitationState>
+  projects$!: Observable<ProjectState>
+  allItems: Array<UserModel> = [];
+  currentProject!: ProjectModel;
+  isInvited!: boolean;
+
   constructor(
     public dialogRef: MatDialogRef<ShareProjectComponent>,
     private userService:UserService,
-    private invitationService: InvitationService,
-    private notificationService: NotificationService
-  ) { }
+    private store: Store<{ auth: UserState, invite: InvitationState, project: ProjectState }>,
+    private route: ActivatedRoute,
+    private projectService: ProjectService
+  ) {
+
+    this.projects$ = this.store.select('project');
+    this.invites$ = this.store.select('invite');
+    this.projects$.subscribe((data) => {
+      this.currentProject = data.project!;
+        console.log(data.project);
+        this.projectName = data.project?.name!;
+        console.log(this.projectName);
+    })
+
+    this.users$ = this.store.select('auth');
+    this.store.dispatch(UserActions.getAllUsers());
+  }
   ngOnInit(): void {
-    this.userService.getAllUser().subscribe((users) => {
-      users.forEach((user) => {
-        if (user.uid !== this.userService.userInfo.uid) {
-          if(this.project.members.find((m) => m.uid === user.uid) == undefined) {
-            this.options.push(user);
-          }
-        }
-      });
-    });
-    console.log(this.options);
   }
 
-  readonly separatorKeysCodes = [ENTER, COMMA] as const;
-  addOnBlur = true;
-
-  project!: ProjectModel;
-
-  options: UserModel[] = [];
-  tagsMembers: Set<string> = new Set<string>();
-  members: UserModel[] = [];
-
-  @ViewChild(MatChipInput, { read: ElementRef })
-  tagInput!: ElementRef<HTMLInputElement>;
-
-  closeDialogShare() {
-    this.dialogRef.close();
-  }
-
-  onTagAddMember(mem: UserModel): void {
-    if (mem) {
-      this.tagsMembers.add(mem.displayName);
-      console.log(this.tagsMembers);
-      this.members.push(mem);
-      this.options = this.options.filter((ops) => ops !== mem);
-    }
-    this.tagInput.nativeElement.value = '';
-  }
-
-  onTagDelete(onTagDelete: MatChipInputEvent){
-    this.tagsMembers.delete(onTagDelete.value);
-  }
-
-  send() {
-    if(this.members.length === 0) {
-      window.alert('No member to invitation!!');
+  sendInvite(receiver: UserModel) {
+    let index = this.currentProject.members.findIndex((member) => member.uid == receiver.uid);
+    if(index == -1){
+      console.log(this.projectService.idParam);
+      if(this.projectService.idParam!=null){
+        let invitation:InvitationModel = {
+          id: Timestamp.now().toMillis().toString(),
+          from: this.user.uid!,
+          name: this.user.displayName!,
+          to: receiver.uid!,
+          status: 'pending',
+          project_id: this.projectService.idParam,
+          project_name: this.projectName,
+      }
+      console.log(invitation);
+      this.store.dispatch(InvitationActions.createInvitation({invitation: invitation, idReceiver: receiver.uid!}));}
+    }else{
       return;
     }
-    // this.members.forEach((mem) => {
-    //   let invitation: InvitationModel = {
-    //     id: '',
-    //     owner_id: this.userService.user.uid,
-    //     receiver_id: mem.uid,
-    //     status: 0,
-    //     project_id: this.project.project_id,
-    //     unread: true
-    //   }
-
-    //   this.invitationService.createInvitation(invitation).subscribe(
-    //     (res) => {
-    //       window.alert('Invitation send!!');
-    //     }
-    //   );
-    //   if(this.userService.currentUserInfo.uid !== mem.uid) {
-    //     this.notificationService.notificationsCount++;
-    //     console.log(this.notificationService.notificationsCount);
-    //   }
-    // });
-
-    this.dialogRef.close();
   }
 }

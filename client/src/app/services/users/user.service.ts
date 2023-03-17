@@ -21,8 +21,8 @@ import { Observable } from 'rxjs';
 export class UserService {
   public baseUrl: string = environment.baseURL + 'users/';
   public userInfo: any;
-  user !: User;
-  currentUserInfo!: UserModel;
+
+  currentUserId!: string | null;
 
   constructor(
     public auth: Auth,
@@ -32,6 +32,7 @@ export class UserService {
   ) {
     authState(this.auth).subscribe((user) => {
       if (user != null) {
+        this.currentUserId = user.uid;
         let account: UserModel = {
           uid: user?.uid,
           displayName: user?.displayName,

@@ -1,40 +1,40 @@
 <div class="table">
-    <div class="header">
-        <span>Add new Project</span>
-        <div id="closeBtn" (click)="closeDialog()">
-            <img id="close-icon" src="https://cdn-icons-png.flaticon.com/512/1828/1828778.png">
-        </div>
-    </div>
-    <div class="body">
-        <div class="row">
-            <mat-form-field class="input">
-                <mat-label>Project name</mat-label>
-                <input [(ngModel)]="projectName" matInput>
+  <div class="header">
+      <span>Add new Project</span>
+      <div id="closeBtn" (click)="closeDialog()">
+          <img id="close-icon" src="https://cdn-icons-png.flaticon.com/512/1828/1828778.png">
+      </div>
+  </div>
+  <div class="body">
+      <div class="row">
+          <mat-form-field class="input">
+              <mat-label>Project name</mat-label>
+              <input [(ngModel)]="projectName" matInput>
+          </mat-form-field>
+      </div>
+      <div class="row">
+          <mat-form-field class="input" appearance="fill">
+              <mat-label>Due date</mat-label>
+              <input min="{{deadline | date: 'yyyy-MM-dd'}}" [(ngModel)]="date" matInput placeholder="MM/DD/YYYY" [matDatepicker]="picker">
+              <!-- <input [(ngModel)]="date" matInput placeholder="MM/DD/YYYY" [matDatepicker]="picker"> -->
+              <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+          <button id="calendat-btn" mat-raised-button (click)="picker.open()">
+              <mat-icon>calendar_today</mat-icon>
+          </button>
+      </div>
+      <div>
+          <span>Members limited</span>
+          <mat-checkbox class="example-margin"></mat-checkbox>
+      </div>
+      <div class="row">
+          <mat-form-field class="input">
+              <mat-label>Members available</mat-label>
+              <input matInput>
             </mat-form-field>
-        </div>
-        <div class="row">
-            <mat-form-field class="input" appearance="fill">
-                <mat-label>Due date</mat-label>
-                <input min="{{deadline | date: 'yyyy-MM-dd'}}" [(ngModel)]="date" matInput placeholder="MM/DD/YYYY" [matDatepicker]="picker">
-                <!-- <input [(ngModel)]="date" matInput placeholder="MM/DD/YYYY" [matDatepicker]="picker"> -->
-                <mat-datepicker #picker></mat-datepicker>
-            </mat-form-field>
-            <button id="calendat-btn" mat-raised-button (click)="picker.open()">
-                <mat-icon>calendar_today</mat-icon>
-            </button>
-        </div>
-        <div>
-            <span>Members limited</span>
-            <mat-checkbox class="example-margin"></mat-checkbox>
-        </div>
-        <div class="row">
-            <mat-form-field class="input">
-                <mat-label>Members available</mat-label>
-                <input matInput>
-              </mat-form-field>
-        </div>
-    </div>
-    <div id="add-project">
-        <button id="add-btn" (click)="addProject()">Add</button>
-    </div>
+      </div>
+  </div>
+  <div id="add-project">
+      <button id="add-btn" (click)="addProject()">Add</button>
+  </div>
 </div>

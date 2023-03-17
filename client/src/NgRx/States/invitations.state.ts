@@ -1,8 +1,9 @@
-import { UserModel } from "src/models/user.model";
+import { InvitationModel } from "src/models/invitation.model";
 
 export interface InvitationState {
-  invitation: UserModel | null;
+  invitation: InvitationModel | null;
+  invitations: InvitationModel[];
+  loading: boolean;
   inProcess: boolean;
-  isLoading: boolean;
   error: string;
 }

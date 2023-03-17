@@ -60,12 +60,10 @@ export class AddProjectComponent {
           email: this.userService.userInfo.email,
         }
       ],
-      // members: [this.currentUser],
       disable: false,
       due_date: this.due_date,
       status: 'in-progress',
       marked: false,
-      invitedMembers: [],
     };
 
     this.projectService.create(newProject).subscribe(
