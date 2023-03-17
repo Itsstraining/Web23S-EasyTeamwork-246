@@ -12,6 +12,7 @@ import { ProjectState } from 'src/NgRx/States/projects.state';
 import { UserModel } from 'src/models/user.model';
 import { InvitationComponent } from 'src/app/components/invitation/invitation.component';
 import { InvitationState } from 'src/NgRx/States/invitations.state';
+import { InvitationActions } from 'src/NgRx/Actions/invitations.action';
 
 export type Status = "in-progress" | "completed" | "overdue";
 
@@ -36,24 +37,24 @@ export class ViewallprojectComponent implements OnInit {
         if(auth.loading == false){
           this.userUid = auth.user?.uid !;
           this.user = auth.user!;
-          console.log("User", this.user);
         }
       })
     );
 
-    // this.invites$ = this.store.select('invite');
-    // this.store.dispatch(
-    //   InvitationActions.getInvitations({ idReceiver: this.userUid })
-    // );
-    // this.invites$.subscribe((invites) => {
-    //   let count = 0;
-    //   invites.invitations.forEach((invite) => {
-    //     if (invite.status == 'pending') {
-    //       count++;
-    //     }
-    //   });
-    //   this.invitesCount = count;
-    // });
+    this.invites$ = this.store.select('invite');
+    this.store.dispatch(
+      InvitationActions.getInvitations({ idReceiver: this.userUid })
+    );
+    this.invites$.subscribe((invites) => {
+      let count = 0;
+      invites.invitations.forEach((invite) => {
+        if (invite.status == 'pending') {
+          count++;
+        }
+      });
+      this.invitesCount = count;
+      console.log('Invites count: ', this.invitesCount);
+    });
   }
 
   project$ !: Observable<any>;
@@ -107,7 +108,6 @@ export class ViewallprojectComponent implements OnInit {
     this.viewOverdue = false;
     this.viewMarked = false;
 
-    // this.changeStatus();
     this.getAllProject();
   }
 
@@ -128,7 +128,6 @@ export class ViewallprojectComponent implements OnInit {
         if (data) {
           // Get all projects
           this.projectList = data.projects;
-          console.log("Project List: ", this.projectList);
           // Get owned projects
           this.ownedProjects = this.projectList.filter((project) => {
             for (let i = 0; i < project.members.length; i++) {
@@ -138,9 +137,9 @@ export class ViewallprojectComponent implements OnInit {
             }
             return false;
           });
-  
+
           this.ownedProjects.reverse();
-  
+
           if (this.viewAll == true) {
             this.getOwnedProjects();
           }
@@ -156,14 +155,14 @@ export class ViewallprojectComponent implements OnInit {
           else if (this.viewMarked == true) {
             this.getMarkProject();
           }
-  
+
           // Get project status list
           this.in_progress_list = this.ownedProjects.filter((project) => project.status == "in-progress");
           this.completed_list = this.ownedProjects.filter((project) => project.status == "completed");
           this.overdue_list = this.ownedProjects.filter((project) => project.status == "overdue");
           this.mark_list = this.ownedProjects.filter((project) => project.marked == true);
-  
-  
+
+
         }
         else {
           console.log("No data");
@@ -282,7 +281,7 @@ export class ViewallprojectComponent implements OnInit {
           }
           return false;
         });
-  
+
         for (let i = 0; i < projectList.length; i++) {
           let currentDate: string = new Date().toLocaleDateString();
           let date_of_currentDate: number = parseInt(currentDate.split("/")[0]);
@@ -291,7 +290,7 @@ export class ViewallprojectComponent implements OnInit {
           // console.log("Month of current date", month_of_currentDate);
           let year_of_currentDate: number = parseInt(currentDate.split("/")[2]);
           // console.log("Year of current date", year_of_currentDate);
-    
+
           let dueDate: string = projectList[i].due_date;
           let date_of_dueDate: number = parseInt(dueDate.split("/")[1]);
           // console.log("Date of due date", date_of_dueDate);
@@ -299,9 +298,9 @@ export class ViewallprojectComponent implements OnInit {
           // console.log("Month of due date", month_of_dueDate);
           let year_of_dueDate: number = parseInt(dueDate.split("/")[2]);
           // console.log("Year of due date", year_of_dueDate);
-    
+
           let status: Status;
-    
+
           if ((year_of_currentDate > year_of_dueDate) && (projectList[i].status != "completed")) {
             status = "overdue";
           }
@@ -326,7 +325,7 @@ export class ViewallprojectComponent implements OnInit {
           else {
             status = projectList[i].status;
           }
-    
+
           let updateProject: ProjectModel = {
             project_id: projectList[i].project_id,
             marked: projectList[i].marked,
@@ -339,7 +338,7 @@ export class ViewallprojectComponent implements OnInit {
             disable: projectList[i].disable,
             members: projectList[i].members,
           };
-    
+
           this.projectService.updateProject(updateProject, projectList[i].project_id).subscribe();
         }
       })

@@ -1,473 +1,461 @@
-.homeContainer{
-    width: 100%;
-    height: 93.4%;
-    display: flex;
-    flex-direction: row;
-    background-color: transparent;
-    overflow: hidden;
+.homeContainer {
+  width: 100%;
+  height: 93.4%;
+  display: flex;
+  flex-direction: row;
+  background-color: transparent;
+  overflow: hidden;
 }
 
-.project_task_infoDiv{
-    width: 15%;
-    height: 100%;
-    font-family: 'Quicksand', sans-serif;
-    background-color: transparent;
-    // border-left: 1px solid #673477;
-    position: relative;
-    overflow: hidden;
-    padding: 1rem;
-    color: white;
-    border-left: 2px solid rgba(255, 255, 255, .2);
+.project_task_infoDiv {
+  width: 15%;
+  height: 100%;
+  font-family: 'Quicksand', sans-serif;
+  background-color: transparent;
+  position: relative;
+  overflow: hidden;
+  padding: 1rem;
+  color: white;
+  border-left: 2px solid rgba(255, 255, 255, .2);
 }
 
-.sidebar_info{
-    position: relative;
-    font-size: 1.1rem;
-    margin-bottom: 15%;
+.sidebar_info {
+  position: relative;
+  font-size: 1.1rem;
+  margin-bottom: 15%;
 }
 
-.sidebar_info:after{
-    content: "";
-    display: block;
-    position: absolute;
-    width: 50%;
-    bottom: -1rem;
-    left: 0%;
-    top: 0px;
-    right: 0px;
-    margin-left: 25%;
-    border-bottom: 2px solid rgba(255, 255, 255, .2);
+.sidebar_info:after {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 50%;
+  bottom: -1rem;
+  left: 0%;
+  top: 0px;
+  right: 0px;
+  margin-left: 25%;
+  border-bottom: 2px solid rgba(255, 255, 255, .2);
 }
 
-.sidebar_info_div{
-    display: flex;
-    flex-direction: row;
+.sidebar_info_div {
+  display: flex;
+  flex-direction: row;
 }
 
-#sidebar_project_name{
-    font-size: 1.6rem;
-    font-weight: bolder;
-    margin-left: 2%;
+#sidebar_project_name {
+  font-size: 1.6rem;
+  font-weight: bolder;
+  margin-left: 2%;
 }
 
-#sidebar_project_title{
-    font-size: 1rem;
-    margin-left: 10%;
+#sidebar_project_title {
+  font-size: 1rem;
+  margin-left: 10%;
 }
 
-.sidebar_info_task{
-    position: relative;
-    font-size: 1.1rem;
-    margin-bottom: 5%;
-    background-color: rgba(255, 255, 255, .2);
-    padding: 1rem;
-    border-radius: 15px;
+.sidebar_info_task {
+  position: relative;
+  font-size: 1.1rem;
+  margin-bottom: 5%;
+  background-color: rgba(255, 255, 255, .2);
+  padding: 1rem;
+  border-radius: 15px;
 }
 
-.sidebar_info_task > h2{
-    font-size: 1.6rem;
-    font-weight: bolder;
-    text-align: center;
-    // margin-top: 5%;
+.sidebar_info_task>h2 {
+  font-size: 1.6rem;
+  font-weight: bolder;
+  text-align: center;
 }
 
 /* Home div */
-.infoDiv{
-    width: 100%;
-    background-color: transparent;
-    padding-left: 2%;
-    padding-top: 1%;
-    padding-bottom: .5%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    position: relative;
-    
-    color: white;
+.infoDiv {
+  width: 100%;
+  background-color: transparent;
+  padding-left: 2%;
+  padding-top: 1%;
+  padding-bottom: .5%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  position: relative;
+  color: white;
 }
 
-.infoDiv:after{
-    content: "";
-    display: block;
-    position: absolute;
-    width: 80%;
-    bottom: 0px;
-    left: 0%;
-    top: 0px;
-    right: 0px;
-    margin-left: 7%;
-    border-bottom: 2px solid rgba(255, 255, 255, .2);
+.infoDiv:after {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 80%;
+  bottom: 0px;
+  left: 0%;
+  top: 0px;
+  right: 0px;
+  margin-left: 7%;
+  border-bottom: 2px solid rgba(255, 255, 255, .2);
 }
 
-.homeDiv{
-    width: 85%;
-    height: auto;
-    // background-color: #FF6464;
-    overflow: hidden;
+.homeDiv {
+  width: 85%;
+  height: auto;
+  overflow: hidden;
 }
 
-#funcTitle{
-    font-family: 'Ubuntu', sans-serif;
-    font-weight: bold;
-    font-size: 1.8rem;
-    margin-top: .5%;
+#funcTitle {
+  font-family: 'Ubuntu', sans-serif;
+  font-weight: bold;
+  font-size: 1.8rem;
+  margin-top: .5%;
 }
 
-.projInfo{
-    font-size: 1.2rem;
-    font-family: 'Quicksand', sans-serif;
-    font-weight: 500;
-    margin-left: 1rem;
+.projInfo {
+  font-size: 1.2rem;
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 500;
+  margin-left: 1rem;
 }
 
-.userDiv{
-    width: 100%;
-    border-radius: 10px;
-    margin-top: -5%;
+.userDiv {
+  width: 100%;
+  border-radius: 10px;
+  margin-top: -5%;
 }
 
-.usrImgDiv{
-    width: 30%;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
+.usrImgDiv {
+  width: 30%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
-.user_remain_div{
-    width: 40%;
+.user_remain_div {
+  width: 40%;
 }
 
-#user_remain{
-    margin: 0;
-    padding: 0;
-    margin-left: 2%;
+#user_remain {
+  margin: 0;
+  padding: 0;
+  margin-left: 2%;
 }
 
-#user_remain_count{
-    font-weight: 500;
+#user_remain_count {
+  font-weight: 500;
 }
 
-.usrIcon{
-    width: 2.7rem;
-    height: 2.7rem;
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    justify-content: center;
-    border-radius: 50%;
-    background-color: rgb(255, 205, 205);
+.usrIcon {
+  width: 2.7rem;
+  height: 2.7rem;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: rgb(255, 205, 205);
 }
 
-#owner_img{
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
+#owner_img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
 }
 
-.usrIcon1{
-    width: 2.7rem;
-    height: 2.7rem;
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    justify-content: center;
-    border-radius: 30px;
-    background-color: rgb(250, 145, 145);
-    margin-left: -.7rem;
+.usrIcon1 {
+  width: 2.7rem;
+  height: 2.7rem;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: center;
+  border-radius: 30px;
+  background-color: rgb(250, 145, 145);
+  margin-left: -.7rem;
 }
 
-.usrIcon2{
-    width: 2.7rem;
-    height: 2.7rem;
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    justify-content: center;
-    border-radius: 50px;
-    background-color: rgb(255, 100, 100);
-    margin-left: -.7rem;
+.usrIcon2 {
+  width: 2.7rem;
+  height: 2.7rem;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: center;
+  border-radius: 50px;
+  background-color: rgb(255, 100, 100);
+  margin-left: -.7rem;
 }
 
-.addUsr{
-    width: 15%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    justify-content: center;
-    margin-left: .5rem;
+.addUsr {
+  width: 15%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: center;
+  margin-left: .5rem;
 }
 
-.addUsr:hover{
-    cursor: pointer;
+.addUsr:hover {
+  cursor: pointer;
 }
 
-.todoMainDiv{
-    width: 100%;
-    height: 85%;
-    display: flex;
-    flex-direction: row;
-    background-color: transparent;
+.todoMainDiv {
+  width: 100%;
+  height: 85%;
+  display: flex;
+  flex-direction: row;
+  background-color: transparent;
 }
 
-.dragContainer{
-    width: 23%;
-    margin-left: 1.5%;
-    margin-top: 1%;
+.dragContainer {
+  width: 23%;
+  margin-left: 1.5%;
+  margin-top: 1%;
 }
 
-.taskTitleDiv{
-    height: 5%;
-    margin-left: 1%;
-    margin-bottom: 1.5%;
+.taskTitleDiv {
+  height: 5%;
+  margin-left: 1%;
+  margin-bottom: 1.5%;
 }
 
-.taskDiv{
-    font-family: 'Quicksand', sans-serif;
-    font-weight: bolder;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
+.taskDiv {
+  font-family: 'Quicksand', sans-serif;
+  font-weight: bolder;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
-.taskDiv > p{
-    padding: 0;
-    margin: 0;
+.taskDiv>p {
+  padding: 0;
+  margin: 0;
 }
 
-.todoLists{
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    overflow-y: scroll;
-    padding: 1% 2% 1% 2%;
-    border-radius: 10px;
-    scrollbar-width: none;
-    // border: 1px dashed rgba(102, 102, 102, .2);
+.todoLists {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  overflow-y: scroll;
+  padding: 1% 2% 1% 2%;
+  border-radius: 10px;
+  scrollbar-width: none;
 }
 
-.todoLists::-webkit-scrollbar{
-    width: 0;
+.todoLists::-webkit-scrollbar {
+  width: 0;
 }
 
-.taskBox{
-    border-radius: 10px;
-    margin-bottom: 5%;
+.taskBox {
+  border-radius: 10px;
+  margin-bottom: 5%;
 }
 
-.todoCard:hover{    
-    box-shadow: 0px 0px 10px 0px rgba(255, 255, 255, 0.75);
+.todoCard:hover {
+  box-shadow: 0px 0px 10px 0px rgba(255, 255, 255, 0.75);
 }
 
-#todoDiv{
-    height: 95%;
-    margin-top: 1.5%;
+#todoDiv {
+  height: 95%;
+  margin-top: 1.5%;
 }
 
-.taskTitle{
-    font-size: 1.4rem;
-    color: white;
-    display: flex;
-    flex-direction: row;
-    text-align: left;
-    font-weight: bolder;
+.taskTitle {
+  font-size: 1.4rem;
+  color: white;
+  display: flex;
+  flex-direction: row;
+  text-align: left;
+  font-weight: bolder;
 }
 
-.mat-button{
-    float: right;
+.mat-button {
+  float: right;
 }
 
-.mat-mdc-card-content{
-    padding-bottom: .8rem;
+.mat-mdc-card-content {
+  padding-bottom: .8rem;
 }
 
-.todoCard{
-    font-family: 'Quicksand', sans-serif;
-    font-weight: 500;
-    border-radius: 15px !important;
-    overflow: hidden;
-    transition: box-shadow 200ms cubic-bezier(0, 0, 0.2, 1);
-    background-color: rgba(255, 255, 255, .2);
-    border: 1px solid rgba(255, 255, 255, .5);
-    color: white;
-    :hover{
-        cursor: grab;
-    }
-    :active{
-        cursor: grabbing;
-    }
-}
+.todoCard {
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 500;
+  border-radius: 15px !important;
+  overflow: hidden;
+  transition: box-shadow 200ms cubic-bezier(0, 0, 0.2, 1);
+  background-color: rgba(255, 255, 255, .2);
+  border: 1px solid rgba(255, 255, 255, .5);
+  color: white;
 
-.cdk-drag-dragging{
+  :hover {
+    cursor: grab;
+  }
+
+  :active {
     cursor: grabbing;
+  }
 }
 
-.cardTitle{
-    font-size: 1.2rem;
-    font-weight: bolder;
-    margin-bottom: 1%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    text-align: left;
+.cdk-drag-dragging {
+  cursor: grabbing;
 }
 
-.cardTitle > p{
-    text-align: left;
+.cardTitle {
+  font-size: 1.2rem;
+  font-weight: bolder;
+  margin-bottom: 1%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  text-align: left;
 }
 
-.cardInfo{
-    font-size: 1rem;
-    font-weight: 400;
-    margin-left: 3%;
+.cardTitle>p {
+  text-align: left;
 }
 
-.cardAct{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    padding: 0% 5%;
+.cardInfo {
+  font-size: 1rem;
+  font-weight: 400;
+  margin-left: 3%;
 }
 
-.cardAct > i:hover{
-    cursor: pointer;
+.cardAct {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0% 5%;
 }
 
-.commentDiv{
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
+.cardAct>i:hover {
+  cursor: pointer;
+}
+
+.commentDiv {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 }
 
 .cdk-drag-placeholder {
-    opacity: 0;
+  opacity: 0;
 }
 
 .cdk-drop-list-dragging .cdk-drag {
-    transition: transform 10ms cubic-bezier(0, 0, 0.2, 1);
-  }
+  transition: transform 10ms cubic-bezier(0, 0, 0.2, 1);
+}
 
 .cdk-drag-animating {
-    transition: transform 500ms cubic-bezier(0, 0, 0.2, 1);
+  transition: transform 500ms cubic-bezier(0, 0, 0.2, 1);
 }
 
-.addTaskPop{
-    position: absolute;
-    width: 40%;
-    height: 40%;
-    background-color: transparent;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+.addTaskPop {
+  position: absolute;
+  width: 40%;
+  height: 40%;
+  background-color: transparent;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
-#addTaskBtn{
-    font-size: 1.2rem;
-    border: none;
-    border-radius: 7px;
-    background-color: transparent;
-    padding: .5%;
-    margin-left: 5%;
-    margin-top: -5%;
+#addTaskBtn {
+  font-size: 1.2rem;
+  border: none;
+  border-radius: 7px;
+  background-color: transparent;
+  padding: .5%;
+  margin-left: 5%;
+  margin-top: -5%;
 }
 
-.addTaskDiv{
-    width: 98%;
-    height: 2rem;
-    border-radius: 15px;
-    background-color: #FE6F7A;
-    display: flex;
-    justify-content: center;
-    margin: 3% 0% 3% 2%;
-    box-shadow: 0px 1px 19px 0px rgba(254,111,122,0.75);
+.addTaskDiv {
+  width: 98%;
+  height: 2rem;
+  border-radius: 15px;
+  background-color: #FE6F7A;
+  display: flex;
+  justify-content: center;
+  margin: 3% 0% 3% 2%;
+  box-shadow: 0px 1px 19px 0px rgba(254, 111, 122, 0.75);
 }
 
-.addTaskDiv:hover{
-    cursor: pointer;
-    box-shadow: 0px 0px 25px 0px rgba(255, 145, 154, 0.75);
-    transition: .2s;
+.addTaskDiv:hover {
+  cursor: pointer;
+  box-shadow: 0px 0px 25px 0px rgba(255, 145, 154, 0.75);
+  transition: .2s;
 }
 
-#addTask{
-    font-family: 'Quicksand', sans-serif;
-    font-weight: 500;
-    font-size: 1.3rem;
-    text-align: center;
-    vertical-align: middle;
-    align-items: center;
-    color: white;
-    margin-top: 1.5%;
+#addTask {
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 500;
+  font-size: 1.3rem;
+  text-align: center;
+  vertical-align: middle;
+  align-items: center;
+  color: white;
+  margin-top: 1.5%;
 }
 
-#todoMenu:hover{
-    cursor: pointer;
+#todoMenu:hover {
+  cursor: pointer;
 }
 
-.userImg{
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
+.userImg {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
 }
 
-#commentSpace{
-    margin-left: 20%;
+#commentSpace {
+  margin-left: 20%;
 }
 
-// .infoads{
-//     display: flex;
-//     flex-direction: column;
-//     justify-content: space-between;
-// }
-
-#infoBtn{
-    width: 24px;
-    height: 24px;
+#infoBtn {
+  width: 24px;
+  height: 24px;
 }
 
-#infoBtn:hover{
-    cursor: pointer;
+#infoBtn:hover {
+  cursor: pointer;
 }
 
-.taskCountDiv{
-    width: 7%;
-    height: 60%;
-    border-radius: 50%;
-    font-size: 1rem;
-    color: #60175D;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    text-align: center;
-    align-items: center;
-    padding: .2rem;
-    margin-left: 2%;
+.taskCountDiv {
+  width: 7%;
+  height: 60%;
+  border-radius: 50%;
+  font-size: 1rem;
+  color: #60175D;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  padding: .2rem;
+  margin-left: 2%;
 }
 
-#todoCount{
-    background-color: #64ff6c;
-    box-shadow: 0px 1px 19px 0px rgba(100,255,108,0.75);
+#todoCount {
+  background-color: #64ff6c;
+  box-shadow: 0px 1px 19px 0px rgba(100, 255, 108, 0.75);
 }
 
-#inProgressCount{
-    background-color: #fffc64;
-    box-shadow: 0px 1px 19px 0px rgba(255,252,100,0.75);
+#inProgressCount {
+  background-color: #fffc64;
+  box-shadow: 0px 1px 19px 0px rgba(255, 252, 100, 0.75);
 }
 
-#completeCount{
-    background-color: #ffaf64;
-    box-shadow: 0px 1px 19px 0px rgba(255,175,100,0.75);
+#completeCount {
+  background-color: #ffaf64;
+  box-shadow: 0px 1px 19px 0px rgba(255, 175, 100, 0.75);
 }
 
-#dueCount{
-    background-color: #FF6464;
-    box-shadow: 0px 1px 19px 0px rgba(255,100,100,0.75);
+#dueCount {
+  background-color: #FF6464;
+  box-shadow: 0px 1px 19px 0px rgba(255, 100, 100, 0.75);
 }
-
-
-
 
 
 

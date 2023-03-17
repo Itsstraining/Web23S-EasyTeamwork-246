@@ -21,7 +21,7 @@
   margin: auto auto;
   border-radius: 10px;
   border: 1px solid rgba(255, 255, 255, .8);
-  
+
   .title{
     height: 16%;
     width: auto;
@@ -31,11 +31,11 @@
     p{
       width: 100%;
       font-size: 200%;
-      
+
     }
 
     span{
-      color: rgb(221, 221, 221); 
+      color: rgb(221, 221, 221);
     }
   } 
 
@@ -44,14 +44,14 @@
     height: auto;
     margin: auto 0;
     margin-left: 8%;
-  
+
     .logo-team {
       width: 2.8rem;
       height: 2.7rem;
       border-radius: 1.4rem;
       background-color: #ffacac;
     }
-  
+
     h3 {
       text-align: center;
       padding-top: 18%;
@@ -66,7 +66,7 @@
     height: 23%;
     margin-left: 8%;
     margin-right: 8%;
-    
+
 
     .Email{
       width: auto;
@@ -111,7 +111,7 @@
       }
     }
   }
-  
+
 
   .btn-signIn{
     width: auto;
@@ -134,7 +134,7 @@
       float: right;
       margin-top: 2%;
       padding-right: 8.5%;
-      color: rgb(228, 228, 228); 
+      color: rgb(228, 228, 228);
     }
     :hover{
       cursor: pointer;
@@ -142,7 +142,7 @@
       text-decoration: underline;
     }
   }
-  
+
 
   .word-Or{
     width: auto;
@@ -151,18 +151,18 @@
     align-items: center;
     justify-content: center;
     margin: 0 auto;
-    
+
     #or{
       color: white;
       vertical-align: middle;
       text-align: center;
-      
+
     }
     #hr{
       border-bottom: 2px solid white;
       width: 1rem;
     }
-    
+
 
   }
 
@@ -186,7 +186,7 @@
 
       .img{
         width: 25%;
-        
+
         img{
           margin-top: 5%;
           width: 85%;
@@ -206,14 +206,14 @@
     justify-content: center;
     align-items: center;
 
-   
+
     p{
       color: white;
     }
 
     a{
       color: #00C2EE;
-      cursor: pointer;  
+      cursor: pointer;
       padding-bottom: 2.4%;
       padding-left: 1%;
       text-decoration: none;
@@ -224,7 +224,7 @@
     }
   }
 
-  
+
 
 }
 
