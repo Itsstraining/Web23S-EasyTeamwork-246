@@ -12,6 +12,7 @@ const initialState: InvitationState = {
 
 export const InvitationReducer = createReducer(
   initialState,
+
   on(InvitationActions.createInvitation, (state) => {
       return {
           ...state,
@@ -20,7 +21,6 @@ export const InvitationReducer = createReducer(
           error: '',
       };
   }),
-
   on(InvitationActions.createInvitationSuccess, (state) => {
       return {
           ...state,
@@ -29,7 +29,6 @@ export const InvitationReducer = createReducer(
           error: '',
       };
   }),
-
   on(InvitationActions.createInvitationFailure, (state, { error }) => {
       return {
           ...state,
@@ -56,7 +55,6 @@ export const InvitationReducer = createReducer(
           error: '',
       };
   }),
-
   on(InvitationActions.getInvitationFailure, (state, { error }) => {
       return {
           ...state,
@@ -74,12 +72,14 @@ export const InvitationReducer = createReducer(
           error: '',
       };
   }),
-
   on(InvitationActions.acceptInvitationSuccess, (state,{idInvitation,invitation}) => {
       let newInvitations = [...state.invitations]
       let index = newInvitations.findIndex((invitation:any) => invitation.id == idInvitation);
       newInvitations[index] = {...invitation};
       newInvitations = [...newInvitations]
+      if(index != -1){
+        newInvitations[index] = {...newInvitations[index], status: 'accepted'};
+      }
       return {
           ...state,
           invitations: newInvitations,
@@ -88,7 +88,6 @@ export const InvitationReducer = createReducer(
           error: '',
       };
   }),
-
   on(InvitationActions.acceptInvitationFailure, (state, { error }) => {
       return {
           ...state,
@@ -98,30 +97,29 @@ export const InvitationReducer = createReducer(
       };
   }),
 
-  on(InvitationActions.declineInvitation, (state,{idInvitation}) => {
-      let newInvitations = [...state.invitations]
-      let index = newInvitations.findIndex((invitation:any) => invitation.id == idInvitation);
-      if(index != -1){
-          newInvitations[index] = {...newInvitations[index], status: 'accepted'};
-      }
+  on(InvitationActions.declineInvitation, (state) => {
+      
       return {
           ...state,
-          invitations: newInvitations,
           inProcess: true,
           loading: true,
           error: '',
       };
   }),
-
-  on(InvitationActions.declineInvitationSuccess, (state) => {
+  on(InvitationActions.declineInvitationSuccess, (state,{idInvitation}) => {
+      let newInvitations = [...state.invitations]
+      let index = newInvitations.findIndex((invitation:any) => invitation.id == idInvitation);
+      if(index != -1){
+          newInvitations[index] = {...newInvitations[index], status: 'rejected'};
+      }
       return {
           ...state,
+          invitations: newInvitations,
           inProcess: false,
           loading: false,
           error: '',
       };
   }),
-
   on(InvitationActions.declineInvitationFailure, (state, { error }) => {
       return {
           ...state,

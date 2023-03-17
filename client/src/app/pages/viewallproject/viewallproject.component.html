@@ -61,7 +61,7 @@
         <div class="view-mode" id="search">
           <input [(ngModel)]="projectName" type="text" placeholder="Search project name...">
           <div id="search-btn-container">
-            <button id="search-btn">
+            <button (click)="findProject()" id="search-btn">
               <i class="fa-solid fa-search" id="search-icon"></i>
             </button>
           </div>
@@ -161,7 +161,6 @@
           <div class="item-attribute" id="item-date">
             <div id="date-content">
               <span>{{item.due_date}}</span>
-              <!-- <span style="color: #666666;">00:00</span> -->
             </div>
           </div>
           <div class="item-attribute" id="item-mems">
@@ -176,8 +175,8 @@
               <i class="fa-solid fa-ellipsis-vertical fa-sm"></i>
             </button>
             <mat-menu #menu="matMenu">
-              <button mat-menu-item (click)="deleteProject(item.project_id)" [disabled]="item.owner_id == this.user.uid">Delete</button>
-              <button mat-menu-item [disabled]="item.owner_id == this.user.uid">Add
+              <button mat-menu-item (click)="deleteProject(item.project_id)" [disabled]="item.owner_id != this.user.uid">Delete</button>
+              <button mat-menu-item [disabled]="item.owner_id != this.user.uid">Add
                 Member</button>
             </mat-menu>
           </div>
