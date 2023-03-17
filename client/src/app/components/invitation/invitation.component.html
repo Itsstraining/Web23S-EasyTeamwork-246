@@ -3,7 +3,7 @@
     INVITATIONS
     <mat-icon matTooltip="Close Invitations" matTooltipPlacement="top" (click)="dialogref.close()">close</mat-icon>
   </mat-card-header>
-  <div class="invitation-container" *ngIf="(this.invites$|async)?.loading == false">
+  <div class="invitation-container">
     <div *ngFor="let invite of (invites$|async)?.invitations" class="content">
       <div *ngIf="invite.status == 'pending' " class="content">
         <div class="message">

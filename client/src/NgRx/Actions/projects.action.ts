@@ -14,6 +14,6 @@ export const getAllProjectsFailure = createAction(
     props<{ error: string }>()
 );
 
-export const  getByProjectId = createAction('[Project] Get Project', props<{ project_id: string }>());
-export const  getByProjectIdSuccess = createAction('[Project] Get Project Success', props<{ project: ProjectModel }>());
-export const  getByProjectIdFailure = createAction('[Project] Get Project Failure', props<{ error: string }>());
+export const  getProjectById = createAction('[Project] Get Project', props<{ project_id: string }>());
+export const  getProjectByIdSuccess = createAction('[Project] Get Project Success', props<{ project: ProjectModel }>());
+export const  getProjectByIdFailure = createAction('[Project] Get Project Failure', props<{ error: string }>());

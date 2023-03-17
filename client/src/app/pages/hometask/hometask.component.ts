@@ -44,7 +44,8 @@ export class HometaskComponent implements OnInit {
     this.auth$.subscribe((res) => {
       this.user = res.user!;
     })
-    this.store.dispatch(ProjectAction.getByProjectId({ project_id: this.idParam }));
+    this.store.dispatch(ProjectAction.getProjectById({ project_id: this.idParam }));
+
     // this.store.dispatch(UserActions.getAllUsers());
     console.log(this.projectService.idParam!)
   }
@@ -90,10 +91,11 @@ export class HometaskComponent implements OnInit {
   }
 
   getProject() {
-    this.projectService.getByProjectId(this.prj_id).subscribe((data: any) => {
-      this.project_info = data[0];
-      this.project_name = data[0].name;
-      this.project_deadline = data[0].due_date;
+    this.projectService.getProjectById(this.prj_id).subscribe((data: any) => {
+      console.log(data);
+      this.project_info = data;
+      this.project_name = data.name;
+      this.project_deadline = data.due_date;
       this.getOwnerInfo();
       this.addUser();
 
@@ -286,7 +288,7 @@ export class HometaskComponent implements OnInit {
   dialogShareProject() {
     this.matDialog.open(ShareProjectComponent)
     console.log(this.prj_id);
-    this.store.dispatch(ProjectAction.getByProjectId({ project_id: this.prj_id }));
+    this.store.dispatch(ProjectAction.getProjectById({ project_id: this.prj_id }));
     this.projects$.subscribe((project) => {
       console.log(project.project);
     })

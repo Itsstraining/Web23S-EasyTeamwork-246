@@ -25,14 +25,14 @@ export class ProjectEffects{
     );
 
     getProjectById$ = createEffect(() => this.$action.pipe(
-      ofType(ProjectActions.getByProjectId),
+      ofType(ProjectActions.getProjectById),
       switchMap((action) => {
-          return from(this.projectService.getByProjectId(action.project_id).pipe(
+          return from(this.projectService.getProjectById(action.project_id).pipe(
               map((result:any) => {
-                  return ProjectActions.getByProjectIdSuccess({project: result});
+                  return ProjectActions.getProjectByIdSuccess({project: result});
               }),
               catchError((error) => {
-                  return of(ProjectActions.getByProjectIdFailure({error: error}))
+                  return of(ProjectActions.getProjectByIdFailure({error: error}))
               })
           ))
       })
