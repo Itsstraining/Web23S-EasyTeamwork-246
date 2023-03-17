@@ -37,7 +37,6 @@ export class ViewallprojectComponent implements OnInit {
         if(auth.loading == false){
           this.userUid = auth.user?.uid !;
           this.user = auth.user!;
-          console.log("User", this.user);
         }
       })
     );
@@ -54,6 +53,7 @@ export class ViewallprojectComponent implements OnInit {
         }
       });
       this.invitesCount = count;
+      console.log('Invites count: ', this.invitesCount);
     });
   }
 
@@ -124,7 +124,6 @@ export class ViewallprojectComponent implements OnInit {
         if (data) {
           // Get all projects
           this.projectList = data.projects;
-          console.log("Project List: ", this.projectList);
           // Get owned projects
           this.ownedProjects = this.projectList.filter((project) => {
             for (let i = 0; i < project.members.length; i++) {

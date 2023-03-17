@@ -62,6 +62,10 @@ export class HometaskComponent implements OnInit {
 
   project_name!: string;
   project_deadline!: string;
+  project_due_date!: string;
+  project_status!: string;
+  project_owner!: string;
+  project_members!: string;
   project_info!: ProjectModel;
   prj_id: string = '';
 
@@ -91,6 +95,10 @@ export class HometaskComponent implements OnInit {
     this.projectService.getProjectById(this.prj_id).subscribe((data: any) => {
       this.project_info = data;
       this.project_name = data.name;
+      this.project_due_date = data.due_date;
+      this.project_status = data.status;
+      this.project_owner = data.owner;
+      this.project_members = data.members;
       this.project_deadline = data.due_date;
       this.getOwnerInfo();
       this.addUser();

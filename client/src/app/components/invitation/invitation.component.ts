@@ -31,7 +31,7 @@ export class InvitationComponent implements OnInit {
     this.invites$ = this.store.select('invitation');
     this.store.dispatch(InvitationActions.getInvitations({ idReceiver: this.userUid }));
     this.invites$.subscribe((res) => {
-      console.log(res.invitations)
+
     })
   }
 
