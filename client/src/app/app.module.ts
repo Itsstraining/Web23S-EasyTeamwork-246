@@ -25,7 +25,6 @@ import { FormsModule } from '@angular/forms';
 import { SocketIoModule } from 'ngx-socket-io';
 import { SocketIoConfig } from 'ngx-socket-io/src/config/socket-io.config';
 
-
 @NgModule({
   declarations: [
     AppComponent,

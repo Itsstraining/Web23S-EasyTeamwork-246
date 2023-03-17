@@ -12,7 +12,7 @@
         <div class="infoDiv">
             <h1 id="funcTitle">{{project_info.name}}</h1>
             <div class="usrImgDiv">
-                <button (click)="dialogShareProject('400ms', '100ms')" id="share" mat-raised-button matTooltip="Share project">
+                <button (click)="dialogShareProject()" id="share" mat-raised-button matTooltip="Share project">
                     <i class="addUsr" class="fa-solid fa-share-nodes fa-sm" style="color: black"></i>
                     Share
                 </button>
@@ -30,7 +30,7 @@
                     <i class="fa-sharp fa-solid fa-user fa-xl"></i>
                 </div>
 
-                <div class="usrIcon2" *ngIf="all_members[2] != null">                    
+                <div class="usrIcon2" *ngIf="all_members[2] != null">
                     <img id="owner_img" src="{{all_members[2].photoURL}}" alt="img">
                 </div>
                 <div class="usrIcon2" *ngIf="all_members[2] == null">

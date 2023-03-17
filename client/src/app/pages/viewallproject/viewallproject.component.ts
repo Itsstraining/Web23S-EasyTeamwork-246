@@ -5,7 +5,6 @@ import { UserService } from 'src/app/services/users/user.service';
 import { ProjectModel } from 'src/models/projects.model';
 import { AddProjectComponent } from './components/add-project/add-project.component';
 import * as ProjectActions from '../../../NgRx/Actions/projects.action';
-import { ShareProjectComponent } from '../../components/share-project/share-project.component';
 import { ProjectService } from 'src/app/services/projects/project.service';
 import { InvitationActions } from 'src/NgRx/Actions/invitations.action';
 import { MemberComponent } from 'src/app/components/member/member.component';
@@ -14,6 +13,7 @@ import { UserState } from 'src/NgRx/States/user.state';
 import { ProjectState } from 'src/NgRx/States/projects.state';
 import { UserModel } from 'src/models/user.model';
 import { InvitationComponent } from 'src/app/components/invitation/invitation.component';
+import { InvitationState } from 'src/NgRx/States/invitations.state';
 
 export type Status = "in-progress" | "completed" | "overdue";
 
@@ -27,12 +27,39 @@ export class ViewallprojectComponent implements OnInit {
     private matDialog: MatDialog,
     private userService: UserService,
     private projectService: ProjectService,
-    private store: Store<{ project: ProjectState; user: UserState }>
+    private store: Store<{ project: ProjectState,user: UserState; invite: InvitationState}>
   ) {
     this.project$ = this.store.select('project');
+
+    this.auth$ = this.store.select('user');
+
+    this.subscriptions.push(
+      this.auth$.subscribe((auth) => {
+        if(auth.loading == false){
+          this.userUid = auth.user?.uid !;
+          this.user = auth.user!;
+          console.log("User", this.user);
+        }
+      })
+    );
+
+    // this.invites$ = this.store.select('invite');
+    // this.store.dispatch(
+    //   InvitationActions.getInvitations({ idReceiver: this.userUid })
+    // );
+    // this.invites$.subscribe((invites) => {
+    //   let count = 0;
+    //   invites.invitations.forEach((invite) => {
+    //     if (invite.status == 'pending') {
+    //       count++;
+    //     }
+    //   });
+    //   this.invitesCount = count;
+    // });
   }
 
   project$ !: Observable<any>;
+  auth$ !: Observable<any>;
 
   projectList: ProjectModel[] = [];
   ownedProjects: ProjectModel[] = [];
@@ -44,6 +71,11 @@ export class ViewallprojectComponent implements OnInit {
   overdue_list: ProjectModel[] = [];
   mark_list: ProjectModel[] = [];
 
+
+  user: UserModel = <UserModel>{};
+  userUid!: string;
+  invites$!: Observable<InvitationState>;
+  invitesCount = 0;
 
   dialogOpen() {
     let addProjectDialog = this.matDialog.open(AddProjectComponent, {
@@ -57,10 +89,6 @@ export class ViewallprojectComponent implements OnInit {
         this.getAllProject();
       })
     );
-  }
-
-  opendialogShare() {
-    this.matDialog.open(ShareProjectComponent)
   }
 
   ngOnInit(): void {
@@ -77,34 +105,13 @@ export class ViewallprojectComponent implements OnInit {
     this.viewOverdue = false;
     this.viewMarked = false;
 
-    this.changeStatus();
+    // this.changeStatus();
     this.getAllProject();
-
-
-    this.subscriptions.push(
-      this.isRequest$.subscribe((state) => {
-        if (state) {
-          console.log('requested');
-        }
-      })
-    );
-
-    this.subscriptions.push(
-      this.userState$.subscribe((state) => {
-        if (state.loading == false) {
-          if (state.user?.uid) {
-            this.user = state.user;
-            // console.log(this.user);
-            this.store.dispatch(
-              InvitationActions.getAllForUser({ _id: state.user?.uid })
-            );
-          }
-        }
-      })
-    );
   }
 
-
+  openInvitation(){
+    this.matDialog.open(InvitationComponent);
+  }
   getAllProject() {
     this.projectList = [];
     this.ownedProjects = [];
@@ -242,7 +249,6 @@ export class ViewallprojectComponent implements OnInit {
       status: project.status,
       disable: project.disable,
       members: project.members,
-      invitedMembers: project.invitedMembers,
     };
 
     this.subscriptions.push(
@@ -330,7 +336,6 @@ export class ViewallprojectComponent implements OnInit {
             status: status,
             disable: projectList[i].disable,
             members: projectList[i].members,
-            invitedMembers: projectList[i].invitedMembers,
           };
     
           this.projectService.update(updateProject, projectList[i].project_id).subscribe();
@@ -355,32 +360,6 @@ export class ViewallprojectComponent implements OnInit {
     this.projectList = this.foundList;
   }
 
-
-  userState$ = this.store.select('user');
-  user: UserModel = <UserModel>{};
-  isRequest$ = this.store.select('project', 'isRequested');
-  requestProject$ = this.store.select('project', 'requestProject');
-
-  addMember(project: ProjectModel): void {
-    let dialogRef = this.matDialog.open(MemberComponent, {
-      data: project,
-    });
-    this.subscriptions.push(
-      dialogRef.afterClosed().subscribe((result: string) => {
-        if (result == '') return;
-        else {
-          console.log(result);
-          this.store.dispatch(
-            InvitationActions.inviteProject({ project: project, email: result })
-          );
-        }
-      })
-    );
-  }
-
-  invitation(){
-    this.matDialog.open(InvitationComponent)
-  }
 
   subscriptions: Subscription[] = [];
   ngOnDestroy() {

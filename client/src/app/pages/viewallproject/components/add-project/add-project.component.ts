@@ -32,17 +32,18 @@ export class AddProjectComponent {
     public projectService: ProjectService,
     @Inject(MAT_DIALOG_DATA) public data: UserModel,
   ) {
-    this.userService.getAllUser().subscribe((users) => {
-      users.forEach((user) => {
-        if (user.uid !== this.userService.userInfo.uid) {
-          this.options.push(user);
-        }
-      });
-    });
-    this.userService.getUserById(this.userService.userInfo.uid).subscribe((users) => {
-      this.currentUser = users;
-    });
-  }
+      // this.userService.getAllUser().subscribe((users) => {
+      //   users.forEach((user) => {
+      //     if (user.uid !== this.userService.userInfo.uid) {
+      //       this.options.push(user);
+      //     }
+      //   });
+      // });
+      // this.userService.getUserById(this.userService.userInfo.uid).subscribe((users) => {
+      //   console.log(users);
+      //   this.currentUser = users;
+      // });
+    }
 
   addProject() {
     this.formatDateFunc(this.date);
@@ -60,12 +61,10 @@ export class AddProjectComponent {
           email: this.userService.userInfo.email,
         }
       ],
-      // members: [this.currentUser],
       disable: false,
       due_date: this.due_date,
       status: 'in-progress',
       marked: false,
-      invitedMembers: [],
     };
 
     this.projectService.create(newProject).subscribe(

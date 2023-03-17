@@ -1,90 +1,133 @@
-import { ProjectModel } from "src/models/projects.model";
-import { ProjectState } from "../States/projects.state";
 import { InvitationActions } from "../Actions/invitations.action";
 import { createReducer, on } from '@ngrx/store';
+import { InvitationState } from "../States/invitations.state";
 
-const initialState: ProjectState = {
-  project: {} as ProjectModel,
-  projects: [],
+const initialState: InvitationState = {
+  invitation: null,
+  invitations: [],
   loading: false,
-  isSuccess: true,
+  inProcess: false,
   error: '',
-  isAccepted: false,
-  isInvited: false,
-  isRequested: false,
-  requestProject: [],
 }
 
 export const InvitationReducer = createReducer(
   initialState,
-  on(InvitationActions.inviteProject, (state, { type }) => {
-    console.log(type);
-    return {
-      ...state,
-      isInvited: false,
-      error: '',
-    };
+  on(InvitationActions.createInvitation, (state) => {
+      return {
+          ...state,
+          inProcess: true,
+          loading: true,
+          error: '',
+      };
   }),
-  on(InvitationActions.inviteProjectSuccess, (state, { type }) => {
-    console.log(type);
-    return {
-      ...state,
-      isInvited: true,
-    };
+
+  on(InvitationActions.createInvitationSuccess, (state) => {
+      return {
+          ...state,
+          inProcess: false,
+          loading: false,
+          error: '',
+      };
   }),
-  on(InvitationActions.inviteProjectFail, (state, { error, type }) => {
-    console.log(type);
-    return {
-      ...state,
-      isInvited: false,
-      error: error,
-    };
+
+  on(InvitationActions.createInvitationFailure, (state, { error }) => {
+      return {
+          ...state,
+          inProcess: false,
+          loading: false,
+          error: error,
+      };
   }),
-  on(InvitationActions.acceptRequest, (state, { type }) => {
-    console.log(type);
-    return {
-      ...state,
-      isAccepted: false,
-      error: '',
-    };
+
+  on(InvitationActions.getInvitations, (state,{idReceiver: idReciever}) => {
+      return {
+          ...state,
+          inProcess: true,
+          loading: true,
+          error: '',
+      };
   }),
-  on(InvitationActions.acceptRequestSuccess, (state, { project, type }) => {
-    console.log(type);
-    return {
-      ...state,
-      isAccepted: true,
-    };
+  on(InvitationActions.getInvitationSuccess, (state, { invitations }) => {
+      return {
+          ...state,
+          invitations: invitations,
+          inProcess: false,
+          loading: false,
+          error: '',
+      };
   }),
-  on(InvitationActions.acceptRequestFail, (state, { error, type }) => {
-    console.log(type);
-    return {
-      ...state,
-      isAccepted: false,
-      error: error,
-    };
+
+  on(InvitationActions.getInvitationFailure, (state, { error }) => {
+      return {
+          ...state,
+          inProcess: false,
+          loading: false,
+          error: error,
+      };
   }),
-  on(InvitationActions.findRequest, (state, { type }) => {
-    console.log(type);
-    return {
-      ...state,
-      isRequested: false,
-      error: '',
-    };
+
+  on(InvitationActions.acceptInvitation, (state) => {
+      return {
+          ...state,
+          inProcess: true,
+          loading: true,
+          error: '',
+      };
   }),
-  on(InvitationActions.findRequestSuccess, (state, { projects, type }) => {
-    console.log(type);
-    return {
-      ...state,
-      isRequested: true,
-      requestProject: projects,
-    };
+
+  on(InvitationActions.acceptInvitationSuccess, (state,{idInvitation,invitation}) => {
+      let newInvitations = [...state.invitations]
+      let index = newInvitations.findIndex((invitation:any) => invitation.id == idInvitation);
+      newInvitations[index] = {...invitation};
+      [newInvitations[index], newInvitations[newInvitations.length]] = [newInvitations[newInvitations.length], newInvitations[index]]
+      return {
+          ...state,
+          invitations: newInvitations,
+          inProcess: false,
+          loading: false,
+          error: '',
+      };
   }),
-  on(InvitationActions.findRequestFail, (state, { error, type }) => {
-    console.log(type);
-    return {
-      ...state,
-      isRequested: false,
-      error: error,
-    };
+
+  on(InvitationActions.acceptInvitationFailure, (state, { error }) => {
+      return {
+          ...state,
+          inProcess: false,
+          loading: false,
+          error: error,
+      };
   }),
-);
+
+  on(InvitationActions.declineInvitation, (state,{idInvitation}) => {
+      let newInvitations = [...state.invitations]
+      let index = newInvitations.findIndex((invitation:any) => invitation.id == idInvitation);
+      if(index != -1){
+          newInvitations[index] = {...newInvitations[index], status: 'accepted'};
+      }
+      return {
+          ...state,
+          invitations: newInvitations,
+          inProcess: true,
+          loading: true,
+          error: '',
+      };
+  }),
+
+  on(InvitationActions.declineInvitationSuccess, (state) => {
+      return {
+          ...state,
+          inProcess: false,
+          loading: false,
+          error: '',
+      };
+  }),
+
+  on(InvitationActions.declineInvitationFailure, (state, { error }) => {
+      return {
+          ...state,
+          inProcess: false,
+          loading: false,
+          error:error,
+      };
+  })
+)

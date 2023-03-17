@@ -1,8 +1,9 @@
-export interface ProjectModel {
-    id: string;
-    owner: string;
-    receiver_id: string;
-    status: number;
+export interface InvitationModel {
+    id: string | null;
+    from: string;
+    name: string;
+    to: string;
+    status: string;
     project_id: string;
-    unread: boolean;
+    project_name: string;
 }

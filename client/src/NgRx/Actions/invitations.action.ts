@@ -1,54 +1,20 @@
 import { createAction, props } from "@ngrx/store";
-import { ProjectModel } from "src/models/projects.model";
+import { InvitationModel } from "src/models/invitation.model";
 
 export const InvitationActions = {
-  getAllForUser: createAction(
-    '[Project] Get All For User',
-    props<{ _id: string }>()
-  ),
-  getAllForUserSuccess: createAction(
-    '[Project] Get All For User Success',
-    props<{ projects: ProjectModel[] }>()
-  ),
-  getAllForUserFail: createAction(
-    '[Project] Get All For User Fail',
-    props<{ error: string }>()
-  ),
+  createInvitation: createAction('[Invitation] Send Invitation', props<{ invitation: InvitationModel, idReceiver: string }>()),
+  createInvitationSuccess: createAction('[Invitation] Send Invitation Success'),
+  createInvitationFailure: createAction('[Invitation] Send Invitation Failure', props<{ error: string }>()),
 
-  inviteProject: createAction(
-    '[Project] Invite',
-    props<{ project: ProjectModel; email: string }>()
-  ),
-  inviteProjectSuccess: createAction(
-    '[Project] Invite Success',
-    props<{ proj: ProjectModel }>()
-  ),
-  inviteProjectFail: createAction(
-    '[Project] Invite Fail',
-    props<{ error: string }>()
-  ),
-  //find request
-  findRequest: createAction('[Project] Find Request', props<{ _id: string }>()),
-  findRequestSuccess: createAction(
-    '[Project] Find Request Success',
-    props<{ projects: ProjectModel[] }>()
-  ),
+  getInvitations: createAction('[Invitation] Get Invitations', props<{ idReceiver: string }>()),
+  getInvitationSuccess: createAction('[Invitation] Get Invitations Success', props<{ invitations: InvitationModel[] }>()),
+  getInvitationFailure: createAction('[Invitation] Get Invitations Failure', props<{ error: string }>()),
 
-  findRequestFail: createAction(
-    '[Project] Find Request Fail',
-    props<{ error: string }>()
-  ),
-  //accept request
-  acceptRequest: createAction(
-    '[Project] Accept Request',
-    props<{ project: ProjectModel; _id: string }>()
-  ),
-  acceptRequestSuccess: createAction(
-    '[Project] Accept Request Success',
-    props<{ project: ProjectModel }>()
-  ),
-  acceptRequestFail: createAction(
-    '[Project] Accept Request Fail',
-    props<{ error: string }>()
-  ),
-};
+  acceptInvitation: createAction('[Invitation] Accept Invitation', props<{ idProject: string, idReceiver: string, idInvitation: string, invitation: InvitationModel }>()),
+  acceptInvitationSuccess: createAction('[Invitation] Accept Invitation Success', props<{ idInvitation: string, invitation: InvitationModel }>()),
+  acceptInvitationFailure: createAction('[Invitation] Accept Invitation Failure', props<{ error: string }>()),
+
+  declineInvitation: createAction('[Invitation] Reject Invitation', props<{ idInvitation: string }>()),
+  declineInvitationSuccess: createAction('[Invitation] Reject Invitation Success', props<{ idInvitation: string }>()),
+  declineInvitationFailure: createAction('[Invitation] Reject Invitation Failure', props<{ error: string }>()),
+}

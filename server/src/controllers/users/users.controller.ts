@@ -12,18 +12,12 @@ export class UsersController {
     }
 
     @Post('login')
-    async signIn(@Body() user: UserModel) {
-        let temp = await this.userService.findUserById(user.uid);
-
-        if (temp != null) {
-            return 'User already exists';
-        } else {
-            return this.userService.signIn(user)
-        }
+    async signIn(@Body() body: UserModel) {
+        return await this.userService.signIn(body);
     }
 
-    @Get('getId/:id')
-    async getId(@Param('id') id: string) {
-        return await this.userService.findUserById(id);
+    @Get(':uid')
+    async findByUid(@Param('uid') uid: string) {
+        return await this.userService.findUserByUid(uid);
     }
 }
