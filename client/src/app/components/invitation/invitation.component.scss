@@ -2,10 +2,10 @@ mat-card-header{
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-
+  color: #fff;
   mat-icon{
       font-size: 1.5rem;
-      color: var(--dark);
+      color: #fff;
 
       &:hover{
           cursor: pointer;

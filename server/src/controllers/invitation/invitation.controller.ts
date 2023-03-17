@@ -1,10 +1,11 @@
 import { Body, Controller, Get, Param, Post, Put, Delete } from '@nestjs/common';
 import { Invitation } from 'src/schemas/invitation.schema';
 import { InvitationService } from 'src/services/invitation/invitation.service';
+import { ProjectsService } from 'src/services/projects/projects.service';
 
 @Controller('invitations')
 export class InvitationController {
-    constructor(private invitationService:InvitationService) { }
+    constructor(private invitationService:InvitationService,private projectService:ProjectsService) { }
 
     @Get('allInvitations')
     async getAllInvitations() {

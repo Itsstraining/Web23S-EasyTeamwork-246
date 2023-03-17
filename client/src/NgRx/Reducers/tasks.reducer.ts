@@ -27,7 +27,7 @@ export const TaskReducer = createReducer(
         isSuccess: false,
         error: action.error,
     })),
-    
+
     on(TaskActions.getById, (state) => ({...state, loading: false})),
     on(TaskActions.getByIdSuccess, (state, action) => ({
         ...state,

@@ -1,9 +1,10 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { HydratedDocument } from 'mongoose';
-import { Status } from 'src/models/projects.model';
 
 export type ProjectDocument = HydratedDocument<Project>;
-@Schema({ timestamps: true })
+
+export type Status = "in-progress" | "completed" | "overdue";
+@Schema()
 export class Project {
     @Prop()
     project_id: string;

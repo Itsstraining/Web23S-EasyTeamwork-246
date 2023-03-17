@@ -13,7 +13,7 @@ export class ProjectService {
   url = `${environment.baseURL}projects`;
   public idParam!: string;
 
-  getAll(){
+  getAllProject(){
     return  this.httpClient.get(`${this.url}/getAllProjects`);
   }
 
@@ -26,11 +26,11 @@ export class ProjectService {
     return projects;
   }
 
-  getById(id: string){
-    return this.httpClient.get(`${this.url}/getProjectById?id=${id}`);
+  getByProjectId(id: string){
+    return this.httpClient.get(`${this.url}/getProjectById/${id}`) as Observable<ProjectModel>;
   }
 
-  create(project: ProjectModel){
+  createProject(project: ProjectModel){
     let response = this.httpClient
       .post(`${this.url}/createProject`, project, {
         headers: new HttpHeaders({
@@ -45,35 +45,11 @@ export class ProjectService {
     return response;
   }
 
-  update(project: ProjectModel, id: string){
+  updateProject(project: ProjectModel, id: string){
     return this.httpClient.put(`${this.url}/updateProject?id=${id}`, project);
   }
 
-  delete(id: string){
+  deleteProject(id: string){
     return this.httpClient.delete(`${this.url}/deleteProject?id=${id}`);
-  }
-
-  invite(email: string, project: ProjectModel) {
-    return this.httpClient.put(`${this.url}/invite/${email}`, project, {
-      headers: new HttpHeaders({
-        authorization: '',
-      }),
-    }) as Observable<ProjectModel>;
-  }
-
-  findRequestList(_id: string) {
-    return this.httpClient.get(`${this.url}/request/${_id}`, {
-      headers: new HttpHeaders({
-        authorization: '',
-      }),
-    }) as Observable<ProjectModel[]>;
-  }
-
-  acceptRequest(_id: string, project: ProjectModel) {
-    return this.httpClient.put(`${this.url}/accept/${_id}`, project, {
-      headers: new HttpHeaders({
-        authorization: '',
-      }),
-    }) as Observable<ProjectModel>;
   }
 }

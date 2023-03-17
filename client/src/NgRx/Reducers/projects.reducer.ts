@@ -10,10 +10,6 @@ const initialState: ProjectState = {
   loading: false,
   isSuccess: true,
   error: '',
-  isAccepted: false,
-  isInvited: false,
-  isRequested: false,
-  requestProject: [],
 }
 
 export const ProjectReducer = createReducer(
@@ -33,6 +29,29 @@ export const ProjectReducer = createReducer(
     isSuccess: false,
     error: action.error,
   })),
-
-
+  on(ProjectActions.getByProjectId, (state, { project_id }) => {
+    return {
+      ...state,
+      inProcess: true,
+      loading: true,
+      error: '',
+    };
+  }),
+  on(ProjectActions.getByProjectIdSuccess, (state, { project }) => {
+    return {
+      ...state,
+      project: project,
+      inProcess: false,
+      loading: false,
+      error: '',
+    };
+  }),
+  on(ProjectActions.getByProjectIdFailure, (state, { error }) => {
+    return {
+      ...state,
+      inProcess: false,
+      loading: false,
+      error: error,
+    };
+  }),
 );

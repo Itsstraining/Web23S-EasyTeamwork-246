@@ -11,6 +11,7 @@ import { InvitationActions } from 'src/NgRx/Actions/invitations.action';
 import { ProjectModel } from 'src/models/projects.model';
 import { InvitationState } from 'src/NgRx/States/invitations.state';
 import { Observable } from 'rxjs';
+import * as UserActions from '../../../NgRx/Actions/user.action'
 
 @Component({
   selector: 'app-invitation',
@@ -27,13 +28,13 @@ export class InvitationComponent implements OnInit {
   constructor(
     public dialogref: MatDialogRef<InvitationComponent>,
     private userService: UserService,
-    private store: Store<{ invite: InvitationState; user: UserState }>
+    private store: Store<{ invitation: InvitationState; user: UserState }>
   ) {
     this.auth$.subscribe((auth) => {
       this.userUid = auth.user?.uid ?? '';
       console.log(auth.user);
     })
-    this.invites$ = this.store.select('invite');
+    this.invites$ = this.store.select('invitation');
     this.store.dispatch(InvitationActions.getInvitations({ idReceiver: this.userUid }));
     this.invites$.subscribe((res) => {
       console.log(res.invitations)
@@ -41,6 +42,7 @@ export class InvitationComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.store.dispatch(UserActions.getAllUsers());
 
   }
   ngOnDestroy(): void {

@@ -6,13 +6,16 @@ import { UsersModule } from './module/users.module';
 import { TaskModule } from './module/task.module';
 import { ProjectModule } from './module/project.module';
 import { TasksGateway } from './gateways/tasks/tasks.gateway';
-
+import { InvitationModule } from './module/invitation.module';
+import { ConfigModule } from '@nestjs/config';
 @Module({
   imports: [
-    TaskModule, 
-    MongooseModule.forRoot('mongodb+srv://easyteamwork:easyteamwork@cluster0.za2rizv.mongodb.net/todotask?retryWrites=true&w=majority'),
     UsersModule,
+    TaskModule, 
     ProjectModule,
+    InvitationModule,
+    MongooseModule.forRoot('mongodb+srv://easyteamwork:easyteamwork@cluster0.za2rizv.mongodb.net/todotask?retryWrites=true&w=majority'),
+    ConfigModule.forRoot(),
   ],
   controllers: [AppController],
   providers: [AppService, TasksGateway],
