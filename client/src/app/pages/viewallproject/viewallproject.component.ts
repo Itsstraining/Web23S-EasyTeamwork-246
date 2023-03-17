@@ -349,17 +349,23 @@ export class ViewallprojectComponent implements OnInit {
   projectName!: string;
   foundList: ProjectModel[] = [];
   findProject() {
-    for (let i = 0; i < this.ownedProjects.length; i++) {
-      if (this.ownedProjects[i].name == this.projectName) {
-        this.foundList = [];
-        this.foundList.push(this.ownedProjects[i]);
-        break;
-      }
-      else {
-        this.foundList = [];
-      }
+    if(this.projectName.length == 0) {
+      this.getOwnedProjects();
+      return;
     }
-    this.projectList = this.foundList;
+    else {
+      for (let i = 0; i < this.ownedProjects.length; i++) {
+        if (this.ownedProjects[i].name == this.projectName) {
+          this.foundList = [];
+          this.foundList.push(this.ownedProjects[i]);
+          break;
+        }
+        else {
+          this.foundList = [];
+        }
+      }
+      this.projectList = this.foundList;
+    }
   }
 
 

@@ -29,6 +29,7 @@ export const ProjectReducer = createReducer(
     isSuccess: false,
     error: action.error,
   })),
+  
   on(ProjectActions.getProjectById, (state, { project_id }) => {
     return {
       ...state,
