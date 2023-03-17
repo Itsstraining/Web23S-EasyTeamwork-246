@@ -33,7 +33,7 @@ export class InvitationService {
 
     async createInvitation(invitation: Invitation, idReceiver: string) {
         try {
-            let project = await this.projectService.getById(invitation.project_id);
+            let project = await this.projectService.getProjectById(invitation.project_id);
             let index = project[0].members.findIndex(member => member == idReceiver);
             if (index == -1) {
                 let createdInvitation = new this.invitationModel(invitation);
@@ -49,9 +49,9 @@ export class InvitationService {
     }
 
     async acceptInvitation(idProject: string, idReceiver: string, idInvitation: string, invitation: InvitationModel) {
-        let project = await this.projectService.getById(idProject);
+        let project = await this.projectService.getProjectById(idProject);
         project[0].members.push(idReceiver);
-        await this.projectService.update(project[0], idProject);
+        await this.projectService.updateProject(project[0], idProject);
         await this.invitationModel.findOneAndUpdate({id: idInvitation}, {status: 'accepted'}, {new: true});
     }
 

@@ -46,14 +46,4 @@ export class UsersService {
             return null;
         }
     }
-
-    async findByEmail(email: string): Promise<UserDocument> {
-        try {
-            let user = await this.userModel.findOne({ email: email }).exec();
-            return user;
-        } catch (error) {
-            console.log(error);
-            return null;
-        }
-    }
 }

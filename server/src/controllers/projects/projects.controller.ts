@@ -1,5 +1,5 @@
 import { Body, Controller, Delete, Get, Param, Post, Put, Query } from '@nestjs/common';
-import { Project,ProjectDocument } from 'src/schemas/projects.schema';
+import { Project } from 'src/schemas/projects.schema';
 import { ProjectsService } from 'src/services/projects/projects.service';
 
 @Controller('projects')
@@ -7,27 +7,27 @@ export class ProjectsController {
     constructor(private projectService: ProjectsService) { }
 
     @Get('getAllProjects')
-    getAll() {
-        return this.projectService.getAll();
+    async getAllProject() {
+        return await this.projectService.getAllProject();
     }
 
-    @Get('getProjectById')
-    getById(@Query('id') id: string) {
-        return this.projectService.getById(id);
+    @Get('getProjectById/:id')
+    async getProjectById(@Param('id') id: string) {
+        return await this.projectService.getProjectById(id);
     }
 
     @Post('createProject')
-    async create(@Body() newProject: Project) {
-        return await this.projectService.create(newProject);
+    async createProject(@Body() newProject: Project) {
+        return await this.projectService.createProject(newProject);
     }
 
     @Put('updateProject')
-    update(@Query('id') id: string, @Body() project: Project) {
-        return this.projectService.update(project, id);
+    async updateProject(@Query('id') id: string, @Body() project: Project) {
+        return await this.projectService.updateProject(project, id);
     }
 
     @Delete('deleteProject')
-    delete(@Query('id') id: string) {
-        return this.projectService.delete(id);
+    async deleteProject(@Query('id') id: string) {
+        return await this.projectService.deleteProject(id);
     }
 }

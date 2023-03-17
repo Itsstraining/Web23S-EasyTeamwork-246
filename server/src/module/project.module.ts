@@ -3,7 +3,6 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { ProjectsController } from 'src/controllers/projects/projects.controller';
 import { Project, ProjectSchema } from 'src/schemas/projects.schema';
 import { ProjectsService } from 'src/services/projects/projects.service';
-import { InvitationModule } from './invitation.module';
 
 @Module({
     imports: [
@@ -11,5 +10,6 @@ import { InvitationModule } from './invitation.module';
     ],
     controllers: [ProjectsController],
     providers: [ProjectsService],
+    exports: [ProjectsService],
 })
 export class ProjectModule { }

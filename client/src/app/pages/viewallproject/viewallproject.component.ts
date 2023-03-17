@@ -6,8 +6,6 @@ import { ProjectModel } from 'src/models/projects.model';
 import { AddProjectComponent } from './components/add-project/add-project.component';
 import * as ProjectActions from '../../../NgRx/Actions/projects.action';
 import { ProjectService } from 'src/app/services/projects/project.service';
-import { InvitationActions } from 'src/NgRx/Actions/invitations.action';
-import { MemberComponent } from 'src/app/components/member/member.component';
 import { map, Observable, Subject, Subscription } from 'rxjs';
 import { UserState } from 'src/NgRx/States/user.state';
 import { ProjectState } from 'src/NgRx/States/projects.state';
@@ -252,7 +250,7 @@ export class ViewallprojectComponent implements OnInit {
     };
 
     this.subscriptions.push(
-      this.projectService.update(updateProject, project.project_id).subscribe(() => {
+      this.projectService.updateProject(updateProject, project.project_id).subscribe(() => {
         this.getAllProject();
       })
     );
@@ -260,7 +258,7 @@ export class ViewallprojectComponent implements OnInit {
 
   deleteProject(project_id: string) {
     this.subscriptions.push(
-      this.projectService.delete(project_id).subscribe((data) => {
+      this.projectService.deleteProject(project_id).subscribe((data) => {
         console.log("Delete project", data);
         this.ngOnInit();
       })
@@ -338,7 +336,7 @@ export class ViewallprojectComponent implements OnInit {
             members: projectList[i].members,
           };
     
-          this.projectService.update(updateProject, projectList[i].project_id).subscribe();
+          this.projectService.updateProject(updateProject, projectList[i].project_id).subscribe();
         }
       })
     );

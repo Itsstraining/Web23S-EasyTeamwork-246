@@ -13,3 +13,7 @@ export const getAllProjectsFailure = createAction(
     "[Project] Get all projects failure",
     props<{ error: string }>()
 );
+
+export const  getByProjectId = createAction('[Project] Get Project', props<{ project_id: string }>());
+export const  getByProjectIdSuccess = createAction('[Project] Get Project Success', props<{ project: ProjectModel }>());
+export const  getByProjectIdFailure = createAction('[Project] Get Project Failure', props<{ error: string }>());

@@ -1,17 +1,17 @@
 <div id="container">
-  <div class="user-info">
-    <div *ngIf="(this.users$ | async)?.loading == false && (this.users$ | async)?.users ">
+  <div class="user-info" *ngFor="let item of (users$|async)?.users">
+    <div>
       <div class="content">
         <div class="info">
           <div class="avt">
-            <img *ngIf="user !== null" [src]="user.photoURL" alt="">
+            <img *ngIf="item !== null" [src]="item.photoURL" alt="">
           </div>
           <div class="name-email">
-            <p class="name">{{user.displayName}}</p>
-            <p class="email">{{user.email}}</p>
+            <p class="name">{{item.displayName}}</p>
+            <p class="email">{{item.email}}</p>
           </div>
         </div>
-        <div (click)="sendInvite(user)" class="invite">
+        <div (click)="sendInvite(item)" class="invite">
           <span class="material-symbols-outlined">
             send
           </span>
