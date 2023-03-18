@@ -83,6 +83,7 @@ export class HometaskComponent implements OnInit {
     this.completeList = [];
     this.dueList = [];
     this.taskList = [];
+    this.usr_count = 0;
     this.router.params.subscribe((param) => {
       this.prj_id = param['id'];
       this.projectService.idParam = param['id'];
@@ -104,7 +105,8 @@ export class HometaskComponent implements OnInit {
       this.project_members = data.members;
       this.project_deadline = data.due_date;
       this.getOwnerInfo();
-      this.addUser();
+      this.addUser();      
+      this.usr_count = 0;
 
       if (this.project_info.status === 'overdue') {
         let temp: TaskModel[] = [];
@@ -208,8 +210,8 @@ export class HometaskComponent implements OnInit {
     });
 
     taskInfoDialog.afterClosed().subscribe((result) => {
-      for(let i = 0; i < 10; i++){
-        // console.log('oninit running: ', i);
+      // this.store.dispatch(TaskActions.updateTask({ task: result, id: result.task_id }));
+      for(let i = 0; i < 50; i++){
         this.ngOnInit();
       }
     });

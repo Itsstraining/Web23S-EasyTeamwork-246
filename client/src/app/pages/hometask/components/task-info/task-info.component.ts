@@ -104,15 +104,15 @@ export class TaskInfoComponent implements OnInit{
   }
 
   updateTask(){
-    let temp_assignee: Mutable<UserModel>[] = [];
-    for(let i = 0; i <= this.member.length; i++){
-      this.memberID.forEach((member) => {
-        if(this.member[i] == member.displayName){
-          temp_assignee.push(member);
-        }
-      });
-    }
-    this.temp.assignee = temp_assignee;
+    // let temp_assignee: Mutable<UserModel>[] = [];
+    // for(let i = 0; i <= this.member.length; i++){
+    //   this.memberID.forEach((member) => {
+    //     if(this.member[i] == member.displayName){
+    //       temp_assignee.push(member);
+    //     }
+    //   });
+    // }
+    // this.temp.assignee = temp_assignee;
     this.store.dispatch(TaskActions.updateTask({task: this.temp, id: this.temp.task_id}));
     this.closeDialog(this.temp);
   }
