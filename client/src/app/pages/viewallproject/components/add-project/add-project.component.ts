@@ -43,12 +43,12 @@ export class AddProjectComponent {
       owner_photo: this.userService.userInfo.photoURL,
       owner_id: this.userService.userInfo.uid,
       members: [
-        {
-          uid: this.userService.userInfo.uid,
-          displayName: this.userService.userInfo.displayName,
-          photoURL: this.userService.userInfo.photoURL,
-          email: this.userService.userInfo.email,
-        }
+        // {
+        //   uid: this.userService.userInfo.uid,
+        //   displayName: this.userService.userInfo.displayName,
+        //   photoURL: this.userService.userInfo.photoURL,
+        //   email: this.userService.userInfo.email,
+        // }
       ],
       disable: false,
       due_date: this.due_date,

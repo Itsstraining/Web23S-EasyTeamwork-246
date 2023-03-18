@@ -136,7 +136,10 @@ export class ViewallprojectComponent implements OnInit {
     this.viewOverdue = false;
     this.viewMarked = false;
 
+    console.log(this.userService.userInfo.uid);
+
     this.getAllProject();
+
   }
 
   openInvitation(){
@@ -157,19 +160,26 @@ export class ViewallprojectComponent implements OnInit {
           // Get all projects
           this.projectList = data.projects;
           // Get owned projects
-          this.ownedProjects = this.projectList.filter((project) => {
-            for (let i = 0; i < project.members.length; i++) {
-              if (project.members[i].uid == this.userService.userInfo.uid) {
-                return true;
-              }
+          this.ownedProjects = this.projectList.filter((project) =>
+          {
+            if(project.owner_id == this.userService.userInfo.uid){
+              return true;
             }
-            return false;
+            else{
+              for (let i = 0; i < project.members.length; i++) {
+                if (project.members == this.userService.userInfo.uid) {
+                  return true;
+                }
+              }
+              return false;
+            }
           });
 
           this.ownedProjects.reverse();
 
           if (this.viewAll == true) {
             this.getOwnedProjects();
+            console.log("Projects", this.ownedProjects);
           }
           else if (this.viewInprogress == true) {
             this.getInprogressList();
